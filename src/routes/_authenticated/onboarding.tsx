@@ -23,6 +23,7 @@ function Onboarding() {
   const [time, setTime] = useState("evening");
   const [languages, setLanguages] = useState<string[]>([]);
   const [pet, setPet] = useState("capybara");
+  const [ageGroup, setAgeGroup] = useState<string>("");
 
   useEffect(() => {
     if (profile) {
