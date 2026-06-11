@@ -6,21 +6,43 @@ import { PetSprite } from "@/components/PetSprite";
 import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Heart, Flame, LogOut,
+  Compass, GraduationCap, Award, ClipboardList, Wand2,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
-const nav = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/tasks", label: "Planner", icon: ListTodo },
-  { to: "/focus", label: "Focus", icon: Timer },
-  { to: "/notes", label: "Notes", icon: NotebookPen },
-  { to: "/flashcards", label: "Flashcards", icon: Layers },
-  { to: "/tutor", label: "AI Tutor", icon: Sparkles },
-  { to: "/japanese", label: "Japanese", icon: Languages },
-  { to: "/companion", label: "Companion", icon: Heart },
-  { to: "/profile", label: "Profile", icon: User },
-  { to: "/settings", label: "Settings", icon: Settings },
-] as const;
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
+const navGroups: { label: string; items: NavItem[] }[] = [
+  {
+    label: "NekoStudy",
+    items: [
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/tasks", label: "Planner", icon: ListTodo },
+      { to: "/focus", label: "Focus", icon: Timer },
+      { to: "/notes", label: "Notes", icon: NotebookPen },
+      { to: "/flashcards", label: "Flashcards", icon: Layers },
+      { to: "/tutor", label: "AI Tutor", icon: Sparkles },
+      { to: "/japanese", label: "Japanese", icon: Languages },
+      { to: "/companion", label: "Companion", icon: Heart },
+    ],
+  },
+  {
+    label: "StudentHub",
+    items: [
+      { to: "/career", label: "Career Hub", icon: Compass },
+      { to: "/universities", label: "Universities", icon: GraduationCap },
+      { to: "/scholarships", label: "Scholarships", icon: Award },
+      { to: "/applications", label: "Applications", icon: ClipboardList },
+    ],
+  },
+  {
+    label: "Account",
+    items: [
+      { to: "/avatar", label: "Avatar Studio", icon: Wand2 },
+      { to: "/profile", label: "Profile", icon: User },
+      { to: "/settings", label: "Settings", icon: Settings },
+    ],
+  },
+];
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { profile } = useProfile();
@@ -58,18 +80,25 @@ export function AppShell({ children }: { children: ReactNode }) {
           >☰</button>
         </div>
         {open && (
-          <nav className="px-3 pb-4 grid grid-cols-2 gap-2">
-            {nav.map((n) => {
-              const Icon = n.icon;
-              const active = pathname.startsWith(n.to);
-              return (
-                <Link key={n.to} to={n.to} onClick={() => setOpen(false)}
-                  className={`flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold ${active ? "bg-primary text-primary-foreground" : "bg-white border border-border"}`}>
-                  <Icon className="size-4" /> {n.label}
-                </Link>
-              );
-            })}
-            <button onClick={signOut} className="col-span-2 flex items-center justify-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold bg-white border border-border">
+          <nav className="px-3 pb-4 space-y-3">
+            {navGroups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-2 mb-1">{g.label}</div>
+                <div className="grid grid-cols-2 gap-2">
+                  {g.items.map((n) => {
+                    const Icon = n.icon;
+                    const active = pathname.startsWith(n.to);
+                    return (
+                      <Link key={n.to} to={n.to as "/dashboard"} onClick={() => setOpen(false)}
+                        className={`flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold ${active ? "bg-primary text-primary-foreground" : "bg-white border border-border"}`}>
+                        <Icon className="size-4" /> {n.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+            <button onClick={signOut} className="w-full flex items-center justify-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold bg-white border border-border">
               <LogOut className="size-4" /> Sign out
             </button>
           </nav>
@@ -93,19 +122,26 @@ export function AppShell({ children }: { children: ReactNode }) {
             </div>
           </div>
 
-          <nav className="flex-1 flex flex-col gap-1 overflow-y-auto">
-            {nav.map((n) => {
-              const Icon = n.icon;
-              const active = pathname.startsWith(n.to);
-              return (
-                <Link key={n.to} to={n.to}
-                  className={`flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold transition-colors ${
-                    active ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:bg-white hover:text-foreground"
-                  }`}>
-                  <Icon className="size-4" /> {n.label}
-                </Link>
-              );
-            })}
+          <nav className="flex-1 flex flex-col gap-3 overflow-y-auto pr-1">
+            {navGroups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-3 mb-1">{g.label}</div>
+                <div className="flex flex-col gap-0.5">
+                  {g.items.map((n) => {
+                    const Icon = n.icon;
+                    const active = pathname.startsWith(n.to);
+                    return (
+                      <Link key={n.to} to={n.to as "/dashboard"}
+                        className={`flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors ${
+                          active ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:bg-white hover:text-foreground"
+                        }`}>
+                        <Icon className="size-4" /> {n.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </nav>
 
           <div className="rounded-2xl bg-white border border-border p-3 flex items-center gap-2 text-sm">

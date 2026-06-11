@@ -57,6 +57,7 @@ function Dashboard() {
   const dailyTarget = profile?.daily_minutes_target ?? 60;
   const todayMin = weekly[weekly.length - 1]?.minutes ?? 0;
   const dailyPct = Math.min(100, (todayMin / dailyTarget) * 100);
+  const isNew = !profile?.total_minutes && weekTotal === 0 && (tasksQ.data?.length ?? 0) === 0;
 
   return (
     <AppShell>
@@ -72,7 +73,9 @@ function Dashboard() {
               Hi {profile?.display_name ?? "friend"} 🌸
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
-              {todayMin >= dailyTarget
+              {isNew
+                ? "Welcome to NekoStudy powered by StudentHub. Let's start building your future."
+                : todayMin >= dailyTarget
                 ? "You hit your daily goal — incredible work!"
                 : `${dailyTarget - todayMin} min to today's goal. You've got this.`}
             </p>

@@ -23,6 +23,7 @@ function Onboarding() {
   const [time, setTime] = useState("evening");
   const [languages, setLanguages] = useState<string[]>([]);
   const [pet, setPet] = useState("capybara");
+  const [ageGroup, setAgeGroup] = useState<string>("");
 
   useEffect(() => {
     if (profile) {
@@ -45,11 +46,28 @@ function Onboarding() {
       preferred_time: time,
       languages,
       selected_pet: pet,
+      age_group: ageGroup || null,
       onboarded: true,
     });
     toast.success(`Welcome, ${name || "friend"}! 🌱`);
     navigate({ to: "/dashboard" });
   }
+
+  const ageStep = {
+    title: "How old are you?",
+    body: (
+      <div className="flex gap-2 flex-wrap">
+        {["under_13", "13_17", "18_plus"].map((g) => (
+          <button key={g} type="button" onClick={() => setAgeGroup(g)}
+            className={`px-4 py-2 rounded-full text-sm font-semibold border ${ageGroup === g ? "bg-primary border-primary" : "bg-white border-border"}`}>
+            {g === "under_13" ? "Under 13" : g === "13_17" ? "13–17" : "18+"}
+          </button>
+        ))}
+        <p className="w-full text-xs text-muted-foreground mt-2">Used only for safety defaults. Profile is private.</p>
+      </div>
+    ),
+    canNext: !!ageGroup,
+  };
 
   const steps = [
     {
@@ -60,6 +78,7 @@ function Onboarding() {
       ),
       canNext: name.trim().length > 0,
     },
+    ageStep,
     {
       title: "What are you studying for?",
       body: (

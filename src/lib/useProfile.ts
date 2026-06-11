@@ -24,6 +24,16 @@ export type Profile = {
   selected_pet: string | null;
   selected_theme: string | null;
   japanese_level: string | null;
+  age_group: string | null;
+  avatar_config: Record<string, number> | null;
+  teacher_name: string | null;
+  teacher_personality: string | null;
+  teacher_voice: string | null;
+  teacher_style: string | null;
+  dream_career: string | null;
+  dream_country: string | null;
+  dream_university: string | null;
+  current_grade: string | null;
 };
 
 export function useProfile() {
