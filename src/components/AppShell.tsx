@@ -6,21 +6,43 @@ import { PetSprite } from "@/components/PetSprite";
 import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Heart, Flame, LogOut,
+  Compass, GraduationCap, Award, ClipboardList, Wand2,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
-const nav = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/tasks", label: "Planner", icon: ListTodo },
-  { to: "/focus", label: "Focus", icon: Timer },
-  { to: "/notes", label: "Notes", icon: NotebookPen },
-  { to: "/flashcards", label: "Flashcards", icon: Layers },
-  { to: "/tutor", label: "AI Tutor", icon: Sparkles },
-  { to: "/japanese", label: "Japanese", icon: Languages },
-  { to: "/companion", label: "Companion", icon: Heart },
-  { to: "/profile", label: "Profile", icon: User },
-  { to: "/settings", label: "Settings", icon: Settings },
+const navGroups = [
+  {
+    label: "NekoStudy",
+    items: [
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/tasks", label: "Planner", icon: ListTodo },
+      { to: "/focus", label: "Focus", icon: Timer },
+      { to: "/notes", label: "Notes", icon: NotebookPen },
+      { to: "/flashcards", label: "Flashcards", icon: Layers },
+      { to: "/tutor", label: "AI Tutor", icon: Sparkles },
+      { to: "/japanese", label: "Japanese", icon: Languages },
+      { to: "/companion", label: "Companion", icon: Heart },
+    ],
+  },
+  {
+    label: "StudentHub",
+    items: [
+      { to: "/career", label: "Career Hub", icon: Compass },
+      { to: "/universities", label: "Universities", icon: GraduationCap },
+      { to: "/scholarships", label: "Scholarships", icon: Award },
+      { to: "/applications", label: "Applications", icon: ClipboardList },
+    ],
+  },
+  {
+    label: "Account",
+    items: [
+      { to: "/avatar", label: "Avatar Studio", icon: Wand2 },
+      { to: "/profile", label: "Profile", icon: User },
+      { to: "/settings", label: "Settings", icon: Settings },
+    ],
+  },
 ] as const;
+const nav = navGroups.flatMap((g) => g.items);
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { profile } = useProfile();
