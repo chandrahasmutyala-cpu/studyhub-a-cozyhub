@@ -14,7 +14,273 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      achievements: {
+        Row: {
+          code: string
+          id: string
+          unlocked_at: string
+          user_id: string
+        }
+        Insert: {
+          code: string
+          id?: string
+          unlocked_at?: string
+          user_id: string
+        }
+        Update: {
+          code?: string
+          id?: string
+          unlocked_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ai_chats: {
+        Row: {
+          created_at: string
+          id: string
+          messages: Json
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          messages?: Json
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      flashcards: {
+        Row: {
+          back: string
+          created_at: string
+          deck: string
+          due_date: string
+          ease: number
+          front: string
+          id: string
+          interval_days: number
+          reviews: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          back: string
+          created_at?: string
+          deck?: string
+          due_date?: string
+          ease?: number
+          front: string
+          id?: string
+          interval_days?: number
+          reviews?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          back?: string
+          created_at?: string
+          deck?: string
+          due_date?: string
+          ease?: number
+          front?: string
+          id?: string
+          interval_days?: number
+          reviews?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      focus_sessions: {
+        Row: {
+          background: string | null
+          completed_at: string
+          id: string
+          minutes: number
+          mode: string
+          user_id: string
+        }
+        Insert: {
+          background?: string | null
+          completed_at?: string
+          id?: string
+          minutes: number
+          mode?: string
+          user_id: string
+        }
+        Update: {
+          background?: string | null
+          completed_at?: string
+          id?: string
+          minutes?: number
+          mode?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          coins: number
+          created_at: string
+          current_streak: number
+          daily_minutes_target: number | null
+          display_name: string | null
+          exam_target: string | null
+          id: string
+          japanese_level: string | null
+          languages: string[] | null
+          last_study_date: string | null
+          level: number
+          longest_streak: number
+          onboarded: boolean
+          preferred_time: string | null
+          selected_pet: string | null
+          selected_theme: string | null
+          study_goal: string | null
+          subjects: string[] | null
+          total_minutes: number
+          updated_at: string
+          xp: number
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          coins?: number
+          created_at?: string
+          current_streak?: number
+          daily_minutes_target?: number | null
+          display_name?: string | null
+          exam_target?: string | null
+          id: string
+          japanese_level?: string | null
+          languages?: string[] | null
+          last_study_date?: string | null
+          level?: number
+          longest_streak?: number
+          onboarded?: boolean
+          preferred_time?: string | null
+          selected_pet?: string | null
+          selected_theme?: string | null
+          study_goal?: string | null
+          subjects?: string[] | null
+          total_minutes?: number
+          updated_at?: string
+          xp?: number
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          coins?: number
+          created_at?: string
+          current_streak?: number
+          daily_minutes_target?: number | null
+          display_name?: string | null
+          exam_target?: string | null
+          id?: string
+          japanese_level?: string | null
+          languages?: string[] | null
+          last_study_date?: string | null
+          level?: number
+          longest_streak?: number
+          onboarded?: boolean
+          preferred_time?: string | null
+          selected_pet?: string | null
+          selected_theme?: string | null
+          study_goal?: string | null
+          subjects?: string[] | null
+          total_minutes?: number
+          updated_at?: string
+          xp?: number
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          category: string | null
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          due_date: string | null
+          id: string
+          notes: string | null
+          priority: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          priority?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          priority?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
