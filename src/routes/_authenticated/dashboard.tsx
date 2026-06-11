@@ -57,6 +57,7 @@ function Dashboard() {
   const dailyTarget = profile?.daily_minutes_target ?? 60;
   const todayMin = weekly[weekly.length - 1]?.minutes ?? 0;
   const dailyPct = Math.min(100, (todayMin / dailyTarget) * 100);
+  const isNew = !profile?.total_minutes && weekTotal === 0 && (tasksQ.data?.length ?? 0) === 0;
 
   return (
     <AppShell>
