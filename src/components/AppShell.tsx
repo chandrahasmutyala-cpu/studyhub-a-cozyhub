@@ -10,7 +10,8 @@ import {
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
-const navGroups = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
+const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "NekoStudy",
     items: [
@@ -41,8 +42,8 @@ const navGroups = [
       { to: "/settings", label: "Settings", icon: Settings },
     ],
   },
-] as const;
-const nav = navGroups.flatMap((g) => g.items);
+];
+const nav: NavItem[] = navGroups.flatMap((g) => g.items);
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { profile } = useProfile();
