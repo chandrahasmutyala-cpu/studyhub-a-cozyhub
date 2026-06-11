@@ -81,18 +81,25 @@ export function AppShell({ children }: { children: ReactNode }) {
           >☰</button>
         </div>
         {open && (
-          <nav className="px-3 pb-4 grid grid-cols-2 gap-2">
-            {nav.map((n) => {
-              const Icon = n.icon;
-              const active = pathname.startsWith(n.to);
-              return (
-                <Link key={n.to} to={n.to} onClick={() => setOpen(false)}
-                  className={`flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold ${active ? "bg-primary text-primary-foreground" : "bg-white border border-border"}`}>
-                  <Icon className="size-4" /> {n.label}
-                </Link>
-              );
-            })}
-            <button onClick={signOut} className="col-span-2 flex items-center justify-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold bg-white border border-border">
+          <nav className="px-3 pb-4 space-y-3">
+            {navGroups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-2 mb-1">{g.label}</div>
+                <div className="grid grid-cols-2 gap-2">
+                  {g.items.map((n) => {
+                    const Icon = n.icon;
+                    const active = pathname.startsWith(n.to);
+                    return (
+                      <Link key={n.to} to={n.to as "/dashboard"} onClick={() => setOpen(false)}
+                        className={`flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold ${active ? "bg-primary text-primary-foreground" : "bg-white border border-border"}`}>
+                        <Icon className="size-4" /> {n.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+            <button onClick={signOut} className="w-full flex items-center justify-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold bg-white border border-border">
               <LogOut className="size-4" /> Sign out
             </button>
           </nav>
