@@ -78,6 +78,7 @@ function Onboarding() {
       ),
       canNext: name.trim().length > 0,
     },
+    ageStep,
     {
       title: "What are you studying for?",
       body: (
