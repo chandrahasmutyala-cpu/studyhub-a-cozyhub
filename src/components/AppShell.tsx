@@ -1,0 +1,127 @@
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
+import { PetSprite } from "@/components/PetSprite";
+import { Progress } from "@/components/ui/progress";
+import {
+  LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Heart, Flame, LogOut,
+} from "lucide-react";
+import { useState, type ReactNode } from "react";
+
+const nav = [
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/tasks", label: "Planner", icon: ListTodo },
+  { to: "/focus", label: "Focus", icon: Timer },
+  { to: "/notes", label: "Notes", icon: NotebookPen },
+  { to: "/flashcards", label: "Flashcards", icon: Layers },
+  { to: "/tutor", label: "AI Tutor", icon: Sparkles },
+  { to: "/japanese", label: "Japanese", icon: Languages },
+  { to: "/companion", label: "Companion", icon: Heart },
+  { to: "/profile", label: "Profile", icon: User },
+  { to: "/settings", label: "Settings", icon: Settings },
+] as const;
+
+export function AppShell({ children }: { children: ReactNode }) {
+  const { profile } = useProfile();
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [open, setOpen] = useState(false);
+
+  const xp = profile?.xp ?? 0;
+  const level = levelFromXp(xp);
+  const next = xpForNextLevel(level);
+  const prev = xpForNextLevel(level - 1);
+  const pct = Math.max(0, Math.min(100, ((xp - prev) / (next - prev)) * 100));
+
+  async function signOut() {
+    await qc.cancelQueries();
+    qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
+  return (
+    <div className="min-h-screen paw-bg">
+      {/* Mobile top bar */}
+      <header className="md:hidden sticky top-0 z-30 backdrop-blur bg-cream/70 border-b border-border">
+        <div className="flex items-center justify-between px-4 h-14">
+          <Link to="/dashboard" className="flex items-center gap-2 font-display font-bold text-lg">
+            <span className="size-7 rounded-xl bg-primary grid place-items-center">🍓</span>
+            Study.
+          </Link>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="size-9 rounded-full bg-white border border-border grid place-items-center"
+            aria-label="Open menu"
+          >☰</button>
+        </div>
+        {open && (
+          <nav className="px-3 pb-4 grid grid-cols-2 gap-2">
+            {nav.map((n) => {
+              const Icon = n.icon;
+              const active = pathname.startsWith(n.to);
+              return (
+                <Link key={n.to} to={n.to} onClick={() => setOpen(false)}
+                  className={`flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold ${active ? "bg-primary text-primary-foreground" : "bg-white border border-border"}`}>
+                  <Icon className="size-4" /> {n.label}
+                </Link>
+              );
+            })}
+            <button onClick={signOut} className="col-span-2 flex items-center justify-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold bg-white border border-border">
+              <LogOut className="size-4" /> Sign out
+            </button>
+          </nav>
+        )}
+      </header>
+
+      <div className="md:flex">
+        {/* Sidebar */}
+        <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-5 gap-4">
+          <Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
+            <span className="size-10 rounded-2xl bg-primary grid place-items-center text-xl">🍓</span>
+            <span className="font-display font-bold text-2xl tracking-tight">Study.</span>
+          </Link>
+
+          <div className="rounded-3xl bg-white border border-border p-4 flex items-center gap-3 shadow-soft">
+            <PetSprite petId={profile?.selected_pet} size={56} />
+            <div className="min-w-0 flex-1">
+              <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lvl {level}</div>
+              <Progress value={pct} className="h-2 mt-1 bg-secondary" />
+              <div className="text-[11px] text-muted-foreground mt-1">{xp} / {next} XP</div>
+            </div>
+          </div>
+
+          <nav className="flex-1 flex flex-col gap-1 overflow-y-auto">
+            {nav.map((n) => {
+              const Icon = n.icon;
+              const active = pathname.startsWith(n.to);
+              return (
+                <Link key={n.to} to={n.to}
+                  className={`flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold transition-colors ${
+                    active ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:bg-white hover:text-foreground"
+                  }`}>
+                  <Icon className="size-4" /> {n.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="rounded-2xl bg-white border border-border p-3 flex items-center gap-2 text-sm">
+            <Flame className="size-4 text-primary" />
+            <span className="font-bold">{profile?.current_streak ?? 0}</span>
+            <span className="text-muted-foreground">day streak</span>
+            <button onClick={signOut} className="ml-auto text-muted-foreground hover:text-foreground" aria-label="Sign out">
+              <LogOut className="size-4" />
+            </button>
+          </div>
+        </aside>
+
+        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}
