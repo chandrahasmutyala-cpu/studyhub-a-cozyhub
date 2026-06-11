@@ -62,6 +62,123 @@ export type Database = {
         }
         Relationships: []
       }
+      applications: {
+        Row: {
+          country: string | null
+          created_at: string
+          deadline: string | null
+          id: string
+          kind: string
+          name: string
+          notes: string | null
+          status: string
+          updated_at: string
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          kind: string
+          name: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          kind?: string
+          name?: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      career_plans: {
+        Row: {
+          career_goal: string | null
+          created_at: string
+          current_grade: string | null
+          dream_country: string | null
+          dream_university: string | null
+          id: string
+          is_active: boolean
+          plan: Json
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          career_goal?: string | null
+          created_at?: string
+          current_grade?: string | null
+          dream_country?: string | null
+          dream_university?: string | null
+          id?: string
+          is_active?: boolean
+          plan: Json
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          career_goal?: string | null
+          created_at?: string
+          current_grade?: string | null
+          dream_country?: string | null
+          dream_university?: string | null
+          id?: string
+          is_active?: boolean
+          plan?: Json
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      deadlines: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          kind: string | null
+          notes: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          kind?: string | null
+          notes?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          kind?: string | null
+          notes?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       flashcards: {
         Row: {
           back: string
@@ -163,13 +280,19 @@ export type Database = {
       }
       profiles: {
         Row: {
+          age_group: string | null
+          avatar_config: Json | null
           avatar_url: string | null
           bio: string | null
           coins: number
           created_at: string
+          current_grade: string | null
           current_streak: number
           daily_minutes_target: number | null
           display_name: string | null
+          dream_career: string | null
+          dream_country: string | null
+          dream_university: string | null
           exam_target: string | null
           id: string
           japanese_level: string | null
@@ -183,18 +306,28 @@ export type Database = {
           selected_theme: string | null
           study_goal: string | null
           subjects: string[] | null
+          teacher_name: string | null
+          teacher_personality: string | null
+          teacher_style: string | null
+          teacher_voice: string | null
           total_minutes: number
           updated_at: string
           xp: number
         }
         Insert: {
+          age_group?: string | null
+          avatar_config?: Json | null
           avatar_url?: string | null
           bio?: string | null
           coins?: number
           created_at?: string
+          current_grade?: string | null
           current_streak?: number
           daily_minutes_target?: number | null
           display_name?: string | null
+          dream_career?: string | null
+          dream_country?: string | null
+          dream_university?: string | null
           exam_target?: string | null
           id: string
           japanese_level?: string | null
@@ -208,18 +341,28 @@ export type Database = {
           selected_theme?: string | null
           study_goal?: string | null
           subjects?: string[] | null
+          teacher_name?: string | null
+          teacher_personality?: string | null
+          teacher_style?: string | null
+          teacher_voice?: string | null
           total_minutes?: number
           updated_at?: string
           xp?: number
         }
         Update: {
+          age_group?: string | null
+          avatar_config?: Json | null
           avatar_url?: string | null
           bio?: string | null
           coins?: number
           created_at?: string
+          current_grade?: string | null
           current_streak?: number
           daily_minutes_target?: number | null
           display_name?: string | null
+          dream_career?: string | null
+          dream_country?: string | null
+          dream_university?: string | null
           exam_target?: string | null
           id?: string
           japanese_level?: string | null
@@ -233,9 +376,58 @@ export type Database = {
           selected_theme?: string | null
           study_goal?: string | null
           subjects?: string[] | null
+          teacher_name?: string | null
+          teacher_personality?: string | null
+          teacher_style?: string | null
+          teacher_voice?: string | null
           total_minutes?: number
           updated_at?: string
           xp?: number
+        }
+        Relationships: []
+      }
+      scholarships: {
+        Row: {
+          benefits: string | null
+          country: string | null
+          created_at: string
+          deadline: string | null
+          documents_required: string | null
+          eligibility: string | null
+          id: string
+          name: string
+          provider: string | null
+          source_url: string
+          updated_at: string
+          verified: boolean
+        }
+        Insert: {
+          benefits?: string | null
+          country?: string | null
+          created_at?: string
+          deadline?: string | null
+          documents_required?: string | null
+          eligibility?: string | null
+          id?: string
+          name: string
+          provider?: string | null
+          source_url: string
+          updated_at?: string
+          verified?: boolean
+        }
+        Update: {
+          benefits?: string | null
+          country?: string | null
+          created_at?: string
+          deadline?: string | null
+          documents_required?: string | null
+          eligibility?: string | null
+          id?: string
+          name?: string
+          provider?: string | null
+          source_url?: string
+          updated_at?: string
+          verified?: boolean
         }
         Relationships: []
       }
@@ -278,6 +470,63 @@ export type Database = {
           title?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      universities: {
+        Row: {
+          application_deadline: string | null
+          city: string | null
+          country: string
+          created_at: string
+          currency: string | null
+          degrees: string[] | null
+          id: string
+          languages: string[] | null
+          name: string
+          requirements: string | null
+          scholarships_available: boolean | null
+          tuition_max: number | null
+          tuition_min: number | null
+          updated_at: string
+          verified: boolean
+          website: string | null
+        }
+        Insert: {
+          application_deadline?: string | null
+          city?: string | null
+          country: string
+          created_at?: string
+          currency?: string | null
+          degrees?: string[] | null
+          id?: string
+          languages?: string[] | null
+          name: string
+          requirements?: string | null
+          scholarships_available?: boolean | null
+          tuition_max?: number | null
+          tuition_min?: number | null
+          updated_at?: string
+          verified?: boolean
+          website?: string | null
+        }
+        Update: {
+          application_deadline?: string | null
+          city?: string | null
+          country?: string
+          created_at?: string
+          currency?: string | null
+          degrees?: string[] | null
+          id?: string
+          languages?: string[] | null
+          name?: string
+          requirements?: string | null
+          scholarships_available?: boolean | null
+          tuition_max?: number | null
+          tuition_min?: number | null
+          updated_at?: string
+          verified?: boolean
+          website?: string | null
         }
         Relationships: []
       }
