@@ -14,9 +14,11 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
@@ -25,6 +27,9 @@ import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCompanionRouteImport } from './routes/_authenticated/companion'
+import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
+import { Route as AuthenticatedAvatarRouteImport } from './routes/_authenticated/avatar'
+import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -50,6 +55,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedUniversitiesRoute =
+  AuthenticatedUniversitiesRouteImport.update({
+    id: '/universities',
+    path: '/universities',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
   id: '/tutor',
   path: '/tutor',
@@ -65,6 +76,12 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedScholarshipsRoute =
+  AuthenticatedScholarshipsRouteImport.update({
+    id: '/scholarships',
+    path: '/scholarships',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -105,12 +122,31 @@ const AuthenticatedCompanionRoute = AuthenticatedCompanionRouteImport.update({
   path: '/companion',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
+  id: '/career',
+  path: '/career',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAvatarRoute = AuthenticatedAvatarRouteImport.update({
+  id: '/avatar',
+  path: '/avatar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedApplicationsRoute =
+  AuthenticatedApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
+  '/avatar': typeof AuthenticatedAvatarRoute
+  '/career': typeof AuthenticatedCareerRoute
   '/companion': typeof AuthenticatedCompanionRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
@@ -119,15 +155,20 @@ export interface FileRoutesByFullPath {
   '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
+  '/universities': typeof AuthenticatedUniversitiesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
+  '/avatar': typeof AuthenticatedAvatarRoute
+  '/career': typeof AuthenticatedCareerRoute
   '/companion': typeof AuthenticatedCompanionRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
@@ -136,9 +177,11 @@ export interface FileRoutesByTo {
   '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
+  '/universities': typeof AuthenticatedUniversitiesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -147,6 +190,9 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
+  '/_authenticated/avatar': typeof AuthenticatedAvatarRoute
+  '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/companion': typeof AuthenticatedCompanionRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
@@ -155,9 +201,11 @@ export interface FileRoutesById {
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/scholarships': typeof AuthenticatedScholarshipsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
+  '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -166,6 +214,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/applications'
+    | '/avatar'
+    | '/career'
     | '/companion'
     | '/dashboard'
     | '/flashcards'
@@ -174,15 +225,20 @@ export interface FileRouteTypes {
     | '/notes'
     | '/onboarding'
     | '/profile'
+    | '/scholarships'
     | '/settings'
     | '/tasks'
     | '/tutor'
+    | '/universities'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/applications'
+    | '/avatar'
+    | '/career'
     | '/companion'
     | '/dashboard'
     | '/flashcards'
@@ -191,9 +247,11 @@ export interface FileRouteTypes {
     | '/notes'
     | '/onboarding'
     | '/profile'
+    | '/scholarships'
     | '/settings'
     | '/tasks'
     | '/tutor'
+    | '/universities'
   id:
     | '__root__'
     | '/'
@@ -201,6 +259,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/_authenticated/applications'
+    | '/_authenticated/avatar'
+    | '/_authenticated/career'
     | '/_authenticated/companion'
     | '/_authenticated/dashboard'
     | '/_authenticated/flashcards'
@@ -209,9 +270,11 @@ export interface FileRouteTypes {
     | '/_authenticated/notes'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
+    | '/_authenticated/scholarships'
     | '/_authenticated/settings'
     | '/_authenticated/tasks'
     | '/_authenticated/tutor'
+    | '/_authenticated/universities'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -259,6 +322,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/universities': {
+      id: '/_authenticated/universities'
+      path: '/universities'
+      fullPath: '/universities'
+      preLoaderRoute: typeof AuthenticatedUniversitiesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/tutor': {
       id: '/_authenticated/tutor'
       path: '/tutor'
@@ -278,6 +348,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scholarships': {
+      id: '/_authenticated/scholarships'
+      path: '/scholarships'
+      fullPath: '/scholarships'
+      preLoaderRoute: typeof AuthenticatedScholarshipsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/profile': {
@@ -336,10 +413,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCompanionRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/career': {
+      id: '/_authenticated/career'
+      path: '/career'
+      fullPath: '/career'
+      preLoaderRoute: typeof AuthenticatedCareerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/avatar': {
+      id: '/_authenticated/avatar'
+      path: '/avatar'
+      fullPath: '/avatar'
+      preLoaderRoute: typeof AuthenticatedAvatarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/applications': {
+      id: '/_authenticated/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
+  AuthenticatedAvatarRoute: typeof AuthenticatedAvatarRoute
+  AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedCompanionRoute: typeof AuthenticatedCompanionRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
@@ -348,12 +449,17 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedScholarshipsRoute: typeof AuthenticatedScholarshipsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
+  AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
+  AuthenticatedAvatarRoute: AuthenticatedAvatarRoute,
+  AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedCompanionRoute: AuthenticatedCompanionRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
@@ -362,9 +468,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedScholarshipsRoute: AuthenticatedScholarshipsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
+  AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
