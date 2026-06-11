@@ -43,7 +43,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     ],
   },
 ];
-const nav: NavItem[] = navGroups.flatMap((g) => g.items);
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { profile } = useProfile();
