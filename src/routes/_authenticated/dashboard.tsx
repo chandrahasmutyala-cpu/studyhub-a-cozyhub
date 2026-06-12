@@ -212,7 +212,7 @@ function Dashboard() {
   );
 }
 
-function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode }) {
+function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; label: string; value: React.ReactNode }) {
   return (
     <div className="bg-card border border-border rounded-3xl p-5">
       <Icon className="size-5 text-muted-foreground mb-6" strokeWidth={1.75} />

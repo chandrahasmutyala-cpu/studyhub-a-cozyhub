@@ -13,16 +13,16 @@ export const Route = createFileRoute("/_authenticated/profile")({
 });
 
 function ProfilePage() {
-  const { profile, update } = useProfile();
+  const { profile } = useProfile();
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [open, setOpen] = useState<string | null>(null);
+  const [isPrivate, setIsPrivate] = useState(true);
 
   const ageLabel = profile?.age_group ?? "Not set";
-  const isPrivate = profile?.is_private ?? true;
 
-  async function togglePrivate() {
-    await update.mutateAsync({ is_private: !isPrivate });
+  function togglePrivate() {
+    setIsPrivate((v) => !v);
   }
 
   async function reset() {
