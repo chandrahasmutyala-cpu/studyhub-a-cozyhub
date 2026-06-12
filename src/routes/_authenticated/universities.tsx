@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
-import { GraduationCap, ExternalLink, BookmarkPlus, Search } from "lucide-react";
+import { ExternalLink, Search, ShieldCheck, GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/universities")({
@@ -21,9 +21,6 @@ type Uni = {
 function UniversitiesPage() {
   const qc = useQueryClient();
   const [country, setCountry] = useState("");
-  const [language, setLanguage] = useState("");
-  const [degree, setDegree] = useState("");
-  const [maxTuition, setMaxTuition] = useState<number | "">("");
   const [q, setQ] = useState("");
 
   const list = useQuery({
@@ -35,16 +32,16 @@ function UniversitiesPage() {
     },
   });
 
-  const countries = useMemo(() => Array.from(new Set((list.data ?? []).map((u) => u.country))).sort(), [list.data]);
+  const countries = useMemo(
+    () => Array.from(new Set((list.data ?? []).map((u) => u.country))).sort(),
+    [list.data],
+  );
 
   const filtered = useMemo(() => (list.data ?? []).filter((u) => {
     if (q && !u.name.toLowerCase().includes(q.toLowerCase())) return false;
     if (country && u.country !== country) return false;
-    if (language && !(u.languages ?? []).includes(language)) return false;
-    if (degree && !(u.degrees ?? []).map((d) => d.toLowerCase()).includes(degree.toLowerCase())) return false;
-    if (maxTuition !== "" && (u.tuition_min ?? 0) > Number(maxTuition)) return false;
     return true;
-  }), [list.data, q, country, language, degree, maxTuition]);
+  }), [list.data, q, country]);
 
   async function track(u: Uni) {
     const { data: { user } } = await supabase.auth.getUser();
@@ -60,72 +57,114 @@ function UniversitiesPage() {
 
   return (
     <AppShell>
-      <div className="max-w-6xl space-y-5">
-        <header>
-          <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Discovery</div>
-          <h1 className="font-display text-3xl font-bold flex items-center gap-2 mt-1">
-            <GraduationCap className="size-7 text-primary" /> Universities
-          </h1>
-          <p className="text-sm text-muted-foreground">Only verified entries shown. Save the ones you like to your tracker.</p>
+      <div className="space-y-6 animate-fade-up">
+        <header className="flex items-start justify-between gap-3">
+          <div>
+            <div className="section-label">University Finder</div>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mt-1">Where will you study?</h1>
+          </div>
+          <span className="inline-flex items-center gap-1.5 bg-verified-soft text-verified rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider shrink-0">
+            <ShieldCheck className="size-3.5" /> Verified
+          </span>
         </header>
 
-        <div className="bg-white border border-border rounded-3xl p-4 grid sm:grid-cols-2 lg:grid-cols-5 gap-2">
-          <div className="relative sm:col-span-2">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search name"
-              className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none" />
-          </div>
-          <select value={country} onChange={(e) => setCountry(e.target.value)} className="bg-cream rounded-2xl px-3 py-2.5 text-sm">
-            <option value="">Any country</option>
-            {countries.map((c) => <option key={c} value={c}>{c}</option>)}
-          </select>
-          <input value={degree} onChange={(e) => setDegree(e.target.value)} placeholder="Degree (e.g. BSc)" className="bg-cream rounded-2xl px-3 py-2.5 text-sm outline-none" />
-          <div className="flex gap-2">
-            <input value={language} onChange={(e) => setLanguage(e.target.value)} placeholder="Language" className="flex-1 bg-cream rounded-2xl px-3 py-2.5 text-sm outline-none" />
-            <input value={maxTuition} onChange={(e) => setMaxTuition(e.target.value ? Number(e.target.value) : "")} placeholder="Max $" className="w-24 bg-cream rounded-2xl px-3 py-2.5 text-sm outline-none" type="number" />
-          </div>
+        {/* Search */}
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search universities"
+            className="w-full bg-card border border-border rounded-full pl-12 pr-4 py-3.5 text-sm outline-none focus:border-primary transition-colors"
+          />
         </div>
 
-        {list.isLoading && <div className="h-32 bg-cream animate-pulse rounded-3xl" />}
-        {!list.isLoading && filtered.length === 0 && (
-          <div className="bg-white rounded-3xl border border-border p-8 text-center text-sm text-muted-foreground">
-            No verified universities match your filters yet. Add data via the admin import (or ask us to seed the directory).
+        {/* Country pills */}
+        {countries.length > 0 && (
+          <div className="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5">
+            <Pill active={country === ""} onClick={() => setCountry("")}>All</Pill>
+            {countries.map((c) => (
+              <Pill key={c} active={country === c} onClick={() => setCountry(c)}>{c}</Pill>
+            ))}
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 gap-3">
+        {list.isLoading && <div className="h-40 bg-muted animate-pulse rounded-3xl" />}
+
+        {!list.isLoading && filtered.length === 0 && (
+          <div className="rounded-3xl border border-dashed border-border p-10 text-center">
+            <div className="size-10 mx-auto rounded-full bg-muted grid place-items-center mb-3">
+              <GraduationCap className="size-5 text-muted-foreground" />
+            </div>
+            <div className="font-semibold">No universities yet</div>
+            <div className="text-sm text-muted-foreground mt-1">The verified directory is being seeded.</div>
+          </div>
+        )}
+
+        <div className="space-y-3">
           {filtered.map((u) => (
-            <article key={u.id} className="bg-white border border-border rounded-3xl p-5 shadow-soft space-y-2">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <h3 className="font-display text-lg font-bold">{u.name}</h3>
-                  <p className="text-xs text-muted-foreground">{[u.city, u.country].filter(Boolean).join(", ")}</p>
+            <article key={u.id} className="bg-card border border-border rounded-3xl p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-lg">{u.name}</h3>
+                    <ShieldCheck className="size-4 text-verified shrink-0" />
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    {[u.city, u.country].filter(Boolean).join(" · ")}
+                  </p>
                 </div>
-                <button onClick={() => track(u)} className="size-9 rounded-full bg-secondary hover:bg-primary grid place-items-center" aria-label="Track">
-                  <BookmarkPlus className="size-4" />
+                <button
+                  onClick={() => track(u)}
+                  className="size-9 rounded-full border border-border grid place-items-center hover:bg-muted shrink-0"
+                  aria-label="Save"
+                >
+                  <ExternalLink className="size-4" />
                 </button>
               </div>
-              <div className="text-xs flex flex-wrap gap-1.5">
-                {(u.degrees ?? []).map((d) => <span key={d} className="bg-lavender-soft rounded-full px-2 py-0.5">{d}</span>)}
-                {(u.languages ?? []).map((l) => <span key={l} className="bg-matcha-soft rounded-full px-2 py-0.5">{l}</span>)}
+              <div className="grid grid-cols-2 gap-2 mt-4">
+                <Field label="Tuition">
+                  {u.tuition_min || u.tuition_max
+                    ? `${u.currency ?? ""}${u.tuition_min ?? "?"}${u.tuition_max ? `–${u.tuition_max}` : ""} / yr`
+                    : "—"}
+                </Field>
+                <Field label="Language">
+                  {(u.languages ?? []).join(" / ") || "—"}
+                </Field>
               </div>
-              {(u.tuition_min || u.tuition_max) && (
-                <p className="text-xs text-muted-foreground">Tuition: {u.tuition_min ?? "?"}–{u.tuition_max ?? "?"} {u.currency ?? "USD"}/yr</p>
+              {u.scholarships_available && (
+                <div className="mt-3 inline-flex items-center gap-1.5 bg-verified-soft text-verified rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider">
+                  Scholarships
+                </div>
               )}
-              {u.requirements && <p className="text-xs">{u.requirements}</p>}
-              <div className="flex items-center gap-3 text-xs">
-                {u.application_deadline && <span>📅 {new Date(u.application_deadline).toLocaleDateString()}</span>}
-                {u.scholarships_available && <span className="bg-honey/50 rounded-full px-2 py-0.5">Scholarships</span>}
-                {u.website && (
-                  <a href={u.website} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 font-bold text-primary-foreground bg-primary rounded-full px-3 py-1">
-                    Visit <ExternalLink className="size-3" />
-                  </a>
-                )}
-              </div>
             </article>
           ))}
         </div>
       </div>
     </AppShell>
+  );
+}
+
+function Pill({ children, active, onClick }: { children: React.ReactNode; active?: boolean; onClick?: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+        active
+          ? "bg-foreground text-background border-foreground"
+          : "bg-card text-foreground border-border hover:bg-muted"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-muted rounded-2xl px-4 py-3">
+      <div className="section-label">{label}</div>
+      <div className="text-sm font-semibold mt-0.5">{children}</div>
+    </div>
   );
 }
