@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { AppShell } from "@/components/AppShell";
 import { useProfile, levelFromXp } from "@/lib/useProfile";
-import { PetSprite } from "@/components/PetSprite";
+
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -52,7 +52,9 @@ function ProfilePage() {
         <h1 className="font-display text-3xl font-bold">Profile</h1>
 
         <section className="bg-white rounded-[2rem] border border-border p-6 shadow-soft flex flex-col sm:flex-row items-center gap-5">
-          <PetSprite petId={profile?.selected_pet} size={110} />
+          <div className="size-24 rounded-[1.75rem] bg-gradient-to-br from-primary to-lavender grid place-items-center text-4xl font-display font-bold">
+            {(profile?.display_name?.[0] ?? "✿").toUpperCase()}
+          </div>
           <div className="flex-1 w-full space-y-3">
             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Display name"
               className="w-full bg-cream rounded-2xl px-4 py-3 outline-none border border-transparent focus:border-primary font-display text-xl font-bold" />

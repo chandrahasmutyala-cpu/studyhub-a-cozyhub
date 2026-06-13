@@ -3,8 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { tutorChat } from "@/lib/tutor.functions";
 import { AppShell } from "@/components/AppShell";
-import { PetSprite } from "@/components/PetSprite";
-import { useProfile } from "@/lib/useProfile";
 import { Sparkles, Send } from "lucide-react";
 import { toast } from "sonner";
 
@@ -15,7 +13,7 @@ export const Route = createFileRoute("/_authenticated/tutor")({
 type Msg = { role: "user" | "assistant"; content: string };
 
 function TutorPage() {
-  const { profile } = useProfile();
+  
   const chat = useServerFn(tutorChat);
   const [mode, setMode] = useState<"general" | "japanese">("general");
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -64,7 +62,7 @@ function TutorPage() {
         <div className="flex-1 bg-white border border-border rounded-3xl p-4 overflow-y-auto space-y-3">
           {messages.length === 0 && (
             <div className="text-center py-10">
-              <PetSprite petId={profile?.selected_pet} size={120} />
+              <div className="size-24 rounded-[2rem] bg-gradient-to-br from-lavender to-primary grid place-items-center text-5xl mx-auto">✨</div>
               <p className="text-muted-foreground text-sm mt-3">Ask anything — homework, plans, languages…</p>
               <div className="flex flex-wrap gap-2 justify-center mt-4">
                 {suggestions.map((s) => (

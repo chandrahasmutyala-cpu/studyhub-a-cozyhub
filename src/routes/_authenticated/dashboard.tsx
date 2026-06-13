@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
-import { PetSprite } from "@/components/PetSprite";
+
 import { useProfile } from "@/lib/useProfile";
 import { Flame, Star, Coins, Clock, Sparkles, Timer, ListTodo, Languages } from "lucide-react";
 
@@ -64,7 +64,7 @@ function Dashboard() {
       <div className="space-y-6 max-w-6xl">
         {/* Greeting card */}
         <section className="bg-white rounded-[2rem] border border-border p-6 lg:p-8 shadow-soft flex flex-col sm:flex-row gap-6 items-center">
-          <PetSprite petId={profile?.selected_pet} size={120} />
+          <div className="size-28 rounded-[2rem] bg-gradient-to-br from-primary to-peach-soft grid place-items-center text-5xl shadow-soft">🌸</div>
           <div className="flex-1 text-center sm:text-left">
             <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}

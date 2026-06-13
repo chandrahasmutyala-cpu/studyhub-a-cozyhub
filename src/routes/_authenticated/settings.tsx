@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { useProfile } from "@/lib/useProfile";
-import { THEMES } from "@/lib/pets";
+import { THEMES } from "@/lib/themes";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";

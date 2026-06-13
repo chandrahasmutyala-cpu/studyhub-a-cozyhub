@@ -2,10 +2,9 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
-import { PetSprite } from "@/components/PetSprite";
 import { Progress } from "@/components/ui/progress";
 import {
-  LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Heart, Flame, LogOut,
+  LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Wand2,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
@@ -22,7 +21,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/flashcards", label: "Flashcards", icon: Layers },
       { to: "/tutor", label: "AI Tutor", icon: Sparkles },
       { to: "/japanese", label: "Japanese", icon: Languages },
-      { to: "/companion", label: "Companion", icon: Heart },
     ],
   },
   {
@@ -114,7 +112,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
 
           <div className="rounded-3xl bg-white border border-border p-4 flex items-center gap-3 shadow-soft">
-            <PetSprite petId={profile?.selected_pet} size={56} />
+            <div className="size-12 rounded-2xl bg-primary/40 grid place-items-center text-xl font-display font-bold">
+              {(profile?.display_name?.[0] ?? "✿").toUpperCase()}
+            </div>
             <div className="min-w-0 flex-1">
               <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lvl {level}</div>
               <Progress value={pct} className="h-2 mt-1 bg-secondary" />
