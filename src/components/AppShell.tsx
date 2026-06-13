@@ -1,38 +1,47 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useProfile } from "@/lib/useProfile";
+import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
+import { PetSprite } from "@/components/PetSprite";
+import { Progress } from "@/components/ui/progress";
 import {
-  Home, Map, GraduationCap, Sparkles, User,
-  LogOut, Menu, X, ListTodo, NotebookPen, Layers, Timer, Languages, Heart,
-  Award, ClipboardList, Settings, Compass,
+  LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Heart, Flame, LogOut,
+  Compass, GraduationCap, Award, ClipboardList, Wand2,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
-type Tab = { to: string; label: string; icon: typeof Home };
-
-// Primary 5-tab bottom nav (mobile + collapsed desktop)
-const tabs: Tab[] = [
-  { to: "/dashboard", label: "Home", icon: Home },
-  { to: "/career", label: "Roadmap", icon: Map },
-  { to: "/universities", label: "Finder", icon: GraduationCap },
-  { to: "/teacher", label: "Teacher", icon: Sparkles },
-  { to: "/profile", label: "Profile", icon: User },
-];
-
-// Secondary nav (drawer + desktop sidebar)
-const moreLinks: Tab[] = [
-  { to: "/tasks", label: "Planner", icon: ListTodo },
-  { to: "/focus", label: "Focus", icon: Timer },
-  { to: "/notes", label: "Notes", icon: NotebookPen },
-  { to: "/flashcards", label: "Flashcards", icon: Layers },
-  { to: "/tutor", label: "AI Tutor", icon: Sparkles },
-  { to: "/japanese", label: "Japanese", icon: Languages },
-  { to: "/companion", label: "Companion", icon: Heart },
-  { to: "/scholarships", label: "Scholarships", icon: Award },
-  { to: "/applications", label: "Applications", icon: ClipboardList },
-  { to: "/avatar", label: "Avatar Studio", icon: Compass },
-  { to: "/settings", label: "Settings", icon: Settings },
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
+const navGroups: { label: string; items: NavItem[] }[] = [
+  {
+    label: "NekoStudy",
+    items: [
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/tasks", label: "Planner", icon: ListTodo },
+      { to: "/focus", label: "Focus", icon: Timer },
+      { to: "/notes", label: "Notes", icon: NotebookPen },
+      { to: "/flashcards", label: "Flashcards", icon: Layers },
+      { to: "/tutor", label: "AI Tutor", icon: Sparkles },
+      { to: "/japanese", label: "Japanese", icon: Languages },
+      { to: "/companion", label: "Companion", icon: Heart },
+    ],
+  },
+  {
+    label: "StudentHub",
+    items: [
+      { to: "/career", label: "Career Hub", icon: Compass },
+      { to: "/universities", label: "Universities", icon: GraduationCap },
+      { to: "/scholarships", label: "Scholarships", icon: Award },
+      { to: "/applications", label: "Applications", icon: ClipboardList },
+    ],
+  },
+  {
+    label: "Account",
+    items: [
+      { to: "/avatar", label: "Avatar Studio", icon: Wand2 },
+      { to: "/profile", label: "Profile", icon: User },
+      { to: "/settings", label: "Settings", icon: Settings },
+    ],
+  },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -40,7 +49,13 @@ export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const [drawer, setDrawer] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const xp = profile?.xp ?? 0;
+  const level = levelFromXp(xp);
+  const next = xpForNextLevel(level);
+  const prev = xpForNextLevel(level - 1);
+  const pct = Math.max(0, Math.min(100, ((xp - prev) / (next - prev)) * 100));
 
   async function signOut() {
     await qc.cancelQueries();
@@ -50,116 +65,99 @@ export function AppShell({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-surface text-foreground">
-      {/* Desktop top bar */}
-      <header className="hidden md:flex sticky top-0 z-30 backdrop-blur bg-surface/85 border-b border-border h-16 px-6 items-center gap-6">
-        <Link to="/dashboard" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-          <span className="size-8 rounded-xl bg-primary text-primary-foreground grid place-items-center text-sm">SH</span>
-          StudentHub
-        </Link>
-        <nav className="flex items-center gap-1 ml-4">
-          {tabs.map((t) => {
-            const Icon = t.icon;
-            const active = pathname === t.to || (t.to !== "/dashboard" && pathname.startsWith(t.to));
-            return (
-              <Link
-                key={t.to}
-                to={t.to as "/dashboard"}
-                className={`flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors ${
-                  active ? "bg-brand-soft text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                }`}
-              >
-                <Icon className="size-4" /> {t.label}
-              </Link>
-            );
-          })}
-        </nav>
-        <button
-          onClick={() => setDrawer(true)}
-          className="ml-auto flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted"
-        >
-          <Menu className="size-4" /> More
-        </button>
-        <button
-          onClick={signOut}
-          className="size-9 grid place-items-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
-          aria-label="Sign out"
-        >
-          <LogOut className="size-4" />
-        </button>
+    <div className="min-h-screen paw-bg">
+      {/* Mobile top bar */}
+      <header className="md:hidden sticky top-0 z-30 backdrop-blur bg-cream/70 border-b border-border">
+        <div className="flex items-center justify-between px-4 h-14">
+          <Link to="/dashboard" className="flex items-center gap-2 font-display font-bold text-lg">
+            <span className="size-7 rounded-xl bg-primary grid place-items-center">🍓</span>
+            Study.
+          </Link>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="size-9 rounded-full bg-white border border-border grid place-items-center"
+            aria-label="Open menu"
+          >☰</button>
+        </div>
+        {open && (
+          <nav className="px-3 pb-4 space-y-3">
+            {navGroups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-2 mb-1">{g.label}</div>
+                <div className="grid grid-cols-2 gap-2">
+                  {g.items.map((n) => {
+                    const Icon = n.icon;
+                    const active = pathname.startsWith(n.to);
+                    return (
+                      <Link key={n.to} to={n.to as "/dashboard"} onClick={() => setOpen(false)}
+                        className={`flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold ${active ? "bg-primary text-primary-foreground" : "bg-white border border-border"}`}>
+                        <Icon className="size-4" /> {n.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+            <button onClick={signOut} className="w-full flex items-center justify-center gap-2 rounded-2xl px-3 py-2 text-sm font-semibold bg-white border border-border">
+              <LogOut className="size-4" /> Sign out
+            </button>
+          </nav>
+        )}
       </header>
 
-      {/* Mobile top spacer (no header — content goes edge-to-edge like the screenshots) */}
-      <div className="md:hidden h-6" />
+      <div className="md:flex">
+        {/* Sidebar */}
+        <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-5 gap-4">
+          <Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
+            <span className="size-10 rounded-2xl bg-primary grid place-items-center text-xl">🍓</span>
+            <span className="font-display font-bold text-2xl tracking-tight">Study.</span>
+          </Link>
 
-      {/* Page content */}
-      <main className="mx-auto w-full max-w-5xl px-5 sm:px-6 pb-28 md:pb-12 pt-2 md:pt-8">
-        {children}
-      </main>
-
-      {/* Mobile bottom tab nav */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-card/95 backdrop-blur border-t border-border">
-        <div className="grid grid-cols-5 max-w-md mx-auto">
-          {tabs.map((t) => {
-            const Icon = t.icon;
-            const active = pathname === t.to || (t.to !== "/dashboard" && pathname.startsWith(t.to));
-            return (
-              <Link
-                key={t.to}
-                to={t.to as "/dashboard"}
-                className={`flex flex-col items-center justify-center gap-1 py-3 text-[11px] font-medium ${
-                  active ? "text-primary" : "text-muted-foreground"
-                }`}
-              >
-                <Icon className={`size-6 ${active ? "fill-primary/10" : ""}`} strokeWidth={active ? 2.5 : 1.75} />
-                {t.label}
-              </Link>
-            );
-          })}
-        </div>
-        <div className="h-[env(safe-area-inset-bottom)]" />
-      </nav>
-
-      {/* Drawer (more links) */}
-      {drawer && (
-        <div className="fixed inset-0 z-50 bg-foreground/30 backdrop-blur-sm" onClick={() => setDrawer(false)}>
-          <aside
-            className="absolute right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card p-6 overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div className="font-bold text-lg">More</div>
-              <button onClick={() => setDrawer(false)} className="size-9 grid place-items-center rounded-full hover:bg-muted">
-                <X className="size-5" />
-              </button>
+          <div className="rounded-3xl bg-white border border-border p-4 flex items-center gap-3 shadow-soft">
+            <PetSprite petId={profile?.selected_pet} size={56} />
+            <div className="min-w-0 flex-1">
+              <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lvl {level}</div>
+              <Progress value={pct} className="h-2 mt-1 bg-secondary" />
+              <div className="text-[11px] text-muted-foreground mt-1">{xp} / {next} XP</div>
             </div>
-            <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
-              Hello, {profile?.display_name ?? "Student"}
-            </div>
-            <nav className="flex flex-col gap-1 mt-3">
-              {moreLinks.map((l) => {
-                const Icon = l.icon;
-                return (
-                  <Link
-                    key={l.to}
-                    to={l.to as "/tasks"}
-                    onClick={() => setDrawer(false)}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-foreground hover:bg-muted"
-                  >
-                    <Icon className="size-4 text-muted-foreground" /> {l.label}
-                  </Link>
-                );
-              })}
-              <button
-                onClick={signOut}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-destructive hover:bg-muted mt-3"
-              >
-                <LogOut className="size-4" /> Sign out
-              </button>
-            </nav>
-          </aside>
-        </div>
-      )}
+          </div>
+
+          <nav className="flex-1 flex flex-col gap-3 overflow-y-auto pr-1">
+            {navGroups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-3 mb-1">{g.label}</div>
+                <div className="flex flex-col gap-0.5">
+                  {g.items.map((n) => {
+                    const Icon = n.icon;
+                    const active = pathname.startsWith(n.to);
+                    return (
+                      <Link key={n.to} to={n.to as "/dashboard"}
+                        className={`flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors ${
+                          active ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:bg-white hover:text-foreground"
+                        }`}>
+                        <Icon className="size-4" /> {n.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </nav>
+
+          <div className="rounded-2xl bg-white border border-border p-3 flex items-center gap-2 text-sm">
+            <Flame className="size-4 text-primary" />
+            <span className="font-bold">{profile?.current_streak ?? 0}</span>
+            <span className="text-muted-foreground">day streak</span>
+            <button onClick={signOut} className="ml-auto text-muted-foreground hover:text-foreground" aria-label="Sign out">
+              <LogOut className="size-4" />
+            </button>
+          </div>
+        </aside>
+
+        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

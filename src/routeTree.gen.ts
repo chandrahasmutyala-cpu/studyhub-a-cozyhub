@@ -16,7 +16,6 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
-import { Route as AuthenticatedTeacherRouteImport } from './routes/_authenticated/teacher'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
@@ -65,11 +64,6 @@ const AuthenticatedUniversitiesRoute =
 const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
   id: '/tutor',
   path: '/tutor',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedTeacherRoute = AuthenticatedTeacherRouteImport.update({
-  id: '/teacher',
-  path: '/teacher',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTasksRoute = AuthenticatedTasksRouteImport.update({
@@ -164,7 +158,6 @@ export interface FileRoutesByFullPath {
   '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tasks': typeof AuthenticatedTasksRoute
-  '/teacher': typeof AuthenticatedTeacherRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
 }
@@ -187,7 +180,6 @@ export interface FileRoutesByTo {
   '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tasks': typeof AuthenticatedTasksRoute
-  '/teacher': typeof AuthenticatedTeacherRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
 }
@@ -212,7 +204,6 @@ export interface FileRoutesById {
   '/_authenticated/scholarships': typeof AuthenticatedScholarshipsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
-  '/_authenticated/teacher': typeof AuthenticatedTeacherRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
 }
@@ -237,7 +228,6 @@ export interface FileRouteTypes {
     | '/scholarships'
     | '/settings'
     | '/tasks'
-    | '/teacher'
     | '/tutor'
     | '/universities'
   fileRoutesByTo: FileRoutesByTo
@@ -260,7 +250,6 @@ export interface FileRouteTypes {
     | '/scholarships'
     | '/settings'
     | '/tasks'
-    | '/teacher'
     | '/tutor'
     | '/universities'
   id:
@@ -284,7 +273,6 @@ export interface FileRouteTypes {
     | '/_authenticated/scholarships'
     | '/_authenticated/settings'
     | '/_authenticated/tasks'
-    | '/_authenticated/teacher'
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
   fileRoutesById: FileRoutesById
@@ -346,13 +334,6 @@ declare module '@tanstack/react-router' {
       path: '/tutor'
       fullPath: '/tutor'
       preLoaderRoute: typeof AuthenticatedTutorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/teacher': {
-      id: '/_authenticated/teacher'
-      path: '/teacher'
-      fullPath: '/teacher'
-      preLoaderRoute: typeof AuthenticatedTeacherRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/tasks': {
@@ -471,7 +452,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedScholarshipsRoute: typeof AuthenticatedScholarshipsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
-  AuthenticatedTeacherRoute: typeof AuthenticatedTeacherRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
 }
@@ -491,7 +471,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedScholarshipsRoute: AuthenticatedScholarshipsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
-  AuthenticatedTeacherRoute: AuthenticatedTeacherRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
 }

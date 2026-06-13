@@ -3,12 +3,9 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
-import { Mascot } from "@/components/Mascot";
+import { PetSprite } from "@/components/PetSprite";
 import { useProfile } from "@/lib/useProfile";
-import {
-  BookOpen, Flame, CheckCircle2, Target, ArrowRight, ShieldCheck,
-  GraduationCap, Sparkles,
-} from "lucide-react";
+import { Flame, Star, Coins, Clock, Sparkles, Timer, ListTodo, Languages } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
@@ -28,228 +25,163 @@ function Dashboard() {
     queryKey: ["tasks", "today"],
     queryFn: async () => {
       const today = todayISO();
-      const { data } = await supabase
-        .from("tasks").select("*")
-        .or(`due_date.is.null,due_date.eq.${today}`)
-        .order("completed").order("created_at");
+      const { data } = await supabase.from("tasks").select("*").or(`due_date.is.null,due_date.eq.${today}`).order("completed").order("created_at");
       return data ?? [];
     },
   });
 
-  const planQ = useQuery({
-    queryKey: ["career_plans", "active"],
+  const focusQ = useQuery({
+    queryKey: ["focus", "week"],
     queryFn: async () => {
-      const { data } = await supabase
-        .from("career_plans").select("id,title,plan,career_goal,dream_country")
-        .order("created_at", { ascending: false }).limit(1);
-      return data?.[0] ?? null;
+      const since = new Date(); since.setDate(since.getDate() - 6);
+      const { data } = await supabase.from("focus_sessions").select("minutes,completed_at").gte("completed_at", since.toISOString());
+      return data ?? [];
     },
   });
 
-  const unisQ = useQuery({
-    queryKey: ["universities", "countries"],
-    queryFn: async () => {
-      const { data } = await supabase.from("universities").select("country");
-      return Array.from(new Set((data ?? []).map((u) => u.country))).length;
-    },
-  });
+  const weekly = useMemo(() => {
+    const days = Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(); d.setDate(d.getDate() - (6 - i));
+      return { key: d.toISOString().slice(0, 10), label: d.toLocaleDateString(undefined, { weekday: "short" }), minutes: 0 };
+    });
+    for (const s of focusQ.data ?? []) {
+      const k = (s.completed_at as string).slice(0, 10);
+      const day = days.find((d) => d.key === k);
+      if (day) day.minutes += s.minutes;
+    }
+    return days;
+  }, [focusQ.data]);
 
-  const tasksDoneToday = useMemo(
-    () => (tasksQ.data ?? []).filter((t) => t.completed).length,
-    [tasksQ.data],
-  );
-  const lessonsCount = profile?.total_minutes
-    ? Math.round((profile.total_minutes ?? 0) / 25)
-    : 0;
-  const streak = profile?.current_streak ?? 0;
-  const totalMilestones = Array.isArray(planQ.data?.plan && (planQ.data.plan as { timeline?: unknown[] })?.timeline)
-    ? ((planQ.data!.plan as { timeline: unknown[] }).timeline.length)
-    : 0;
-  const progressPct = totalMilestones > 0 ? 0 : 0; // future: track per milestone
-
-  const displayName = profile?.display_name?.split(" ")[0] ?? "friend";
+  const maxMin = Math.max(60, ...weekly.map((d) => d.minutes));
+  const weekTotal = weekly.reduce((a, b) => a + b.minutes, 0);
+  const dailyTarget = profile?.daily_minutes_target ?? 60;
+  const todayMin = weekly[weekly.length - 1]?.minutes ?? 0;
+  const dailyPct = Math.min(100, (todayMin / dailyTarget) * 100);
+  const isNew = !profile?.total_minutes && weekTotal === 0 && (tasksQ.data?.length ?? 0) === 0;
 
   return (
     <AppShell>
-      <div className="space-y-7 animate-fade-up">
-        {/* Header */}
-        <header className="flex items-start justify-between gap-4">
-          <div>
-            <div className="section-label">StudentHub</div>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mt-1">Welcome.</h1>
-            <p className="text-muted-foreground mt-3 max-w-md">
-              {profile?.display_name
-                ? `Welcome back, ${displayName}. Let's keep building your future.`
-                : "Welcome to StudentHub. Let's start building your future."}
+      <div className="space-y-6 max-w-6xl">
+        {/* Greeting card */}
+        <section className="bg-white rounded-[2rem] border border-border p-6 lg:p-8 shadow-soft flex flex-col sm:flex-row gap-6 items-center">
+          <PetSprite petId={profile?.selected_pet} size={120} />
+          <div className="flex-1 text-center sm:text-left">
+            <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
+            </div>
+            <h1 className="font-display text-3xl sm:text-4xl font-bold mt-1">
+              Hi {profile?.display_name ?? "friend"} 🌸
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              {isNew
+                ? "Welcome to NekoStudy powered by StudentHub. Let's start building your future."
+                : todayMin >= dailyTarget
+                ? "You hit your daily goal — incredible work!"
+                : `${dailyTarget - todayMin} min to today's goal. You've got this.`}
             </p>
-          </div>
-          <Link
-            to="/profile"
-            className="size-14 rounded-full bg-brand-soft grid place-items-center shrink-0 overflow-hidden border border-border"
-            aria-label="Profile"
-          >
-            <Mascot size={56} />
-          </Link>
-        </header>
-
-        {/* Stat grid */}
-        <section className="grid grid-cols-2 gap-3">
-          <Stat icon={BookOpen} label="Lessons" value={lessonsCount} />
-          <Stat icon={Flame} label="Study streak" value={streak} />
-          <Stat icon={CheckCircle2} label="Tasks" value={tasksDoneToday} />
-          <Stat icon={Target} label="Progress" value={`${progressPct}%`} />
-        </section>
-
-        {/* AI Teacher card */}
-        <section className="bg-brand-tint border border-border rounded-3xl p-6 relative overflow-hidden">
-          <div className="max-w-[60%] space-y-3">
-            <Badge tone="brand" dot>AI Teacher</Badge>
-            <h2 className="text-2xl font-bold tracking-tight">Meet your AI teacher.</h2>
-            <p className="text-sm text-muted-foreground">A 2D companion that explains, quizzes, and plans with you.</p>
-            <Link
-              to="/teacher"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-full px-5 py-2.5 font-semibold text-sm"
-            >
-              Set up Teacher <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="absolute -right-2 bottom-0 pointer-events-none">
-            <Mascot size={170} />
+            <div className="h-2 mt-3 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto sm:mx-0">
+              <div className="h-full bg-primary transition-all" style={{ width: `${dailyPct}%` }} />
+            </div>
           </div>
         </section>
 
-        {/* Today's tasks */}
-        <section>
-          <div className="flex items-end justify-between mb-3">
-            <h2 className="text-lg font-bold">Today's tasks</h2>
-            <Link to="/tasks" className="text-sm font-semibold text-primary">Plan</Link>
-          </div>
-          {tasksQ.data && tasksQ.data.length > 0 ? (
-            <ul className="space-y-2">
-              {tasksQ.data.slice(0, 5).map((t) => (
-                <li key={t.id} className="flex items-center gap-3 p-4 rounded-2xl bg-card border border-border">
-                  <span className={`size-5 rounded-full border-2 ${t.completed ? "bg-primary border-primary" : "border-border"}`} />
-                  <span className={`flex-1 text-sm font-medium ${t.completed ? "line-through text-muted-foreground" : ""}`}>{t.title}</span>
-                </li>
+        {/* Stats */}
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <Stat icon={Flame} label="Streak" value={`${profile?.current_streak ?? 0}d`} tint="bg-peach-soft" />
+          <Stat icon={Star} label="Level" value={profile?.level ?? 1} tint="bg-lavender-soft" />
+          <Stat icon={Coins} label="Coins" value={profile?.coins ?? 0} tint="bg-honey/40" />
+          <Stat icon={Clock} label="This week" value={`${Math.round(weekTotal / 60 * 10) / 10}h`} tint="bg-matcha-soft" />
+        </section>
+
+        {/* Today's tasks + Weekly chart */}
+        <section className="grid lg:grid-cols-[1.3fr_1fr] gap-5">
+          <Card title="Today's tasks" action={<Link to="/tasks" className="text-xs font-bold text-primary">Open planner →</Link>}>
+            {tasksQ.isLoading ? (
+              <Skeleton rows={3} />
+            ) : tasksQ.data && tasksQ.data.length > 0 ? (
+              <ul className="space-y-2">
+                {tasksQ.data.slice(0, 6).map((t) => (
+                  <li key={t.id} className="flex items-center gap-3 p-3 rounded-2xl bg-cream">
+                    <span className={`size-5 rounded-full border-2 ${t.completed ? "bg-primary border-primary" : "border-foreground/30"}`} />
+                    <span className={`flex-1 text-sm font-semibold ${t.completed ? "line-through text-muted-foreground" : ""}`}>{t.title}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{t.category}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint to="/tasks" label="Add your first task" desc="A planner that feels light, not heavy." />
+            )}
+          </Card>
+
+          <Card title="This week">
+            <div className="flex items-end gap-2 h-32">
+              {weekly.map((d) => (
+                <div key={d.key} className="flex-1 flex flex-col items-center gap-1.5">
+                  <div className="w-full bg-secondary rounded-xl overflow-hidden flex items-end h-24">
+                    <div className="w-full bg-primary rounded-xl transition-all" style={{ height: `${(d.minutes / maxMin) * 100}%` }} />
+                  </div>
+                  <div className="text-[10px] font-bold text-muted-foreground">{d.label}</div>
+                </div>
               ))}
-            </ul>
-          ) : (
-            <EmptyState
-              icon={CheckCircle2}
-              title="Nothing scheduled yet"
-              desc="Tasks you set will appear here. No fake to-dos."
-            />
-          )}
+            </div>
+            <div className="text-xs text-muted-foreground mt-3">Total: {weekTotal} min across the last 7 days</div>
+          </Card>
         </section>
 
-        {/* Future roadmap */}
-        <section>
-          <div className="flex items-end justify-between mb-3">
-            <h2 className="text-lg font-bold">Future roadmap</h2>
-            <Link to="/career" className="text-sm font-semibold text-primary">Open</Link>
-          </div>
-          <Link
-            to="/career"
-            className="block bg-card border border-border rounded-3xl p-5"
-          >
-            <div className="flex items-center gap-4">
-              <div className="size-14 rounded-2xl bg-brand-soft grid place-items-center shrink-0">
-                <Target className="size-6 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-bold">
-                  {planQ.data?.title ?? "Set a career goal"}
-                </div>
-                <div className="text-sm text-muted-foreground truncate">
-                  {planQ.data?.career_goal
-                    ? `${planQ.data.career_goal}${planQ.data.dream_country ? ` · ${planQ.data.dream_country}` : ""}`
-                    : "Pick a country or university"}
-                </div>
-              </div>
-              <ArrowRight className="size-5 text-muted-foreground shrink-0" />
-            </div>
-            <div className="h-1.5 bg-muted rounded-full mt-5 overflow-hidden">
-              <div className="h-full bg-primary" style={{ width: `${progressPct}%` }} />
-            </div>
-            <div className="flex items-center justify-between mt-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-              <span>Milestone 0 / {totalMilestones}</span>
-              <span>{progressPct}% complete</span>
-            </div>
-          </Link>
+        {/* Quick actions */}
+        <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <QuickAction to="/focus" icon={Timer} title="Start a focus session" tint="bg-matcha-soft" />
+          <QuickAction to="/tutor" icon={Sparkles} title="Ask your AI tutor" tint="bg-peach-soft" />
+          <QuickAction to="/japanese" icon={Languages} title="Practice kana" tint="bg-lavender-soft" />
+          <QuickAction to="/tasks" icon={ListTodo} title="Plan tomorrow" tint="bg-honey/40" />
         </section>
-
-        {/* Discover */}
-        <section>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-bold">Discover</h2>
-            <Badge tone="verified" icon={ShieldCheck}>Verified only</Badge>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <Link to="/universities" className="bg-card border border-border rounded-3xl p-5 hover:border-primary/30 transition-colors">
-              <GraduationCap className="size-6 text-primary mb-3" />
-              <div className="font-bold">Universities</div>
-              <div className="text-xs text-muted-foreground mt-0.5">
-                {unisQ.data ?? 0} {unisQ.data === 1 ? "country" : "countries"}
-              </div>
-            </Link>
-            <Link to="/scholarships" className="bg-card border border-border rounded-3xl p-5 hover:border-primary/30 transition-colors">
-              <Sparkles className="size-6 text-primary mb-3" />
-              <div className="font-bold">Scholarships</div>
-              <div className="text-xs text-muted-foreground mt-0.5">Verified sources</div>
-            </Link>
-          </div>
-        </section>
-
-        {/* Focus CTA */}
-        <Link
-          to="/focus"
-          className="block w-full bg-foreground text-background rounded-full py-4 text-center font-semibold"
-        >
-          Enter Focus Mode
-        </Link>
       </div>
     </AppShell>
   );
 }
 
-function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string; strokeWidth?: number }>; label: string; value: React.ReactNode }) {
+function Stat({ icon: Icon, label, value, tint }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode; tint: string }) {
   return (
-    <div className="bg-card border border-border rounded-3xl p-5">
-      <Icon className="size-5 text-muted-foreground mb-6" strokeWidth={1.75} />
-      <div className="section-label">{label}</div>
-      <div className="text-3xl font-bold mt-1">{value}</div>
-    </div>
-  );
-}
-
-function EmptyState({ icon: Icon, title, desc }: { icon: React.ComponentType<{ className?: string }>; title: string; desc: string }) {
-  return (
-    <div className="rounded-3xl border border-dashed border-border p-8 text-center">
-      <div className="size-10 mx-auto rounded-full bg-muted grid place-items-center mb-3">
-        <Icon className="size-5 text-muted-foreground" />
+    <div className="bg-white rounded-3xl border border-border p-4 flex items-center gap-3">
+      <div className={`size-10 rounded-2xl ${tint} grid place-items-center`}><Icon className="size-5" /></div>
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
+        <div className="font-display text-xl font-bold">{value}</div>
       </div>
-      <div className="font-semibold">{title}</div>
-      <div className="text-sm text-muted-foreground mt-1">{desc}</div>
     </div>
   );
 }
 
-function Badge({
-  children, tone = "brand", icon: Icon, dot,
-}: {
-  children: React.ReactNode;
-  tone?: "brand" | "verified";
-  icon?: React.ComponentType<{ className?: string }>;
-  dot?: boolean;
-}) {
-  const styles = tone === "verified"
-    ? "bg-verified-soft text-verified"
-    : "bg-card border border-border text-primary";
+function Card({ title, action, children }: { title: string; action?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 ${styles} rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider`}>
-      {dot && <span className="size-1.5 rounded-full bg-emerald-500" />}
-      {Icon && <Icon className="size-3.5" />}
+    <div className="bg-white rounded-[2rem] border border-border p-5 shadow-soft">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="font-display text-lg font-bold">{title}</h2>
+        {action}
+      </div>
       {children}
-    </span>
+    </div>
+  );
+}
+
+function Skeleton({ rows = 3 }) {
+  return <div className="space-y-2">{Array.from({ length: rows }).map((_, i) => <div key={i} className="h-10 bg-cream rounded-2xl animate-pulse" />)}</div>;
+}
+
+function EmptyHint({ to, label, desc }: { to: string; label: string; desc: string }) {
+  return (
+    <div className="text-center py-6 text-sm text-muted-foreground">
+      {desc}
+      <div className="mt-3"><Link to={to} className="inline-block px-4 py-2 rounded-full bg-primary font-bold text-foreground">{label}</Link></div>
+    </div>
+  );
+}
+
+function QuickAction({ to, icon: Icon, title, tint }: { to: string; icon: React.ComponentType<{ className?: string }>; title: string; tint: string }) {
+  return (
+    <Link to={to} className="bg-white rounded-3xl border border-border p-5 flex items-center gap-3 hover:shadow-pop hover:-translate-y-0.5 transition-all">
+      <div className={`size-10 rounded-2xl ${tint} grid place-items-center`}><Icon className="size-5" /></div>
+      <span className="text-sm font-bold">{title}</span>
+    </Link>
   );
 }
