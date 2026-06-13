@@ -1,8 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useProfile } from "@/lib/useProfile";
-import { PETS } from "@/lib/pets";
-import { PetSprite } from "@/components/PetSprite";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
@@ -22,7 +20,6 @@ function Onboarding() {
   const [daily, setDaily] = useState(60);
   const [time, setTime] = useState("evening");
   const [languages, setLanguages] = useState<string[]>([]);
-  const [pet, setPet] = useState("capybara");
   const [ageGroup, setAgeGroup] = useState<string>("");
 
   useEffect(() => {
@@ -45,7 +42,6 @@ function Onboarding() {
       daily_minutes_target: daily,
       preferred_time: time,
       languages,
-      selected_pet: pet,
       age_group: ageGroup || null,
       onboarded: true,
     });
@@ -134,21 +130,6 @@ function Onboarding() {
           <input value={examTarget} onChange={(e) => setExamTarget(e.target.value)}
             placeholder="Exam target (optional, e.g. JLPT N3 Dec 2026)"
             className="w-full bg-cream border border-border rounded-2xl px-4 py-3 outline-none focus:border-primary" />
-        </div>
-      ),
-      canNext: true,
-    },
-    {
-      title: "Pick your study buddy",
-      body: (
-        <div className="grid grid-cols-3 gap-3">
-          {PETS.map((p) => (
-            <button key={p.id} type="button" onClick={() => setPet(p.id)}
-              className={`rounded-3xl p-3 border ${pet === p.id ? "bg-primary border-primary" : "bg-white border-border"}`}>
-              <PetSprite petId={p.id} size={72} float={false} />
-              <div className="text-[11px] font-bold mt-1">{p.name.split(" the ")[0]}</div>
-            </button>
-          ))}
         </div>
       ),
       canNext: true,

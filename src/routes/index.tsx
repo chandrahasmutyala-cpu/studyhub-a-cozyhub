@@ -1,22 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PetSprite } from "@/components/PetSprite";
-import { PETS } from "@/lib/pets";
-import { Sparkles, Languages, Timer, Heart, Layers, NotebookPen } from "lucide-react";
+import { Sparkles, Languages, Timer, Layers, NotebookPen, Compass, GraduationCap, Award } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Study — your softest corner for hard work" },
-      { name: "description", content: "A cozy kawaii study platform with AI tutor, Japanese learning, focus timer, flashcards, and a virtual animal companion." },
+      { name: "description", content: "A cozy study platform with AI tutor, full Japanese path (hiragana, katakana, JLPT N5–N1), focus timer, flashcards, and StudentHub: career planner, university discovery, scholarships, and application tracking." },
     ],
   }),
   component: Landing,
 });
 
 function Landing() {
+  const kana = ["あ","い","う","え","お","か","き","く","け","こ"];
+
   return (
     <div className="min-h-screen paw-bg text-foreground">
-      {/* Nav */}
       <nav className="px-6 lg:px-12 py-5 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <div className="size-10 bg-primary rounded-2xl grid place-items-center text-2xl">🍓</div>
@@ -24,7 +23,7 @@ function Landing() {
         </div>
         <div className="hidden md:flex items-center gap-8 font-semibold text-foreground/70">
           <a href="#features" className="hover:text-primary transition-colors">Features</a>
-          <a href="#companions" className="hover:text-primary transition-colors">Companions</a>
+          <a href="#studenthub" className="hover:text-primary transition-colors">StudentHub</a>
           <a href="#japanese" className="hover:text-primary transition-colors">Japanese</a>
         </div>
         <div className="flex items-center gap-2">
@@ -33,7 +32,6 @@ function Landing() {
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="px-6 lg:px-12 pt-8 pb-20 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-7 animate-fade-up">
@@ -45,7 +43,7 @@ function Landing() {
               Your softest corner <br className="hidden sm:block" />for <span className="text-primary underline decoration-wavy decoration-primary/60 underline-offset-8">hard work.</span>
             </h1>
             <p className="text-lg text-foreground/70 max-w-lg leading-relaxed">
-              Plan your day, focus deeply, learn Japanese from hiragana to JLPT N1, and grow alongside a tiny animal companion that cheers for every pomodoro.
+              Plan your day, focus deeply, learn Japanese from hiragana to JLPT N1, and map out your university + scholarship path inside one cozy hub.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/auth" search={{ tab: "signup" as const }} className="px-7 py-3.5 rounded-3xl bg-primary text-base font-bold shadow-pop hover:scale-[1.02] active:scale-[0.98] transition-transform">
@@ -55,21 +53,9 @@ function Landing() {
                 See features
               </a>
             </div>
-            <div className="flex items-center gap-3 pt-2 text-sm text-muted-foreground">
-              <div className="flex -space-x-2">
-                {PETS.slice(0, 4).map((p) => (
-                  <img key={p.id} src={p.image} alt="" width={32} height={32} className="size-8 rounded-full bg-white border-2 border-cream" />
-                ))}
-              </div>
-              Six cute companions to choose from
-            </div>
           </div>
 
-          {/* App preview */}
           <div className="bg-white/70 p-5 sm:p-6 rounded-[2.5rem] border-8 border-white shadow-pop relative">
-            <div className="absolute -top-10 -right-6 sm:-right-8 animate-float-soft z-10">
-              <PetSprite petId="capybara" size={140} float={false} />
-            </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white p-5 rounded-3xl shadow-soft space-y-3 border border-lavender/50">
                 <div className="flex justify-between items-center">
@@ -86,11 +72,6 @@ function Landing() {
               <div className="bg-matcha-soft p-5 rounded-3xl shadow-soft border border-matcha/40 flex flex-col items-center justify-center gap-2">
                 <div className="text-3xl font-display font-bold">24:59</div>
                 <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Deep Focus</div>
-                <div className="flex gap-1.5 mt-1">
-                  <div className="size-2 rounded-full bg-matcha" />
-                  <div className="size-2 rounded-full bg-matcha/30" />
-                  <div className="size-2 rounded-full bg-matcha/30" />
-                </div>
               </div>
 
               <div className="col-span-2 bg-white p-5 rounded-3xl shadow-soft border border-border space-y-3">
@@ -110,7 +91,6 @@ function Landing() {
         </div>
       </section>
 
-      {/* Features */}
       <section id="features" className="px-6 lg:px-12 py-20 bg-white/40">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 space-y-3">
@@ -120,11 +100,11 @@ function Landing() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               { Icon: Sparkles, t: "AI Tutor", d: "Ask anything — homework, code, exam prep. Clear explanations, tiny examples.", c: "bg-peach-soft" },
-              { Icon: Languages, t: "Japanese Path", d: "Hiragana, Katakana, and JLPT N5 → N1 with kana drills and grammar.", c: "bg-lavender-soft" },
+              { Icon: Languages, t: "Japanese Path", d: "Full hiragana & katakana (with dakuten + yōon), JLPT N5 → N1 vocab and sentences.", c: "bg-lavender-soft" },
               { Icon: Timer, t: "Focus Sessions", d: "Pomodoro timer with cozy backgrounds and ambient sounds.", c: "bg-matcha-soft" },
               { Icon: NotebookPen, t: "Notes", d: "Markdown notes that sync everywhere and stay yours.", c: "bg-honey/30" },
               { Icon: Layers, t: "Flashcards", d: "Spaced repetition that actually remembers when you'll forget.", c: "bg-peach-soft" },
-              { Icon: Heart, t: "Animal Companion", d: "A tiny friend that levels up alongside you and celebrates streaks.", c: "bg-lavender-soft" },
+              { Icon: Compass, t: "AI Future Planner", d: "Map a realistic roadmap from your current grade to your dream career.", c: "bg-lavender-soft" },
             ].map(({ Icon, t, d, c }) => (
               <div key={t} className="group bg-white p-7 rounded-[2rem] border border-border hover:shadow-pop hover:-translate-y-1 transition-all">
                 <div className={`size-12 ${c} rounded-2xl grid place-items-center mb-5`}>
@@ -138,31 +118,37 @@ function Landing() {
         </div>
       </section>
 
-      {/* Companions */}
-      <section id="companions" className="px-6 lg:px-12 py-24 max-w-6xl mx-auto text-center">
-        <h2 className="font-display text-4xl font-bold mb-3">Pick your study buddy</h2>
-        <p className="text-foreground/60 max-w-lg mx-auto mb-12">They react to your focus sessions and grow with every streak.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {PETS.map((p) => (
-            <div key={p.id} className="bg-white rounded-3xl p-5 border border-border hover:shadow-pop transition-all">
-              <img src={p.image} alt={p.name} width={120} height={120} loading="lazy" className="mx-auto size-24 animate-float-soft" />
-              <div className="text-xs font-bold mt-2">{p.name.split(" the ")[0]}</div>
+      <section id="studenthub" className="px-6 lg:px-12 py-24 max-w-6xl mx-auto">
+        <div className="text-center mb-10 space-y-3">
+          <h2 className="font-display text-4xl font-bold">StudentHub</h2>
+          <p className="text-foreground/60 max-w-xl mx-auto">Career planning, universities, scholarships, and application tracking — all in one place.</p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { Icon: Compass, t: "Career Hub", d: "Set goals, get an AI roadmap." },
+            { Icon: GraduationCap, t: "Universities", d: "Browse verified programs." },
+            { Icon: Award, t: "Scholarships", d: "Discover and save opportunities." },
+            { Icon: NotebookPen, t: "Applications", d: "Track deadlines & status." },
+          ].map(({ Icon, t, d }) => (
+            <div key={t} className="bg-white rounded-3xl p-6 border border-border">
+              <div className="size-10 bg-primary/30 rounded-2xl grid place-items-center mb-3"><Icon className="size-5" /></div>
+              <div className="font-display font-bold">{t}</div>
+              <p className="text-xs text-muted-foreground mt-1">{d}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Japanese */}
       <section id="japanese" className="px-6 lg:px-12 py-20 bg-lavender-soft">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
           <div className="space-y-5">
             <h2 className="font-display text-4xl font-bold">From あ to JLPT N1</h2>
-            <p className="text-foreground/70">A complete Japanese path: kana foundations, JLPT vocabulary, grammar, and an AI tutor who speaks Japanese with you.</p>
+            <p className="text-foreground/70">A complete Japanese path: full kana foundations (basic, dakuten, yōon), JLPT vocabulary with example sentences, an AI tutor who speaks Japanese with you, plus curated video lessons.</p>
             <Link to="/auth" search={{ tab: "signup" as const }} className="inline-block px-7 py-3 rounded-3xl bg-primary font-bold shadow-soft">Start the path</Link>
           </div>
           <div className="bg-white rounded-3xl border border-border p-6 shadow-soft">
             <div className="grid grid-cols-5 gap-2 text-center" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-              {["あ","い","う","え","お","か","き","く","け","こ"].map((k) => (
+              {kana.map((k) => (
                 <div key={k} className="aspect-square rounded-2xl bg-cream grid place-items-center text-2xl font-bold">{k}</div>
               ))}
             </div>
