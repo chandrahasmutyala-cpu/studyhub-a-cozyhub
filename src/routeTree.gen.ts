@@ -26,7 +26,6 @@ import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
 import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedCompanionRouteImport } from './routes/_authenticated/companion'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
 import { Route as AuthenticatedAvatarRouteImport } from './routes/_authenticated/avatar'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
@@ -117,11 +116,6 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCompanionRoute = AuthenticatedCompanionRouteImport.update({
-  id: '/companion',
-  path: '/companion',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
   id: '/career',
   path: '/career',
@@ -147,7 +141,6 @@ export interface FileRoutesByFullPath {
   '/applications': typeof AuthenticatedApplicationsRoute
   '/avatar': typeof AuthenticatedAvatarRoute
   '/career': typeof AuthenticatedCareerRoute
-  '/companion': typeof AuthenticatedCompanionRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
@@ -169,7 +162,6 @@ export interface FileRoutesByTo {
   '/applications': typeof AuthenticatedApplicationsRoute
   '/avatar': typeof AuthenticatedAvatarRoute
   '/career': typeof AuthenticatedCareerRoute
-  '/companion': typeof AuthenticatedCompanionRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
@@ -193,7 +185,6 @@ export interface FileRoutesById {
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/avatar': typeof AuthenticatedAvatarRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
-  '/_authenticated/companion': typeof AuthenticatedCompanionRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
   '/_authenticated/focus': typeof AuthenticatedFocusRoute
@@ -217,7 +208,6 @@ export interface FileRouteTypes {
     | '/applications'
     | '/avatar'
     | '/career'
-    | '/companion'
     | '/dashboard'
     | '/flashcards'
     | '/focus'
@@ -239,7 +229,6 @@ export interface FileRouteTypes {
     | '/applications'
     | '/avatar'
     | '/career'
-    | '/companion'
     | '/dashboard'
     | '/flashcards'
     | '/focus'
@@ -262,7 +251,6 @@ export interface FileRouteTypes {
     | '/_authenticated/applications'
     | '/_authenticated/avatar'
     | '/_authenticated/career'
-    | '/_authenticated/companion'
     | '/_authenticated/dashboard'
     | '/_authenticated/flashcards'
     | '/_authenticated/focus'
@@ -406,13 +394,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/companion': {
-      id: '/_authenticated/companion'
-      path: '/companion'
-      fullPath: '/companion'
-      preLoaderRoute: typeof AuthenticatedCompanionRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/career': {
       id: '/_authenticated/career'
       path: '/career'
@@ -441,7 +422,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedAvatarRoute: typeof AuthenticatedAvatarRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
-  AuthenticatedCompanionRoute: typeof AuthenticatedCompanionRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
   AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
@@ -460,7 +440,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedAvatarRoute: AuthenticatedAvatarRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
-  AuthenticatedCompanionRoute: AuthenticatedCompanionRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
   AuthenticatedFocusRoute: AuthenticatedFocusRoute,
@@ -488,13 +467,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
