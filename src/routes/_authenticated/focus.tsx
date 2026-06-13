@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
-import { PetSprite } from "@/components/PetSprite";
+
 import { useProfile } from "@/lib/useProfile";
 import { Play, Pause, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
@@ -105,9 +105,7 @@ function FocusPage() {
         </div>
 
         <div className="rounded-[2.5rem] p-8 sm:p-12 border-8 border-white shadow-pop relative overflow-hidden" style={{ background: bg.bg }}>
-          <div className="absolute top-4 right-4 animate-float-soft">
-            <PetSprite petId={profile?.selected_pet} size={88} float={false} />
-          </div>
+          <div className="absolute top-4 right-4 text-5xl animate-float-soft select-none" aria-hidden>✨</div>
           <div className="text-[10px] font-bold uppercase tracking-widest text-foreground/70 mb-2">{mode === "focus" ? "Deep Focus" : "Break"}</div>
           <div className="font-display text-7xl sm:text-8xl font-bold tabular-nums">{mm}:{ss}</div>
           <div className="h-2 bg-white/50 rounded-full overflow-hidden mt-4">

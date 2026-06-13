@@ -21,14 +21,14 @@ const SYSTEM = `You are an academic & career planner. Given a student's goal, re
   "scholarships_hint": [string],
   "timeline": [{"phase": string, "when": string, "actions": [string]}]
 }
-Keep arrays focused (3-7 items). Be realistic and specific to the country/university where possible. Never invent scholarship names or URLs — only general categories under scholarships_hint.`;
+Keep arrays focused (3-7 items). Be realistic and specific to the country/university where possible. Never invent scholarship names or URLs — only general categories under scholarships_hint. Output ONLY the JSON object, no markdown fences.`;
 
 export const generatePlan = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data, context }) => {
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) throw new Error("OPENAI_API_KEY is not configured.");
+    const apiKey = process.env.LOVABLE_API_KEY;
+    if (!apiKey) throw new Error("AI is not configured.");
 
     const userPrompt = `Student profile:
 - Current grade/year: ${data.current_grade}
@@ -39,13 +39,11 @@ export const generatePlan = createServerFn({ method: "POST" })
 
 Return the JSON plan now.`;
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      headers: { "Lovable-API-Key": apiKey, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
-        temperature: 0.5,
-        response_format: { type: "json_object" },
+        model: "google/gemini-3-flash-preview",
         messages: [
           { role: "system", content: SYSTEM },
           { role: "user", content: userPrompt },
@@ -54,12 +52,14 @@ Return the JSON plan now.`;
     });
     if (!res.ok) {
       const text = await res.text().catch(() => "");
-      if (res.status === 401) throw new Error("OpenAI rejected the API key.");
-      if (res.status === 429) throw new Error("OpenAI rate limit — try again shortly.");
-      throw new Error(`OpenAI error ${res.status}: ${text.slice(0, 200)}`);
+      if (res.status === 429) throw new Error("AI is busy — try again shortly.");
+      if (res.status === 402) throw new Error("AI credits exhausted. Add credits in workspace billing.");
+      throw new Error(`AI error ${res.status}: ${text.slice(0, 200)}`);
     }
     const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    const raw = json.choices?.[0]?.message?.content ?? "{}";
+    let raw = json.choices?.[0]?.message?.content ?? "{}";
+    // Strip code fences if present
+    raw = raw.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/i, "").trim();
     let plan: unknown;
     try { plan = JSON.parse(raw); } catch { throw new Error("Planner returned invalid JSON."); }
 

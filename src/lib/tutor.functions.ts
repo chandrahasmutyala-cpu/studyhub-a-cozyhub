@@ -19,30 +19,29 @@ export const tutorChat = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.LOVABLE_API_KEY;
     if (!apiKey) {
-      throw new Error("OPENAI_API_KEY is not configured. Add it in project secrets.");
+      throw new Error("AI is not configured. Please contact support.");
     }
     const system = data.mode === "japanese" ? SYSTEM_JAPANESE : SYSTEM_GENERAL;
 
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        "Lovable-API-Key": apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
-        temperature: 0.6,
+        model: "google/gemini-3-flash-preview",
         messages: [{ role: "system", content: system }, ...data.messages],
       }),
     });
 
     if (!res.ok) {
       const text = await res.text().catch(() => "");
-      if (res.status === 401) throw new Error("OpenAI rejected the API key. Update OPENAI_API_KEY.");
-      if (res.status === 429) throw new Error("OpenAI rate limit hit. Please try again in a moment.");
-      throw new Error(`OpenAI error ${res.status}: ${text.slice(0, 200)}`);
+      if (res.status === 429) throw new Error("AI is busy right now — try again in a moment.");
+      if (res.status === 402) throw new Error("AI credits exhausted. Please add credits in your workspace billing.");
+      throw new Error(`AI error ${res.status}: ${text.slice(0, 200)}`);
     }
     const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
     const content = json.choices?.[0]?.message?.content ?? "(no response)";
