@@ -1,25 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { AppShell } from "@/components/AppShell";
 import { useProfile } from "@/lib/useProfile";
 import {
   HIRAGANA_BASIC, HIRAGANA_DAKUTEN, HIRAGANA_YOON,
   KATAKANA_BASIC, KATAKANA_DAKUTEN, KATAKANA_YOON,
-  JLPT, LESSONS, CHANNEL_URL,
-  type Kana,
+  JLPT, type Kana,
 } from "@/lib/japanese-data";
-import { ExternalLink, Youtube } from "lucide-react";
+import { GRAMMAR } from "@/lib/japanese-grammar";
+import { tutorChat } from "@/lib/tutor.functions";
+import { BookOpen, Sparkles, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/japanese")({
   component: JapanesePage,
 });
 
-type Tab = "hiragana" | "katakana" | "jlpt" | "lessons" | "quiz";
+type Tab = "hiragana" | "katakana" | "jlpt" | "grammar" | "stories" | "quiz";
+type Level = "N5" | "N4" | "N3" | "N2" | "N1";
 
 function JapanesePage() {
   const { profile, update } = useProfile();
   const [tab, setTab] = useState<Tab>("hiragana");
-  const [jlptLevel, setJlptLevel] = useState<keyof typeof JLPT>("N5");
+  const [jlptLevel, setJlptLevel] = useState<Level>("N5");
 
   return (
     <AppShell>
@@ -30,7 +34,7 @@ function JapanesePage() {
         </div>
 
         <div className="flex gap-1 bg-white p-1 rounded-full border border-border w-fit overflow-x-auto">
-          {(["hiragana","katakana","jlpt","lessons","quiz"] as Tab[]).map((t) => (
+          {(["hiragana","katakana","jlpt","grammar","stories","quiz"] as Tab[]).map((t) => (
             <button key={t} onClick={() => setTab(t)} className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap ${tab === t ? "bg-primary" : "text-muted-foreground"}`}>{t}</button>
           ))}
         </div>
@@ -53,12 +57,7 @@ function JapanesePage() {
 
         {tab === "jlpt" && (
           <div className="space-y-3">
-            <div className="flex gap-2 flex-wrap">
-              {(Object.keys(JLPT) as (keyof typeof JLPT)[]).map((l) => (
-                <button key={l} onClick={() => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }}
-                  className={`px-4 py-2 rounded-full text-sm font-bold border ${jlptLevel === l ? "bg-primary border-primary" : "bg-white border-border"}`}>{l}</button>
-              ))}
-            </div>
+            <LevelPicker level={jlptLevel} onChange={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
             <div className="grid sm:grid-cols-2 gap-3">
               {JLPT[jlptLevel].map((v) => (
                 <div key={v.j} className="bg-white border border-border rounded-3xl p-5">
@@ -82,10 +81,28 @@ function JapanesePage() {
           </div>
         )}
 
-        {tab === "lessons" && <LessonsTab />}
+        {tab === "grammar" && (
+          <GrammarTab level={jlptLevel} setLevel={setJlptLevel} />
+        )}
+
+        {tab === "stories" && (
+          <StoriesTab defaultLevel={jlptLevel} />
+        )}
+
         {tab === "quiz" && <KanaQuiz />}
       </div>
     </AppShell>
+  );
+}
+
+function LevelPicker({ level, onChange }: { level: Level; onChange: (l: Level) => void }) {
+  return (
+    <div className="flex gap-2 flex-wrap">
+      {(Object.keys(GRAMMAR) as Level[]).map((l) => (
+        <button key={l} onClick={() => onChange(l)}
+          className={`px-4 py-2 rounded-full text-sm font-bold border ${level === l ? "bg-primary border-primary" : "bg-white border-border"}`}>{l}</button>
+      ))}
+    </div>
   );
 }
 
@@ -107,46 +124,120 @@ function KanaSection({ title, items }: { title: string; items: Kana[] }) {
   );
 }
 
-function LessonsTab() {
-  const groups: { label: string; key: keyof typeof LESSONS }[] = [
-    { label: "Hiragana", key: "hiragana" },
-    { label: "Katakana", key: "katakana" },
-    { label: "JLPT N5", key: "N5" },
-    { label: "JLPT N4", key: "N4" },
-    { label: "JLPT N3", key: "N3" },
-    { label: "JLPT N2", key: "N2" },
-    { label: "JLPT N1", key: "N1" },
-  ];
+function GrammarTab({ level, setLevel }: { level: Level; setLevel: (l: Level) => void }) {
+  const chat = useServerFn(tutorChat);
+  const [extra, setExtra] = useState<Record<Level, string[]>>({ N5: [], N4: [], N3: [], N2: [], N1: [] });
+  const [loading, setLoading] = useState(false);
+
+  async function generateMore() {
+    setLoading(true);
+    try {
+      const res = await chat({ data: {
+        mode: "japanese",
+        messages: [{ role: "user", content: `Give me 5 fresh JLPT ${level} grammar points I might not have seen. For each: pattern (Japanese), short English meaning, structure rule, one example sentence in Japanese, romaji, and English translation. Format each as a compact numbered block.` }],
+      }});
+      setExtra((e) => ({ ...e, [level]: [...e[level], res.content] }));
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Generation failed");
+    } finally { setLoading(false); }
+  }
+
   return (
     <div className="space-y-4">
-      <section className="bg-white rounded-[2rem] border border-border p-5 shadow-soft flex items-center gap-4">
-        <div className="size-12 rounded-2xl bg-destructive/10 grid place-items-center"><Youtube className="size-6 text-destructive" /></div>
-        <div className="flex-1">
-          <div className="font-display text-lg font-bold">Learn Japanese Channel</div>
-          <p className="text-xs text-muted-foreground">Curated video lessons hosted on YouTube. Opens externally.</p>
-        </div>
-        <a href={CHANNEL_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-bold bg-primary rounded-full px-3 py-2">
-          Visit channel <ExternalLink className="size-3" />
-        </a>
-      </section>
-
+      <LevelPicker level={level} onChange={setLevel} />
       <div className="grid sm:grid-cols-2 gap-3">
-        {groups.map((g) => (
-          <div key={g.key} className="bg-white border border-border rounded-3xl p-5">
-            <div className="font-display text-base font-bold mb-2">{g.label}</div>
-            <ul className="space-y-2">
-              {LESSONS[g.key].map((l) => (
-                <li key={l.url}>
-                  <a href={l.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold hover:underline">
-                    <Youtube className="size-4 text-destructive" /> {l.title}
-                  </a>
-                  {l.note && <div className="text-[11px] text-muted-foreground ml-6">{l.note}</div>}
-                </li>
-              ))}
-            </ul>
+        {GRAMMAR[level].map((g) => (
+          <div key={g.pattern} className="bg-white border border-border rounded-3xl p-5">
+            <div className="flex items-baseline justify-between gap-2">
+              <div className="text-xl font-bold" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{g.pattern}</div>
+              <div className="text-xs text-muted-foreground">{g.meaning}</div>
+            </div>
+            <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mt-2">Structure</div>
+            <div className="text-sm">{g.structure}</div>
+            <div className="mt-3 pt-3 border-t border-border/70 text-sm space-y-0.5">
+              <div style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{g.example}</div>
+              <div className="text-xs text-muted-foreground italic">{g.exRomaji}</div>
+              <div className="text-xs">{g.exMeaning}</div>
+            </div>
           </div>
         ))}
       </div>
+
+      {extra[level].map((block, i) => (
+        <div key={i} className="bg-lavender-soft/50 border border-border rounded-3xl p-5 whitespace-pre-wrap text-sm">
+          {block}
+        </div>
+      ))}
+
+      <button onClick={generateMore} disabled={loading}
+        className="inline-flex items-center gap-2 bg-primary rounded-full px-5 py-2.5 font-bold text-sm disabled:opacity-40">
+        {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+        Generate 5 more {level} grammar points
+      </button>
+    </div>
+  );
+}
+
+function StoriesTab({ defaultLevel }: { defaultLevel: Level }) {
+  const chat = useServerFn(tutorChat);
+  const [level, setLevel] = useState<Level>(defaultLevel);
+  const [theme, setTheme] = useState("daily life");
+  const [stories, setStories] = useState<{ level: Level; theme: string; text: string }[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  async function generate() {
+    setLoading(true);
+    try {
+      const res = await chat({ data: {
+        mode: "japanese",
+        messages: [{ role: "user", content: `Write an original short story (8-14 sentences) in Japanese suitable for JLPT ${level} learners, on the theme "${theme}". Use vocabulary and grammar level-appropriate. After the Japanese text, add:\n\nROMAJI:\n(full romaji)\n\nTRANSLATION:\n(English translation)\n\nVOCAB:\n- word (romaji) — meaning\n(5-8 key new words)` }],
+      }});
+      setStories((s) => [{ level, theme, text: res.content }, ...s]);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Generation failed");
+    } finally { setLoading(false); }
+  }
+
+  const themes = ["daily life", "school", "travel in Japan", "festival", "food", "friendship", "mystery", "ghost story", "sci-fi", "samurai"];
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-white border border-border rounded-3xl p-5 space-y-3">
+        <div className="flex items-center gap-2">
+          <BookOpen className="size-5 text-primary" />
+          <h2 className="font-display text-lg font-bold">Story Generator</h2>
+        </div>
+        <p className="text-xs text-muted-foreground">Unlimited reading practice — pick a level &amp; theme.</p>
+        <LevelPicker level={level} onChange={setLevel} />
+        <div className="flex flex-wrap gap-2">
+          {themes.map((t) => (
+            <button key={t} onClick={() => setTheme(t)}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold border ${theme === t ? "bg-primary border-primary" : "bg-cream border-border"}`}>{t}</button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          <input value={theme} onChange={(e) => setTheme(e.target.value)} placeholder="custom theme"
+            className="flex-1 bg-cream rounded-2xl px-4 py-2.5 text-sm outline-none" />
+          <button onClick={generate} disabled={loading}
+            className="inline-flex items-center gap-2 bg-primary rounded-full px-5 py-2.5 font-bold text-sm disabled:opacity-40">
+            {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+            New story
+          </button>
+        </div>
+      </div>
+
+      {stories.length === 0 && (
+        <div className="bg-white rounded-3xl border border-border p-8 text-center text-sm text-muted-foreground">
+          No stories yet — tap “New story” to read your first one ✨
+        </div>
+      )}
+
+      {stories.map((s, i) => (
+        <article key={i} className="bg-white border border-border rounded-3xl p-6 shadow-soft">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">{s.level} · {s.theme}</div>
+          <div className="whitespace-pre-wrap text-sm leading-relaxed" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{s.text}</div>
+        </article>
+      ))}
     </div>
   );
 }
