@@ -5,14 +5,16 @@ import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
 import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
-  Compass, GraduationCap, Award, ClipboardList, Wand2,
+  Compass, GraduationCap, Award, ClipboardList,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
+import { PandaBackground } from "@/components/PandaBackground";
+import { MusicPlayer } from "@/components/MusicPlayer";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
 const navGroups: { label: string; items: NavItem[] }[] = [
   {
-    label: "NekoStudy",
+    label: "Study",
     items: [
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
       { to: "/tasks", label: "Planner", icon: ListTodo },
@@ -35,12 +37,19 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "Account",
     items: [
-      { to: "/avatar", label: "Avatar Studio", icon: Wand2 },
       { to: "/profile", label: "Profile", icon: User },
       { to: "/settings", label: "Settings", icon: Settings },
     ],
   },
 ];
+
+function Monogram({ className = "" }: { className?: string }) {
+  return (
+    <span className={`grid place-items-center rounded-2xl bg-white border border-border text-[#3B82F6] font-display font-bold tracking-tight ${className}`}>
+      SH
+    </span>
+  );
+}
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { profile } = useProfile();
@@ -63,22 +72,22 @@ export function AppShell({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen paw-bg">
+    <div className="min-h-screen relative">
+      <PandaBackground />
+
       {/* Mobile top bar */}
-      <header className="md:hidden sticky top-0 z-30 backdrop-blur bg-cream/70 border-b border-border">
+      <header className="md:hidden sticky top-0 z-30 backdrop-blur bg-cream/80 border-b border-border">
         <div className="flex items-center justify-between px-4 h-14">
           <Link to="/dashboard" className="flex items-center gap-2 font-display font-bold text-lg">
-            <span className="size-7 rounded-xl bg-primary grid place-items-center">🍓</span>
-            Study.
+            <Monogram className="size-8 text-sm" />
+            StudyHub
           </Link>
-          <button
-            onClick={() => setOpen((v) => !v)}
+          <button onClick={() => setOpen((v) => !v)}
             className="size-9 rounded-full bg-white border border-border grid place-items-center"
-            aria-label="Open menu"
-          >☰</button>
+            aria-label="Open menu">☰</button>
         </div>
         {open && (
-          <nav className="px-3 pb-4 space-y-3">
+          <nav className="px-3 pb-4 space-y-3 bg-cream/95 backdrop-blur">
             {navGroups.map((g) => (
               <div key={g.label}>
                 <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-2 mb-1">{g.label}</div>
@@ -104,16 +113,15 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
 
       <div className="md:flex">
-        {/* Sidebar */}
         <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-5 gap-4">
           <Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
-            <span className="size-10 rounded-2xl bg-primary grid place-items-center text-xl">🍓</span>
-            <span className="font-display font-bold text-2xl tracking-tight">Study.</span>
+            <Monogram className="size-11 text-base" />
+            <span className="font-display font-bold text-2xl tracking-tight">StudyHub</span>
           </Link>
 
-          <div className="rounded-3xl bg-white border border-border p-4 flex items-center gap-3 shadow-soft">
-            <div className="size-12 rounded-2xl bg-primary/40 grid place-items-center text-xl font-display font-bold">
-              {(profile?.display_name?.[0] ?? "✿").toUpperCase()}
+          <div className="rounded-3xl bg-white/85 backdrop-blur border border-border p-4 flex items-center gap-3 shadow-soft">
+            <div className="size-12 rounded-2xl bg-primary/30 grid place-items-center text-lg font-display font-bold">
+              {(profile?.display_name?.[0] ?? "S").toUpperCase()}
             </div>
             <div className="min-w-0 flex-1">
               <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lvl {level}</div>
@@ -133,7 +141,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     return (
                       <Link key={n.to} to={n.to as "/dashboard"}
                         className={`flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors ${
-                          active ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:bg-white hover:text-foreground"
+                          active ? "bg-primary text-primary-foreground shadow-soft" : "text-foreground/70 hover:bg-white/70 hover:text-foreground"
                         }`}>
                         <Icon className="size-4" /> {n.label}
                       </Link>
@@ -144,7 +152,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
 
-          <div className="rounded-2xl bg-white border border-border p-3 flex items-center gap-2 text-sm">
+          <div className="rounded-2xl bg-white/85 backdrop-blur border border-border p-3 flex items-center gap-2 text-sm">
             <Flame className="size-4 text-primary" />
             <span className="font-bold">{profile?.current_streak ?? 0}</span>
             <span className="text-muted-foreground">day streak</span>
@@ -158,6 +166,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           {children}
         </main>
       </div>
+
+      <MusicPlayer />
     </div>
   );
 }
