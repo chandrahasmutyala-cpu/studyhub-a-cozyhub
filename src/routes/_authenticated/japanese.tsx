@@ -8,7 +8,7 @@ import {
   KATAKANA_BASIC, KATAKANA_DAKUTEN, KATAKANA_YOON,
   JLPT, type Kana,
 } from "@/lib/japanese-data";
-import { GRAMMAR } from "@/lib/japanese-grammar";
+import { kanjiByLevel, KANJI_COUNTS } from "@/lib/kanji-data";
 import { tutorChat } from "@/lib/tutor.functions";
 import { BookOpen, Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -17,8 +17,9 @@ export const Route = createFileRoute("/_authenticated/japanese")({
   component: JapanesePage,
 });
 
-type Tab = "hiragana" | "katakana" | "jlpt" | "grammar" | "stories" | "quiz";
+type Tab = "hiragana" | "katakana" | "kanji" | "jlpt" | "stories" | "quiz";
 type Level = "N5" | "N4" | "N3" | "N2" | "N1";
+const LEVELS: Level[] = ["N5","N4","N3","N2","N1"];
 
 function JapanesePage() {
   const { profile, update } = useProfile();
@@ -27,15 +28,16 @@ function JapanesePage() {
 
   return (
     <AppShell>
-      <div className="max-w-5xl space-y-5">
+      <div className="max-w-5xl space-y-5 animate-fade-up">
         <div>
-          <h1 className="font-display text-3xl font-bold">Japanese Academy</h1>
-          <p className="text-sm text-muted-foreground">From あ to JLPT N1 — your level: {profile?.japanese_level ?? "beginner"}</p>
+          <h1 className="font-display text-3xl font-bold tracking-tight">Japanese Academy</h1>
+          <p className="text-sm text-muted-foreground">Hiragana, katakana, all {Object.values(KANJI_COUNTS).reduce((a,b)=>a+b,0)} JLPT kanji, vocab, stories — your level: {profile?.japanese_level ?? "beginner"}</p>
         </div>
 
-        <div className="flex gap-1 bg-white p-1 rounded-full border border-border w-fit overflow-x-auto">
-          {(["hiragana","katakana","jlpt","grammar","stories","quiz"] as Tab[]).map((t) => (
-            <button key={t} onClick={() => setTab(t)} className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap ${tab === t ? "bg-primary" : "text-muted-foreground"}`}>{t}</button>
+        <div className="flex gap-1 bg-white/80 backdrop-blur p-1 rounded-full border border-border w-fit overflow-x-auto">
+          {(["hiragana","katakana","kanji","jlpt","stories","quiz"] as Tab[]).map((t) => (
+            <button key={t} onClick={() => setTab(t)}
+              className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap ${tab === t ? "bg-primary" : "text-muted-foreground"}`}>{t}</button>
           ))}
         </div>
 
@@ -55,12 +57,16 @@ function JapanesePage() {
           </div>
         )}
 
+        {tab === "kanji" && (
+          <KanjiTab level={jlptLevel} setLevel={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
+        )}
+
         {tab === "jlpt" && (
           <div className="space-y-3">
             <LevelPicker level={jlptLevel} onChange={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
             <div className="grid sm:grid-cols-2 gap-3">
               {JLPT[jlptLevel].map((v) => (
-                <div key={v.j} className="bg-white border border-border rounded-3xl p-5">
+                <div key={v.j} className="bg-white/85 backdrop-blur border border-border rounded-3xl p-5">
                   <div className="flex items-baseline justify-between gap-3">
                     <div>
                       <div className="text-3xl font-bold" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{v.j}</div>
@@ -81,14 +87,7 @@ function JapanesePage() {
           </div>
         )}
 
-        {tab === "grammar" && (
-          <GrammarTab level={jlptLevel} setLevel={setJlptLevel} />
-        )}
-
-        {tab === "stories" && (
-          <StoriesTab defaultLevel={jlptLevel} />
-        )}
-
+        {tab === "stories" && <StoriesTab defaultLevel={jlptLevel} />}
         {tab === "quiz" && <KanaQuiz />}
       </div>
     </AppShell>
@@ -98,9 +97,9 @@ function JapanesePage() {
 function LevelPicker({ level, onChange }: { level: Level; onChange: (l: Level) => void }) {
   return (
     <div className="flex gap-2 flex-wrap">
-      {(Object.keys(GRAMMAR) as Level[]).map((l) => (
+      {LEVELS.map((l) => (
         <button key={l} onClick={() => onChange(l)}
-          className={`px-4 py-2 rounded-full text-sm font-bold border ${level === l ? "bg-primary border-primary" : "bg-white border-border"}`}>{l}</button>
+          className={`px-4 py-2 rounded-full text-sm font-bold border ${level === l ? "bg-primary border-primary" : "bg-white/85 border-border"}`}>{l}</button>
       ))}
     </div>
   );
@@ -112,7 +111,7 @@ function KanaSection({ title, items }: { title: string; items: Kana[] }) {
       <h2 className="font-display text-lg font-bold mb-2">{title}</h2>
       <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-10 gap-2">
         {items.map((k) => (
-          <div key={k.kana} className="bg-white border border-border rounded-2xl aspect-square grid place-items-center hover:bg-primary/30 transition-colors">
+          <div key={k.kana} className="bg-white/85 backdrop-blur border border-border rounded-2xl aspect-square grid place-items-center hover:bg-primary/30 transition-colors">
             <div className="text-center">
               <div className="text-2xl font-bold" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{k.kana}</div>
               <div className="text-[10px] text-muted-foreground font-semibold">{k.romaji}</div>
@@ -124,56 +123,41 @@ function KanaSection({ title, items }: { title: string; items: Kana[] }) {
   );
 }
 
-function GrammarTab({ level, setLevel }: { level: Level; setLevel: (l: Level) => void }) {
-  const chat = useServerFn(tutorChat);
-  const [extra, setExtra] = useState<Record<Level, string[]>>({ N5: [], N4: [], N3: [], N2: [], N1: [] });
-  const [loading, setLoading] = useState(false);
-
-  async function generateMore() {
-    setLoading(true);
-    try {
-      const res = await chat({ data: {
-        mode: "japanese",
-        messages: [{ role: "user", content: `Give me 5 fresh JLPT ${level} grammar points I might not have seen. For each: pattern (Japanese), short English meaning, structure rule, one example sentence in Japanese, romaji, and English translation. Format each as a compact numbered block.` }],
-      }});
-      setExtra((e) => ({ ...e, [level]: [...e[level], res.content] }));
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Generation failed");
-    } finally { setLoading(false); }
-  }
+function KanjiTab({ level, setLevel }: { level: Level; setLevel: (l: Level) => void }) {
+  const [q, setQ] = useState("");
+  const all = useMemo(() => kanjiByLevel(level), [level]);
+  const filtered = useMemo(() => {
+    if (!q.trim()) return all;
+    const s = q.toLowerCase();
+    return all.filter((k) =>
+      k.k.includes(q) ||
+      k.m.some((m) => m.toLowerCase().includes(s)) ||
+      k.on.some((r) => r.includes(q)) ||
+      k.kun.some((r) => r.includes(q)),
+    );
+  }, [all, q]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <LevelPicker level={level} onChange={setLevel} />
-      <div className="grid sm:grid-cols-2 gap-3">
-        {GRAMMAR[level].map((g) => (
-          <div key={g.pattern} className="bg-white border border-border rounded-3xl p-5">
-            <div className="flex items-baseline justify-between gap-2">
-              <div className="text-xl font-bold" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{g.pattern}</div>
-              <div className="text-xs text-muted-foreground">{g.meaning}</div>
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search kanji, meaning, or reading"
+          className="flex-1 min-w-[200px] bg-white/85 backdrop-blur border border-border rounded-2xl px-4 py-2.5 text-sm outline-none focus:border-primary" />
+        <span className="text-xs text-muted-foreground">{filtered.length} / {KANJI_COUNTS[level]} kanji</span>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+        {filtered.map((k) => (
+          <div key={k.k} className="bg-white/85 backdrop-blur border border-border rounded-2xl p-3 hover:shadow-soft transition-shadow">
+            <div className="flex items-baseline justify-between">
+              <div className="text-4xl font-bold leading-none" style={{ fontFamily: "Noto Serif JP, Noto Sans JP, sans-serif" }}>{k.k}</div>
+              <span className="text-[10px] font-bold text-muted-foreground">{k.s}画</span>
             </div>
-            <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mt-2">Structure</div>
-            <div className="text-sm">{g.structure}</div>
-            <div className="mt-3 pt-3 border-t border-border/70 text-sm space-y-0.5">
-              <div style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{g.example}</div>
-              <div className="text-xs text-muted-foreground italic">{g.exRomaji}</div>
-              <div className="text-xs">{g.exMeaning}</div>
-            </div>
+            <div className="mt-2 text-xs font-semibold line-clamp-1">{k.m.join(", ")}</div>
+            {k.on.length > 0 && <div className="text-[11px] text-muted-foreground truncate" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>音 {k.on.join("・")}</div>}
+            {k.kun.length > 0 && <div className="text-[11px] text-muted-foreground truncate" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>訓 {k.kun.join("・")}</div>}
           </div>
         ))}
       </div>
-
-      {extra[level].map((block, i) => (
-        <div key={i} className="bg-lavender-soft/50 border border-border rounded-3xl p-5 whitespace-pre-wrap text-sm">
-          {block}
-        </div>
-      ))}
-
-      <button onClick={generateMore} disabled={loading}
-        className="inline-flex items-center gap-2 bg-primary rounded-full px-5 py-2.5 font-bold text-sm disabled:opacity-40">
-        {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-        Generate 5 more {level} grammar points
-      </button>
     </div>
   );
 }
@@ -198,11 +182,11 @@ function StoriesTab({ defaultLevel }: { defaultLevel: Level }) {
     } finally { setLoading(false); }
   }
 
-  const themes = ["daily life", "school", "travel in Japan", "festival", "food", "friendship", "mystery", "ghost story", "sci-fi", "samurai"];
+  const themes = ["daily life","school","travel in Japan","festival","food","friendship","mystery","ghost story","sci-fi","samurai"];
 
   return (
     <div className="space-y-4">
-      <div className="bg-white border border-border rounded-3xl p-5 space-y-3">
+      <div className="bg-white/85 backdrop-blur border border-border rounded-3xl p-5 space-y-3">
         <div className="flex items-center gap-2">
           <BookOpen className="size-5 text-primary" />
           <h2 className="font-display text-lg font-bold">Story Generator</h2>
@@ -227,13 +211,13 @@ function StoriesTab({ defaultLevel }: { defaultLevel: Level }) {
       </div>
 
       {stories.length === 0 && (
-        <div className="bg-white rounded-3xl border border-border p-8 text-center text-sm text-muted-foreground">
-          No stories yet — tap “New story” to read your first one ✨
+        <div className="bg-white/85 backdrop-blur rounded-3xl border border-border p-8 text-center text-sm text-muted-foreground">
+          No stories yet — tap "New story" to read your first one ✨
         </div>
       )}
 
       {stories.map((s, i) => (
-        <article key={i} className="bg-white border border-border rounded-3xl p-6 shadow-soft">
+        <article key={i} className="bg-white/85 backdrop-blur border border-border rounded-3xl p-6 shadow-soft">
           <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">{s.level} · {s.theme}</div>
           <div className="whitespace-pre-wrap text-sm leading-relaxed" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{s.text}</div>
         </article>
@@ -267,7 +251,7 @@ function KanaQuiz() {
   }
 
   return (
-    <div className="bg-white rounded-[2rem] border border-border p-8 shadow-soft text-center max-w-md mx-auto">
+    <div className="bg-white/85 backdrop-blur rounded-[2rem] border border-border p-8 shadow-soft text-center max-w-md mx-auto">
       <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">What's this kana?</div>
       <div className="text-8xl font-bold my-4" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{card.kana}</div>
       <form onSubmit={check}>
