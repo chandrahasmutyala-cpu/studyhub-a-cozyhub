@@ -27,7 +27,6 @@ import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
-import { Route as AuthenticatedAvatarRouteImport } from './routes/_authenticated/avatar'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -121,11 +120,6 @@ const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
   path: '/career',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAvatarRoute = AuthenticatedAvatarRouteImport.update({
-  id: '/avatar',
-  path: '/avatar',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedApplicationsRoute =
   AuthenticatedApplicationsRouteImport.update({
     id: '/applications',
@@ -139,7 +133,6 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/applications': typeof AuthenticatedApplicationsRoute
-  '/avatar': typeof AuthenticatedAvatarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
@@ -160,7 +153,6 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/applications': typeof AuthenticatedApplicationsRoute
-  '/avatar': typeof AuthenticatedAvatarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
@@ -183,7 +175,6 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
-  '/_authenticated/avatar': typeof AuthenticatedAvatarRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
@@ -206,7 +197,6 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/applications'
-    | '/avatar'
     | '/career'
     | '/dashboard'
     | '/flashcards'
@@ -227,7 +217,6 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/applications'
-    | '/avatar'
     | '/career'
     | '/dashboard'
     | '/flashcards'
@@ -249,7 +238,6 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/_authenticated/applications'
-    | '/_authenticated/avatar'
     | '/_authenticated/career'
     | '/_authenticated/dashboard'
     | '/_authenticated/flashcards'
@@ -401,13 +389,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCareerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/avatar': {
-      id: '/_authenticated/avatar'
-      path: '/avatar'
-      fullPath: '/avatar'
-      preLoaderRoute: typeof AuthenticatedAvatarRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/applications': {
       id: '/_authenticated/applications'
       path: '/applications'
@@ -420,7 +401,6 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
-  AuthenticatedAvatarRoute: typeof AuthenticatedAvatarRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
@@ -438,7 +418,6 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
-  AuthenticatedAvatarRoute: AuthenticatedAvatarRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
