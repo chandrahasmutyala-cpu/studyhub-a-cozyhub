@@ -15,24 +15,31 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedWorldRouteImport } from './routes/_authenticated/world'
+import { Route as AuthenticatedVocabMiningRouteImport } from './routes/_authenticated/vocab-mining'
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
+import { Route as AuthenticatedScholarshipEligibilityRouteImport } from './routes/_authenticated/scholarship-eligibility'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedOfflineRouteImport } from './routes/_authenticated/offline'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
 import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
+import { Route as AuthenticatedLanguageGoalsRouteImport } from './routes/_authenticated/language-goals'
 import { Route as AuthenticatedKoreanRouteImport } from './routes/_authenticated/korean'
 import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticated/japanese'
 import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
 import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
+import { Route as AuthenticatedEssayReviewerRouteImport } from './routes/_authenticated/essay-reviewer'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
 import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
 import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
+import { Route as AuthenticatedAdmissionRoadmapRouteImport } from './routes/_authenticated/admission-roadmap'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -63,6 +70,12 @@ const AuthenticatedWorldRoute = AuthenticatedWorldRouteImport.update({
   path: '/world',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVocabMiningRoute =
+  AuthenticatedVocabMiningRouteImport.update({
+    id: '/vocab-mining',
+    path: '/vocab-mining',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedUniversitiesRoute =
   AuthenticatedUniversitiesRouteImport.update({
     id: '/universities',
@@ -90,6 +103,12 @@ const AuthenticatedScholarshipsRoute =
     path: '/scholarships',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedScholarshipEligibilityRoute =
+  AuthenticatedScholarshipEligibilityRouteImport.update({
+    id: '/scholarship-eligibility',
+    path: '/scholarship-eligibility',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -98,6 +117,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOfflineRoute = AuthenticatedOfflineRouteImport.update({
+  id: '/offline',
+  path: '/offline',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
@@ -109,6 +133,12 @@ const AuthenticatedMediaTranslatorRoute =
   AuthenticatedMediaTranslatorRouteImport.update({
     id: '/media-translator',
     path: '/media-translator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedLanguageGoalsRoute =
+  AuthenticatedLanguageGoalsRouteImport.update({
+    id: '/language-goals',
+    path: '/language-goals',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedKoreanRoute = AuthenticatedKoreanRouteImport.update({
@@ -131,11 +161,23 @@ const AuthenticatedFlashcardsRoute = AuthenticatedFlashcardsRouteImport.update({
   path: '/flashcards',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEssayReviewerRoute =
+  AuthenticatedEssayReviewerRouteImport.update({
+    id: '/essay-reviewer',
+    path: '/essay-reviewer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCostCalculatorRoute =
+  AuthenticatedCostCalculatorRouteImport.update({
+    id: '/cost-calculator',
+    path: '/cost-calculator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedChineseRoute = AuthenticatedChineseRouteImport.update({
   id: '/chinese',
   path: '/chinese',
@@ -157,30 +199,43 @@ const AuthenticatedApplicationsRoute =
     path: '/applications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdmissionRoadmapRoute =
+  AuthenticatedAdmissionRoadmapRouteImport.update({
+    id: '/admission-roadmap',
+    path: '/admission-roadmap',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
+  '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
   '/japanese': typeof AuthenticatedJapaneseRoute
   '/korean': typeof AuthenticatedKoreanRoute
+  '/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
+  '/offline': typeof AuthenticatedOfflineRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
   '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
+  '/vocab-mining': typeof AuthenticatedVocabMiningRoute
   '/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRoutesByTo {
@@ -188,24 +243,31 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/calendar': typeof AuthenticatedCalendarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
+  '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
   '/japanese': typeof AuthenticatedJapaneseRoute
   '/korean': typeof AuthenticatedKoreanRoute
+  '/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
+  '/offline': typeof AuthenticatedOfflineRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
   '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
+  '/vocab-mining': typeof AuthenticatedVocabMiningRoute
   '/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRoutesById {
@@ -215,24 +277,31 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/chinese': typeof AuthenticatedChineseRoute
+  '/_authenticated/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
   '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
   '/_authenticated/focus': typeof AuthenticatedFocusRoute
   '/_authenticated/japanese': typeof AuthenticatedJapaneseRoute
   '/_authenticated/korean': typeof AuthenticatedKoreanRoute
+  '/_authenticated/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/_authenticated/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
+  '/_authenticated/offline': typeof AuthenticatedOfflineRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
   '/_authenticated/scholarships': typeof AuthenticatedScholarshipsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
+  '/_authenticated/vocab-mining': typeof AuthenticatedVocabMiningRoute
   '/_authenticated/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRouteTypes {
@@ -242,24 +311,31 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/admission-roadmap'
     | '/applications'
     | '/calendar'
     | '/career'
     | '/chinese'
+    | '/cost-calculator'
     | '/dashboard'
+    | '/essay-reviewer'
     | '/flashcards'
     | '/focus'
     | '/japanese'
     | '/korean'
+    | '/language-goals'
     | '/media-translator'
     | '/notes'
+    | '/offline'
     | '/onboarding'
     | '/profile'
+    | '/scholarship-eligibility'
     | '/scholarships'
     | '/settings'
     | '/tasks'
     | '/tutor'
     | '/universities'
+    | '/vocab-mining'
     | '/world'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -267,24 +343,31 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/admission-roadmap'
     | '/applications'
     | '/calendar'
     | '/career'
     | '/chinese'
+    | '/cost-calculator'
     | '/dashboard'
+    | '/essay-reviewer'
     | '/flashcards'
     | '/focus'
     | '/japanese'
     | '/korean'
+    | '/language-goals'
     | '/media-translator'
     | '/notes'
+    | '/offline'
     | '/onboarding'
     | '/profile'
+    | '/scholarship-eligibility'
     | '/scholarships'
     | '/settings'
     | '/tasks'
     | '/tutor'
     | '/universities'
+    | '/vocab-mining'
     | '/world'
   id:
     | '__root__'
@@ -293,24 +376,31 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/sitemap.xml'
+    | '/_authenticated/admission-roadmap'
     | '/_authenticated/applications'
     | '/_authenticated/calendar'
     | '/_authenticated/career'
     | '/_authenticated/chinese'
+    | '/_authenticated/cost-calculator'
     | '/_authenticated/dashboard'
+    | '/_authenticated/essay-reviewer'
     | '/_authenticated/flashcards'
     | '/_authenticated/focus'
     | '/_authenticated/japanese'
     | '/_authenticated/korean'
+    | '/_authenticated/language-goals'
     | '/_authenticated/media-translator'
     | '/_authenticated/notes'
+    | '/_authenticated/offline'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
+    | '/_authenticated/scholarship-eligibility'
     | '/_authenticated/scholarships'
     | '/_authenticated/settings'
     | '/_authenticated/tasks'
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
+    | '/_authenticated/vocab-mining'
     | '/_authenticated/world'
   fileRoutesById: FileRoutesById
 }
@@ -366,6 +456,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedWorldRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/vocab-mining': {
+      id: '/_authenticated/vocab-mining'
+      path: '/vocab-mining'
+      fullPath: '/vocab-mining'
+      preLoaderRoute: typeof AuthenticatedVocabMiningRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/universities': {
       id: '/_authenticated/universities'
       path: '/universities'
@@ -401,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedScholarshipsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/scholarship-eligibility': {
+      id: '/_authenticated/scholarship-eligibility'
+      path: '/scholarship-eligibility'
+      fullPath: '/scholarship-eligibility'
+      preLoaderRoute: typeof AuthenticatedScholarshipEligibilityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -415,6 +519,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/offline': {
+      id: '/_authenticated/offline'
+      path: '/offline'
+      fullPath: '/offline'
+      preLoaderRoute: typeof AuthenticatedOfflineRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/notes': {
       id: '/_authenticated/notes'
       path: '/notes'
@@ -427,6 +538,13 @@ declare module '@tanstack/react-router' {
       path: '/media-translator'
       fullPath: '/media-translator'
       preLoaderRoute: typeof AuthenticatedMediaTranslatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/language-goals': {
+      id: '/_authenticated/language-goals'
+      path: '/language-goals'
+      fullPath: '/language-goals'
+      preLoaderRoute: typeof AuthenticatedLanguageGoalsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/korean': {
@@ -457,11 +575,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedFlashcardsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/essay-reviewer': {
+      id: '/_authenticated/essay-reviewer'
+      path: '/essay-reviewer'
+      fullPath: '/essay-reviewer'
+      preLoaderRoute: typeof AuthenticatedEssayReviewerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cost-calculator': {
+      id: '/_authenticated/cost-calculator'
+      path: '/cost-calculator'
+      fullPath: '/cost-calculator'
+      preLoaderRoute: typeof AuthenticatedCostCalculatorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chinese': {
@@ -492,50 +624,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admission-roadmap': {
+      id: '/_authenticated/admission-roadmap'
+      path: '/admission-roadmap'
+      fullPath: '/admission-roadmap'
+      preLoaderRoute: typeof AuthenticatedAdmissionRoadmapRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdmissionRoadmapRoute: typeof AuthenticatedAdmissionRoadmapRoute
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
+  AuthenticatedCostCalculatorRoute: typeof AuthenticatedCostCalculatorRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEssayReviewerRoute: typeof AuthenticatedEssayReviewerRoute
   AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
   AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
   AuthenticatedJapaneseRoute: typeof AuthenticatedJapaneseRoute
   AuthenticatedKoreanRoute: typeof AuthenticatedKoreanRoute
+  AuthenticatedLanguageGoalsRoute: typeof AuthenticatedLanguageGoalsRoute
   AuthenticatedMediaTranslatorRoute: typeof AuthenticatedMediaTranslatorRoute
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
+  AuthenticatedOfflineRoute: typeof AuthenticatedOfflineRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedScholarshipEligibilityRoute: typeof AuthenticatedScholarshipEligibilityRoute
   AuthenticatedScholarshipsRoute: typeof AuthenticatedScholarshipsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
+  AuthenticatedVocabMiningRoute: typeof AuthenticatedVocabMiningRoute
   AuthenticatedWorldRoute: typeof AuthenticatedWorldRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdmissionRoadmapRoute: AuthenticatedAdmissionRoadmapRoute,
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedChineseRoute: AuthenticatedChineseRoute,
+  AuthenticatedCostCalculatorRoute: AuthenticatedCostCalculatorRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEssayReviewerRoute: AuthenticatedEssayReviewerRoute,
   AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
   AuthenticatedFocusRoute: AuthenticatedFocusRoute,
   AuthenticatedJapaneseRoute: AuthenticatedJapaneseRoute,
   AuthenticatedKoreanRoute: AuthenticatedKoreanRoute,
+  AuthenticatedLanguageGoalsRoute: AuthenticatedLanguageGoalsRoute,
   AuthenticatedMediaTranslatorRoute: AuthenticatedMediaTranslatorRoute,
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
+  AuthenticatedOfflineRoute: AuthenticatedOfflineRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedScholarshipEligibilityRoute:
+    AuthenticatedScholarshipEligibilityRoute,
   AuthenticatedScholarshipsRoute: AuthenticatedScholarshipsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
+  AuthenticatedVocabMiningRoute: AuthenticatedVocabMiningRoute,
   AuthenticatedWorldRoute: AuthenticatedWorldRoute,
 }
 
