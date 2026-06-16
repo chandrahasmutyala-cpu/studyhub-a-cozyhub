@@ -63,10 +63,11 @@ async function callGateway(body: object) {
   return json.choices?.[0]?.message?.content ?? "";
 }
 
-function tryParseJson(content: string): unknown {
+type JsonValue = string | number | boolean | null | JsonValue[] | { [k: string]: JsonValue };
+function tryParseJson(content: string): JsonValue {
   const m = content.match(/\{[\s\S]*\}$/m) ?? content.match(/\{[\s\S]*\}/);
   const raw = m ? m[0] : content;
-  try { return JSON.parse(raw); } catch { return { raw: content }; }
+  try { return JSON.parse(raw) as JsonValue; } catch { return { raw: content }; }
 }
 
 export const translateTranscript = createServerFn({ method: "POST" })
