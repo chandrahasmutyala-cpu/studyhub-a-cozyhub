@@ -75,7 +75,8 @@ function GlassCard({ title, icon: Icon, children, accent }: { title: string; ico
   );
 }
 
-function ChatPanel({ mode }: { mode: "general" | "japanese" }) {
+type ChatMode = "general" | "japanese" | "chinese" | "korean";
+function ChatPanel({ mode }: { mode: ChatMode }) {
   const chat = useServerFn(tutorChat);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -102,12 +103,28 @@ function ChatPanel({ mode }: { mode: "general" | "japanese" }) {
     } finally { setLoading(false); }
   }
 
-  const suggestions = mode === "japanese"
-    ? ["Teach me ~te form with 3 examples", "Quiz me on JLPT N5 vocabulary", "Translate: I will study tomorrow"]
-    : ["Help me plan my Japan study application", "Suggest a 30-day study schedule", "What documents do I need for MEXT?"];
+  const suggestionMap: Record<ChatMode, string[]> = {
+    japanese: ["Teach me ~te form with 3 examples", "Quiz me on JLPT N5 vocabulary", "Translate: I will study tomorrow"],
+    chinese: ["Teach me the 了 particle with 3 examples", "Quiz me on HSK 2 vocabulary", "Translate: I will study tomorrow"],
+    korean: ["Teach me 은/는 vs 이/가", "Quiz me on TOPIK I vocabulary", "Translate: I will study tomorrow"],
+    general: ["Help me plan my Japan study application", "Suggest a 30-day study schedule", "What documents do I need for MEXT?"],
+  };
+  const titleMap: Record<ChatMode, string> = {
+    japanese: "Japanese Study Chat 日本語",
+    chinese: "Chinese Study Chat 中文",
+    korean: "Korean Study Chat 한국어",
+    general: "Ask anything",
+  };
+  const placeholderMap: Record<ChatMode, string> = {
+    japanese: "聞いてみよう…",
+    chinese: "问问看…",
+    korean: "물어보세요…",
+    general: "Ask anything…",
+  };
+  const suggestions = suggestionMap[mode];
 
   return (
-    <GlassCard title={mode === "japanese" ? "Japanese Study Chat" : "Ask anything"} icon={Lightbulb}>
+    <GlassCard title={titleMap[mode]} icon={Lightbulb}>
       <div className="bg-cream/60 rounded-2xl p-3 h-[380px] overflow-y-auto space-y-3">
         {messages.length === 0 && (
           <div className="text-center py-8">
@@ -139,7 +156,7 @@ function ChatPanel({ mode }: { mode: "general" | "japanese" }) {
 
       <form onSubmit={(e) => { e.preventDefault(); send(); }} className="mt-3 flex gap-2 bg-white border border-border rounded-full p-1.5 shadow-soft">
         <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)}
-          placeholder={mode === "japanese" ? "聞いてみよう…" : "Ask anything…"}
+          placeholder={placeholderMap[mode]}
           className="flex-1 bg-transparent px-3 outline-none text-sm" />
         <button disabled={loading || !input.trim()} className="size-9 rounded-full bg-primary grid place-items-center disabled:opacity-40">
           <Send className="size-4" />
