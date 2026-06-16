@@ -14,6 +14,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedWorldRouteImport } from './routes/_authenticated/world'
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
@@ -56,6 +57,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedWorldRoute = AuthenticatedWorldRouteImport.update({
+  id: '/world',
+  path: '/world',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedUniversitiesRoute =
   AuthenticatedUniversitiesRouteImport.update({
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
+  '/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -199,6 +206,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
+  '/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -225,6 +233,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
+  '/_authenticated/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -251,6 +260,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/tutor'
     | '/universities'
+    | '/world'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -275,6 +285,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/tutor'
     | '/universities'
+    | '/world'
   id:
     | '__root__'
     | '/'
@@ -300,6 +311,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks'
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
+    | '/_authenticated/world'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -346,6 +358,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/world': {
+      id: '/_authenticated/world'
+      path: '/world'
+      fullPath: '/world'
+      preLoaderRoute: typeof AuthenticatedWorldRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/universities': {
       id: '/_authenticated/universities'
@@ -495,6 +514,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
+  AuthenticatedWorldRoute: typeof AuthenticatedWorldRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -516,6 +536,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
+  AuthenticatedWorldRoute: AuthenticatedWorldRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
