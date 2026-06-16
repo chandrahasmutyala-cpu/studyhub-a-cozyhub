@@ -4,6 +4,7 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
+import { Logo } from "@/components/Logo";
 
 const search = z.object({
   tab: z.enum(["login", "signup", "reset"]).optional(),
@@ -87,8 +88,8 @@ function Auth() {
     <div className="min-h-screen paw-bg grid place-items-center px-4 py-10">
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center gap-2 justify-center mb-6">
-          <div className="size-10 bg-primary rounded-2xl grid place-items-center text-2xl">🍓</div>
-          <span className="font-display text-2xl font-bold">Study.</span>
+          <Logo className="size-12" />
+          <span className="font-display text-2xl font-bold">StudyHub</span>
         </Link>
 
         <div className="bg-white rounded-[2rem] border border-border p-7 shadow-soft">

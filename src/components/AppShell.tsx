@@ -5,7 +5,7 @@ import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
 import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
-  Compass, GraduationCap, Award, ClipboardList,
+  Compass, GraduationCap, Award, ClipboardList, Video,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { PandaBackground } from "@/components/PandaBackground";
@@ -24,7 +24,10 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/notes", label: "Notes", icon: NotebookPen },
       { to: "/flashcards", label: "Flashcards", icon: Layers },
       { to: "/tutor", label: "AI Tutor", icon: Sparkles },
-      { to: "/japanese", label: "Japanese", icon: Languages },
+      { to: "/japanese", label: "Japanese Academy", icon: Languages },
+      { to: "/chinese", label: "Chinese Academy", icon: Languages },
+      { to: "/korean", label: "Korean Academy", icon: Languages },
+      { to: "/media-translator", label: "Media Translator", icon: Video },
     ],
   },
   {

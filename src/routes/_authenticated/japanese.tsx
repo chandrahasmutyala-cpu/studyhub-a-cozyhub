@@ -8,7 +8,7 @@ import {
   KATAKANA_BASIC, KATAKANA_DAKUTEN, KATAKANA_YOON,
   type Kana,
 } from "@/lib/japanese-data";
-import { kanjiByLevel, KANJI_COUNTS } from "@/lib/kanji-data";
+import { kanjiByLevel, KANJI_COUNTS, KANJI_TOTAL } from "@/lib/kanji-data";
 import { tutorChat } from "@/lib/tutor.functions";
 import { KanjiStrokeViewer } from "@/components/KanjiStrokeViewer";
 import { BookOpen, Sparkles, Loader2, X } from "lucide-react";
@@ -32,7 +32,7 @@ function JapanesePage() {
       <div className="max-w-5xl space-y-5 animate-fade-up">
         <div>
           <h1 className="font-display text-3xl font-bold tracking-tight">Japanese Academy</h1>
-          <p className="text-sm text-muted-foreground">Hiragana, katakana, all {Object.values(KANJI_COUNTS).reduce((a,b)=>a+b,0)} JLPT kanji, vocab, stories — your level: {profile?.japanese_level ?? "beginner"}</p>
+          <p className="text-sm text-muted-foreground">Hiragana, katakana, all {KANJI_TOTAL.toLocaleString()} official Jōyō kanji, stories — your level: {profile?.japanese_level ?? "beginner"}</p>
         </div>
 
         <div className="flex gap-1 bg-white/80 backdrop-blur p-1 rounded-full border border-border w-fit overflow-x-auto">
