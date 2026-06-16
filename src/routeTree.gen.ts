@@ -22,10 +22,13 @@ import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authent
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
+import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
+import { Route as AuthenticatedKoreanRouteImport } from './routes/_authenticated/korean'
 import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticated/japanese'
 import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
 import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 
@@ -95,6 +98,17 @@ const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMediaTranslatorRoute =
+  AuthenticatedMediaTranslatorRouteImport.update({
+    id: '/media-translator',
+    path: '/media-translator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedKoreanRoute = AuthenticatedKoreanRouteImport.update({
+  id: '/korean',
+  path: '/korean',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedJapaneseRoute = AuthenticatedJapaneseRouteImport.update({
   id: '/japanese',
   path: '/japanese',
@@ -113,6 +127,11 @@ const AuthenticatedFlashcardsRoute = AuthenticatedFlashcardsRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedChineseRoute = AuthenticatedChineseRouteImport.update({
+  id: '/chinese',
+  path: '/chinese',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
@@ -134,10 +153,13 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/career': typeof AuthenticatedCareerRoute
+  '/chinese': typeof AuthenticatedChineseRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
   '/japanese': typeof AuthenticatedJapaneseRoute
+  '/korean': typeof AuthenticatedKoreanRoute
+  '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -154,10 +176,13 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/career': typeof AuthenticatedCareerRoute
+  '/chinese': typeof AuthenticatedChineseRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
   '/japanese': typeof AuthenticatedJapaneseRoute
+  '/korean': typeof AuthenticatedKoreanRoute
+  '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -176,10 +201,13 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
+  '/_authenticated/chinese': typeof AuthenticatedChineseRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
   '/_authenticated/focus': typeof AuthenticatedFocusRoute
   '/_authenticated/japanese': typeof AuthenticatedJapaneseRoute
+  '/_authenticated/korean': typeof AuthenticatedKoreanRoute
+  '/_authenticated/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
@@ -198,10 +226,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/applications'
     | '/career'
+    | '/chinese'
     | '/dashboard'
     | '/flashcards'
     | '/focus'
     | '/japanese'
+    | '/korean'
+    | '/media-translator'
     | '/notes'
     | '/onboarding'
     | '/profile'
@@ -218,10 +249,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/applications'
     | '/career'
+    | '/chinese'
     | '/dashboard'
     | '/flashcards'
     | '/focus'
     | '/japanese'
+    | '/korean'
+    | '/media-translator'
     | '/notes'
     | '/onboarding'
     | '/profile'
@@ -239,10 +273,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_authenticated/applications'
     | '/_authenticated/career'
+    | '/_authenticated/chinese'
     | '/_authenticated/dashboard'
     | '/_authenticated/flashcards'
     | '/_authenticated/focus'
     | '/_authenticated/japanese'
+    | '/_authenticated/korean'
+    | '/_authenticated/media-translator'
     | '/_authenticated/notes'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
@@ -354,6 +391,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNotesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/media-translator': {
+      id: '/_authenticated/media-translator'
+      path: '/media-translator'
+      fullPath: '/media-translator'
+      preLoaderRoute: typeof AuthenticatedMediaTranslatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/korean': {
+      id: '/_authenticated/korean'
+      path: '/korean'
+      fullPath: '/korean'
+      preLoaderRoute: typeof AuthenticatedKoreanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/japanese': {
       id: '/_authenticated/japanese'
       path: '/japanese'
@@ -382,6 +433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/chinese': {
+      id: '/_authenticated/chinese'
+      path: '/chinese'
+      fullPath: '/chinese'
+      preLoaderRoute: typeof AuthenticatedChineseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/career': {
       id: '/_authenticated/career'
       path: '/career'
@@ -402,10 +460,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
+  AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
   AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
   AuthenticatedJapaneseRoute: typeof AuthenticatedJapaneseRoute
+  AuthenticatedKoreanRoute: typeof AuthenticatedKoreanRoute
+  AuthenticatedMediaTranslatorRoute: typeof AuthenticatedMediaTranslatorRoute
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -419,10 +480,13 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
+  AuthenticatedChineseRoute: AuthenticatedChineseRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
   AuthenticatedFocusRoute: AuthenticatedFocusRoute,
   AuthenticatedJapaneseRoute: AuthenticatedJapaneseRoute,
+  AuthenticatedKoreanRoute: AuthenticatedKoreanRoute,
+  AuthenticatedMediaTranslatorRoute: AuthenticatedMediaTranslatorRoute,
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
