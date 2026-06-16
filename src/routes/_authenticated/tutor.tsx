@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_authenticated/tutor")({
   component: TutorPage,
 });
 
-type Tab = "general" | "japanese" | "universities" | "scholarships";
+type Tab = "general" | "japanese" | "chinese" | "korean" | "universities" | "scholarships";
 type Msg = { role: "user" | "assistant"; content: string };
 
 function TutorPage() {
@@ -31,7 +31,9 @@ function TutorPage() {
         <div className="flex gap-1 bg-white/70 backdrop-blur p-1 rounded-full border border-border w-fit overflow-x-auto">
           {([
             { id: "general", label: "General AI" },
-            { id: "japanese", label: "Japanese Study" },
+            { id: "japanese", label: "Japanese 日本語" },
+            { id: "chinese", label: "Chinese 中文" },
+            { id: "korean", label: "Korean 한국어" },
             { id: "universities", label: "Universities" },
             { id: "scholarships", label: "Scholarships" },
           ] as { id: Tab; label: string }[]).map((t) => (
@@ -42,8 +44,8 @@ function TutorPage() {
           ))}
         </div>
 
-        {(tab === "general" || tab === "japanese") && (
-          <ChatPanel mode={tab === "japanese" ? "japanese" : "general"} key={tab} />
+        {(tab === "general" || tab === "japanese" || tab === "chinese" || tab === "korean") && (
+          <ChatPanel mode={tab} key={tab} />
         )}
 
         {tab === "universities" && <UniversitiesPanel />}
