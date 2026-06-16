@@ -6,18 +6,19 @@ import { useProfile } from "@/lib/useProfile";
 import {
   HIRAGANA_BASIC, HIRAGANA_DAKUTEN, HIRAGANA_YOON,
   KATAKANA_BASIC, KATAKANA_DAKUTEN, KATAKANA_YOON,
-  JLPT, type Kana,
+  type Kana,
 } from "@/lib/japanese-data";
 import { kanjiByLevel, KANJI_COUNTS } from "@/lib/kanji-data";
 import { tutorChat } from "@/lib/tutor.functions";
-import { BookOpen, Sparkles, Loader2 } from "lucide-react";
+import { KanjiStrokeViewer } from "@/components/KanjiStrokeViewer";
+import { BookOpen, Sparkles, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/japanese")({
   component: JapanesePage,
 });
 
-type Tab = "hiragana" | "katakana" | "kanji" | "jlpt" | "stories" | "quiz";
+type Tab = "hiragana" | "katakana" | "kanji" | "stories" | "quiz";
 type Level = "N5" | "N4" | "N3" | "N2" | "N1";
 const LEVELS: Level[] = ["N5","N4","N3","N2","N1"];
 
@@ -35,7 +36,7 @@ function JapanesePage() {
         </div>
 
         <div className="flex gap-1 bg-white/80 backdrop-blur p-1 rounded-full border border-border w-fit overflow-x-auto">
-          {(["hiragana","katakana","kanji","jlpt","stories","quiz"] as Tab[]).map((t) => (
+          {(["hiragana","katakana","kanji","stories","quiz"] as Tab[]).map((t) => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap ${tab === t ? "bg-primary" : "text-muted-foreground"}`}>{t}</button>
           ))}
@@ -59,32 +60,6 @@ function JapanesePage() {
 
         {tab === "kanji" && (
           <KanjiTab level={jlptLevel} setLevel={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
-        )}
-
-        {tab === "jlpt" && (
-          <div className="space-y-3">
-            <LevelPicker level={jlptLevel} onChange={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
-            <div className="grid sm:grid-cols-2 gap-3">
-              {JLPT[jlptLevel].map((v) => (
-                <div key={v.j} className="bg-white/85 backdrop-blur border border-border rounded-3xl p-5">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <div>
-                      <div className="text-3xl font-bold" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{v.j}</div>
-                      <div className="text-sm font-semibold mt-1">{v.r}</div>
-                    </div>
-                    <div className="text-xs text-muted-foreground text-right">{v.m}</div>
-                  </div>
-                  {v.ex && (
-                    <div className="mt-3 pt-3 border-t border-border/70 text-sm space-y-0.5">
-                      <div style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{v.ex}</div>
-                      <div className="text-xs text-muted-foreground italic">{v.exR}</div>
-                      <div className="text-xs">{v.exM}</div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
         )}
 
         {tab === "stories" && <StoriesTab defaultLevel={jlptLevel} />}
@@ -125,6 +100,7 @@ function KanaSection({ title, items }: { title: string; items: Kana[] }) {
 
 function KanjiTab({ level, setLevel }: { level: Level; setLevel: (l: Level) => void }) {
   const [q, setQ] = useState("");
+  const [selected, setSelected] = useState<ReturnType<typeof kanjiByLevel>[number] | null>(null);
   const all = useMemo(() => kanjiByLevel(level), [level]);
   const filtered = useMemo(() => {
     if (!q.trim()) return all;
@@ -145,9 +121,11 @@ function KanjiTab({ level, setLevel }: { level: Level; setLevel: (l: Level) => v
           className="flex-1 min-w-[200px] bg-white/85 backdrop-blur border border-border rounded-2xl px-4 py-2.5 text-sm outline-none focus:border-primary" />
         <span className="text-xs text-muted-foreground">{filtered.length} / {KANJI_COUNTS[level]} kanji</span>
       </div>
+      <p className="text-xs text-muted-foreground">Tap any kanji to see numbered stroke-order arrows.</p>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
         {filtered.map((k) => (
-          <div key={k.k} className="bg-white/85 backdrop-blur border border-border rounded-2xl p-3 hover:shadow-soft transition-shadow">
+          <button key={k.k} onClick={() => setSelected(k)}
+            className="text-left bg-white/85 backdrop-blur border border-border rounded-2xl p-3 hover:shadow-soft hover:border-primary transition-all">
             <div className="flex items-baseline justify-between">
               <div className="text-4xl font-bold leading-none" style={{ fontFamily: "Noto Serif JP, Noto Sans JP, sans-serif" }}>{k.k}</div>
               <span className="text-[10px] font-bold text-muted-foreground">{k.s}画</span>
@@ -155,8 +133,37 @@ function KanjiTab({ level, setLevel }: { level: Level; setLevel: (l: Level) => v
             <div className="mt-2 text-xs font-semibold line-clamp-1">{k.m.join(", ")}</div>
             {k.on.length > 0 && <div className="text-[11px] text-muted-foreground truncate" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>音 {k.on.join("・")}</div>}
             {k.kun.length > 0 && <div className="text-[11px] text-muted-foreground truncate" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>訓 {k.kun.join("・")}</div>}
-          </div>
+          </button>
         ))}
+      </div>
+
+      {selected && <KanjiDetail kanji={selected} onClose={() => setSelected(null)} />}
+    </div>
+  );
+}
+
+function KanjiDetail({ kanji, onClose }: { kanji: ReturnType<typeof kanjiByLevel>[number]; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 bg-ink/40 backdrop-blur grid place-items-center p-4 animate-fade-up" onClick={onClose}>
+      <div onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-[2rem] border border-border max-w-md w-full p-6 shadow-pop max-h-[90vh] overflow-y-auto">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <div className="text-6xl font-bold leading-none mb-2" style={{ fontFamily: "Noto Serif JP, Noto Sans JP, sans-serif" }}>{kanji.k}</div>
+            <div className="text-sm font-bold">{kanji.m.join(", ")}</div>
+            <div className="text-xs text-muted-foreground mt-1">{kanji.s} strokes</div>
+          </div>
+          <button onClick={onClose} className="size-9 rounded-full bg-cream hover:bg-secondary grid place-items-center"><X className="size-4" /></button>
+        </div>
+
+        <div className="space-y-1 text-xs mb-4">
+          {kanji.on.length > 0 && <div><span className="font-bold text-muted-foreground">On (音):</span> <span style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{kanji.on.join("、")}</span></div>}
+          {kanji.kun.length > 0 && <div><span className="font-bold text-muted-foreground">Kun (訓):</span> <span style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{kanji.kun.join("、")}</span></div>}
+        </div>
+
+        <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">Stroke order</div>
+        <KanjiStrokeViewer kanji={kanji.k} />
+        <p className="text-[11px] text-muted-foreground mt-2 text-center">Numbered arrows show the order — follow them from 1 to {kanji.s}.</p>
       </div>
     </div>
   );

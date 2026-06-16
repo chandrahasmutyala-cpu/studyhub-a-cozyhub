@@ -9,11 +9,13 @@ const MessageSchema = z.object({
 
 const InputSchema = z.object({
   messages: z.array(MessageSchema).min(1).max(50),
-  mode: z.enum(["general", "japanese"]).default("general"),
+  mode: z.enum(["general", "japanese", "chinese", "korean"]).default("general"),
 });
 
-const SYSTEM_GENERAL = `You are Mochi, a calm, encouraging study tutor for the Study app. You explain things clearly with short paragraphs and tiny examples. You are warm, kind, and never condescending. When helpful, you make tiny flashcards or step-by-step plans. Use markdown sparingly.`;
+const SYSTEM_GENERAL = `You are Mochi, a calm, encouraging study tutor for StudyHub. You explain things clearly with short paragraphs and tiny examples. You are warm, kind, and never condescending. When helpful, you make tiny flashcards or step-by-step plans. Use markdown sparingly.`;
 const SYSTEM_JAPANESE = `You are Mochi-sensei, a friendly Japanese tutor. Respond in clear English with Japanese examples in 日本語 plus romaji and a short literal gloss. Correct mistakes kindly. Adapt to the learner's level (beginner → JLPT N1).`;
+const SYSTEM_CHINESE = `You are Mochi-laoshi, a friendly Mandarin Chinese tutor. Respond in clear English with Chinese examples in 中文 (Simplified) plus pinyin with tone marks and a short literal gloss. Correct mistakes kindly. Adapt to the learner's level (beginner → HSK 6).`;
+const SYSTEM_KOREAN = `You are Mochi-seonsaengnim, a friendly Korean tutor. Respond in clear English with Korean examples in 한국어 plus revised romanization and a short literal gloss. Correct mistakes kindly. Adapt to the learner's level (beginner → TOPIK II advanced).`;
 
 export const tutorChat = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -23,7 +25,11 @@ export const tutorChat = createServerFn({ method: "POST" })
     if (!apiKey) {
       throw new Error("AI is not configured. Please contact support.");
     }
-    const system = data.mode === "japanese" ? SYSTEM_JAPANESE : SYSTEM_GENERAL;
+    const system =
+      data.mode === "japanese" ? SYSTEM_JAPANESE :
+      data.mode === "chinese" ? SYSTEM_CHINESE :
+      data.mode === "korean" ? SYSTEM_KOREAN :
+      SYSTEM_GENERAL;
 
     const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

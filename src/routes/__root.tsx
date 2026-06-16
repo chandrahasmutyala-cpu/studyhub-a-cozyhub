@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import logoAsset from "../assets/studyhub-logo.png.asset.json";
 
 function NotFoundComponent() {
   return (
@@ -68,7 +69,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700&family=Noto+Serif+JP:wght@500;700&display=swap" },
-      { rel: "icon", href: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='white' stroke='%23e5e7eb'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Inter,system-ui,sans-serif' font-weight='800' font-size='28' fill='%233B82F6' letter-spacing='-1'>SH</text></svg>" },
+      { rel: "icon", type: "image/png", href: logoAsset.url },
     ],
   }),
   shellComponent: RootShell,
