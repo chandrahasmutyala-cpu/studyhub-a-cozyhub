@@ -1,10 +1,10 @@
-import logoAsset from "@/assets/studyhub-logo.png.asset.json";
+import bunny from "@/assets/studyhub-bunny.png.asset.json";
 
-/** StudyHub bunny logo. */
+/** StudyHub bunny mark. */
 export function Logo({ className = "size-10" }: { className?: string }) {
   return (
     <img
-      src={logoAsset.url}
+      src={bunny.url}
       alt="StudyHub"
       className={`${className} object-contain select-none`}
       draggable={false}
