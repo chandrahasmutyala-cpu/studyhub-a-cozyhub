@@ -10,6 +10,8 @@ import {
 import { useState, type ReactNode } from "react";
 import { PandaBackground } from "@/components/PandaBackground";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { SplashScreen } from "@/components/SplashScreen";
+import { Logo } from "@/components/Logo";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
 const navGroups: { label: string; items: NavItem[] }[] = [
@@ -44,11 +46,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
 ];
 
 function Monogram({ className = "" }: { className?: string }) {
-  return (
-    <span className={`grid place-items-center rounded-2xl bg-white border border-border text-[#3B82F6] font-display font-bold tracking-tight ${className}`}>
-      SH
-    </span>
-  );
+  return <Logo className={className} />;
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -73,7 +71,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen relative">
+      <SplashScreen />
       <PandaBackground />
+
 
       {/* Mobile top bar */}
       <header className="md:hidden sticky top-0 z-30 backdrop-blur bg-cream/80 border-b border-border">
