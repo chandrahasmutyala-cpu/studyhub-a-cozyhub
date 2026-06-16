@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video, CalendarDays, Globe2,
+  Calculator, FileText, Pickaxe, Target, CloudDownload,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { PandaBackground } from "@/components/PandaBackground";
@@ -28,6 +29,9 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/chinese", label: "Chinese Academy", icon: Languages },
       { to: "/korean", label: "Korean Academy", icon: Languages },
       { to: "/media-translator", label: "Media Translator", icon: Video },
+      { to: "/vocab-mining", label: "Vocab Mining", icon: Pickaxe },
+      { to: "/language-goals", label: "Language Goals", icon: Target },
+      { to: "/offline", label: "Offline Packs", icon: CloudDownload },
     ],
   },
   {
@@ -38,6 +42,10 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/universities", label: "Universities", icon: GraduationCap },
       { to: "/scholarships", label: "Scholarships", icon: Award },
       { to: "/applications", label: "Applications", icon: ClipboardList },
+      { to: "/admission-roadmap", label: "Admission Roadmap", icon: Compass },
+      { to: "/scholarship-eligibility", label: "Scholarship Match", icon: Award },
+      { to: "/cost-calculator", label: "Cost Calculator", icon: Calculator },
+      { to: "/essay-reviewer", label: "Essay Reviewer", icon: FileText },
     ],
   },
   {
