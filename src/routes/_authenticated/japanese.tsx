@@ -9,16 +9,17 @@ import {
   type Kana,
 } from "@/lib/japanese-data";
 import { kanjiByLevel, KANJI_COUNTS, KANJI_TOTAL } from "@/lib/kanji-data";
+import { JLPT_VOCAB, JLPT_COUNTS, JLPT_TOTAL, type JlptLevel, type JlptWord } from "@/lib/jlpt-vocab";
 import { tutorChat } from "@/lib/tutor.functions";
 import { KanjiStrokeViewer } from "@/components/KanjiStrokeViewer";
-import { BookOpen, Sparkles, Loader2, X } from "lucide-react";
+import { BookOpen, Sparkles, Loader2, X, Search } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/japanese")({
   component: JapanesePage,
 });
 
-type Tab = "hiragana" | "katakana" | "kanji" | "stories" | "quiz";
+type Tab = "hiragana" | "katakana" | "kanji" | "vocab" | "stories" | "quiz";
 type Level = "N5" | "N4" | "N3" | "N2" | "N1";
 const LEVELS: Level[] = ["N5","N4","N3","N2","N1"];
 
@@ -32,11 +33,11 @@ function JapanesePage() {
       <div className="max-w-5xl space-y-5 animate-fade-up">
         <div>
           <h1 className="font-display text-3xl font-bold tracking-tight">Japanese Academy</h1>
-          <p className="text-sm text-muted-foreground">Hiragana, katakana, all {KANJI_TOTAL.toLocaleString()} official Jōyō kanji, stories — your level: {profile?.japanese_level ?? "beginner"}</p>
+          <p className="text-sm text-muted-foreground">Hiragana, katakana, {JLPT_TOTAL.toLocaleString()} JLPT vocab, {KANJI_TOTAL.toLocaleString()} Jōyō kanji — your level: {profile?.japanese_level ?? "beginner"}</p>
         </div>
 
         <div className="flex gap-1 bg-white/80 backdrop-blur p-1 rounded-full border border-border w-fit overflow-x-auto">
-          {(["hiragana","katakana","kanji","stories","quiz"] as Tab[]).map((t) => (
+          {(["hiragana","katakana","kanji","vocab","stories","quiz"] as Tab[]).map((t) => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap ${tab === t ? "bg-primary" : "text-muted-foreground"}`}>{t}</button>
           ))}
@@ -62,6 +63,7 @@ function JapanesePage() {
           <KanjiTab level={jlptLevel} setLevel={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
         )}
 
+        {tab === "vocab" && <VocabTab defaultLevel={jlptLevel} onLevel={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />}
         {tab === "stories" && <StoriesTab defaultLevel={jlptLevel} />}
         {tab === "quiz" && <KanaQuiz />}
       </div>
