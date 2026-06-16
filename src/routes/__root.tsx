@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import logoAsset from "../assets/studyhub-logo.png.asset.json";
 
 function NotFoundComponent() {
   return (
@@ -68,7 +69,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700&family=Noto+Serif+JP:wght@500;700&display=swap" },
-      { rel: "icon", href: "/__l5e/assets-v1/" }, // overridden below by logo asset
+      { rel: "icon", type: "image/png", href: logoAsset.url },
     ],
   }),
   shellComponent: RootShell,
