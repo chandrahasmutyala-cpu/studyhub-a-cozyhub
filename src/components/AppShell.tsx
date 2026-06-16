@@ -33,6 +33,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "StudentHub",
     items: [
+      { to: "/world", label: "World Explorer", icon: Globe2 },
       { to: "/career", label: "Career Hub", icon: Compass },
       { to: "/universities", label: "Universities", icon: GraduationCap },
       { to: "/scholarships", label: "Scholarships", icon: Award },
