@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { JLPT_VOCAB, type JlptLevel } from "@/lib/jlpt-vocab";
 import { HSK_VOCAB, type HskLevel } from "@/lib/hsk-data";
-import { TOPIK_VOCAB, type TopikLevel } from "@/lib/korean-data";
+import { TOPIK_STARTERS, type TopikLevel } from "@/lib/korean-data";
 import { CloudDownload, Check, Wifi, WifiOff, HardDrive } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/offline")({
@@ -17,16 +17,12 @@ function buildPacks(): Pack[] {
   (Object.keys(JLPT_VOCAB) as JlptLevel[]).forEach(l => {
     packs.push({ id: `ja-${l}`, label: `Japanese · JLPT ${l}`, lang: "Japanese", size: JLPT_VOCAB[l].length, data: JLPT_VOCAB[l] });
   });
-  try {
-    (Object.keys(HSK_VOCAB) as HskLevel[]).forEach(l => {
-      packs.push({ id: `zh-${l}`, label: `Chinese · HSK ${l}`, lang: "Chinese", size: HSK_VOCAB[l].length, data: HSK_VOCAB[l] });
-    });
-  } catch { /* noop */ }
-  try {
-    (Object.keys(TOPIK_VOCAB) as TopikLevel[]).forEach(l => {
-      packs.push({ id: `ko-${l}`, label: `Korean · TOPIK ${l}`, lang: "Korean", size: TOPIK_VOCAB[l].length, data: TOPIK_VOCAB[l] });
-    });
-  } catch { /* noop */ }
+  ([1, 2, 3, 4, 5, 6] as HskLevel[]).forEach(l => {
+    packs.push({ id: `zh-${l}`, label: `Chinese · HSK ${l}`, lang: "Chinese", size: HSK_VOCAB[l].length, data: HSK_VOCAB[l] });
+  });
+  (Object.keys(TOPIK_STARTERS) as TopikLevel[]).forEach(l => {
+    packs.push({ id: `ko-${l.replace(/\s/g, "-")}`, label: `Korean · ${l}`, lang: "Korean", size: TOPIK_STARTERS[l].length, data: TOPIK_STARTERS[l] });
+  });
   return packs;
 }
 
