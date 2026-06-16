@@ -9,16 +9,17 @@ import {
   type Kana,
 } from "@/lib/japanese-data";
 import { kanjiByLevel, KANJI_COUNTS, KANJI_TOTAL } from "@/lib/kanji-data";
+import { JLPT_VOCAB, JLPT_COUNTS, JLPT_TOTAL, type JlptLevel, type JlptWord } from "@/lib/jlpt-vocab";
 import { tutorChat } from "@/lib/tutor.functions";
 import { KanjiStrokeViewer } from "@/components/KanjiStrokeViewer";
-import { BookOpen, Sparkles, Loader2, X } from "lucide-react";
+import { BookOpen, Sparkles, Loader2, X, Search } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/japanese")({
   component: JapanesePage,
 });
 
-type Tab = "hiragana" | "katakana" | "kanji" | "stories" | "quiz";
+type Tab = "hiragana" | "katakana" | "kanji" | "vocab" | "stories" | "quiz";
 type Level = "N5" | "N4" | "N3" | "N2" | "N1";
 const LEVELS: Level[] = ["N5","N4","N3","N2","N1"];
 
@@ -32,11 +33,11 @@ function JapanesePage() {
       <div className="max-w-5xl space-y-5 animate-fade-up">
         <div>
           <h1 className="font-display text-3xl font-bold tracking-tight">Japanese Academy</h1>
-          <p className="text-sm text-muted-foreground">Hiragana, katakana, all {KANJI_TOTAL.toLocaleString()} official Jōyō kanji, stories — your level: {profile?.japanese_level ?? "beginner"}</p>
+          <p className="text-sm text-muted-foreground">Hiragana, katakana, {JLPT_TOTAL.toLocaleString()} JLPT vocab, {KANJI_TOTAL.toLocaleString()} Jōyō kanji — your level: {profile?.japanese_level ?? "beginner"}</p>
         </div>
 
         <div className="flex gap-1 bg-white/80 backdrop-blur p-1 rounded-full border border-border w-fit overflow-x-auto">
-          {(["hiragana","katakana","kanji","stories","quiz"] as Tab[]).map((t) => (
+          {(["hiragana","katakana","kanji","vocab","stories","quiz"] as Tab[]).map((t) => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2 rounded-full text-xs font-bold capitalize whitespace-nowrap ${tab === t ? "bg-primary" : "text-muted-foreground"}`}>{t}</button>
           ))}
@@ -62,6 +63,7 @@ function JapanesePage() {
           <KanjiTab level={jlptLevel} setLevel={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />
         )}
 
+        {tab === "vocab" && <VocabTab defaultLevel={jlptLevel} onLevel={(l) => { setJlptLevel(l); update.mutate({ japanese_level: l.toLowerCase() }); }} />}
         {tab === "stories" && <StoriesTab defaultLevel={jlptLevel} />}
         {tab === "quiz" && <KanaQuiz />}
       </div>
@@ -272,6 +274,116 @@ function KanaQuiz() {
         </div>
       </form>
       <div className="text-xs text-muted-foreground mt-4">✅ {score.right} · ❌ {score.wrong}</div>
+    </div>
+  );
+}
+
+function VocabTab({ defaultLevel, onLevel }: { defaultLevel: Level; onLevel: (l: Level) => void }) {
+  const [level, setLevel] = useState<Level>(defaultLevel);
+  const [q, setQ] = useState("");
+  const [selected, setSelected] = useState<JlptWord | null>(null);
+
+  const all = useMemo<JlptWord[]>(() => JLPT_VOCAB[level as JlptLevel] ?? [], [level]);
+  const filtered = useMemo(() => {
+    if (!q.trim()) return all;
+    const s = q.toLowerCase();
+    return all.filter((w) =>
+      w.j.includes(q) || w.r.includes(q) || w.m.toLowerCase().includes(s),
+    );
+  }, [all, q]);
+
+  return (
+    <div className="space-y-3">
+      <div className="flex gap-2 flex-wrap">
+        {LEVELS.map((l) => (
+          <button key={l} onClick={() => { setLevel(l); onLevel(l); }}
+            className={`px-4 py-2 rounded-full text-sm font-bold border ${level === l ? "bg-primary border-primary" : "bg-white/85 border-border"}`}>
+            {l} <span className="text-[10px] font-semibold text-muted-foreground ml-1">{JLPT_COUNTS[l as JlptLevel]}</span>
+          </button>
+        ))}
+      </div>
+      <div className="flex items-center gap-2 flex-wrap">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search Japanese, reading, or English meaning"
+            className="w-full pl-9 bg-white/85 backdrop-blur border border-border rounded-2xl px-4 py-2.5 text-sm outline-none focus:border-primary" />
+        </div>
+        <span className="text-xs text-muted-foreground">{filtered.length.toLocaleString()} words</span>
+      </div>
+      <p className="text-xs text-muted-foreground">Tap any word for unlimited AI-generated example sentences.</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        {filtered.slice(0, 600).map((w, i) => (
+          <button key={`${w.j}-${i}`} onClick={() => setSelected(w)}
+            className="text-left bg-white/85 backdrop-blur border border-border rounded-2xl p-3 hover:shadow-soft hover:border-primary transition-all">
+            <div className="flex items-baseline justify-between gap-2">
+              <div className="text-xl font-bold" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{w.j}</div>
+              {w.r && <div className="text-[11px] text-muted-foreground" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{w.r}</div>}
+            </div>
+            <div className="text-xs text-muted-foreground mt-1 line-clamp-2">{w.m}</div>
+          </button>
+        ))}
+      </div>
+      {filtered.length > 600 && (
+        <p className="text-xs text-muted-foreground text-center">Showing first 600 — refine your search to see more.</p>
+      )}
+      {selected && <VocabDetail word={selected} level={level} onClose={() => setSelected(null)} />}
+    </div>
+  );
+}
+
+function VocabDetail({ word, level, onClose }: { word: JlptWord; level: Level; onClose: () => void }) {
+  const chat = useServerFn(tutorChat);
+  const [examples, setExamples] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+
+  async function generate() {
+    setLoading(true);
+    try {
+      const res = await chat({ data: {
+        mode: "japanese",
+        messages: [{ role: "user", content: `Give me 5 fresh, original example sentences using the JLPT ${level} word 「${word.j}」 (${word.r} — ${word.m}).
+
+For each sentence return EXACTLY this format on its own block:
+JP: <Japanese sentence>
+読み: <full reading in hiragana>
+RO: <romaji>
+EN: <English translation>
+
+Use varied grammar suitable for ${level} learners. Do not repeat sentences from previous turns.` }],
+      }});
+      setExamples((prev) => (prev ? prev + "\n\n---\n\n" : "") + res.content);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Generation failed");
+    } finally { setLoading(false); }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 bg-ink/40 backdrop-blur grid place-items-center p-4 animate-fade-up" onClick={onClose}>
+      <div onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-[2rem] border border-border max-w-lg w-full p-6 shadow-pop max-h-[90vh] overflow-y-auto">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <div className="text-4xl font-bold" style={{ fontFamily: "Noto Serif JP, Noto Sans JP, sans-serif" }}>{word.j}</div>
+            {word.r && <div className="text-sm text-muted-foreground mt-1" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>{word.r}</div>}
+            <div className="text-sm font-semibold mt-1">{word.m}</div>
+            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mt-1">{level}</div>
+          </div>
+          <button onClick={onClose} className="size-9 rounded-full bg-cream hover:bg-secondary grid place-items-center"><X className="size-4" /></button>
+        </div>
+
+        <button onClick={generate} disabled={loading}
+          className="w-full inline-flex items-center justify-center gap-2 bg-primary rounded-full px-5 py-2.5 font-bold text-sm disabled:opacity-40">
+          {loading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+          {examples ? "More examples" : "Generate examples"}
+        </button>
+
+        {examples && (
+          <div className="mt-4 whitespace-pre-wrap text-sm leading-relaxed bg-cream/60 rounded-2xl p-4" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
+            {examples}
+          </div>
+        )}
+        <p className="text-[11px] text-muted-foreground mt-3 text-center">Powered by Lovable AI — examples are freshly generated each tap.</p>
+      </div>
     </div>
   );
 }

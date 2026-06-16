@@ -30,6 +30,7 @@ import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authentic
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
+import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -139,6 +140,11 @@ const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
   path: '/career',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCalendarRoute = AuthenticatedCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedApplicationsRoute =
   AuthenticatedApplicationsRouteImport.update({
     id: '/applications',
@@ -152,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/applications': typeof AuthenticatedApplicationsRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/applications': typeof AuthenticatedApplicationsRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -200,6 +208,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
+  '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/chinese': typeof AuthenticatedChineseRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -225,6 +234,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/applications'
+    | '/calendar'
     | '/career'
     | '/chinese'
     | '/dashboard'
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/applications'
+    | '/calendar'
     | '/career'
     | '/chinese'
     | '/dashboard'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/_authenticated/applications'
+    | '/_authenticated/calendar'
     | '/_authenticated/career'
     | '/_authenticated/chinese'
     | '/_authenticated/dashboard'
@@ -447,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCareerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/calendar': {
+      id: '/_authenticated/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof AuthenticatedCalendarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/applications': {
       id: '/_authenticated/applications'
       path: '/applications'
@@ -459,6 +478,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
+  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
@@ -479,6 +499,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
+  AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedChineseRoute: AuthenticatedChineseRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
@@ -510,13 +531,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
