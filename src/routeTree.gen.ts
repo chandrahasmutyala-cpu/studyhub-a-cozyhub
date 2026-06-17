@@ -30,6 +30,7 @@ import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
 import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
 import { Route as AuthenticatedEssayReviewerRouteImport } from './routes/_authenticated/essay-reviewer'
+import { Route as AuthenticatedDoodlekittyRouteImport } from './routes/_authenticated/doodlekitty'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
 import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
@@ -148,6 +149,12 @@ const AuthenticatedEssayReviewerRoute =
     path: '/essay-reviewer',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDoodlekittyRoute =
+  AuthenticatedDoodlekittyRouteImport.update({
+    id: '/doodlekitty',
+    path: '/doodlekitty',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/chinese': typeof AuthenticatedChineseRoute
   '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/doodlekitty': typeof AuthenticatedDoodlekittyRoute
   '/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
@@ -228,6 +236,7 @@ export interface FileRoutesByTo {
   '/chinese': typeof AuthenticatedChineseRoute
   '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/doodlekitty': typeof AuthenticatedDoodlekittyRoute
   '/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
   '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
@@ -259,6 +268,7 @@ export interface FileRoutesById {
   '/_authenticated/chinese': typeof AuthenticatedChineseRoute
   '/_authenticated/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/doodlekitty': typeof AuthenticatedDoodlekittyRoute
   '/_authenticated/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
   '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
   '/_authenticated/focus': typeof AuthenticatedFocusRoute
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/chinese'
     | '/cost-calculator'
     | '/dashboard'
+    | '/doodlekitty'
     | '/essay-reviewer'
     | '/flashcards'
     | '/focus'
@@ -319,6 +330,7 @@ export interface FileRouteTypes {
     | '/chinese'
     | '/cost-calculator'
     | '/dashboard'
+    | '/doodlekitty'
     | '/essay-reviewer'
     | '/flashcards'
     | '/focus'
@@ -349,6 +361,7 @@ export interface FileRouteTypes {
     | '/_authenticated/chinese'
     | '/_authenticated/cost-calculator'
     | '/_authenticated/dashboard'
+    | '/_authenticated/doodlekitty'
     | '/_authenticated/essay-reviewer'
     | '/_authenticated/flashcards'
     | '/_authenticated/focus'
@@ -524,6 +537,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEssayReviewerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/doodlekitty': {
+      id: '/_authenticated/doodlekitty'
+      path: '/doodlekitty'
+      fullPath: '/doodlekitty'
+      preLoaderRoute: typeof AuthenticatedDoodlekittyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -584,6 +604,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
   AuthenticatedCostCalculatorRoute: typeof AuthenticatedCostCalculatorRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDoodlekittyRoute: typeof AuthenticatedDoodlekittyRoute
   AuthenticatedEssayReviewerRoute: typeof AuthenticatedEssayReviewerRoute
   AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
   AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
@@ -610,6 +631,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChineseRoute: AuthenticatedChineseRoute,
   AuthenticatedCostCalculatorRoute: AuthenticatedCostCalculatorRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDoodlekittyRoute: AuthenticatedDoodlekittyRoute,
   AuthenticatedEssayReviewerRoute: AuthenticatedEssayReviewerRoute,
   AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
   AuthenticatedFocusRoute: AuthenticatedFocusRoute,
