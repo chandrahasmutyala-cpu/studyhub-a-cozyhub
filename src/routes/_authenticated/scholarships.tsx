@@ -1,51 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
-import { Award, ExternalLink, BookmarkPlus, Search } from "lucide-react";
-import { toast } from "sonner";
+import { Award, Search } from "lucide-react";
+import {
+  scholarshipsFor,
+  COUNTRY_LABEL,
+  COUNTRY_FLAG,
+  DIRECTORY_TOTALS,
+  type CountryKey,
+} from "@/lib/study-directory";
 
 export const Route = createFileRoute("/_authenticated/scholarships")({
   component: ScholarshipsPage,
 });
 
-type Scholarship = {
-  id: string; name: string; provider: string | null; country: string | null;
-  eligibility: string | null; benefits: string | null; documents_required: string | null;
-  deadline: string | null; source_url: string;
-};
+const COUNTRIES: CountryKey[] = ["japan", "china", "korea"];
 
 function ScholarshipsPage() {
-  const qc = useQueryClient();
+  const [country, setCountry] = useState<CountryKey>("japan");
   const [q, setQ] = useState("");
-  const [country, setCountry] = useState("");
+  const [level, setLevel] = useState("");
 
-  const list = useQuery({
-    queryKey: ["scholarships"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("scholarships").select("*").order("deadline", { ascending: true });
-      if (error) throw error;
-      return (data ?? []) as Scholarship[];
-    },
-  });
+  const all = useMemo(() => scholarshipsFor(country), [country]);
+  const levels = useMemo(
+    () => Array.from(new Set(all.map((s) => s.level))).filter(Boolean),
+    [all],
+  );
 
-  const countries = useMemo(() => Array.from(new Set((list.data ?? []).map((s) => s.country).filter(Boolean) as string[])).sort(), [list.data]);
-  const filtered = useMemo(() => (list.data ?? []).filter((s) =>
-    (!q || s.name.toLowerCase().includes(q.toLowerCase())) && (!country || s.country === country)
-  ), [list.data, q, country]);
-
-  async function track(s: Scholarship) {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-    const { error } = await supabase.from("applications").insert({
-      user_id: user.id, kind: "scholarship", name: s.name, country: s.country,
-      url: s.source_url, status: "interested", deadline: s.deadline,
-    });
-    if (error) return toast.error(error.message);
-    toast.success(`Saved ${s.name}`);
-    qc.invalidateQueries({ queryKey: ["applications"] });
-  }
+  const filtered = useMemo(
+    () => all.filter((s) => {
+      if (level && s.level !== level) return false;
+      if (!q) return true;
+      const t = q.toLowerCase();
+      return [s.name, s.type, s.coverage, s.notes].some((v) => v.toLowerCase().includes(t));
+    }),
+    [all, q, level],
+  );
 
   return (
     <AppShell>
@@ -53,54 +43,82 @@ function ScholarshipsPage() {
         <header>
           <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Discovery</div>
           <h1 className="font-display text-3xl font-bold flex items-center gap-2 mt-1">
-            <Award className="size-7 text-primary" /> Scholarships
+            <Award className="size-7 text-primary" /> Scholarship Finder
           </h1>
-          <p className="text-sm text-muted-foreground">Verified scholarships only — always confirm details on the official source.</p>
+          <p className="text-sm text-muted-foreground">
+            {DIRECTORY_TOTALS.japan.scholarships + DIRECTORY_TOTALS.china.scholarships + DIRECTORY_TOTALS.korea.scholarships} verified scholarships — government, university, and private.
+          </p>
         </header>
 
-        <div className="bg-white border border-border rounded-3xl p-4 flex flex-col sm:flex-row gap-2">
-          <div className="relative flex-1">
+        <div className="flex gap-2 flex-wrap">
+          {COUNTRIES.map((c) => (
+            <button
+              key={c}
+              onClick={() => { setCountry(c); setLevel(""); }}
+              className={`px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition ${
+                country === c
+                  ? "bg-primary text-primary-foreground shadow-soft"
+                  : "bg-white border border-border text-foreground/70 hover:bg-secondary"
+              }`}
+            >
+              <span>{COUNTRY_FLAG[c]}</span>
+              {COUNTRY_LABEL[c]}
+              <span className="text-[10px] opacity-70">({DIRECTORY_TOTALS[c].scholarships})</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="bg-white border border-border rounded-3xl p-4 grid sm:grid-cols-3 gap-2">
+          <div className="relative sm:col-span-2">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search scholarships" className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search by name, provider, or benefit"
+              className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none"
+            />
           </div>
-          <select value={country} onChange={(e) => setCountry(e.target.value)} className="bg-cream rounded-2xl px-3 py-2.5 text-sm">
-            <option value="">Any country</option>
-            {countries.map((c) => <option key={c} value={c}>{c}</option>)}
+          <select
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+            className="bg-cream rounded-2xl px-3 py-2.5 text-sm"
+          >
+            <option value="">All levels</option>
+            {levels.map((l) => <option key={l} value={l}>{l}</option>)}
           </select>
         </div>
 
-        {list.isLoading && <div className="h-32 bg-cream animate-pulse rounded-3xl" />}
-        {!list.isLoading && filtered.length === 0 && (
-          <div className="bg-white rounded-3xl border border-border p-8 text-center text-sm text-muted-foreground">
-            No verified scholarships available yet.
-          </div>
-        )}
-
         <div className="space-y-3">
           {filtered.map((s) => (
-            <article key={s.id} className="bg-white border border-border rounded-3xl p-5 shadow-soft">
+            <article key={s.name} className="bg-white border border-border rounded-3xl p-5 shadow-soft">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-display text-lg font-bold">{s.name}</h3>
-                  <p className="text-xs text-muted-foreground">{[s.provider, s.country].filter(Boolean).join(" · ")}</p>
+                  <p className="text-xs text-muted-foreground">{s.type}{s.level && ` · ${s.level}`}</p>
                 </div>
-                <button onClick={() => track(s)} className="size-9 rounded-full bg-secondary hover:bg-primary grid place-items-center" aria-label="Save">
-                  <BookmarkPlus className="size-4" />
-                </button>
+                <span className="text-[10px] uppercase tracking-wider font-bold bg-honey rounded-full px-2 py-1 whitespace-nowrap">
+                  {COUNTRY_FLAG[country]} {COUNTRY_LABEL[country]}
+                </span>
               </div>
               <div className="mt-3 grid sm:grid-cols-2 gap-2 text-sm">
-                {s.eligibility && <div><span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Eligibility</span><p>{s.eligibility}</p></div>}
-                {s.benefits && <div><span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Benefits</span><p>{s.benefits}</p></div>}
-                {s.documents_required && <div className="sm:col-span-2"><span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Documents</span><p>{s.documents_required}</p></div>}
-              </div>
-              <div className="mt-3 flex items-center justify-between text-xs">
-                {s.deadline ? <span>📅 Deadline: {new Date(s.deadline).toLocaleDateString()}</span> : <span />}
-                <a href={s.source_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-bold bg-primary rounded-full px-3 py-1">
-                  Official source <ExternalLink className="size-3" />
-                </a>
+                <div>
+                  <span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Coverage</span>
+                  <p>{s.coverage}</p>
+                </div>
+                {s.notes && (
+                  <div>
+                    <span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Notes</span>
+                    <p>{s.notes}</p>
+                  </div>
+                )}
               </div>
             </article>
           ))}
+          {filtered.length === 0 && (
+            <div className="bg-white rounded-3xl border border-border p-8 text-center text-sm text-muted-foreground">
+              No scholarships match your search.
+            </div>
+          )}
         </div>
       </div>
     </AppShell>
