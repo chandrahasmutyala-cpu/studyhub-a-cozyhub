@@ -14,8 +14,6 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedWorldRouteImport } from './routes/_authenticated/world'
-import { Route as AuthenticatedVocabMiningRouteImport } from './routes/_authenticated/vocab-mining'
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
@@ -24,7 +22,6 @@ import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authent
 import { Route as AuthenticatedScholarshipEligibilityRouteImport } from './routes/_authenticated/scholarship-eligibility'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
-import { Route as AuthenticatedOfflineRouteImport } from './routes/_authenticated/offline'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
 import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
 import { Route as AuthenticatedLanguageGoalsRouteImport } from './routes/_authenticated/language-goals'
@@ -65,17 +62,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedWorldRoute = AuthenticatedWorldRouteImport.update({
-  id: '/world',
-  path: '/world',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedVocabMiningRoute =
-  AuthenticatedVocabMiningRouteImport.update({
-    id: '/vocab-mining',
-    path: '/vocab-mining',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedUniversitiesRoute =
   AuthenticatedUniversitiesRouteImport.update({
     id: '/universities',
@@ -117,11 +103,6 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedOfflineRoute = AuthenticatedOfflineRouteImport.update({
-  id: '/offline',
-  path: '/offline',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
@@ -226,7 +207,6 @@ export interface FileRoutesByFullPath {
   '/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
-  '/offline': typeof AuthenticatedOfflineRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
@@ -235,8 +215,6 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
-  '/vocab-mining': typeof AuthenticatedVocabMiningRoute
-  '/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -258,7 +236,6 @@ export interface FileRoutesByTo {
   '/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
-  '/offline': typeof AuthenticatedOfflineRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
@@ -267,8 +244,6 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
-  '/vocab-mining': typeof AuthenticatedVocabMiningRoute
-  '/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -292,7 +267,6 @@ export interface FileRoutesById {
   '/_authenticated/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/_authenticated/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
-  '/_authenticated/offline': typeof AuthenticatedOfflineRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
@@ -301,8 +275,6 @@ export interface FileRoutesById {
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
-  '/_authenticated/vocab-mining': typeof AuthenticatedVocabMiningRoute
-  '/_authenticated/world': typeof AuthenticatedWorldRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -326,7 +298,6 @@ export interface FileRouteTypes {
     | '/language-goals'
     | '/media-translator'
     | '/notes'
-    | '/offline'
     | '/onboarding'
     | '/profile'
     | '/scholarship-eligibility'
@@ -335,8 +306,6 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/tutor'
     | '/universities'
-    | '/vocab-mining'
-    | '/world'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -358,7 +327,6 @@ export interface FileRouteTypes {
     | '/language-goals'
     | '/media-translator'
     | '/notes'
-    | '/offline'
     | '/onboarding'
     | '/profile'
     | '/scholarship-eligibility'
@@ -367,8 +335,6 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/tutor'
     | '/universities'
-    | '/vocab-mining'
-    | '/world'
   id:
     | '__root__'
     | '/'
@@ -391,7 +357,6 @@ export interface FileRouteTypes {
     | '/_authenticated/language-goals'
     | '/_authenticated/media-translator'
     | '/_authenticated/notes'
-    | '/_authenticated/offline'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
     | '/_authenticated/scholarship-eligibility'
@@ -400,8 +365,6 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks'
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
-    | '/_authenticated/vocab-mining'
-    | '/_authenticated/world'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -448,20 +411,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/world': {
-      id: '/_authenticated/world'
-      path: '/world'
-      fullPath: '/world'
-      preLoaderRoute: typeof AuthenticatedWorldRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/vocab-mining': {
-      id: '/_authenticated/vocab-mining'
-      path: '/vocab-mining'
-      fullPath: '/vocab-mining'
-      preLoaderRoute: typeof AuthenticatedVocabMiningRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/universities': {
       id: '/_authenticated/universities'
@@ -517,13 +466,6 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/offline': {
-      id: '/_authenticated/offline'
-      path: '/offline'
-      fullPath: '/offline'
-      preLoaderRoute: typeof AuthenticatedOfflineRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/notes': {
@@ -650,7 +592,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLanguageGoalsRoute: typeof AuthenticatedLanguageGoalsRoute
   AuthenticatedMediaTranslatorRoute: typeof AuthenticatedMediaTranslatorRoute
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
-  AuthenticatedOfflineRoute: typeof AuthenticatedOfflineRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedScholarshipEligibilityRoute: typeof AuthenticatedScholarshipEligibilityRoute
@@ -659,8 +600,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
-  AuthenticatedVocabMiningRoute: typeof AuthenticatedVocabMiningRoute
-  AuthenticatedWorldRoute: typeof AuthenticatedWorldRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -679,7 +618,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLanguageGoalsRoute: AuthenticatedLanguageGoalsRoute,
   AuthenticatedMediaTranslatorRoute: AuthenticatedMediaTranslatorRoute,
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
-  AuthenticatedOfflineRoute: AuthenticatedOfflineRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedScholarshipEligibilityRoute:
@@ -689,8 +627,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
-  AuthenticatedVocabMiningRoute: AuthenticatedVocabMiningRoute,
-  AuthenticatedWorldRoute: AuthenticatedWorldRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -706,3 +642,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
