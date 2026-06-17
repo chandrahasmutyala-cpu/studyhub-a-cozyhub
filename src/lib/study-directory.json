@@ -1,0 +1,3617 @@
+{
+ "universities": {
+  "japan": {
+   "national": [
+    {
+     "name": "Aichi University of Education",
+     "location": "Nagakute, Aichi",
+     "fields": "Education"
+    },
+    {
+     "name": "Akita University",
+     "location": "Akita",
+     "fields": "Medicine, Engineering, Education"
+    },
+    {
+     "name": "Asahikawa Medical University",
+     "location": "Asahikawa, Hokkaido",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Chiba University",
+     "location": "Chiba",
+     "fields": "Medicine, Science, Engineering"
+    },
+    {
+     "name": "Ehime University",
+     "location": "Matsuyama, Ehime",
+     "fields": "Agriculture, Engineering, Education"
+    },
+    {
+     "name": "Fukuoka University of Education",
+     "location": "Munakata, Fukuoka",
+     "fields": "Education"
+    },
+    {
+     "name": "Fukushima University",
+     "location": "Fukushima",
+     "fields": "Economics, Agriculture, Education"
+    },
+    {
+     "name": "Gifu University",
+     "location": "Gifu",
+     "fields": "Medicine, Agriculture, Engineering"
+    },
+    {
+     "name": "Graduate University for Advanced Studies (SOKENDAI)",
+     "location": "Hayama, Kanagawa",
+     "fields": "Graduate Research"
+    },
+    {
+     "name": "Gunma University",
+     "location": "Maebashi, Gunma",
+     "fields": "Medicine, Science, Engineering"
+    },
+    {
+     "name": "Hamamatsu University School of Medicine",
+     "location": "Hamamatsu, Shizuoka",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Hirosaki University",
+     "location": "Hirosaki, Aomori",
+     "fields": "Medicine, Agriculture, Education"
+    },
+    {
+     "name": "Hiroshima University",
+     "location": "Higashihiroshima",
+     "fields": "Education, Science, Engineering"
+    },
+    {
+     "name": "Hokkaido University",
+     "location": "Sapporo",
+     "fields": "Agriculture, Science, Veterinary, Engineering"
+    },
+    {
+     "name": "Hokkaido University of Education",
+     "location": "Sapporo",
+     "fields": "Education"
+    },
+    {
+     "name": "Hyogo University of Teacher Education",
+     "location": "Kato, Hyogo",
+     "fields": "Education"
+    },
+    {
+     "name": "Ibaraki University",
+     "location": "Mito, Ibaraki",
+     "fields": "Education, Engineering, Agriculture"
+    },
+    {
+     "name": "Institute of Science Tokyo (ex-Tokyo Tech + TMDU)",
+     "location": "Tokyo",
+     "fields": "Science, Engineering, Medicine"
+    },
+    {
+     "name": "Iwate University",
+     "location": "Morioka, Iwate",
+     "fields": "Agriculture, Engineering, Education"
+    },
+    {
+     "name": "Japan Advanced Institute of Science & Technology (JAIST)",
+     "location": "Nomi, Ishikawa",
+     "fields": "Science, Technology"
+    },
+    {
+     "name": "Joetsu University of Education",
+     "location": "Joetsu, Niigata",
+     "fields": "Education"
+    },
+    {
+     "name": "Kagawa University",
+     "location": "Takamatsu, Kagawa",
+     "fields": "Medicine, Agriculture, Engineering"
+    },
+    {
+     "name": "Kagoshima University",
+     "location": "Kagoshima",
+     "fields": "Medicine, Agriculture, Engineering"
+    },
+    {
+     "name": "Kanazawa University",
+     "location": "Kanazawa",
+     "fields": "Medicine, Science, Engineering"
+    },
+    {
+     "name": "Kitami Institute of Technology",
+     "location": "Kitami, Hokkaido",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Kobe University",
+     "location": "Kobe",
+     "fields": "Business, Economics, Engineering"
+    },
+    {
+     "name": "Kochi University",
+     "location": "Kochi",
+     "fields": "Agriculture, Education, Science"
+    },
+    {
+     "name": "Kumamoto University",
+     "location": "Kumamoto",
+     "fields": "Medicine, Engineering, Law"
+    },
+    {
+     "name": "Kyoto Institute of Technology",
+     "location": "Kyoto",
+     "fields": "Engineering, Design"
+    },
+    {
+     "name": "Kyoto University",
+     "location": "Kyoto",
+     "fields": "All fields — Nobel laureates"
+    },
+    {
+     "name": "Kyoto University of Education",
+     "location": "Kyoto",
+     "fields": "Education"
+    },
+    {
+     "name": "Kyushu Institute of Technology",
+     "location": "Kitakyushu, Fukuoka",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Kyushu University",
+     "location": "Fukuoka",
+     "fields": "Science, Engineering, Medicine, Agriculture"
+    },
+    {
+     "name": "Mie University",
+     "location": "Tsu, Mie",
+     "fields": "Medicine, Agriculture, Engineering"
+    },
+    {
+     "name": "Miyagi University of Education",
+     "location": "Sendai",
+     "fields": "Education"
+    },
+    {
+     "name": "Muroran Institute of Technology",
+     "location": "Muroran, Hokkaido",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Nagaoka University of Technology",
+     "location": "Nagaoka, Niigata",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Nagasaki University",
+     "location": "Nagasaki",
+     "fields": "Medicine, Fisheries, Education"
+    },
+    {
+     "name": "Nagoya Institute of Technology",
+     "location": "Nagoya",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Nagoya University",
+     "location": "Nagoya",
+     "fields": "Science, Engineering, Medicine"
+    },
+    {
+     "name": "Nara Institute of Science and Technology (NAIST)",
+     "location": "Ikoma, Nara",
+     "fields": "Science, Technology"
+    },
+    {
+     "name": "Nara University of Education",
+     "location": "Nara",
+     "fields": "Education"
+    },
+    {
+     "name": "Nara Women's University",
+     "location": "Nara",
+     "fields": "Science, Life & Environmental Science"
+    },
+    {
+     "name": "Naruto University of Education",
+     "location": "Naruto, Tokushima",
+     "fields": "Education"
+    },
+    {
+     "name": "National Graduate Institute for Policy Studies (GRIPS)",
+     "location": "Tokyo",
+     "fields": "Policy Studies"
+    },
+    {
+     "name": "National Institute of Fitness and Sports in Kanoya",
+     "location": "Kanoya, Kagoshima",
+     "fields": "Sports Science"
+    },
+    {
+     "name": "Niigata University",
+     "location": "Niigata",
+     "fields": "Medicine, Engineering, Agriculture"
+    },
+    {
+     "name": "Obihiro University of Agriculture and Veterinary Medicine",
+     "location": "Obihiro, Hokkaido",
+     "fields": "Agriculture, Veterinary"
+    },
+    {
+     "name": "Ochanomizu University",
+     "location": "Tokyo",
+     "fields": "Science, Life Science (Women's)"
+    },
+    {
+     "name": "Oita University",
+     "location": "Oita",
+     "fields": "Medicine, Engineering, Education"
+    },
+    {
+     "name": "Okayama University",
+     "location": "Okayama",
+     "fields": "Medicine, Agriculture, Engineering"
+    },
+    {
+     "name": "Osaka Kyoiku University",
+     "location": "Kashiwara, Osaka",
+     "fields": "Education"
+    },
+    {
+     "name": "Otaru University of Commerce",
+     "location": "Otaru, Hokkaido",
+     "fields": "Commerce, Economics"
+    },
+    {
+     "name": "Saga University",
+     "location": "Saga",
+     "fields": "Medicine, Engineering, Agriculture"
+    },
+    {
+     "name": "Saitama University",
+     "location": "Saitama",
+     "fields": "Science, Engineering, Liberal Arts"
+    },
+    {
+     "name": "Shiga University",
+     "location": "Hikone, Shiga",
+     "fields": "Economics, Data Science"
+    },
+    {
+     "name": "Shiga University of Medical Science",
+     "location": "Otsu, Shiga",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Shimane University",
+     "location": "Matsue, Shimane",
+     "fields": "Medicine, Agriculture, Education"
+    },
+    {
+     "name": "Shinshu University",
+     "location": "Nagano",
+     "fields": "Medicine, Engineering, Agriculture"
+    },
+    {
+     "name": "Shizuoka University",
+     "location": "Shizuoka",
+     "fields": "Science, Engineering, Agriculture"
+    },
+    {
+     "name": "Tohoku University",
+     "location": "Sendai",
+     "fields": "Science, Engineering, Medicine"
+    },
+    {
+     "name": "Tokushima University",
+     "location": "Tokushima",
+     "fields": "Medicine, Engineering, Agriculture"
+    },
+    {
+     "name": "Tokyo Gakugei University",
+     "location": "Koganei, Tokyo",
+     "fields": "Education"
+    },
+    {
+     "name": "Tokyo University of Agriculture and Technology",
+     "location": "Fuchu, Tokyo",
+     "fields": "Agriculture, Engineering"
+    },
+    {
+     "name": "Tokyo University of Foreign Studies",
+     "location": "Fuchu, Tokyo",
+     "fields": "Foreign Languages, International Studies"
+    },
+    {
+     "name": "Tokyo University of Marine Science and Technology",
+     "location": "Tokyo",
+     "fields": "Marine Science"
+    },
+    {
+     "name": "Tokyo University of the Arts",
+     "location": "Tokyo",
+     "fields": "Fine Arts, Music"
+    },
+    {
+     "name": "Tottori University",
+     "location": "Tottori",
+     "fields": "Agriculture, Medicine, Engineering"
+    },
+    {
+     "name": "Toyohashi University of Technology",
+     "location": "Toyohashi, Aichi",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Tsukuba University of Technology",
+     "location": "Tsukuba, Ibaraki",
+     "fields": "Engineering (for hearing/visually impaired)"
+    },
+    {
+     "name": "University of Electro-Communications",
+     "location": "Chofu, Tokyo",
+     "fields": "Engineering, Informatics"
+    },
+    {
+     "name": "University of Fukui",
+     "location": "Fukui",
+     "fields": "Medicine, Engineering, Education"
+    },
+    {
+     "name": "University of Miyazaki",
+     "location": "Miyazaki",
+     "fields": "Medicine, Agriculture, Engineering"
+    },
+    {
+     "name": "University of the Ryukyus",
+     "location": "Nishihara, Okinawa",
+     "fields": "All fields"
+    },
+    {
+     "name": "University of the Tokyo",
+     "location": "Tokyo",
+     "fields": "All fields — Japan's #1 university"
+    },
+    {
+     "name": "University of Toyama",
+     "location": "Toyama",
+     "fields": "Medicine, Engineering, Economics"
+    },
+    {
+     "name": "University of Yamanashi",
+     "location": "Kofu, Yamanashi",
+     "fields": "Engineering, Education"
+    },
+    {
+     "name": "Utsunomiya University",
+     "location": "Utsunomiya, Tochigi",
+     "fields": "Agriculture, Engineering, Education"
+    },
+    {
+     "name": "Wakayama University",
+     "location": "Wakayama",
+     "fields": "Economics, Tourism, Engineering"
+    },
+    {
+     "name": "Yamagata University",
+     "location": "Yamagata",
+     "fields": "Medicine, Engineering, Agriculture"
+    },
+    {
+     "name": "Yamaguchi University",
+     "location": "Yamaguchi",
+     "fields": "Medicine, Engineering, Agriculture"
+    },
+    {
+     "name": "Yokohama National University",
+     "location": "Yokohama",
+     "fields": "Engineering, Economics, Urban Science"
+    },
+    {
+     "name": "Hitotsubashi University",
+     "location": "Kunitachi, Tokyo",
+     "fields": "Economics, Law, Social Sciences"
+    },
+    {
+     "name": "University of Tsukuba",
+     "location": "Tsukuba",
+     "fields": "Interdisciplinary, Sciences, Sports"
+    },
+    {
+     "name": "Tokyo Medical and Dental University",
+     "location": "Tokyo",
+     "fields": "Medicine, Dentistry"
+    }
+   ],
+   "public": [
+    {
+     "name": "Aichi Prefectural University",
+     "location": "Nagakute, Aichi",
+     "fields": "Foreign Languages, Education"
+    },
+    {
+     "name": "Aichi Prefectural University of Fine Arts and Music",
+     "location": "Nagakute, Aichi",
+     "fields": "Fine Arts, Music"
+    },
+    {
+     "name": "Advanced Institute of Industrial Technology",
+     "location": "Tokyo",
+     "fields": "Engineering, Industrial Technology"
+    },
+    {
+     "name": "Akita International University",
+     "location": "Akita",
+     "fields": "International Liberal Arts (English medium)"
+    },
+    {
+     "name": "Akita Prefectural University",
+     "location": "Akita",
+     "fields": "Agriculture, Systems Science"
+    },
+    {
+     "name": "Akita University of Art",
+     "location": "Akita",
+     "fields": "Fine Arts"
+    },
+    {
+     "name": "Aomori Public University",
+     "location": "Aomori",
+     "fields": "Business, Economics"
+    },
+    {
+     "name": "Aomori University of Health and Welfare",
+     "location": "Aomori",
+     "fields": "Health Sciences"
+    },
+    {
+     "name": "Asahikawa City University",
+     "location": "Asahikawa, Hokkaido",
+     "fields": "Economics, Nutrition"
+    },
+    {
+     "name": "Chiba Prefectural University of Health Sciences",
+     "location": "Chiba",
+     "fields": "Nursing, Rehabilitation"
+    },
+    {
+     "name": "Chitose Institute of Science and Technology",
+     "location": "Chitose, Hokkaido",
+     "fields": "Science, Technology"
+    },
+    {
+     "name": "Ehime Prefectural University of Health Science",
+     "location": "Ehime",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Eikei University of Hiroshima",
+     "location": "Higashihiroshima",
+     "fields": "Policy, Management"
+    },
+    {
+     "name": "Fukui Prefectural University",
+     "location": "Fukui",
+     "fields": "Biological Resources, Economics"
+    },
+    {
+     "name": "Fukuoka Prefectural University",
+     "location": "Tagawa, Fukuoka",
+     "fields": "Human Social Sciences, Nursing"
+    },
+    {
+     "name": "Fukuoka Women's University",
+     "location": "Fukuoka",
+     "fields": "Human Environmental Sciences"
+    },
+    {
+     "name": "Fukushima Medical University",
+     "location": "Fukushima",
+     "fields": "Medicine, Nursing"
+    },
+    {
+     "name": "Fukuyama City University",
+     "location": "Fukuyama, Hiroshima",
+     "fields": "Education, Urban Management"
+    },
+    {
+     "name": "Future University Hakodate",
+     "location": "Hakodate, Hokkaido",
+     "fields": "Systems Information Science"
+    },
+    {
+     "name": "Gifu College of Nursing",
+     "location": "Gifu",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Gifu Pharmaceutical University",
+     "location": "Gifu",
+     "fields": "Pharmacy"
+    },
+    {
+     "name": "Gunma Prefectural College of Health Sciences",
+     "location": "Maebashi, Gunma",
+     "fields": "Health Sciences"
+    },
+    {
+     "name": "Gunma Prefectural Women's University",
+     "location": "Tamamura, Gunma",
+     "fields": "Liberal Arts"
+    },
+    {
+     "name": "Hiroshima City University",
+     "location": "Hiroshima",
+     "fields": "Information Sciences, Arts, Int'l Studies"
+    },
+    {
+     "name": "Ibaraki Prefectural University of Health Sciences",
+     "location": "Ami, Ibaraki",
+     "fields": "Health Sciences"
+    },
+    {
+     "name": "Institute of Advanced Media Arts and Sciences",
+     "location": "Ogaki, Gifu",
+     "fields": "Media Arts"
+    },
+    {
+     "name": "Ishikawa Prefectural Nursing University",
+     "location": "Kahoku, Ishikawa",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Ishikawa Prefectural University",
+     "location": "Nonoichi, Ishikawa",
+     "fields": "Agriculture, Bioscience"
+    },
+    {
+     "name": "Iwate Prefectural University",
+     "location": "Takizawa, Iwate",
+     "fields": "Social Welfare, Nursing, Software"
+    },
+    {
+     "name": "Kagawa Prefectural College of Health Sciences",
+     "location": "Takamatsu",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Kanagawa University of Human Services",
+     "location": "Yokosuka, Kanagawa",
+     "fields": "Health & Human Services"
+    },
+    {
+     "name": "Kanazawa College of Art",
+     "location": "Kanazawa",
+     "fields": "Art & Design"
+    },
+    {
+     "name": "Kawasaki City College of Nursing",
+     "location": "Kawasaki",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Kobe City College of Nursing",
+     "location": "Kobe",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Kobe City University of Foreign Studies",
+     "location": "Kobe",
+     "fields": "Foreign Languages"
+    },
+    {
+     "name": "Kochi University of Technology",
+     "location": "Kochi",
+     "fields": "Engineering, Economics"
+    },
+    {
+     "name": "Kochi Women's University",
+     "location": "Kochi",
+     "fields": "Liberal Arts"
+    },
+    {
+     "name": "Komatsu University",
+     "location": "Komatsu, Ishikawa",
+     "fields": "Business, Regional Studies"
+    },
+    {
+     "name": "Kushiro Public University of Economics",
+     "location": "Kushiro, Hokkaido",
+     "fields": "Economics"
+    },
+    {
+     "name": "Kyoto City University of Arts",
+     "location": "Kyoto",
+     "fields": "Fine Arts, Music"
+    },
+    {
+     "name": "Kyoto Prefectural University",
+     "location": "Kyoto",
+     "fields": "Agriculture, Literature, Environment"
+    },
+    {
+     "name": "Kyoto Prefectural University of Medicine",
+     "location": "Kyoto",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Kyushu Dental University",
+     "location": "Kitakyushu, Fukuoka",
+     "fields": "Dentistry"
+    },
+    {
+     "name": "Maebashi Institute of Technology",
+     "location": "Maebashi, Gunma",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Meio University",
+     "location": "Nago, Okinawa",
+     "fields": "Humanities, Tourism"
+    },
+    {
+     "name": "Mie Prefectural College of Nursing",
+     "location": "Tsu, Mie",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Miyagi University",
+     "location": "Kurokawa, Miyagi",
+     "fields": "Nursing, Business, Food Industry"
+    },
+    {
+     "name": "Miyazaki Municipal University",
+     "location": "Miyazaki",
+     "fields": "Humanities"
+    },
+    {
+     "name": "Miyazaki Prefectural Nursing University",
+     "location": "Miyazaki",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Nagano College of Nursing",
+     "location": "Komagane, Nagano",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Nagano University",
+     "location": "Ueda, Nagano",
+     "fields": "Social Welfare, Environment"
+    },
+    {
+     "name": "Nagaoka Institute of Design",
+     "location": "Nagaoka, Niigata",
+     "fields": "Industrial Design"
+    },
+    {
+     "name": "Nagoya City University",
+     "location": "Nagoya",
+     "fields": "Medicine, Pharmacy, Economics"
+    },
+    {
+     "name": "Nara Medical University",
+     "location": "Kashihara, Nara",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Nara Prefectural University",
+     "location": "Nara",
+     "fields": "Regional Creation"
+    },
+    {
+     "name": "Nayoro City University",
+     "location": "Nayoro, Hokkaido",
+     "fields": "Social Work"
+    },
+    {
+     "name": "Niigata College of Nursing",
+     "location": "Joetsu, Niigata",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Oita University of Nursing and Health Sciences",
+     "location": "Oita",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Okayama Prefectural University",
+     "location": "Soja, Okayama",
+     "fields": "Design, Health & Welfare"
+    },
+    {
+     "name": "Okinawa Prefectural College of Nursing",
+     "location": "Naha, Okinawa",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Okinawa Prefectural University of Arts",
+     "location": "Naha, Okinawa",
+     "fields": "Fine Arts, Music"
+    },
+    {
+     "name": "Onomichi City University",
+     "location": "Onomichi, Hiroshima",
+     "fields": "Arts, Economic Information"
+    },
+    {
+     "name": "Osaka Metropolitan University",
+     "location": "Osaka",
+     "fields": "Sciences, Engineering, Medicine (merged OU+OPU)"
+    },
+    {
+     "name": "Prefectural University of Hiroshima",
+     "location": "Hiroshima",
+     "fields": "Business, Health Sciences"
+    },
+    {
+     "name": "Prefectural University of Kumamoto",
+     "location": "Kumamoto",
+     "fields": "Environmental & Symbiotic Sciences"
+    },
+    {
+     "name": "Saitama Prefectural University",
+     "location": "Koshigaya, Saitama",
+     "fields": "Health Sciences"
+    },
+    {
+     "name": "Sapporo City University",
+     "location": "Sapporo",
+     "fields": "Design, Nursing"
+    },
+    {
+     "name": "Sapporo Medical University",
+     "location": "Sapporo",
+     "fields": "Medicine, Health Sciences"
+    },
+    {
+     "name": "Shimonoseki City University",
+     "location": "Shimonoseki, Yamaguchi",
+     "fields": "Economics"
+    },
+    {
+     "name": "Shizuoka University of Art and Culture",
+     "location": "Hamamatsu",
+     "fields": "Art, Design, Cultural Policy"
+    },
+    {
+     "name": "Shizuoka Graduate University of Public Health",
+     "location": "Shizuoka",
+     "fields": "Public Health (Graduate)"
+    },
+    {
+     "name": "Shunan University",
+     "location": "Shunan, Yamaguchi",
+     "fields": "Economics, Information Science"
+    },
+    {
+     "name": "Suwa University of Science",
+     "location": "Chino, Nagano",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Takasaki City University of Economics",
+     "location": "Takasaki, Gunma",
+     "fields": "Economics, Regional Policy"
+    },
+    {
+     "name": "Tokyo Metropolitan University",
+     "location": "Tokyo",
+     "fields": "Humanities, Law, Science, Engineering"
+    },
+    {
+     "name": "Tottori University of Environmental Studies",
+     "location": "Tottori",
+     "fields": "Environmental Studies"
+    },
+    {
+     "name": "Toyama Prefectural University",
+     "location": "Toyama",
+     "fields": "Engineering, IT"
+    },
+    {
+     "name": "Tsuruga Nursing University",
+     "location": "Tsuruga, Fukui",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Tsuru University",
+     "location": "Tsuru, Yamanashi",
+     "fields": "Liberal Arts"
+    },
+    {
+     "name": "University of Aizu",
+     "location": "Aizu-Wakamatsu, Fukushima",
+     "fields": "Computer Science, Engineering"
+    },
+    {
+     "name": "University of Fukuchiyama",
+     "location": "Fukuchiyama, Kyoto",
+     "fields": "Comprehensive Sciences"
+    },
+    {
+     "name": "University of Hyogo",
+     "location": "Himeji, Hyogo",
+     "fields": "Economics, Sciences, Nursing"
+    },
+    {
+     "name": "University of Kitakyushu",
+     "location": "Kitakyushu, Fukuoka",
+     "fields": "Humanities, Law, Engineering"
+    },
+    {
+     "name": "University of Nagano",
+     "location": "Nagano",
+     "fields": "Comprehensive Sciences"
+    },
+    {
+     "name": "University of Nagasaki",
+     "location": "Nagasaki",
+     "fields": "Health & Nutrition, Regional Sciences"
+    },
+    {
+     "name": "University of Niigata Prefecture",
+     "location": "Niigata",
+     "fields": "Humanities, International Studies"
+    },
+    {
+     "name": "University of Shiga Prefecture",
+     "location": "Hikone, Shiga",
+     "fields": "Engineering, Human Cultures"
+    },
+    {
+     "name": "University of Shimane",
+     "location": "Matsue, Shimane",
+     "fields": "Regional Policy, Nursing"
+    },
+    {
+     "name": "University of Shizuoka",
+     "location": "Shizuoka",
+     "fields": "International Relations, Food & Nutrition"
+    },
+    {
+     "name": "Wakayama Medical University",
+     "location": "Wakayama",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Yamagata Prefectural University of Health Sciences",
+     "location": "Yamagata",
+     "fields": "Health Sciences"
+    },
+    {
+     "name": "Yamagata Prefectural Yonezawa University of Nutrition Sciences",
+     "location": "Yonezawa, Yamagata",
+     "fields": "Nutrition Sciences"
+    },
+    {
+     "name": "Yamaguchi Prefectural University",
+     "location": "Yamaguchi",
+     "fields": "International Studies, Welfare"
+    },
+    {
+     "name": "Yamanashi Prefectural University",
+     "location": "Kofu, Yamanashi",
+     "fields": "Nursing, Welfare"
+    },
+    {
+     "name": "Yokohama City University",
+     "location": "Yokohama",
+     "fields": "Medicine, International Liberal Arts"
+    },
+    {
+     "name": "Sanjo City University",
+     "location": "Sanjo, Niigata",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Sanyo-Onoda City University",
+     "location": "Sanyo-Onoda, Yamaguchi",
+     "fields": "Engineering, Pharmacy"
+    },
+    {
+     "name": "Niimi University",
+     "location": "Niimi, Okayama",
+     "fields": "Social Work, Nursing"
+    }
+   ],
+   "private": [
+    {
+     "name": "Aichi Gakuin University",
+     "location": "Nisshin, Aichi",
+     "fields": "Law, Commerce, Dentistry"
+    },
+    {
+     "name": "Aichi Institute of Technology",
+     "location": "Toyota, Aichi",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Aichi Medical University",
+     "location": "Nagakute, Aichi",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Aichi Shukutoku University",
+     "location": "Nagakute, Aichi",
+     "fields": "Communication, Education"
+    },
+    {
+     "name": "Aichi University",
+     "location": "Nagoya",
+     "fields": "Law, Economics, International Studies"
+    },
+    {
+     "name": "Asahi University",
+     "location": "Mizuho, Gifu",
+     "fields": "Dentistry, Business"
+    },
+    {
+     "name": "Asia University",
+     "location": "Musashino, Tokyo",
+     "fields": "Law, Business, International Studies"
+    },
+    {
+     "name": "Azabu University",
+     "location": "Sagamihara, Kanagawa",
+     "fields": "Veterinary, Bioscience"
+    },
+    {
+     "name": "Baika Women's University",
+     "location": "Ibaraki, Osaka",
+     "fields": "Liberal Arts"
+    },
+    {
+     "name": "Bunkyo University",
+     "location": "Koshigaya, Saitama",
+     "fields": "Education, Human Sciences"
+    },
+    {
+     "name": "Chiba Institute of Technology",
+     "location": "Narashino, Chiba",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Chiba University of Commerce",
+     "location": "Ichikawa, Chiba",
+     "fields": "Commerce, Economics"
+    },
+    {
+     "name": "Chuo University",
+     "location": "Hachioji, Tokyo",
+     "fields": "Law, Economics, Commerce, Science"
+    },
+    {
+     "name": "Daito Bunka University",
+     "location": "Itabashi, Tokyo",
+     "fields": "Law, Economics, Foreign Language"
+    },
+    {
+     "name": "Doshisha University",
+     "location": "Kyoto",
+     "fields": "Social Sciences, Business, Engineering"
+    },
+    {
+     "name": "Doshisha Women's College of Liberal Arts",
+     "location": "Kyoto",
+     "fields": "Liberal Arts"
+    },
+    {
+     "name": "Dokkyo University",
+     "location": "Soka, Saitama",
+     "fields": "Law, Economics, Foreign Languages"
+    },
+    {
+     "name": "Edogawa University",
+     "location": "Nagareyama, Chiba",
+     "fields": "Media, Social Studies"
+    },
+    {
+     "name": "Ferris University",
+     "location": "Yokohama",
+     "fields": "Liberal Arts, Music"
+    },
+    {
+     "name": "Fujita Health University",
+     "location": "Toyoake, Aichi",
+     "fields": "Medicine, Health Sciences"
+    },
+    {
+     "name": "Fukuoka Dental College",
+     "location": "Fukuoka",
+     "fields": "Dentistry"
+    },
+    {
+     "name": "Fukuoka Institute of Technology",
+     "location": "Fukuoka",
+     "fields": "Engineering, IT"
+    },
+    {
+     "name": "Fukuoka University",
+     "location": "Fukuoka",
+     "fields": "Humanities, Law, Medicine, Engineering"
+    },
+    {
+     "name": "Gakushuin University",
+     "location": "Tokyo",
+     "fields": "Humanities, Law, Science"
+    },
+    {
+     "name": "Gifu University of Medical Science",
+     "location": "Seki, Gifu",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Hakuoh University",
+     "location": "Oyama, Tochigi",
+     "fields": "Law, Education, Business"
+    },
+    {
+     "name": "Hannan University",
+     "location": "Matsubara, Osaka",
+     "fields": "International Studies, Business"
+    },
+    {
+     "name": "Higashiosaka College",
+     "location": "Higashiosaka, Osaka",
+     "fields": "Social Work"
+    },
+    {
+     "name": "Hiroshima Institute of Technology",
+     "location": "Hiroshima",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Hiroshima International University",
+     "location": "Hiroshima",
+     "fields": "Health Sciences, Engineering"
+    },
+    {
+     "name": "Hiroshima Shudo University",
+     "location": "Hiroshima",
+     "fields": "Law, Commercial Science"
+    },
+    {
+     "name": "Hiroshima University of Economics",
+     "location": "Hiroshima",
+     "fields": "Economics"
+    },
+    {
+     "name": "Hokkai-Gakuen University",
+     "location": "Sapporo",
+     "fields": "Economics, Engineering, Law"
+    },
+    {
+     "name": "Hokkaido Information University",
+     "location": "Ebetsu, Hokkaido",
+     "fields": "Information Science"
+    },
+    {
+     "name": "Hokkaido University of Science",
+     "location": "Sapporo",
+     "fields": "Engineering, Pharmacy"
+    },
+    {
+     "name": "Hokusei Gakuen University",
+     "location": "Sapporo",
+     "fields": "Literature, Economics, Education"
+    },
+    {
+     "name": "Hosei University",
+     "location": "Tokyo",
+     "fields": "Law, Economics, Engineering, Social Sciences"
+    },
+    {
+     "name": "Hyogo College of Medicine",
+     "location": "Nishinomiya, Hyogo",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Hyogo University of Health Sciences",
+     "location": "Kobe",
+     "fields": "Health Sciences"
+    },
+    {
+     "name": "International Christian University (ICU)",
+     "location": "Mitaka, Tokyo",
+     "fields": "Liberal Arts (English & Japanese)"
+    },
+    {
+     "name": "International University of Japan",
+     "location": "Minami-Uonuma, Niigata",
+     "fields": "International Relations, MPA"
+    },
+    {
+     "name": "J.F. Oberlin University",
+     "location": "Machida, Tokyo",
+     "fields": "Liberal Arts"
+    },
+    {
+     "name": "Japan Women's University",
+     "location": "Bunkyo, Tokyo",
+     "fields": "Home Economics, Humanities"
+    },
+    {
+     "name": "Japanese Red Cross Toyota College of Nursing",
+     "location": "Toyota, Aichi",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Josai International University",
+     "location": "Togane, Chiba",
+     "fields": "Pharmacy, Media, Management"
+    },
+    {
+     "name": "JISSEN Women's University",
+     "location": "Hino, Tokyo",
+     "fields": "Humanities, Home Economics"
+    },
+    {
+     "name": "Kagoshima International University",
+     "location": "Kagoshima",
+     "fields": "International Studies, Welfare"
+    },
+    {
+     "name": "Kanagawa Institute of Technology",
+     "location": "Atsugi, Kanagawa",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Kanagawa University",
+     "location": "Yokohama",
+     "fields": "Law, Economics, Engineering"
+    },
+    {
+     "name": "Kanda University of International Studies",
+     "location": "Chiba",
+     "fields": "Languages, International Studies"
+    },
+    {
+     "name": "Kansei Gakuin University",
+     "location": "Nishinomiya, Hyogo",
+     "fields": "Theology, Business, Science"
+    },
+    {
+     "name": "Kansai Gaidai University",
+     "location": "Hirakata, Osaka",
+     "fields": "International Studies"
+    },
+    {
+     "name": "Kansai Medical University",
+     "location": "Hirakata, Osaka",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Kansai University",
+     "location": "Suita, Osaka",
+     "fields": "Law, Economics, Engineering, Business"
+    },
+    {
+     "name": "Kanazawa Institute of Technology",
+     "location": "Nonoichi, Ishikawa",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Kanazawa Medical University",
+     "location": "Uchinada, Ishikawa",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Keio University",
+     "location": "Tokyo",
+     "fields": "Business, Law, Medicine, Science (oldest private univ)"
+    },
+    {
+     "name": "Kindai University",
+     "location": "Higashiosaka, Osaka",
+     "fields": "Law, Economics, Medicine, Engineering"
+    },
+    {
+     "name": "Kinjo Gakuin University",
+     "location": "Nagoya",
+     "fields": "Liberal Arts, Pharmacy, Science"
+    },
+    {
+     "name": "Kitasato University",
+     "location": "Minato, Tokyo",
+     "fields": "Medicine, Pharmacy, Science"
+    },
+    {
+     "name": "Kobe College",
+     "location": "Nishinomiya, Hyogo",
+     "fields": "Humanities (Women's)"
+    },
+    {
+     "name": "Kobe Design University",
+     "location": "Kobe",
+     "fields": "Design"
+    },
+    {
+     "name": "Kobe Gakuin University",
+     "location": "Kobe",
+     "fields": "Law, Business, Pharmacy"
+    },
+    {
+     "name": "Kobe International University",
+     "location": "Kobe",
+     "fields": "Economics, Rehabilitation"
+    },
+    {
+     "name": "Kobe Pharmaceutical University",
+     "location": "Kobe",
+     "fields": "Pharmacy"
+    },
+    {
+     "name": "Kobe Women's University",
+     "location": "Kobe",
+     "fields": "Humanities, Home Economics (Women's)"
+    },
+    {
+     "name": "Komazawa University",
+     "location": "Setagaya, Tokyo",
+     "fields": "Buddhism, Humanities, Law"
+    },
+    {
+     "name": "Konan University",
+     "location": "Higashinada, Kobe",
+     "fields": "Humanities, Law, Science"
+    },
+    {
+     "name": "Kokugakuin University",
+     "location": "Shibuya, Tokyo",
+     "fields": "Shinto, Literature, Law, Economics"
+    },
+    {
+     "name": "Kokushikan University",
+     "location": "Setagaya, Tokyo",
+     "fields": "Law, Political Science, Engineering, PE"
+    },
+    {
+     "name": "Komatsu University",
+     "location": "Komatsu, Ishikawa",
+     "fields": "Business, Regional Policy"
+    },
+    {
+     "name": "Konnan Women's University",
+     "location": "Higashinada, Kobe",
+     "fields": "Humanities (Women's)"
+    },
+    {
+     "name": "Konan Women's University",
+     "location": "Higashinada, Kobe",
+     "fields": "Humanities"
+    },
+    {
+     "name": "Koshien University",
+     "location": "Takarazuka, Hyogo",
+     "fields": "Nutrition, Business"
+    },
+    {
+     "name": "Kwansei Gakuin University",
+     "location": "Nishinomiya, Hyogo",
+     "fields": "Theology, Business, Science, Policy"
+    },
+    {
+     "name": "Kyorin University",
+     "location": "Mitaka, Tokyo",
+     "fields": "Medicine, Health Science"
+    },
+    {
+     "name": "Kyoto Notre Dame University",
+     "location": "Kyoto",
+     "fields": "Humanities (Women's)"
+    },
+    {
+     "name": "Kyoto Pharmaceutical University",
+     "location": "Kyoto",
+     "fields": "Pharmacy"
+    },
+    {
+     "name": "Kyoto Sangyo University",
+     "location": "Kyoto",
+     "fields": "Law, Economics, Science, Foreign Languages"
+    },
+    {
+     "name": "Kyoto University of the Arts",
+     "location": "Kyoto",
+     "fields": "Arts, Design"
+    },
+    {
+     "name": "Kyoto Women's University",
+     "location": "Kyoto",
+     "fields": "Liberal Arts (Women's)"
+    },
+    {
+     "name": "Meiji Gakuin University",
+     "location": "Minato, Tokyo",
+     "fields": "Humanities, International Studies"
+    },
+    {
+     "name": "Meiji University",
+     "location": "Chiyoda, Tokyo",
+     "fields": "Law, Business, Agriculture, Engineering"
+    },
+    {
+     "name": "Meijo University",
+     "location": "Nagoya",
+     "fields": "Pharmacy, Engineering, Law"
+    },
+    {
+     "name": "Meikai University",
+     "location": "Sakado, Saitama",
+     "fields": "Foreign Languages, Dentistry"
+    },
+    {
+     "name": "Meio University",
+     "location": "Nago, Okinawa",
+     "fields": "Humanities, Tourism"
+    },
+    {
+     "name": "Momoyama Gakuin University",
+     "location": "Izumi, Osaka",
+     "fields": "Economics, Business, Sociology"
+    },
+    {
+     "name": "Mukogawa Women's University",
+     "location": "Nishinomiya, Hyogo",
+     "fields": "Pharmacy, Engineering, Education (Women's)"
+    },
+    {
+     "name": "Musashi University",
+     "location": "Nerima, Tokyo",
+     "fields": "Humanities, Social Sciences"
+    },
+    {
+     "name": "Musashino Art University",
+     "location": "Kodaira, Tokyo",
+     "fields": "Fine Arts, Design"
+    },
+    {
+     "name": "Musashino University",
+     "location": "Nishitokyo, Tokyo",
+     "fields": "Law, Pharmaceutical Sciences"
+    },
+    {
+     "name": "Nagoya Gakuin University",
+     "location": "Seto, Aichi",
+     "fields": "Foreign Languages, Economics"
+    },
+    {
+     "name": "Nagoya University of Commerce and Business",
+     "location": "Nisshin, Aichi",
+     "fields": "Commerce, Business"
+    },
+    {
+     "name": "Nagoya University of Foreign Studies",
+     "location": "Nisshin, Aichi",
+     "fields": "Foreign Languages"
+    },
+    {
+     "name": "Nanzan University",
+     "location": "Nagoya",
+     "fields": "Humanities, Business, Law, Foreign Languages"
+    },
+    {
+     "name": "Nihon Fukushi University",
+     "location": "Handa, Aichi",
+     "fields": "Social Welfare"
+    },
+    {
+     "name": "Nihon University",
+     "location": "Tokyo",
+     "fields": "Law, Medicine, Engineering — Japan's largest university"
+    },
+    {
+     "name": "Niigata University of Health and Welfare",
+     "location": "Niigata",
+     "fields": "Nursing, Rehabilitation"
+    },
+    {
+     "name": "Nippon Medical School",
+     "location": "Bunkyo, Tokyo",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Nippon Sport Science University",
+     "location": "Setagaya, Tokyo",
+     "fields": "Physical Education"
+    },
+    {
+     "name": "Nishinippon Institute of Technology",
+     "location": "Iizuka, Fukuoka",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Oita University of Nursing and Health Sciences",
+     "location": "Oita",
+     "fields": "Nursing"
+    },
+    {
+     "name": "Osaka Institute of Technology",
+     "location": "Osaka",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Osaka Medical College",
+     "location": "Takatsuki, Osaka",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Osaka University of Arts",
+     "location": "Kanan, Osaka",
+     "fields": "Arts, Design, Performance"
+    },
+    {
+     "name": "Osaka University of Economics",
+     "location": "Higashiyodogawa, Osaka",
+     "fields": "Economics, Business"
+    },
+    {
+     "name": "Otani University",
+     "location": "Kyoto",
+     "fields": "Buddhist Studies, Education"
+    },
+    {
+     "name": "Otemae University",
+     "location": "Itami, Hyogo",
+     "fields": "Liberal Arts, Dentistry"
+    },
+    {
+     "name": "Reitaku University",
+     "location": "Kashiwa, Chiba",
+     "fields": "Foreign Languages, Economics"
+    },
+    {
+     "name": "Rikkyo University",
+     "location": "Toshima, Tokyo",
+     "fields": "Liberal Arts, Business, Science"
+    },
+    {
+     "name": "Ritsumeikan University",
+     "location": "Kyoto",
+     "fields": "Law, Business, Science, International Studies"
+    },
+    {
+     "name": "Riyutoku University",
+     "location": "Tsuchiura, Ibaraki",
+     "fields": "Contemporary Culture, Nursing"
+    },
+    {
+     "name": "Ryukoku University",
+     "location": "Kyoto",
+     "fields": "Buddhism, Literature, Law, Economics"
+    },
+    {
+     "name": "Sagami Women's University",
+     "location": "Sagamihara, Kanagawa",
+     "fields": "Liberal Arts (Women's)"
+    },
+    {
+     "name": "Sapporo Gakuin University",
+     "location": "Ebetsu, Hokkaido",
+     "fields": "Law, Economics, Humanities"
+    },
+    {
+     "name": "Seinan Gakuin University",
+     "location": "Sawara, Fukuoka",
+     "fields": "Theology, Law, Economics"
+    },
+    {
+     "name": "Seisen University",
+     "location": "Shinagawa, Tokyo",
+     "fields": "Humanities (Women's)"
+    },
+    {
+     "name": "Senshu University",
+     "location": "Chiyoda, Tokyo",
+     "fields": "Law, Commerce, Economics"
+    },
+    {
+     "name": "Showa University",
+     "location": "Shinagawa, Tokyo",
+     "fields": "Medicine, Pharmacy, Dentistry"
+    },
+    {
+     "name": "Showa Women's University",
+     "location": "Setagaya, Tokyo",
+     "fields": "Education, Humanities (Women's)"
+    },
+    {
+     "name": "Soka University",
+     "location": "Hachioji, Tokyo",
+     "fields": "Liberal Arts, Law, Economics"
+    },
+    {
+     "name": "Sophia University",
+     "location": "Chiyoda, Tokyo",
+     "fields": "International Studies, Theology, Science"
+    },
+    {
+     "name": "St. Marianna University School of Medicine",
+     "location": "Kawasaki",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Sugiyama Jogakuen University",
+     "location": "Chikusa, Nagoya",
+     "fields": "Education, Business (Women's)"
+    },
+    {
+     "name": "Tamagawa University",
+     "location": "Machida, Tokyo",
+     "fields": "Liberal Arts, Science, Agriculture"
+    },
+    {
+     "name": "Teikyo University",
+     "location": "Itabashi, Tokyo",
+     "fields": "Law, Economics, Medicine"
+    },
+    {
+     "name": "Toho University",
+     "location": "Funabashi, Chiba",
+     "fields": "Medicine, Science, Pharmacy"
+    },
+    {
+     "name": "Tokai University",
+     "location": "Hiratsuka, Kanagawa",
+     "fields": "Engineering, Science, Law, Medicine"
+    },
+    {
+     "name": "Tohoku Gakuin University",
+     "location": "Sendai",
+     "fields": "Liberal Arts, Engineering"
+    },
+    {
+     "name": "Tohoku Medical and Pharmaceutical University",
+     "location": "Sendai",
+     "fields": "Medicine, Pharmacy"
+    },
+    {
+     "name": "Tokyo City University",
+     "location": "Setagaya, Tokyo",
+     "fields": "Engineering, Information Engineering"
+    },
+    {
+     "name": "Tokyo Denki University",
+     "location": "Adachi, Tokyo",
+     "fields": "Engineering, Technology"
+    },
+    {
+     "name": "Tokyo International University",
+     "location": "Kawagoe, Saitama",
+     "fields": "Economics, International Relations"
+    },
+    {
+     "name": "Tokyo Keizai University",
+     "location": "Kokubunji, Tokyo",
+     "fields": "Economics, Business, Communication"
+    },
+    {
+     "name": "Tokyo Medical University",
+     "location": "Shinjuku, Tokyo",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Tokyo University of Pharmacy and Life Sciences",
+     "location": "Hachioji, Tokyo",
+     "fields": "Pharmacy, Life Sciences"
+    },
+    {
+     "name": "Tokyo University of Science",
+     "location": "Shinjuku, Tokyo",
+     "fields": "Science, Engineering"
+    },
+    {
+     "name": "Tokyo Woman's Christian University",
+     "location": "Suginami, Tokyo",
+     "fields": "Liberal Arts (Women's)"
+    },
+    {
+     "name": "Tokyo Women's Medical University",
+     "location": "Shinjuku, Tokyo",
+     "fields": "Medicine (Women's)"
+    },
+    {
+     "name": "Toyo University",
+     "location": "Bunkyo, Tokyo",
+     "fields": "Law, Economics, Engineering, Sociology"
+    },
+    {
+     "name": "Tsuda University",
+     "location": "Kodaira, Tokyo",
+     "fields": "Liberal Arts (Women's)"
+    },
+    {
+     "name": "Tsurumi University",
+     "location": "Tsurumi, Yokohama",
+     "fields": "Dentistry, Literature"
+    },
+    {
+     "name": "Waseda University",
+     "location": "Shinjuku, Tokyo",
+     "fields": "Law, Engineering, International Studies"
+    },
+    {
+     "name": "Yamaguchi Prefectural University",
+     "location": "Yamaguchi",
+     "fields": "International Studies, Social Welfare"
+    },
+    {
+     "name": "Yokohama College of Commerce",
+     "location": "Yokohama",
+     "fields": "Commerce"
+    },
+    {
+     "name": "Yokohama University of Pharmacy",
+     "location": "Yokohama",
+     "fields": "Pharmacy"
+    }
+   ]
+  },
+  "china": {
+   "985": [
+    {
+     "name": "Peking University (PKU)",
+     "location": "Beijing",
+     "fields": "Medicine, Humanities, Law, Sciences — THE #14 globally"
+    },
+    {
+     "name": "Tsinghua University",
+     "location": "Beijing",
+     "fields": "Engineering, CS, Architecture, Economics — THE #12 globally"
+    },
+    {
+     "name": "Fudan University",
+     "location": "Shanghai",
+     "fields": "Medicine, Economics, Liberal Arts, International Studies"
+    },
+    {
+     "name": "Shanghai Jiao Tong University (SJTU)",
+     "location": "Shanghai",
+     "fields": "Engineering, Medicine, CS, Business"
+    },
+    {
+     "name": "Zhejiang University",
+     "location": "Hangzhou",
+     "fields": "Agriculture, Engineering, Medicine, AI"
+    },
+    {
+     "name": "Univ. of Science & Technology of China (USTC)",
+     "location": "Hefei, Anhui",
+     "fields": "Physics, Math, CS — Nature Index top globally"
+    },
+    {
+     "name": "Nanjing University",
+     "location": "Nanjing, Jiangsu",
+     "fields": "Humanities, Sciences, Arts, Mathematics"
+    },
+    {
+     "name": "Wuhan University",
+     "location": "Wuhan, Hubei",
+     "fields": "Law, Surveying, Remote Sensing, Medicine"
+    },
+    {
+     "name": "Tongji University",
+     "location": "Shanghai",
+     "fields": "Architecture, Engineering — very international campus"
+    },
+    {
+     "name": "Huazhong Univ. of Science & Technology (HUST)",
+     "location": "Wuhan, Hubei",
+     "fields": "Engineering, Medicine, Management"
+    },
+    {
+     "name": "Sun Yat-sen University (SYSU)",
+     "location": "Guangzhou, Guangdong",
+     "fields": "Medicine, Liberal Arts, Sciences"
+    },
+    {
+     "name": "Xi'an Jiaotong University",
+     "location": "Xi'an, Shaanxi",
+     "fields": "Engineering, Medicine, Management"
+    },
+    {
+     "name": "Harbin Institute of Technology (HIT)",
+     "location": "Harbin, Heilongjiang",
+     "fields": "Aerospace, Engineering, IT, Robotics"
+    },
+    {
+     "name": "Shandong University",
+     "location": "Jinan, Shandong",
+     "fields": "Liberal Arts, Engineering, Medicine"
+    },
+    {
+     "name": "Renmin University of China",
+     "location": "Beijing",
+     "fields": "Economics, Law, Sociology, Journalism"
+    },
+    {
+     "name": "Beijing Normal University",
+     "location": "Beijing",
+     "fields": "Education, Psychology, Humanities"
+    },
+    {
+     "name": "Nankai University",
+     "location": "Tianjin",
+     "fields": "Economics, Chemistry, Mathematics"
+    },
+    {
+     "name": "Tianjin University",
+     "location": "Tianjin",
+     "fields": "Engineering, Architecture, Chemistry"
+    },
+    {
+     "name": "Southeast University",
+     "location": "Nanjing, Jiangsu",
+     "fields": "Engineering, Architecture, Medicine"
+    },
+    {
+     "name": "Xiamen University",
+     "location": "Xiamen, Fujian",
+     "fields": "Economics, Marine Science, Chemistry"
+    },
+    {
+     "name": "Beijing Institute of Technology",
+     "location": "Beijing",
+     "fields": "Defense Technology, Engineering, CS"
+    },
+    {
+     "name": "Northwestern Polytechnical University",
+     "location": "Xi'an, Shaanxi",
+     "fields": "Aeronautics, Astronautics, Marine Engineering"
+    },
+    {
+     "name": "Central South University",
+     "location": "Changsha, Hunan",
+     "fields": "Mining, Metallurgy, Medicine, Materials"
+    },
+    {
+     "name": "Jilin University",
+     "location": "Changchun, Jilin",
+     "fields": "Automotive Engineering, Geosciences, Law"
+    },
+    {
+     "name": "Lanzhou University",
+     "location": "Lanzhou, Gansu",
+     "fields": "Chemistry, Physics, Earth Sciences"
+    },
+    {
+     "name": "East China Normal University",
+     "location": "Shanghai",
+     "fields": "Education, Geography, Mathematics"
+    },
+    {
+     "name": "Dalian University of Technology",
+     "location": "Dalian, Liaoning",
+     "fields": "Engineering, Architecture, Management"
+    },
+    {
+     "name": "Beihang University (BUAA)",
+     "location": "Beijing",
+     "fields": "Aeronautics, Astronautics, Robotics"
+    },
+    {
+     "name": "Ocean University of China",
+     "location": "Qingdao, Shandong",
+     "fields": "Marine Science, Fisheries, Oceanography"
+    },
+    {
+     "name": "China Agricultural University",
+     "location": "Beijing",
+     "fields": "Agriculture, Veterinary, Biological Sciences"
+    },
+    {
+     "name": "National University of Defense Technology (NUDT)",
+     "location": "Changsha, Hunan",
+     "fields": "Defense Technology, CS, Engineering"
+    },
+    {
+     "name": "Hunan University",
+     "location": "Changsha, Hunan",
+     "fields": "Engineering, Business, Architecture"
+    },
+    {
+     "name": "Chongqing University",
+     "location": "Chongqing",
+     "fields": "Engineering, Architecture, Business"
+    },
+    {
+     "name": "University of Electronic Science & Technology of China",
+     "location": "Chengdu, Sichuan",
+     "fields": "Electronics, IT, Engineering"
+    },
+    {
+     "name": "Sichuan University",
+     "location": "Chengdu, Sichuan",
+     "fields": "Medicine, Engineering, Liberal Arts"
+    },
+    {
+     "name": "Yunnan University",
+     "location": "Kunming, Yunnan",
+     "fields": "Biology, History, Economics"
+    },
+    {
+     "name": "Xinjiang University",
+     "location": "Urumqi, Xinjiang",
+     "fields": "Ethnic Studies, Engineering, Economics"
+    },
+    {
+     "name": "Inner Mongolia University",
+     "location": "Hohhot, Inner Mongolia",
+     "fields": "Mongolian Studies, Sciences, Engineering"
+    },
+    {
+     "name": "Ningxia University",
+     "location": "Yinchuan, Ningxia",
+     "fields": "Agriculture, Sciences, Humanities"
+    }
+   ],
+   "211": [
+    {
+     "name": "Beijing Jiaotong University",
+     "location": "Beijing",
+     "fields": "Transportation, CS, Engineering"
+    },
+    {
+     "name": "Beijing University of Aeronautics & Astronautics",
+     "location": "Beijing",
+     "fields": "Aeronautics — same as Beihang"
+    },
+    {
+     "name": "Beijing University of Chemical Technology",
+     "location": "Beijing",
+     "fields": "Chemical Engineering"
+    },
+    {
+     "name": "Beijing University of Posts and Telecommunications",
+     "location": "Beijing",
+     "fields": "Telecommunications, IT"
+    },
+    {
+     "name": "China University of Geosciences (Beijing & Wuhan)",
+     "location": "Beijing / Wuhan",
+     "fields": "Geosciences, Resources"
+    },
+    {
+     "name": "China University of Mining and Technology",
+     "location": "Xuzhou, Jiangsu",
+     "fields": "Mining, Engineering"
+    },
+    {
+     "name": "China University of Petroleum",
+     "location": "Beijing / Qingdao",
+     "fields": "Petroleum Engineering"
+    },
+    {
+     "name": "China University of Political Science and Law",
+     "location": "Beijing",
+     "fields": "Law, Political Science"
+    },
+    {
+     "name": "Chongqing Medical University",
+     "location": "Chongqing",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Donghua University",
+     "location": "Shanghai",
+     "fields": "Textile Engineering, Fashion"
+    },
+    {
+     "name": "East China University of Science and Technology",
+     "location": "Shanghai",
+     "fields": "Chemical Engineering"
+    },
+    {
+     "name": "Fuzhou University",
+     "location": "Fuzhou, Fujian",
+     "fields": "Engineering, Sciences"
+    },
+    {
+     "name": "Guangxi University",
+     "location": "Nanning, Guangxi",
+     "fields": "Agriculture, Engineering, Liberal Arts"
+    },
+    {
+     "name": "Guizhou University",
+     "location": "Guiyang, Guizhou",
+     "fields": "Agriculture, Engineering, Sciences"
+    },
+    {
+     "name": "Hainan University",
+     "location": "Haikou, Hainan",
+     "fields": "Agriculture, Marine Sciences, Economics"
+    },
+    {
+     "name": "Harbin Engineering University",
+     "location": "Harbin, Heilongjiang",
+     "fields": "Marine Engineering, Nuclear Technology"
+    },
+    {
+     "name": "Hebei University of Technology",
+     "location": "Tianjin",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Hefei University of Technology",
+     "location": "Hefei, Anhui",
+     "fields": "Engineering, Management"
+    },
+    {
+     "name": "Hohai University",
+     "location": "Nanjing, Jiangsu",
+     "fields": "Water Conservancy, Civil Engineering"
+    },
+    {
+     "name": "Huazhong Agricultural University",
+     "location": "Wuhan, Hubei",
+     "fields": "Agriculture, Life Sciences"
+    },
+    {
+     "name": "Hunan Agricultural University",
+     "location": "Changsha, Hunan",
+     "fields": "Agriculture"
+    },
+    {
+     "name": "Inner Mongolia Agricultural University",
+     "location": "Hohhot",
+     "fields": "Agriculture, Veterinary"
+    },
+    {
+     "name": "Jiangnan University",
+     "location": "Wuxi, Jiangsu",
+     "fields": "Food Science, Engineering, Textiles"
+    },
+    {
+     "name": "Jilin Agricultural University",
+     "location": "Changchun",
+     "fields": "Agriculture"
+    },
+    {
+     "name": "Jinan University",
+     "location": "Guangzhou",
+     "fields": "25% international students — most intl campus"
+    },
+    {
+     "name": "Kunming University of Science and Technology",
+     "location": "Kunming, Yunnan",
+     "fields": "Engineering, Sciences"
+    },
+    {
+     "name": "Liaoning University",
+     "location": "Shenyang, Liaoning",
+     "fields": "Economics, Law, Sciences"
+    },
+    {
+     "name": "Nanchang University",
+     "location": "Nanchang, Jiangxi",
+     "fields": "Sciences, Engineering, Medicine"
+    },
+    {
+     "name": "Nanjing Agricultural University",
+     "location": "Nanjing",
+     "fields": "Agriculture, Life Sciences"
+    },
+    {
+     "name": "Nanjing University of Aeronautics & Astronautics",
+     "location": "Nanjing",
+     "fields": "Aeronautics, Engineering"
+    },
+    {
+     "name": "Nanjing University of Science and Technology",
+     "location": "Nanjing",
+     "fields": "Engineering, Sciences"
+    },
+    {
+     "name": "Nanjing Forestry University",
+     "location": "Nanjing",
+     "fields": "Forestry, Agriculture"
+    },
+    {
+     "name": "Nanjing Normal University",
+     "location": "Nanjing",
+     "fields": "Education, Sciences, Liberal Arts"
+    },
+    {
+     "name": "Nanjing University of Posts & Telecommunications",
+     "location": "Nanjing",
+     "fields": "Telecommunications, IT"
+    },
+    {
+     "name": "North China Electric Power University",
+     "location": "Beijing / Baoding",
+     "fields": "Electric Power Engineering"
+    },
+    {
+     "name": "Northeast Agricultural University",
+     "location": "Harbin",
+     "fields": "Agriculture"
+    },
+    {
+     "name": "Northeast Forestry University",
+     "location": "Harbin",
+     "fields": "Forestry, Agriculture"
+    },
+    {
+     "name": "Northeast Normal University",
+     "location": "Changchun",
+     "fields": "Education, Sciences"
+    },
+    {
+     "name": "Northeastern University",
+     "location": "Shenyang, Liaoning",
+     "fields": "Engineering, CS, Metallurgy"
+    },
+    {
+     "name": "Northwest A&F; University",
+     "location": "Yangling, Shaanxi",
+     "fields": "Agriculture, Life Sciences"
+    },
+    {
+     "name": "Northwest University",
+     "location": "Xi'an, Shaanxi",
+     "fields": "Geology, History, Sciences"
+    },
+    {
+     "name": "Qingdao University",
+     "location": "Qingdao",
+     "fields": "Sciences, Engineering, Medicine"
+    },
+    {
+     "name": "Shanghai Maritime University",
+     "location": "Shanghai",
+     "fields": "Maritime, Logistics"
+    },
+    {
+     "name": "Shanghai University",
+     "location": "Shanghai",
+     "fields": "Sciences, Engineering, Liberal Arts"
+    },
+    {
+     "name": "Shanghai University of Finance and Economics",
+     "location": "Shanghai",
+     "fields": "Finance, Economics, Business"
+    },
+    {
+     "name": "Shaanxi Normal University",
+     "location": "Xi'an",
+     "fields": "Education, Sciences, Humanities"
+    },
+    {
+     "name": "Shanxi University",
+     "location": "Taiyuan, Shanxi",
+     "fields": "Sciences, Law, Education"
+    },
+    {
+     "name": "Shenzhen University",
+     "location": "Shenzhen",
+     "fields": "Engineering, Business, Sciences"
+    },
+    {
+     "name": "Soochow University",
+     "location": "Suzhou, Jiangsu",
+     "fields": "Sciences, Medicine, Engineering"
+    },
+    {
+     "name": "South China Agricultural University",
+     "location": "Guangzhou",
+     "fields": "Agriculture, Life Sciences"
+    },
+    {
+     "name": "South China University of Technology",
+     "location": "Guangzhou",
+     "fields": "Engineering, Architecture, Business"
+    },
+    {
+     "name": "Southwest Jiaotong University",
+     "location": "Chengdu",
+     "fields": "Transportation Engineering"
+    },
+    {
+     "name": "Southwest University",
+     "location": "Chongqing",
+     "fields": "Agriculture, Life Sciences, Education"
+    },
+    {
+     "name": "Southwest University of Finance and Economics",
+     "location": "Chengdu",
+     "fields": "Finance, Economics"
+    },
+    {
+     "name": "Taiyuan University of Technology",
+     "location": "Taiyuan, Shanxi",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Tibet University",
+     "location": "Lhasa, Tibet",
+     "fields": "Tibetan Studies, Sciences, Agriculture"
+    },
+    {
+     "name": "Wuhan University of Technology",
+     "location": "Wuhan",
+     "fields": "Materials Science, Engineering"
+    },
+    {
+     "name": "Wuhan University of Science and Technology",
+     "location": "Wuhan",
+     "fields": "Engineering, Medicine"
+    },
+    {
+     "name": "Xi'an University of Architecture and Technology",
+     "location": "Xi'an",
+     "fields": "Architecture, Civil Engineering"
+    },
+    {
+     "name": "Xinjiang Agricultural University",
+     "location": "Urumqi",
+     "fields": "Agriculture, Veterinary"
+    },
+    {
+     "name": "Yanbian University",
+     "location": "Yanji, Jilin",
+     "fields": "Korean Studies, Medicine, Sciences"
+    },
+    {
+     "name": "Yangzhou University",
+     "location": "Yangzhou, Jiangsu",
+     "fields": "Agriculture, Sciences, Engineering"
+    },
+    {
+     "name": "Zhengzhou University",
+     "location": "Zhengzhou, Henan",
+     "fields": "Sciences, Engineering, Medicine"
+    },
+    {
+     "name": "South-Central Minzu University",
+     "location": "Wuhan",
+     "fields": "Ethnic Studies"
+    },
+    {
+     "name": "Southwest Minzu University",
+     "location": "Chengdu",
+     "fields": "Ethnic Studies"
+    },
+    {
+     "name": "Northwest Minzu University",
+     "location": "Lanzhou",
+     "fields": "Ethnic Studies"
+    },
+    {
+     "name": "Minzu University of China",
+     "location": "Beijing",
+     "fields": "Ethnic Studies, Languages"
+    },
+    {
+     "name": "Guizhou Minzu University",
+     "location": "Guiyang",
+     "fields": "Ethnic Studies"
+    },
+    {
+     "name": "Guangxi Minzu University",
+     "location": "Nanning",
+     "fields": "Ethnic Studies, International Studies"
+    },
+    {
+     "name": "China Three Gorges University",
+     "location": "Yichang, Hubei",
+     "fields": "Engineering, Sciences"
+    },
+    {
+     "name": "Guangzhou Medical University",
+     "location": "Guangzhou",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Wenzhou Medical University",
+     "location": "Wenzhou, Zhejiang",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Capital Normal University",
+     "location": "Beijing",
+     "fields": "Education, Sciences, Humanities"
+    },
+    {
+     "name": "University of Chinese Academy of Sciences",
+     "location": "Beijing",
+     "fields": "Sciences, Technology (graduate)"
+    },
+    {
+     "name": "Southern University of Science & Technology (SUSTech)",
+     "location": "Shenzhen",
+     "fields": "STEM — rapid rise in rankings"
+    },
+    {
+     "name": "Chinese University of Hong Kong, Shenzhen (CUHK-SZ)",
+     "location": "Shenzhen",
+     "fields": "Business, Data Science (English medium)"
+    },
+    {
+     "name": "Harbin Medical University",
+     "location": "Harbin",
+     "fields": "Medicine"
+    },
+    {
+     "name": "Shenyang Pharmaceutical University",
+     "location": "Shenyang",
+     "fields": "Pharmacy"
+    },
+    {
+     "name": "Beijing Language and Culture University (BLCU)",
+     "location": "Beijing",
+     "fields": "Chinese Language & Culture — top for intl students"
+    }
+   ]
+  },
+  "korea": {
+   "national": [
+    {
+     "name": "Seoul National University (SNU)",
+     "location": "Seoul",
+     "fields": "All fields; 'Harvard of Korea'; QS #41 globally; SKY"
+    },
+    {
+     "name": "Pusan National University (PNU)",
+     "location": "Busan",
+     "fields": "Engineering, Medicine, Business; 2nd largest city"
+    },
+    {
+     "name": "Chonnam National University",
+     "location": "Gwangju, South Jeolla",
+     "fields": "Medical School, Sciences, Engineering"
+    },
+    {
+     "name": "Chungbuk National University",
+     "location": "Cheongju, North Chungcheong",
+     "fields": "Sciences, Engineering, Agriculture"
+    },
+    {
+     "name": "Chungnam National University",
+     "location": "Daejeon",
+     "fields": "Humanities, Sciences, Engineering"
+    },
+    {
+     "name": "Gyeongsang National University",
+     "location": "Jinju, South Gyeongsang",
+     "fields": "Agriculture, Engineering, Marine Sciences"
+    },
+    {
+     "name": "Jeju National University",
+     "location": "Jeju City, Jeju",
+     "fields": "Tourism, Social Sciences, Education"
+    },
+    {
+     "name": "Jeonbuk National University",
+     "location": "Jeonju, North Jeolla",
+     "fields": "Engineering, Agriculture, Medicine"
+    },
+    {
+     "name": "Kangwon National University",
+     "location": "Chuncheon, Gangwon",
+     "fields": "Agriculture, Engineering, Law"
+    },
+    {
+     "name": "Kyungpook National University",
+     "location": "Daegu, North Gyeongsang",
+     "fields": "Medicine, Engineering, Natural Sciences"
+    },
+    {
+     "name": "Andong National University",
+     "location": "Andong, North Gyeongsang",
+     "fields": "Liberal Arts, Sciences"
+    },
+    {
+     "name": "Changwon National University",
+     "location": "Changwon, South Gyeongsang",
+     "fields": "Engineering, Business"
+    },
+    {
+     "name": "Gangneung-Wonju National University",
+     "location": "Gangneung, Gangwon",
+     "fields": "Marine Sciences, Sciences"
+    },
+    {
+     "name": "Gyeongnam National University of Science & Technology",
+     "location": "Jinju",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Hanbat National University",
+     "location": "Daejeon",
+     "fields": "Engineering, IT"
+    },
+    {
+     "name": "Hankyong National University",
+     "location": "Anseong, Gyeonggi",
+     "fields": "Agriculture, Engineering, Economics"
+    },
+    {
+     "name": "Incheon National University",
+     "location": "Incheon",
+     "fields": "Sciences, Engineering, Business"
+    },
+    {
+     "name": "Jinju National University",
+     "location": "Jinju, South Gyeongsang",
+     "fields": "Agriculture, Engineering"
+    },
+    {
+     "name": "Korea Maritime and Ocean University",
+     "location": "Busan",
+     "fields": "Maritime, Ocean Engineering"
+    },
+    {
+     "name": "Korea National University of Education",
+     "location": "Cheongju, North Chungcheong",
+     "fields": "Education"
+    },
+    {
+     "name": "Korea National University of Transportation",
+     "location": "Chungju, North Chungcheong",
+     "fields": "Transportation, Engineering"
+    },
+    {
+     "name": "Kumoh National Institute of Technology",
+     "location": "Gumi, North Gyeongsang",
+     "fields": "Engineering, IT"
+    },
+    {
+     "name": "Mokpo National Maritime University",
+     "location": "Mokpo, South Jeolla",
+     "fields": "Maritime Studies"
+    },
+    {
+     "name": "Mokpo National University",
+     "location": "Mokpo, South Jeolla",
+     "fields": "Agriculture, Business, Engineering"
+    },
+    {
+     "name": "Pukyong National University",
+     "location": "Busan",
+     "fields": "Marine Sciences, IT, Engineering"
+    },
+    {
+     "name": "Seoul National University of Science & Technology (SeoulTech)",
+     "location": "Seoul",
+     "fields": "Engineering, Architecture, Design"
+    },
+    {
+     "name": "Gyeongin National University of Education",
+     "location": "Incheon / Anyang",
+     "fields": "Education (primary teachers)"
+    },
+    {
+     "name": "Busan National University of Education",
+     "location": "Busan",
+     "fields": "Education"
+    },
+    {
+     "name": "Cheongju National University of Education",
+     "location": "Cheongju",
+     "fields": "Education"
+    },
+    {
+     "name": "Chuncheon National University of Education",
+     "location": "Chuncheon",
+     "fields": "Education"
+    },
+    {
+     "name": "Chinju National University of Education",
+     "location": "Jinju",
+     "fields": "Education"
+    },
+    {
+     "name": "Daegu National University of Education",
+     "location": "Daegu",
+     "fields": "Education"
+    },
+    {
+     "name": "Gwangju National University of Education",
+     "location": "Gwangju",
+     "fields": "Education"
+    },
+    {
+     "name": "Gongju National University of Education",
+     "location": "Gongju, South Chungcheong",
+     "fields": "Education"
+    },
+    {
+     "name": "Jeonbuk National University of Education",
+     "location": "Jeonju",
+     "fields": "Education"
+    },
+    {
+     "name": "Jeonju National University of Education",
+     "location": "Jeonju",
+     "fields": "Education"
+    },
+    {
+     "name": "Korea National University of Arts (K-Arts)",
+     "location": "Seoul",
+     "fields": "Arts, Performing Arts, Music, Film"
+    },
+    {
+     "name": "Korea National Sport University",
+     "location": "Seoul",
+     "fields": "Sports Science, Physical Education"
+    }
+   ],
+   "tech": [
+    {
+     "name": "KAIST (Korea Advanced Institute of Science & Technology)",
+     "location": "Daejeon",
+     "fields": "STEM; QS #63; most courses in English; top 5 in Korea"
+    },
+    {
+     "name": "POSTECH (Pohang Univ. of Science & Technology)",
+     "location": "Pohang, North Gyeongsang",
+     "fields": "Sciences, Engineering; highest research/faculty output"
+    },
+    {
+     "name": "GIST (Gwangju Institute of Science & Technology)",
+     "location": "Gwangju",
+     "fields": "Sciences, Technology; fully English-medium graduate programs"
+    },
+    {
+     "name": "UNIST (Ulsan Institute of Science & Technology)",
+     "location": "Ulsan",
+     "fields": "Sciences, Engineering, Management; rapidly rising in rankings"
+    },
+    {
+     "name": "DGIST (Daegu Gyeongbuk Institute of Science & Technology)",
+     "location": "Daegu",
+     "fields": "Convergence Science; interdisciplinary STEM research"
+    },
+    {
+     "name": "UST (University of Science & Technology)",
+     "location": "Daejeon",
+     "fields": "Sciences; affiliated with 30+ government research institutes"
+    }
+   ],
+   "private": [
+    {
+     "name": "Yonsei University",
+     "location": "Seoul",
+     "fields": "Business, Medicine, International Studies; SKY"
+    },
+    {
+     "name": "Korea University (KU)",
+     "location": "Seoul",
+     "fields": "Business, Law, Political Science; SKY"
+    },
+    {
+     "name": "Sungkyunkwan University (SKKU)",
+     "location": "Seoul / Suwon",
+     "fields": "Business, Engineering; Samsung-affiliated; QS top 100"
+    },
+    {
+     "name": "Hanyang University",
+     "location": "Seoul / Ansan",
+     "fields": "Electrical, Mechanical, Civil Engineering; Medicine"
+    },
+    {
+     "name": "Kyung Hee University (KHU)",
+     "location": "Seoul / Suwon",
+     "fields": "International Studies, Hospitality, Business, Medicine"
+    },
+    {
+     "name": "Sejong University",
+     "location": "Seoul",
+     "fields": "Hotel & Tourism, CS, Aerospace Engineering"
+    },
+    {
+     "name": "Ewha Womans University",
+     "location": "Seoul",
+     "fields": "Business, Law, Arts, STEM (Women's)"
+    },
+    {
+     "name": "Sogang University",
+     "location": "Seoul",
+     "fields": "Business, Engineering, International Studies; Jesuit"
+    },
+    {
+     "name": "Chung-Ang University (CAU)",
+     "location": "Seoul / Anseong",
+     "fields": "Arts, Design, Business, Law, Medicine, Film"
+    },
+    {
+     "name": "Konkuk University",
+     "location": "Seoul",
+     "fields": "Veterinary, Agriculture, Engineering, Business"
+    },
+    {
+     "name": "Hankuk University of Foreign Studies (HUFS)",
+     "location": "Seoul",
+     "fields": "45 languages; International Studies, Translation"
+    },
+    {
+     "name": "Inha University",
+     "location": "Incheon",
+     "fields": "Engineering, Business, Law; near Incheon Airport"
+    },
+    {
+     "name": "Ajou University",
+     "location": "Suwon, Gyeonggi",
+     "fields": "Medical, Engineering, Business"
+    },
+    {
+     "name": "Kookmin University",
+     "location": "Seoul",
+     "fields": "Design, IT, Business, Automobile Engineering"
+    },
+    {
+     "name": "Hongik University",
+     "location": "Seoul",
+     "fields": "Fine Arts, Architecture, Business"
+    },
+    {
+     "name": "Dongguk University",
+     "location": "Seoul / Gyeongju",
+     "fields": "Buddhist Studies, Film, Law, Medicine"
+    },
+    {
+     "name": "Sookmyung Women's University",
+     "location": "Seoul",
+     "fields": "Pharmacy, Law, Business (Women's)"
+    },
+    {
+     "name": "Dankook University",
+     "location": "Seoul / Cheonan",
+     "fields": "Medicine, Engineering, Liberal Arts"
+    },
+    {
+     "name": "Dong-A University",
+     "location": "Busan",
+     "fields": "Law, Medicine, Engineering"
+    },
+    {
+     "name": "Dong-eui University",
+     "location": "Busan",
+     "fields": "Engineering, Business, Oriental Medicine"
+    },
+    {
+     "name": "Dongseo University",
+     "location": "Busan",
+     "fields": "Design, Business, IT, Tourism"
+    },
+    {
+     "name": "Duksung Women's University",
+     "location": "Seoul",
+     "fields": "Pharmacy, Business (Women's)"
+    },
+    {
+     "name": "Far East University",
+     "location": "Eumseong, North Chungcheong",
+     "fields": "Physical Therapy, Nursing"
+    },
+    {
+     "name": "Gachon University",
+     "location": "Seongnam, Gyeonggi",
+     "fields": "Medicine, Pharmacy, Engineering"
+    },
+    {
+     "name": "Gyeongju University",
+     "location": "Gyeongju, North Gyeongsang",
+     "fields": "Tourism, Arts"
+    },
+    {
+     "name": "Hallym University",
+     "location": "Chuncheon, Gangwon",
+     "fields": "Medicine, Sciences, Business"
+    },
+    {
+     "name": "Handong Global University",
+     "location": "Pohang",
+     "fields": "International, Engineering, Business — English medium"
+    },
+    {
+     "name": "Hanlyo University",
+     "location": "Gwangyang, South Jeolla",
+     "fields": "Nursing, Social Work"
+    },
+    {
+     "name": "Hannam University",
+     "location": "Daejeon",
+     "fields": "Business, Engineering, Sciences"
+    },
+    {
+     "name": "Hansei University",
+     "location": "Gunpo, Gyeonggi",
+     "fields": "Music, Theology, Business"
+    },
+    {
+     "name": "Hanseo University",
+     "location": "Seosan, South Chungcheong",
+     "fields": "Aviation, Engineering, Sports"
+    },
+    {
+     "name": "Hanshin University",
+     "location": "Osan, Gyeonggi",
+     "fields": "Theology, Social Sciences"
+    },
+    {
+     "name": "Hansung University",
+     "location": "Seoul",
+     "fields": "IT, Design, Business"
+    },
+    {
+     "name": "Hanyang Women's University",
+     "location": "Seoul",
+     "fields": "Nursing, Dental Hygiene"
+    },
+    {
+     "name": "Honam University",
+     "location": "Gwangju",
+     "fields": "Engineering, Business, Tourism"
+    },
+    {
+     "name": "Hoseo University",
+     "location": "Asan, South Chungcheong",
+     "fields": "Engineering, Business, Nursing"
+    },
+    {
+     "name": "Hyupsung University",
+     "location": "Hwaseong, Gyeonggi",
+     "fields": "Engineering, Social Work"
+    },
+    {
+     "name": "Incheon Catholic University",
+     "location": "Incheon",
+     "fields": "Nursing, Social Work"
+    },
+    {
+     "name": "Induk University",
+     "location": "Seoul",
+     "fields": "Engineering, Business"
+    },
+    {
+     "name": "Inje University",
+     "location": "Gimhae, South Gyeongsang",
+     "fields": "Medicine, Engineering"
+    },
+    {
+     "name": "International University of Korea",
+     "location": "Jinju",
+     "fields": "International Studies, Business"
+    },
+    {
+     "name": "Jeju International University",
+     "location": "Jeju City",
+     "fields": "Business, Tourism, Languages"
+    },
+    {
+     "name": "JEI University",
+     "location": "Incheon",
+     "fields": "Tourism, Leisure, Business"
+    },
+    {
+     "name": "Jeonju University",
+     "location": "Jeonju, North Jeolla",
+     "fields": "Engineering, Business, Liberal Arts"
+    },
+    {
+     "name": "Joongbu University",
+     "location": "Geumsan, South Chungcheong",
+     "fields": "Engineering, Social Sciences"
+    },
+    {
+     "name": "Kangnam University",
+     "location": "Yongin, Gyeonggi",
+     "fields": "Social Work, Business, Music"
+    },
+    {
+     "name": "Catholic University of Daegu",
+     "location": "Gyeongsan, North Gyeongsang",
+     "fields": "Medicine, Engineering, Business"
+    },
+    {
+     "name": "Catholic University of Korea",
+     "location": "Seoul",
+     "fields": "Medicine, Theology, Sciences"
+    },
+    {
+     "name": "Catholic University of Pusan",
+     "location": "Busan",
+     "fields": "Medicine, Social Sciences"
+    },
+    {
+     "name": "Keimyung University",
+     "location": "Daegu",
+     "fields": "Medicine, Business, Engineering"
+    },
+    {
+     "name": "Konyang University",
+     "location": "Nonsan, South Chungcheong",
+     "fields": "Medicine, Allied Health Sciences"
+    },
+    {
+     "name": "Korea University of Technology & Education (KoreaTech)",
+     "location": "Cheonan",
+     "fields": "Engineering, Technology Education"
+    },
+    {
+     "name": "Kwangwoon University",
+     "location": "Seoul",
+     "fields": "Electronics, Engineering, IT"
+    },
+    {
+     "name": "Kyonggi University",
+     "location": "Suwon / Seoul",
+     "fields": "Business, Engineering, Hospitality"
+    },
+    {
+     "name": "Kyungdong University",
+     "location": "Wonju, Gangwon",
+     "fields": "Oriental Medicine, Engineering, Tourism"
+    },
+    {
+     "name": "Kyungil University",
+     "location": "Gyeongsan, North Gyeongsang",
+     "fields": "Engineering, Social Sciences"
+    },
+    {
+     "name": "Kyungnam University",
+     "location": "Changwon, South Gyeongsang",
+     "fields": "Social Sciences, Engineering"
+    },
+    {
+     "name": "Kyungwoon University",
+     "location": "Gumi, North Gyeongsang",
+     "fields": "Engineering"
+    },
+    {
+     "name": "Myongji University",
+     "location": "Seoul / Yongin",
+     "fields": "Engineering, Business, Humanities"
+    },
+    {
+     "name": "Namseoul University",
+     "location": "Cheonan",
+     "fields": "Engineering, Business, Arts"
+    },
+    {
+     "name": "Pai Chai University",
+     "location": "Daejeon",
+     "fields": "Humanities, Engineering, Business"
+    },
+    {
+     "name": "Sahmyook University",
+     "location": "Seoul",
+     "fields": "Theology, Nursing, Business; Adventist"
+    },
+    {
+     "name": "Sangji University",
+     "location": "Wonju, Gangwon",
+     "fields": "Oriental Medicine, Law, Engineering"
+    },
+    {
+     "name": "Sehan University",
+     "location": "Yeongam, South Jeolla",
+     "fields": "Nursing, Social Work, Arts"
+    },
+    {
+     "name": "Shinhan University",
+     "location": "Dongducheon / Uijeongbu",
+     "fields": "Engineering, Business, Arts"
+    },
+    {
+     "name": "Silla University",
+     "location": "Busan",
+     "fields": "Engineering, Education, Business"
+    },
+    {
+     "name": "Soonchunhyang University",
+     "location": "Asan, South Chungcheong",
+     "fields": "Medicine, Business, Engineering"
+    },
+    {
+     "name": "Soongsil University",
+     "location": "Seoul",
+     "fields": "Engineering, Business, IT, Christian Education"
+    },
+    {
+     "name": "Sun Moon University",
+     "location": "Asan, South Chungcheong",
+     "fields": "International Studies, Business"
+    },
+    {
+     "name": "Sunmoon University",
+     "location": "Asan",
+     "fields": "Business, International Studies"
+    },
+    {
+     "name": "Ulsan University",
+     "location": "Ulsan",
+     "fields": "Medicine, Engineering, Business"
+    },
+    {
+     "name": "Wonkwang University",
+     "location": "Iksan, North Jeolla",
+     "fields": "Oriental Medicine, Dentistry, Business"
+    },
+    {
+     "name": "Woosong University",
+     "location": "Daejeon",
+     "fields": "Engineering, Business, IT, Culinary Arts"
+    },
+    {
+     "name": "Woosuk University",
+     "location": "Wanju, North Jeolla",
+     "fields": "Oriental Medicine, Education"
+    },
+    {
+     "name": "Yeungnam University",
+     "location": "Gyeongsan, North Gyeongsang",
+     "fields": "Engineering, Business, Medicine"
+    },
+    {
+     "name": "Yonsei University (Wonju Campus)",
+     "location": "Wonju, Gangwon",
+     "fields": "Medicine, Engineering, Business"
+    },
+    {
+     "name": "Cha University (CHA)",
+     "location": "Seongnam, Gyeonggi",
+     "fields": "Medicine, Biomedical Sciences"
+    },
+    {
+     "name": "Chosun University",
+     "location": "Gwangju",
+     "fields": "Medicine, Engineering, Liberal Arts"
+    },
+    {
+     "name": "Chugye University for the Arts",
+     "location": "Seoul",
+     "fields": "Fine Arts, Performance, Music"
+    },
+    {
+     "name": "Chungang Sangha University",
+     "location": "Gimpo, Gyeonggi",
+     "fields": "Buddhist Studies"
+    },
+    {
+     "name": "Daebul University",
+     "location": "Yeongam, South Jeolla",
+     "fields": "Engineering, Business"
+    },
+    {
+     "name": "Daejeon University",
+     "location": "Daejeon",
+     "fields": "Oriental Medicine, Engineering, Business"
+    },
+    {
+     "name": "Dong-Pusan College",
+     "location": "Busan",
+     "fields": "Engineering, Design"
+    },
+    {
+     "name": "George Mason University Korea",
+     "location": "Songdo, Incheon",
+     "fields": "Liberal Arts, Sciences — US branch campus"
+    },
+    {
+     "name": "Ghent University Global Campus",
+     "location": "Songdo, Incheon",
+     "fields": "Sciences — Belgian branch campus"
+    },
+    {
+     "name": "NYU Seoul",
+     "location": "Seoul",
+     "fields": "Liberal Arts — NYU branch campus"
+    },
+    {
+     "name": "University of Utah Asia Campus",
+     "location": "Songdo, Incheon",
+     "fields": "Business, Engineering — US branch campus"
+    }
+   ]
+  }
+ },
+ "scholarships": {
+  "japan": [
+   {
+    "name": "MEXT (Japanese Gov.) Scholarship — Research Student",
+    "type": "Government",
+    "level": "PG / Research",
+    "coverage": "Full: tuition + ¥117,000-144,000/mo + airfare",
+    "notes": "Most prestigious; apply via Japanese Embassy or university recommendation"
+   },
+   {
+    "name": "MEXT — Undergraduate",
+    "type": "Government",
+    "level": "UG (4-6 yrs)",
+    "coverage": "Full: tuition + ¥117,000/mo + airfare",
+    "notes": "Study at Japanese national university; 5-6 year program"
+   },
+   {
+    "name": "MEXT — Teacher Training",
+    "type": "Government",
+    "level": "Research",
+    "coverage": "Full coverage",
+    "notes": "For current teachers; 1.5 year program"
+   },
+   {
+    "name": "MEXT — Japanese Studies",
+    "type": "Government",
+    "level": "1 year",
+    "coverage": "Full coverage",
+    "notes": "Japanese language & culture study at partner universities"
+   },
+   {
+    "name": "MEXT — College of Technology",
+    "type": "Government",
+    "level": "3 years",
+    "coverage": "Full coverage",
+    "notes": "Practical technical engineering programs"
+   },
+   {
+    "name": "MEXT — Specialized Training College",
+    "type": "Government",
+    "level": "1-2 years",
+    "coverage": "Full coverage",
+    "notes": "Vocational/technical studies"
+   },
+   {
+    "name": "MEXT — Young Leaders Program (YLP)",
+    "type": "Government",
+    "level": "Masters",
+    "coverage": "Full coverage",
+    "notes": "Future national leaders in Asia & other regions; English-medium"
+   },
+   {
+    "name": "JASSO Honors Scholarship",
+    "type": "Govt (JASSO)",
+    "level": "UG / PG",
+    "coverage": "¥48,000/mo stipend",
+    "notes": "For self-financed students with excellent EJU scores; applied via school"
+   },
+   {
+    "name": "JASSO Student Exchange Support Program",
+    "type": "Govt (JASSO)",
+    "level": "Exchange (8days–1yr)",
+    "coverage": "Monthly allowance",
+    "notes": "Short-term exchange under school agreements"
+   },
+   {
+    "name": "JICA ABE Initiative",
+    "type": "Government (JICA)",
+    "level": "Masters",
+    "coverage": "Full: tuition + ¥200,000/mo + airfare",
+    "notes": "African Business Education; for professionals from Africa"
+   },
+   {
+    "name": "TOBITATE! Young Ambassador Program",
+    "type": "Govt (MEXT)",
+    "level": "Study Abroad",
+    "coverage": "Full project funding",
+    "notes": "Competitive; innovative study-abroad projects"
+   },
+   {
+    "name": "Rotary Yoneyama Memorial Foundation",
+    "type": "Private Foundation",
+    "level": "UG / PG",
+    "coverage": "¥100,000-180,000/mo",
+    "notes": "One of Japan's largest private scholarship foundations"
+   },
+   {
+    "name": "Mitsui Bussan Scholarship",
+    "type": "Corporate (Mitsui)",
+    "level": "UG",
+    "coverage": "Full: tuition + living + airfare",
+    "notes": "For select Asian, African & CIS countries"
+   },
+   {
+    "name": "Honjo International Scholarship Foundation",
+    "type": "Private Foundation",
+    "level": "PG",
+    "coverage": "¥180,000/mo + tuition",
+    "notes": "Science & technology focus"
+   },
+   {
+    "name": "Nakajima Foundation Scholarship",
+    "type": "Private Foundation",
+    "level": "PG",
+    "coverage": "¥200,000/mo + tuition",
+    "notes": "Japanese proficiency required; humanities & social sciences"
+   },
+   {
+    "name": "Japan ICU Foundation",
+    "type": "Private/University",
+    "level": "UG",
+    "coverage": "Partial tuition",
+    "notes": "Specifically for International Christian University"
+   },
+   {
+    "name": "Hitachi Scholarship",
+    "type": "Corporate (Hitachi)",
+    "level": "PG",
+    "coverage": "Tuition + ¥200,000/mo",
+    "notes": "Engineering & science; ASEAN countries"
+   },
+   {
+    "name": "Panasonic Scholarship",
+    "type": "Corporate (Panasonic)",
+    "level": "PG",
+    "coverage": "Tuition + ¥180,000/mo",
+    "notes": "Asia & Middle East; technology focus"
+   },
+   {
+    "name": "Toyota Foundation International Grant",
+    "type": "Corporate (Toyota)",
+    "level": "Research",
+    "coverage": "Research grant",
+    "notes": "Cultural exchange & social research"
+   },
+   {
+    "name": "Asian Cultural Council (ACC) Japan",
+    "type": "NGO",
+    "level": "Research / Arts",
+    "coverage": "Project grants",
+    "notes": "Arts and culture exchange programs"
+   },
+   {
+    "name": "Matsumoto International Scholarship Foundation",
+    "type": "Private Foundation",
+    "level": "UG/PG",
+    "coverage": "Tuition + living allowance",
+    "notes": "For students in Nagano and surrounding regions"
+   },
+   {
+    "name": "Izumi Foundation Scholarship",
+    "type": "Private Foundation",
+    "level": "PG",
+    "coverage": "¥120,000/mo",
+    "notes": "Research in humanities and social sciences"
+   },
+   {
+    "name": "Japan Foundation (JF) Fellowship",
+    "type": "Government Foundation",
+    "level": "Research",
+    "coverage": "Research support",
+    "notes": "Japanese language, arts and cultural research"
+   },
+   {
+    "name": "Okayama University International Scholarship",
+    "type": "University",
+    "level": "UG/PG",
+    "coverage": "Partial tuition waiver",
+    "notes": "Merit-based; for students enrolled at Okayama University"
+   },
+   {
+    "name": "Tohoku University Scholarships",
+    "type": "University",
+    "level": "PG",
+    "coverage": "Tuition + stipend",
+    "notes": "Multiple internal scholarship categories"
+   },
+   {
+    "name": "Kyoto University Scholarships",
+    "type": "University",
+    "level": "PG/Research",
+    "coverage": "Partial to full",
+    "notes": "Various internal and MEXT-affiliated programs"
+   },
+   {
+    "name": "University of Tokyo Fellowships",
+    "type": "University",
+    "level": "PG/Research",
+    "coverage": "Tuition + stipend",
+    "notes": "Various fellowship categories; check website"
+   },
+   {
+    "name": "Osaka University Scholarships",
+    "type": "University",
+    "level": "PG",
+    "coverage": "Tuition reduction + stipend",
+    "notes": "Multiple programs; science & engineering focus"
+   },
+   {
+    "name": "Waseda University Scholarships",
+    "type": "University",
+    "level": "UG/PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Multiple categories including special international scholarships"
+   },
+   {
+    "name": "Keio University International Student Scholarships",
+    "type": "University",
+    "level": "UG/PG",
+    "coverage": "Partial tuition",
+    "notes": "Multiple scholarships; merit-based selection"
+   },
+   {
+    "name": "Local Government (Prefecture/City) Scholarships",
+    "type": "Local Government",
+    "level": "UG/PG",
+    "coverage": "Varies",
+    "notes": "Tokyo, Osaka, Kyoto, Aichi and other prefectures have own grants"
+   },
+   {
+    "name": "Daiwa Anglo-Japanese Foundation",
+    "type": "NGO (UK-Japan)",
+    "level": "Research",
+    "coverage": "Research grant",
+    "notes": "Japan-UK cultural exchange research"
+   },
+   {
+    "name": "Japanese Red Cross Scholarship",
+    "type": "Organization",
+    "level": "Nursing",
+    "coverage": "Tuition reduction",
+    "notes": "For nursing students; Red Cross affiliated institutions"
+   }
+  ],
+  "china": [
+   {
+    "name": "Chinese Government Scholarship (CSC/CGS) — University Program",
+    "type": "Government (MOE/CSC)",
+    "level": "UG / Masters / PhD",
+    "coverage": "Full: tuition + accommodation + stipend up to CNY 3,500/mo + medical insurance",
+    "notes": "Most popular; 279 eligible universities; apply via csc.edu.cn embassy or university track"
+   },
+   {
+    "name": "Chinese Government Scholarship — Provincial Gov. Program",
+    "type": "Government (MOE/CSC)",
+    "level": "UG / Masters / PhD",
+    "coverage": "Full or partial",
+    "notes": "Jointly sponsored by MOE and provincial governments; includes all 39 985 universities"
+   },
+   {
+    "name": "Chinese Government Scholarship — Chinese University Program (Type B)",
+    "type": "Government (MOE/CSC)",
+    "level": "Masters / PhD",
+    "coverage": "Full: tuition + accommodation + stipend",
+    "notes": "University-initiated quota; apply directly to Chinese university"
+   },
+   {
+    "name": "Belt & Road Scholarship",
+    "type": "Government (CSC)",
+    "level": "UG / PG",
+    "coverage": "Full funding",
+    "notes": "For students from Belt & Road Initiative countries"
+   },
+   {
+    "name": "Chinese Government Scholarship — AUN Program",
+    "type": "Government/A SEAN",
+    "level": "UG / PG",
+    "coverage": "Full funding",
+    "notes": "For ASEAN University Network member institution students"
+   },
+   {
+    "name": "Chinese Government Scholarship — EU Program",
+    "type": "Government/E U",
+    "level": "UG / PG",
+    "coverage": "Full funding",
+    "notes": "For students from European Union countries"
+   },
+   {
+    "name": "Confucius Institute Scholarship (CIS)",
+    "type": "Government (Hanban/CIE)",
+    "level": "Chinese Language / 1-yr",
+    "coverage": "Full: tuition + board + CNY 1,400-2,000/mo",
+    "notes": "For Chinese language programs; apply via local Confucius Institute"
+   },
+   {
+    "name": "Beijing Government Scholarship",
+    "type": "Beijing Municipal Gov.",
+    "level": "UG / PG",
+    "coverage": "Tuition + living allowance",
+    "notes": "For students at Beijing universities; city-funded"
+   },
+   {
+    "name": "Shanghai Municipal Government Scholarship",
+    "type": "Shanghai Gov.",
+    "level": "UG / PG",
+    "coverage": "Tuition + CNY 1,500-3,000/mo",
+    "notes": "For students at Shanghai universities"
+   },
+   {
+    "name": "Jiangsu Provincial Government Scholarship",
+    "type": "Jiangsu Gov.",
+    "level": "UG / PG",
+    "coverage": "Full or partial tuition + stipend",
+    "notes": "For students at Jiangsu universities"
+   },
+   {
+    "name": "Zhejiang Provincial Government Scholarship",
+    "type": "Zhejiang Gov.",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "For students at Zhejiang universities"
+   },
+   {
+    "name": "Guangdong Government Scholarship",
+    "type": "Guangdong Gov.",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "For students at Guangdong universities"
+   },
+   {
+    "name": "Shandong Gov. Scholarship",
+    "type": "Shandong Gov.",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "For students at Shandong universities"
+   },
+   {
+    "name": "Yunnan Gov. Scholarship",
+    "type": "Yunnan Gov.",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "For students at Yunnan universities; ASEAN focus"
+   },
+   {
+    "name": "Silk Road Scholarship",
+    "type": "Government",
+    "level": "UG / PG",
+    "coverage": "Full funding",
+    "notes": "For students from Silk Road region countries"
+   },
+   {
+    "name": "Great Wall Fellowship (UNESCO-China)",
+    "type": "UNESCO / China",
+    "level": "Research / PhD",
+    "coverage": "Full funding",
+    "notes": "For researchers from developing countries; UNESCO-coordinated"
+   },
+   {
+    "name": "CAITEC Scholarship",
+    "type": "Govt (MOC)",
+    "level": "PG / Research",
+    "coverage": "Partial to full",
+    "notes": "Commerce & economics focus; Ministry of Commerce affiliated"
+   },
+   {
+    "name": "Tsinghua-Berkeley (TBSI) Scholarship",
+    "type": "University (Tsinghua)",
+    "level": "Masters / PhD",
+    "coverage": "CNY 33,000-40,000/yr + housing + insurance",
+    "notes": "STEM focus; UC Berkeley partnership"
+   },
+   {
+    "name": "Peking University Scholarship",
+    "type": "University (PKU)",
+    "level": "UG / PG",
+    "coverage": "Full or partial + stipend",
+    "notes": "Merit-based; very competitive"
+   },
+   {
+    "name": "Fudan University Scholarship",
+    "type": "University (Fudan)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Multiple types; science and arts programs"
+   },
+   {
+    "name": "SJTU Scholarship",
+    "type": "University (SJTU)",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "Multiple categories; engineering and medicine focus"
+   },
+   {
+    "name": "Zhejiang University Scholarship",
+    "type": "University (ZJU)",
+    "level": "UG / PG / Research",
+    "coverage": "Full or partial",
+    "notes": "Multiple programs; CSC-type B available"
+   },
+   {
+    "name": "Xiamen University International Scholarship",
+    "type": "University (XMU)",
+    "level": "UG / PG",
+    "coverage": "5 categories: partial to full",
+    "notes": "One of the most generous university-based programs"
+   },
+   {
+    "name": "Jiangsu Univ. Presidential Scholarship",
+    "type": "University (JSU)",
+    "level": "UG / PG",
+    "coverage": "Full: tuition + CNY 1,000/mo",
+    "notes": "Available to all applicants via China Admissions partner"
+   },
+   {
+    "name": "Nanjing University Scholarship",
+    "type": "University (NJU)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Multiple scholarship categories"
+   },
+   {
+    "name": "Wuhan University International Scholarship",
+    "type": "University (WHU)",
+    "level": "UG / PG",
+    "coverage": "Partial to full",
+    "notes": "Merit-based; famous campus"
+   },
+   {
+    "name": "Sun Yat-sen University Scholarship",
+    "type": "University (SYSU)",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "Multiple categories"
+   },
+   {
+    "name": "Harbin Institute of Technology Scholarship",
+    "type": "University (HIT)",
+    "level": "UG / PG",
+    "coverage": "Full or partial",
+    "notes": "Engineering focus; CSC quota available"
+   },
+   {
+    "name": "Tongji University Scholarship",
+    "type": "University (Tongji)",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "Multiple types; architecture and engineering"
+   },
+   {
+    "name": "Shandong University Scholarship",
+    "type": "University (SDU)",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "Partial to full; international-friendly campus"
+   },
+   {
+    "name": "SUSTech Scholarship",
+    "type": "University (SUSTech)",
+    "level": "UG",
+    "coverage": "Full tuition + stipend",
+    "notes": "For top math/science applicants; very competitive"
+   },
+   {
+    "name": "China Scholarship Council — MOFCOM Scholarship",
+    "type": "Govt (MOC)",
+    "level": "PG",
+    "coverage": "Full funding",
+    "notes": "For developing country students; commerce focus"
+   },
+   {
+    "name": "ADB-Japan Scholarship Program in China",
+    "type": "ADB / Japan",
+    "level": "Masters",
+    "coverage": "Full funding",
+    "notes": "Implemented through Asian Development Bank at select Chinese universities"
+   }
+  ],
+  "korea": [
+   {
+    "name": "Global Korea Scholarship (GKS/KGSP) — Graduate",
+    "type": "Government (NIIED)",
+    "level": "Masters / PhD",
+    "coverage": "Full: airfare + settlement allowance + monthly stipend + tuition + Korean language training + medical insurance",
+    "notes": "2,000+ slots from 155 countries; Embassy Track (Feb-Mar) or University Track (Sep-Oct); under-40; niied.go.kr"
+   },
+   {
+    "name": "Global Korea Scholarship (GKS) — Undergraduate",
+    "type": "Government (NIIED)",
+    "level": "UG (4 yrs)",
+    "coverage": "Full: same as graduate version + 1-yr Korean language course",
+    "notes": "Very competitive; ~145 countries; 1-year language training first"
+   },
+   {
+    "name": "GKS Foreign Exchange Student Program",
+    "type": "Government (NIIED)",
+    "level": "Exchange 1-2 semesters",
+    "coverage": "Living expenses + airfare + settlement allowance + insurance",
+    "notes": "For undergrads from partner universities; max 2 semesters"
+   },
+   {
+    "name": "Brain Korea 21 (BK21) Plus Program",
+    "type": "Government (NRF)",
+    "level": "Masters / PhD",
+    "coverage": "Research stipend + tuition support",
+    "notes": "National Research Foundation; at designated research universities"
+   },
+   {
+    "name": "Study Korea Project Scholarship",
+    "type": "Government (MOE)",
+    "level": "Exchange / Short-term",
+    "coverage": "Living allowance + insurance",
+    "notes": "For short-term exchange students at Korean universities"
+   },
+   {
+    "name": "Korean Government Scholarship — Science & Engineering Talent (SET)",
+    "type": "Government",
+    "level": "Masters / PhD",
+    "coverage": "Full funding",
+    "notes": "For students specializing in STEM at government research institutes"
+   },
+   {
+    "name": "Seoul National University Scholarship",
+    "type": "University (SNU)",
+    "level": "UG / PG",
+    "coverage": "Full or partial tuition + monthly allowance",
+    "notes": "Highly competitive; merit + need-based"
+   },
+   {
+    "name": "KAIST Fellowship / Scholarship",
+    "type": "University (KAIST)",
+    "level": "Masters / PhD",
+    "coverage": "Full tuition waiver + KRW 350,000-400,000/mo stipend",
+    "notes": "All admitted KAIST graduate students receive funding"
+   },
+   {
+    "name": "POSTECH Scholarship",
+    "type": "University (POSTECH)",
+    "level": "UG / PG",
+    "coverage": "Full tuition + monthly stipend",
+    "notes": "All admitted students receive support; STEM only"
+   },
+   {
+    "name": "GIST Scholarship",
+    "type": "University (GIST)",
+    "level": "Masters / PhD",
+    "coverage": "Full tuition + stipend",
+    "notes": "All admitted graduate students; fully English-medium"
+   },
+   {
+    "name": "UNIST Scholarship",
+    "type": "University (UNIST)",
+    "level": "Masters / PhD",
+    "coverage": "Full tuition + stipend",
+    "notes": "All admitted graduate students; rapidly rising institution"
+   },
+   {
+    "name": "Yonsei University Scholarship",
+    "type": "University (Yonsei)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Various: merit, need, international categories"
+   },
+   {
+    "name": "Korea University Scholarship",
+    "type": "University (KU)",
+    "level": "UG / PG",
+    "coverage": "50%-100% tuition reduction",
+    "notes": "International students; merit-based; in-school application"
+   },
+   {
+    "name": "SKKU Samsung Scholarship",
+    "type": "University (SKKU)",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "Engineering and business preference; Samsung-connected"
+   },
+   {
+    "name": "Hanyang University International Scholarship",
+    "type": "University (Hanyang)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Merit-based; multiple categories"
+   },
+   {
+    "name": "Kyung Hee University Scholarship",
+    "type": "University (KHU)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Popular for International Studies, Hospitality, Medicine"
+   },
+   {
+    "name": "Chung-Ang University Scholarship",
+    "type": "University (CAU)",
+    "level": "UG / PG",
+    "coverage": "Partial tuition",
+    "notes": "Merit-based; Art, Film, Business programs"
+   },
+   {
+    "name": "Ewha Global Scholarship",
+    "type": "University (Ewha)",
+    "level": "UG / PG",
+    "coverage": "Tuition reduction",
+    "notes": "For women from partner universities; Ewha Womans University"
+   },
+   {
+    "name": "Sogang University Scholarship",
+    "type": "University (Sogang)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Jesuit-founded; Business and Engineering focus"
+   },
+   {
+    "name": "Konkuk University Scholarship",
+    "type": "University (Konkuk)",
+    "level": "UG / PG",
+    "coverage": "Partial tuition",
+    "notes": "Veterinary, Agriculture, Engineering programs"
+   },
+   {
+    "name": "Incheon National University Scholarship",
+    "type": "University (INU)",
+    "level": "UG / PG",
+    "coverage": "Partial to full tuition",
+    "notes": "Merit-based; Incheon city area"
+   },
+   {
+    "name": "Inha University Scholarship",
+    "type": "University (Inha)",
+    "level": "UG / PG",
+    "coverage": "Partial tuition",
+    "notes": "Engineering, Business; near Incheon Airport"
+   },
+   {
+    "name": "Ajou University Scholarship",
+    "type": "University (Ajou)",
+    "level": "UG / PG",
+    "coverage": "Partial tuition",
+    "notes": "Science, Engineering, Medicine programs"
+   },
+   {
+    "name": "Korea Foundation (KF) Fellowship",
+    "type": "Government Foundation",
+    "level": "Research / Language",
+    "coverage": "Research stipend + living support",
+    "notes": "Korean studies, culture and language research for non-Koreans"
+   },
+   {
+    "name": "Global UGRAD Korea Program",
+    "type": "Government / IREX",
+    "level": "Exchange (1 semester)",
+    "coverage": "Full funding",
+    "notes": "Undergraduate exchange program with US-Korean bilateral agreement"
+   },
+   {
+    "name": "Fulbright Korea Program",
+    "type": "US-Korea Bilateral",
+    "level": "Research / Masters",
+    "coverage": "Full funding",
+    "notes": "For US citizens; Korean studies, research, teaching English"
+   },
+   {
+    "name": "ADB-Japan Scholarship in Korea",
+    "type": "ADB / Japan",
+    "level": "Masters",
+    "coverage": "Full funding",
+    "notes": "Asian Development Bank program; at select Korean universities"
+   },
+   {
+    "name": "Korea-ASEAN Scholarship",
+    "type": "Government",
+    "level": "UG / PG",
+    "coverage": "Tuition + stipend",
+    "notes": "For ASEAN member country students; bilateral agreements"
+   },
+   {
+    "name": "Korea-Africa Economic Cooperation (KOAFEC) Scholarship",
+    "type": "Government",
+    "level": "PG",
+    "coverage": "Full funding",
+    "notes": "For African students; economic cooperation focus"
+   },
+   {
+    "name": "International Cultural Youth Exchange (ICYE) Korea",
+    "type": "NGO",
+    "level": "Volunteer / Short-term",
+    "coverage": "Program-based",
+    "notes": "Cultural exchange + volunteer work in Korea"
+   },
+   {
+    "name": "World Friends Korea (KOICA) Program",
+    "type": "Government (KOICA)",
+    "level": "Short-term",
+    "coverage": "Full support",
+    "notes": "Development cooperation program; includes training programs"
+   },
+   {
+    "name": "Handong Global University Scholarship",
+    "type": "University (Handong)",
+    "level": "UG / PG",
+    "coverage": "Partial to full",
+    "notes": "English-medium institution; international focus"
+   },
+   {
+    "name": "Woosong University Scholarship",
+    "type": "University (Woosong)",
+    "level": "UG / PG",
+    "coverage": "Partial tuition",
+    "notes": "Engineering, Business, Culinary Arts; Daejeon"
+   }
+  ]
+ }
+}

@@ -5,8 +5,8 @@ import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
 import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
-  Compass, GraduationCap, Award, ClipboardList, Video, CalendarDays, Globe2,
-  Calculator, FileText, Pickaxe, Target, CloudDownload,
+  Compass, GraduationCap, Award, ClipboardList, Video, CalendarDays,
+  Calculator, FileText, Target, Cat,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { PandaBackground } from "@/components/PandaBackground";
@@ -29,15 +29,12 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/chinese", label: "Chinese Academy", icon: Languages },
       { to: "/korean", label: "Korean Academy", icon: Languages },
       { to: "/media-translator", label: "Media Translator", icon: Video },
-      { to: "/vocab-mining", label: "Vocab Mining", icon: Pickaxe },
       { to: "/language-goals", label: "Language Goals", icon: Target },
-      { to: "/offline", label: "Offline Packs", icon: CloudDownload },
     ],
   },
   {
     label: "StudentHub",
     items: [
-      { to: "/world", label: "World Explorer", icon: Globe2 },
       { to: "/career", label: "Career Hub", icon: Compass },
       { to: "/universities", label: "Universities", icon: GraduationCap },
       { to: "/scholarships", label: "Scholarships", icon: Award },
@@ -46,6 +43,12 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/scholarship-eligibility", label: "Scholarship Match", icon: Award },
       { to: "/cost-calculator", label: "Cost Calculator", icon: Calculator },
       { to: "/essay-reviewer", label: "Essay Reviewer", icon: FileText },
+    ],
+  },
+  {
+    label: "Creative",
+    items: [
+      { to: "/doodlekitty", label: "DoodleKitty", icon: Cat },
     ],
   },
   {
