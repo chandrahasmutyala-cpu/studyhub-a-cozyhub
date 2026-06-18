@@ -13,24 +13,26 @@ export const Route = createFileRoute("/_authenticated/calendar")({
 type View = "day" | "week" | "month" | "year";
 type Item = { id: string; title: string; date: string; kind: string | null; notes: string | null; source: "deadline" | "task" };
 
-const KIND_COLORS: Record<string, string> = {
-  university: "bg-sky-200 text-sky-900",
-  scholarship: "bg-amber-200 text-amber-900",
-  exam: "bg-rose-200 text-rose-900",
-  personal: "bg-violet-200 text-violet-900",
-  study: "bg-emerald-200 text-emerald-900",
-  task: "bg-slate-200 text-slate-900",
+// Minimal Apple-inspired palette — soft dot + soft tint
+const KIND_TINT: Record<string, { dot: string; chip: string }> = {
+  university:  { dot: "bg-sky-400",     chip: "bg-sky-50 text-sky-900" },
+  scholarship: { dot: "bg-amber-400",   chip: "bg-amber-50 text-amber-900" },
+  exam:        { dot: "bg-rose-400",    chip: "bg-rose-50 text-rose-900" },
+  personal:    { dot: "bg-violet-400",  chip: "bg-violet-50 text-violet-900" },
+  study:       { dot: "bg-emerald-400", chip: "bg-emerald-50 text-emerald-900" },
+  language:    { dot: "bg-indigo-400",  chip: "bg-indigo-50 text-indigo-900" },
+  task:        { dot: "bg-slate-400",   chip: "bg-slate-50 text-slate-900" },
 };
-function kindColor(k?: string | null) {
-  if (!k) return "bg-slate-200 text-slate-900";
-  return KIND_COLORS[k] ?? "bg-slate-200 text-slate-900";
+function tint(k?: string | null) {
+  if (!k) return KIND_TINT.task;
+  return KIND_TINT[k] ?? KIND_TINT.task;
 }
 
 function CalendarPage() {
   const qc = useQueryClient();
   const [view, setView] = useState<View>("month");
   const [anchor, setAnchor] = useState(() => new Date());
-  const [adding, setAdding] = useState<string | null>(null); // ISO date
+  const [adding, setAdding] = useState<string | null>(null);
 
   const { data: items = [] } = useQuery({
     queryKey: ["calendar-items"],
@@ -68,23 +70,23 @@ function CalendarPage() {
 
   return (
     <AppShell>
-      <div className="max-w-6xl space-y-4 animate-fade-up">
+      <div className="max-w-6xl mx-auto space-y-6 animate-fade-up">
         <header className="flex items-end justify-between gap-3 flex-wrap">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Calendar</div>
-            <h1 className="font-display text-3xl font-bold">{headerLabel(anchor, view)}</h1>
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Calendar</div>
+            <h1 className="font-display text-4xl font-bold tracking-tight mt-1">{headerLabel(anchor, view)}</h1>
           </div>
           <div className="flex items-center gap-2">
-            <div className="flex gap-1 bg-white/85 backdrop-blur p-1 rounded-full border border-border">
+            <div className="flex gap-0.5 bg-white/90 backdrop-blur p-1 rounded-full border border-border">
               {(["day","week","month","year"] as View[]).map((v) => (
                 <button key={v} onClick={() => setView(v)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-bold capitalize ${view === v ? "bg-primary" : "text-muted-foreground"}`}>{v}</button>
+                  className={`px-3.5 py-1.5 rounded-full text-[11px] font-bold capitalize transition ${view === v ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}>{v}</button>
               ))}
             </div>
-            <button onClick={() => setAnchor(new Date())} className="text-xs font-bold px-3 py-1.5 rounded-full bg-white border border-border">Today</button>
+            <button onClick={() => setAnchor(new Date())} className="text-[11px] font-bold px-3.5 py-2 rounded-full bg-white border border-border hover:bg-secondary">Today</button>
             <div className="flex items-center gap-1">
-              <button onClick={() => shift(-1)} className="size-9 rounded-full bg-white border border-border grid place-items-center"><ChevronLeft className="size-4" /></button>
-              <button onClick={() => shift(1)} className="size-9 rounded-full bg-white border border-border grid place-items-center"><ChevronRight className="size-4" /></button>
+              <button onClick={() => shift(-1)} className="size-9 rounded-full bg-white border border-border grid place-items-center hover:bg-secondary"><ChevronLeft className="size-4" /></button>
+              <button onClick={() => shift(1)} className="size-9 rounded-full bg-white border border-border grid place-items-center hover:bg-secondary"><ChevronRight className="size-4" /></button>
             </div>
           </div>
         </header>
@@ -93,6 +95,8 @@ function CalendarPage() {
         {view === "week"  && <WeekList anchor={anchor} byDate={byDate} onAdd={setAdding} />}
         {view === "day"   && <DayList date={anchor} items={byDate.get(iso(anchor)) ?? []} onAdd={() => setAdding(iso(anchor))} />}
         {view === "year"  && <YearGrid anchor={anchor} byDate={byDate} onSelectMonth={(d) => { setAnchor(d); setView("month"); }} />}
+
+        <Legend />
 
         {adding && (
           <AddDialog
@@ -103,6 +107,19 @@ function CalendarPage() {
         )}
       </div>
     </AppShell>
+  );
+}
+
+function Legend() {
+  return (
+    <div className="flex flex-wrap gap-3 text-[11px] text-muted-foreground">
+      {Object.entries(KIND_TINT).filter(([k]) => k !== "task").map(([k, v]) => (
+        <div key={k} className="inline-flex items-center gap-1.5">
+          <span className={`size-2 rounded-full ${v.dot}`} />
+          <span className="capitalize">{k}</span>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -127,24 +144,34 @@ function MonthGrid({ anchor, byDate, onAdd }: { anchor: Date; byDate: Map<string
   const today = iso(new Date());
 
   return (
-    <div className="bg-white/90 backdrop-blur border border-border rounded-3xl p-3">
-      <div className="grid grid-cols-7 text-[10px] font-bold uppercase tracking-wider text-muted-foreground pb-2 px-1">
+    <div className="bg-white/95 backdrop-blur border border-border rounded-[2rem] p-4 shadow-soft">
+      <div className="grid grid-cols-7 text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground pb-3 px-1">
         {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((d) => <div key={d} className="text-center">{d}</div>)}
       </div>
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-px bg-border/40 rounded-2xl overflow-hidden">
         {cells.map((d) => {
           const di = iso(d);
           const inMonth = d.getMonth() === anchor.getMonth();
           const dayItems = byDate.get(di) ?? [];
+          const isToday = di === today;
           return (
             <button key={di} onClick={() => onAdd(di)}
-              className={`group relative aspect-square sm:aspect-[1.1/1] rounded-2xl p-1.5 text-left border ${inMonth ? "bg-white border-border hover:border-primary" : "bg-cream/40 border-transparent text-muted-foreground/60"}`}>
-              <div className={`text-[11px] font-bold inline-grid place-items-center size-6 rounded-full ${di === today ? "bg-primary text-primary-foreground" : ""}`}>{d.getDate()}</div>
-              <div className="mt-1 space-y-0.5 overflow-hidden">
-                {dayItems.slice(0,2).map((it) => (
-                  <div key={`${it.source}-${it.id}`} className={`truncate text-[10px] font-semibold rounded px-1 py-0.5 ${kindColor(it.kind)}`}>{it.title}</div>
-                ))}
-                {dayItems.length > 2 && <div className="text-[10px] text-muted-foreground">+{dayItems.length - 2}</div>}
+              className={`group relative min-h-[92px] sm:min-h-[110px] p-2 text-left transition ${inMonth ? "bg-white hover:bg-cream/60" : "bg-cream/30 text-muted-foreground/50"}`}>
+              <div className="flex items-center justify-between">
+                <span className={`text-[12px] font-semibold inline-grid place-items-center size-7 rounded-full ${isToday ? "bg-foreground text-background" : ""}`}>{d.getDate()}</span>
+                {dayItems.length > 0 && !isToday && <span className="text-[9px] font-semibold text-muted-foreground">{dayItems.length}</span>}
+              </div>
+              <div className="mt-1.5 space-y-0.5 overflow-hidden">
+                {dayItems.slice(0,3).map((it) => {
+                  const t = tint(it.kind);
+                  return (
+                    <div key={`${it.source}-${it.id}`} className="flex items-center gap-1 truncate">
+                      <span className={`size-1.5 rounded-full shrink-0 ${t.dot}`} />
+                      <span className="truncate text-[11px] font-medium text-foreground/80">{it.title}</span>
+                    </div>
+                  );
+                })}
+                {dayItems.length > 3 && <div className="text-[10px] text-muted-foreground">+{dayItems.length - 3} more</div>}
               </div>
             </button>
           );
@@ -157,23 +184,28 @@ function MonthGrid({ anchor, byDate, onAdd }: { anchor: Date; byDate: Map<string
 function WeekList({ anchor, byDate, onAdd }: { anchor: Date; byDate: Map<string, Item[]>; onAdd: (iso: string) => void }) {
   const s = startOfWeek(anchor);
   const days = Array.from({ length: 7 }, (_, i) => { const d = new Date(s); d.setDate(s.getDate() + i); return d; });
+  const today = iso(new Date());
   return (
     <div className="grid sm:grid-cols-7 gap-2">
       {days.map((d) => {
         const di = iso(d);
         const its = byDate.get(di) ?? [];
+        const isToday = di === today;
         return (
-          <div key={di} className="bg-white/90 backdrop-blur border border-border rounded-2xl p-3 min-h-[140px]">
-            <div className="flex items-center justify-between">
+          <div key={di} className="bg-white/95 backdrop-blur border border-border rounded-3xl p-4 min-h-[160px] shadow-soft">
+            <div className="flex items-center justify-between mb-3">
               <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{d.toLocaleDateString(undefined, { weekday: "short" })}</div>
-              <div className="text-sm font-bold">{d.getDate()}</div>
+              <div className={`text-lg font-display font-bold inline-grid place-items-center size-8 rounded-full ${isToday ? "bg-foreground text-background" : ""}`}>{d.getDate()}</div>
             </div>
-            <div className="mt-2 space-y-1">
-              {its.map((it) => (
-                <div key={`${it.source}-${it.id}`} className={`text-[11px] font-semibold rounded-md px-2 py-1 ${kindColor(it.kind)}`}>{it.title}</div>
-              ))}
+            <div className="space-y-1.5">
+              {its.map((it) => {
+                const t = tint(it.kind);
+                return (
+                  <div key={`${it.source}-${it.id}`} className={`text-[11px] font-medium rounded-lg px-2 py-1 ${t.chip}`}>{it.title}</div>
+                );
+              })}
             </div>
-            <button onClick={() => onAdd(di)} className="mt-2 text-[11px] text-muted-foreground hover:text-foreground flex items-center gap-1">
+            <button onClick={() => onAdd(di)} className="mt-3 text-[11px] text-muted-foreground hover:text-foreground flex items-center gap-1">
               <Plus className="size-3" /> Add
             </button>
           </div>
@@ -185,25 +217,33 @@ function WeekList({ anchor, byDate, onAdd }: { anchor: Date; byDate: Map<string,
 
 function DayList({ date, items, onAdd }: { date: Date; items: Item[]; onAdd: () => void }) {
   return (
-    <div className="bg-white/90 backdrop-blur border border-border rounded-3xl p-5">
-      <div className="flex items-center justify-between mb-3">
-        <div className="font-display text-lg font-bold">{date.toLocaleDateString(undefined, { weekday: "long" })}</div>
-        <button onClick={onAdd} className="text-xs font-bold rounded-full bg-primary px-3 py-1.5 flex items-center gap-1"><Plus className="size-3" /> New</button>
+    <div className="bg-white/95 backdrop-blur border border-border rounded-[2rem] p-6 sm:p-8 shadow-soft">
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{date.toLocaleDateString(undefined, { weekday: "long" })}</div>
+          <div className="font-display text-2xl font-bold mt-1">{date.toLocaleDateString(undefined, { month: "long", day: "numeric" })}</div>
+        </div>
+        <button onClick={onAdd} className="text-xs font-bold rounded-full bg-foreground text-background px-4 py-2 flex items-center gap-1 hover:opacity-90">
+          <Plus className="size-3" /> New
+        </button>
       </div>
       {items.length === 0 ? (
-        <div className="text-sm text-muted-foreground text-center py-10">Nothing scheduled. Enjoy the day.</div>
+        <div className="text-sm text-muted-foreground text-center py-16">Nothing scheduled. Enjoy the day.</div>
       ) : (
-        <ul className="space-y-2">
-          {items.map((it) => (
-            <li key={`${it.source}-${it.id}`} className="flex items-start gap-3 rounded-2xl bg-cream/60 p-3">
-              <span className={`inline-block size-2.5 rounded-full mt-1.5 ${kindColor(it.kind).split(" ")[0]}`} />
-              <div className="flex-1 min-w-0">
-                <div className="font-bold text-sm truncate">{it.title}</div>
-                <div className="text-[11px] text-muted-foreground capitalize">{it.kind ?? it.source}</div>
-                {it.notes && <div className="text-xs text-muted-foreground mt-1">{it.notes}</div>}
-              </div>
-            </li>
-          ))}
+        <ul className="space-y-1">
+          {items.map((it) => {
+            const t = tint(it.kind);
+            return (
+              <li key={`${it.source}-${it.id}`} className="flex items-start gap-3 rounded-2xl px-3 py-3 hover:bg-cream/60 transition">
+                <span className={`inline-block size-2 rounded-full mt-2 ${t.dot}`} />
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-sm truncate">{it.title}</div>
+                  <div className="text-[11px] text-muted-foreground capitalize mt-0.5">{it.kind ?? it.source}</div>
+                  {it.notes && <div className="text-xs text-muted-foreground mt-1.5">{it.notes}</div>}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
@@ -218,9 +258,9 @@ function YearGrid({ anchor, byDate, onSelectMonth }: { anchor: Date; byDate: Map
         const counts = countMonth(m, byDate);
         return (
           <button key={m.getMonth()} onClick={() => onSelectMonth(m)}
-            className="bg-white/90 backdrop-blur border border-border rounded-2xl p-4 text-left hover:border-primary">
-            <div className="font-display font-bold">{m.toLocaleString(undefined, { month: "long" })}</div>
-            <div className="text-xs text-muted-foreground mt-1">{counts} event{counts === 1 ? "" : "s"}</div>
+            className="bg-white/95 backdrop-blur border border-border rounded-3xl p-5 text-left hover:shadow-soft transition group">
+            <div className="font-display text-lg font-bold">{m.toLocaleString(undefined, { month: "long" })}</div>
+            <div className="text-[11px] text-muted-foreground mt-1">{counts} event{counts === 1 ? "" : "s"}</div>
           </button>
         );
       })}
@@ -234,7 +274,7 @@ function countMonth(m: Date, byDate: Map<string, Item[]>) {
   return c;
 }
 
-const KINDS = ["university","scholarship","exam","study","personal"];
+const KINDS = ["university","scholarship","exam","study","language","personal"];
 
 function AddDialog({ date, onClose, onSaved }: { date: string; onClose: () => void; onSaved: () => void }) {
   const [title, setTitle] = useState("");
@@ -253,26 +293,31 @@ function AddDialog({ date, onClose, onSaved }: { date: string; onClose: () => vo
 
   return (
     <div className="fixed inset-0 z-50 bg-ink/40 backdrop-blur grid place-items-center p-4" onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-3xl border border-border max-w-md w-full p-6 shadow-pop">
-        <div className="flex items-start justify-between mb-3">
+      <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-[2rem] border border-border max-w-md w-full p-6 shadow-pop">
+        <div className="flex items-start justify-between mb-4">
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">New event</div>
-            <div className="font-display font-bold">{new Date(date).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">New event</div>
+            <div className="font-display font-bold text-lg mt-0.5">{new Date(date).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</div>
           </div>
-          <button onClick={onClose} className="size-9 rounded-full bg-cream grid place-items-center"><X className="size-4" /></button>
+          <button onClick={onClose} className="size-9 rounded-full bg-cream grid place-items-center hover:bg-secondary"><X className="size-4" /></button>
         </div>
         <input autoFocus value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"
-          className="w-full bg-cream rounded-2xl px-4 py-2.5 text-sm outline-none mb-2" />
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          {KINDS.map((k) => (
-            <button key={k} onClick={() => setKind(k)}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-bold border capitalize ${kind === k ? "bg-primary border-primary" : "bg-white border-border"}`}>{k}</button>
-          ))}
+          className="w-full bg-cream rounded-2xl px-4 py-3 text-sm outline-none mb-3" />
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {KINDS.map((k) => {
+            const t = tint(k);
+            return (
+              <button key={k} onClick={() => setKind(k)}
+                className={`px-3 py-1 rounded-full text-[11px] font-semibold border capitalize inline-flex items-center gap-1.5 transition ${kind === k ? "bg-foreground text-background border-foreground" : "bg-white border-border hover:bg-secondary"}`}>
+                <span className={`size-1.5 rounded-full ${t.dot}`} /> {k}
+              </button>
+            );
+          })}
         </div>
         <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes (optional)"
-          className="w-full bg-cream rounded-2xl px-4 py-2.5 text-sm outline-none min-h-[80px] mb-3" />
+          className="w-full bg-cream rounded-2xl px-4 py-3 text-sm outline-none min-h-[80px] mb-4" />
         <button disabled={!title.trim() || save.isPending} onClick={() => save.mutate()}
-          className="w-full bg-primary rounded-full py-2.5 font-bold text-sm disabled:opacity-40">
+          className="w-full bg-foreground text-background rounded-full py-3 font-bold text-sm disabled:opacity-40 hover:opacity-90 transition">
           {save.isPending ? "Saving…" : "Add to calendar"}
         </button>
       </div>
