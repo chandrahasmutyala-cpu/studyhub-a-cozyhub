@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video, CalendarDays,
-  Calculator, FileText, Target, Cat,
+  Calculator, FileText, Target, Cat, MessagesSquare,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { PandaBackground } from "@/components/PandaBackground";
@@ -36,6 +36,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     label: "StudentHub",
     items: [
       { to: "/career", label: "Career Hub", icon: Compass },
+      { to: "/university-advisor", label: "University Advisor", icon: MessagesSquare },
       { to: "/universities", label: "Universities", icon: GraduationCap },
       { to: "/scholarships", label: "Scholarships", icon: Award },
       { to: "/applications", label: "Applications", icon: ClipboardList },
