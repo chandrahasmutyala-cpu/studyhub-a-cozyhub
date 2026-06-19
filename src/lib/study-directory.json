@@ -1922,33 +1922,6 @@
      "requirements": "EJU; JLPT N2+",
      "apply": "Sep–Jan",
      "website": "obirin.ac.jp"
-    },
-    {
-     "name": "Rotary Yoneyama Foundation",
-     "location": "rotary-yoneyama.or.j p",
-     "fields": "Private",
-     "tuition": "UG/PG",
-     "requirements": "JPY 100,000–180,000/mo",
-     "apply": "Academic excellence; community involvement; interview",
-     "website": "Oct–Dec"
-    },
-    {
-     "name": "Asian Cultural Council Japan",
-     "location": "asianculturalcouncil. org",
-     "fields": "NGO",
-     "tuition": "Research/ Arts",
-     "requirements": "Project grants",
-     "apply": "Arts/culture exchange; project proposal",
-     "website": "Jan–Mar"
-    },
-    {
-     "name": "Local Gov't Prefecture Scholarships",
-     "location": "nnnnnnnnnn",
-     "fields": "Local Gov.",
-     "tuition": "UG/PG",
-     "requirements": "Varies by prefecture",
-     "apply": "Tokyo, Osaka, Kyoto, Aichi etc. have own grants",
-     "website": "Mar–Jun"
     }
    ]
   },
@@ -2819,7 +2792,7 @@
      "name": "Seoul National University (SNU)",
      "location": "Seoul",
      "fields": "All fields; SKY — QS #41 globally",
-     "tuition": "3,500,000–7,200, 000",
+     "tuition": "3,500,000–7,200000",
      "requirements": "GPA 3.0+/4.0; TOPIK 3+ or TOEFL 80+; interview; recommendations",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "snu.ac.kr"
@@ -2828,7 +2801,7 @@
      "name": "Pusan National University",
      "location": "Busan",
      "fields": "Engineering, Medicine, Business",
-     "tuition": "2,000,000–5,500, 000",
+     "tuition": "2,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; GPA 2.5+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "pusan.ac.kr"
@@ -2837,7 +2810,7 @@
      "name": "Chonnam National University",
      "location": "Gwangju",
      "fields": "Medical School, Sciences, Engineering",
-     "tuition": "2,000,000–5,000, 000",
+     "tuition": "2,000,000–5,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Medical: TOPIK 4+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "jnu.ac.kr"
@@ -2846,7 +2819,7 @@
      "name": "Chungbuk National University",
      "location": "Cheongju",
      "fields": "Sciences, Engineering, Agriculture",
-     "tuition": "1,800,000–4,500, 000",
+     "tuition": "1,800,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "chungbuk.ac.kr"
@@ -2855,7 +2828,7 @@
      "name": "Chungnam National University",
      "location": "Daejeon",
      "fields": "Humanities, Sciences, Engineering",
-     "tuition": "2,000,000–5,000, 000",
+     "tuition": "2,000,000–5,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "cnu.ac.kr"
@@ -2864,7 +2837,7 @@
      "name": "Gyeongsang National University",
      "location": "Jinju",
      "fields": "Agriculture, Engineering, Marine Sciences",
-     "tuition": "1,800,000–4,500, 000",
+     "tuition": "1,800,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "gnu.ac.kr"
@@ -2873,7 +2846,7 @@
      "name": "Jeju National University",
      "location": "Jeju City, Jeju",
      "fields": "Tourism, Social Sciences, Education",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "jejunu.ac.kr"
@@ -2882,7 +2855,7 @@
      "name": "Jeonbuk National University",
      "location": "Jeonju",
      "fields": "Engineering, Agriculture, Medicine",
-     "tuition": "1,800,000–4,500, 000",
+     "tuition": "1,800,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "jbnu.ac.kr"
@@ -2891,7 +2864,7 @@
      "name": "Kangwon National University",
      "location": "Chuncheon",
      "fields": "Agriculture, Engineering, Law",
-     "tuition": "1,800,000–4,500, 000",
+     "tuition": "1,800,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "kangwon.ac.kr"
@@ -2900,7 +2873,7 @@
      "name": "Kyungpook National University",
      "location": "Daegu",
      "fields": "Medicine, Engineering, Sciences",
-     "tuition": "2,000,000–5,500, 000",
+     "tuition": "2,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Medical: TOPIK 4+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "knu.ac.kr"
@@ -2909,7 +2882,7 @@
      "name": "Andong National University",
      "location": "Andong",
      "fields": "Liberal Arts, Sciences",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "andong.ac.kr"
@@ -2918,7 +2891,7 @@
      "name": "Changwon National University",
      "location": "Changwon",
      "fields": "Engineering, Business",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "changwon.ac.kr"
@@ -2927,7 +2900,7 @@
      "name": "Gangneung-Wonju National Univ.",
      "location": "Gangneung, Gangwon",
      "fields": "Marine Sciences, Sciences",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "gwnu.ac.kr"
@@ -2936,7 +2909,7 @@
      "name": "Gyeongnam Nat'l Univ. Sci. & Tech.",
      "location": "Jinju, S. Gyeongsang",
      "fields": "Engineering",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "gntech.ac.kr"
@@ -2945,7 +2918,7 @@
      "name": "Hanbat National University",
      "location": "Daejeon",
      "fields": "Engineering, IT",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Math exam for Engineering",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "hanbat.ac.kr"
@@ -2954,7 +2927,7 @@
      "name": "Hankyong National University",
      "location": "Anseong, Gyeonggi",
      "fields": "Agriculture, Engineering, Economics",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "hknu.ac.kr"
@@ -2963,7 +2936,7 @@
      "name": "Incheon National University",
      "location": "Incheon",
      "fields": "Sciences, Engineering, Business",
-     "tuition": "2,000,000–4,500, 000",
+     "tuition": "2,000,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "inu.ac.kr"
@@ -2972,7 +2945,7 @@
      "name": "Korea Maritime & Ocean University",
      "location": "Busan",
      "fields": "Maritime, Ocean Engineering",
-     "tuition": "2,000,000–4,500, 000",
+     "tuition": "2,000,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Physical fitness test",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "kmou.ac.kr"
@@ -2983,7 +2956,7 @@
      "name": "Korea Nat'l Univ. of Education",
      "location": "Cheongju",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Education aptitude test",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "knue.ac.kr"
@@ -2992,7 +2965,7 @@
      "name": "Korea Nat'l Univ. of Transportation",
      "location": "Chungju",
      "fields": "Transportation, Engineering",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "ut.ac.kr"
@@ -3001,7 +2974,7 @@
      "name": "Kumoh Nat'l Inst. of Technology",
      "location": "Gumi, N. Gyeongsang",
      "fields": "Engineering, IT",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "kumoh.ac.kr"
@@ -3010,7 +2983,7 @@
      "name": "Mokpo National Maritime University",
      "location": "Mokpo",
      "fields": "Maritime Studies",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Physical fitness test",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "mmu.ac.kr"
@@ -3019,7 +2992,7 @@
      "name": "Mokpo National University",
      "location": "Mokpo",
      "fields": "Agriculture, Business, Engineering",
-     "tuition": "1,800,000–4,000, 000",
+     "tuition": "1,800,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "mokpo.ac.kr"
@@ -3028,7 +3001,7 @@
      "name": "Pukyong National University",
      "location": "Busan",
      "fields": "Marine Sciences, IT, Engineering",
-     "tuition": "2,000,000–4,500, 000",
+     "tuition": "2,000,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "pknu.ac.kr"
@@ -3037,7 +3010,7 @@
      "name": "Seoul Nat'l Univ. Sci. & Tech. (SeoulTech)",
      "location": "Seoul",
      "fields": "Engineering, Architecture, Design",
-     "tuition": "2,000,000–4,500, 000",
+     "tuition": "2,000,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Design: portfolio",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "seoultech.ac.kr"
@@ -3046,7 +3019,7 @@
      "name": "Korea National University of Arts",
      "location": "Seoul",
      "fields": "Arts, Music, Film, Performance",
-     "tuition": "4,000,000–7,000, 000",
+     "tuition": "4,000,000–7,000000",
      "requirements": "Portfolio/audition; TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "karts.ac.kr"
@@ -3055,7 +3028,7 @@
      "name": "Korea National Sport University",
      "location": "Seoul",
      "fields": "Sports Science, PE",
-     "tuition": "2,000,000–4,500, 000",
+     "tuition": "2,000,000–4,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Physical fitness test",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "knsu.ac.kr"
@@ -3064,7 +3037,7 @@
      "name": "Gyeongin Nat'l Univ. of Education",
      "location": "Incheon / Anyang",
      "fields": "Education (primary teachers)",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "ginue.ac.kr"
@@ -3073,7 +3046,7 @@
      "name": "Busan Nat'l Univ. of Education",
      "location": "Busan",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "bnue.ac.kr"
@@ -3082,7 +3055,7 @@
      "name": "Cheongju Nat'l Univ. of Education",
      "location": "Cheongju",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "cje.ac.kr"
@@ -3091,7 +3064,7 @@
      "name": "Chuncheon Nat'l Univ. of Education",
      "location": "Chuncheon",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "cnue.ac.kr"
@@ -3100,7 +3073,7 @@
      "name": "Daegu Nat'l Univ. of Education",
      "location": "Daegu",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "dnue.ac.kr"
@@ -3109,7 +3082,7 @@
      "name": "Gwangju Nat'l Univ. of Education",
      "location": "Gwangju",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "gnue.ac.kr"
@@ -3118,7 +3091,7 @@
      "name": "Gongju Nat'l Univ. of Education",
      "location": "Gongju, S. Chungcheong",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "gjue.ac.kr"
@@ -3127,7 +3100,7 @@
      "name": "Jeonju Nat'l Univ. of Education",
      "location": "Jeonju",
      "fields": "Education",
-     "tuition": "2,000,000–4,000, 000",
+     "tuition": "2,000,000–4,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "jnue.ac.kr"
@@ -3192,7 +3165,7 @@
      "name": "Yonsei University",
      "location": "Seoul",
      "fields": "Business, Medicine, Intl Studies; SKY",
-     "tuition": "4,500,000–7,500, 000",
+     "tuition": "4,500,000–7,500000",
      "requirements": "GPA 3.0+; TOPIK 3+ or TOEFL 80+; recommendations; interview; Medical: very competitive",
      "apply": "Spring: Oct–Nov | Fall: Apr–May",
      "website": "yonsei.ac.kr"
@@ -3201,7 +3174,7 @@
      "name": "Korea University (KU)",
      "location": "Seoul",
      "fields": "Business, Law, Political Science; SKY",
-     "tuition": "4,200,000–7,200, 000",
+     "tuition": "4,200,000–7,200000",
      "requirements": "GPA 3.0+; TOPIK 3+ or TOEFL 80+; interview; SAT/ACT for direct freshmen",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "korea.ac.kr"
@@ -3210,7 +3183,7 @@
      "name": "Sungkyunkwan University (SKKU)",
      "location": "Seoul / Suwon",
      "fields": "Business, Engineering; Samsung-linked",
-     "tuition": "4,000,000–7,000, 000",
+     "tuition": "4,000,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 79+; GPA 2.8+",
      "apply": "Spring: Oct–Nov | Fall: Apr–May",
      "website": "skku.edu"
@@ -3219,7 +3192,7 @@
      "name": "Hanyang University",
      "location": "Seoul / Ansan",
      "fields": "Electrical, Mechanical, Civil, Medicine",
-     "tuition": "4,000,000–7,000, 000",
+     "tuition": "4,000,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; GPA 2.8+; Medical: TOPIK 4+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "hanyang.ac.kr"
@@ -3228,7 +3201,7 @@
      "name": "Kyung Hee University",
      "location": "Seoul / Suwon",
      "fields": "Int'l Studies, Hospitality, Medicine",
-     "tuition": "4,000,000–7,000, 000",
+     "tuition": "4,000,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; GPA 2.8+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "khu.ac.kr"
@@ -3237,7 +3210,7 @@
      "name": "Sejong University",
      "location": "Seoul",
      "fields": "Hotel & Tourism, CS, Aerospace Eng.",
-     "tuition": "3,800,000–6,500, 000",
+     "tuition": "3,800,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; GPA 2.5+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "sejong.ac.kr"
@@ -3246,7 +3219,7 @@
      "name": "Ewha Womans University",
      "location": "Seoul",
      "fields": "Business, Law, Arts, STEM (Women's)",
-     "tuition": "4,000,000–7,000, 000",
+     "tuition": "4,000,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Women's only; GPA 2.8+; recommendations",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "ewha.ac.kr"
@@ -3255,7 +3228,7 @@
      "name": "Sogang University",
      "location": "Seoul",
      "fields": "Business, Engineering, Intl Studies",
-     "tuition": "4,000,000–6,500, 000",
+     "tuition": "4,000,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; GPA 2.8+; Jesuit-founded",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "sogang.ac.kr"
@@ -3264,7 +3237,7 @@
      "name": "Chung-Ang University (CAU)",
      "location": "Seoul / Anseong",
      "fields": "Arts, Design, Business, Law, Film",
-     "tuition": "3,800,000–6,500, 000",
+     "tuition": "3,800,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Arts/Film: portfolio; GPA 2.5+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "cau.ac.kr"
@@ -3273,7 +3246,7 @@
      "name": "Konkuk University",
      "location": "Seoul",
      "fields": "Veterinary, Agriculture, Engineering",
-     "tuition": "3,800,000–6,500, 000",
+     "tuition": "3,800,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Vet: very competitive",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "konkuk.ac.kr"
@@ -3282,7 +3255,7 @@
      "name": "Hankuk Univ. Foreign Studies (HUFS)",
      "location": "Seoul",
      "fields": "45 languages; Intl Studies, Translation",
-     "tuition": "3,800,000–6,000, 000",
+     "tuition": "3,800,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; language proficiency; GPA 2.8+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "hufs.ac.kr"
@@ -3291,7 +3264,7 @@
      "name": "Inha University",
      "location": "Incheon",
      "fields": "Engineering, Business, Law",
-     "tuition": "3,500,000–6,000, 000",
+     "tuition": "3,500,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; GPA 2.5+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "inha.ac.kr"
@@ -3300,7 +3273,7 @@
      "name": "Ajou University",
      "location": "Suwon, Gyeonggi",
      "fields": "Medical, Engineering, Business",
-     "tuition": "3,800,000–6,500, 000",
+     "tuition": "3,800,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Medical: very competitive",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "ajou.ac.kr"
@@ -3309,7 +3282,7 @@
      "name": "Kookmin University",
      "location": "Seoul",
      "fields": "Design, IT, Business, Auto Eng.",
-     "tuition": "3,500,000–6,000, 000",
+     "tuition": "3,500,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Design: portfolio",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "kookmin.ac.kr"
@@ -3318,7 +3291,7 @@
      "name": "Hongik University",
      "location": "Seoul",
      "fields": "Fine Arts, Architecture, Design, Business",
-     "tuition": "4,000,000–7,000, 000",
+     "tuition": "4,000,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Arts: portfolio mandatory; very competitive for arts",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "hongik.ac.kr"
@@ -3327,7 +3300,7 @@
      "name": "Dongguk University",
      "location": "Seoul / Gyeongju",
      "fields": "Buddhist Studies, Film, Law, Medicine",
-     "tuition": "3,500,000–6,000, 000",
+     "tuition": "3,500,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Film: portfolio",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "dongguk.edu"
@@ -3336,7 +3309,7 @@
      "name": "Sookmyung Women's University",
      "location": "Seoul",
      "fields": "Pharmacy, Law, Business (Women's)",
-     "tuition": "3,500,000–6,500, 000",
+     "tuition": "3,500,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Women's only",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "sookmyung.ac.kr"
@@ -3345,7 +3318,7 @@
      "name": "Dankook University",
      "location": "Seoul / Cheonan",
      "fields": "Medicine, Engineering, Liberal Arts",
-     "tuition": "3,800,000–7,000, 000",
+     "tuition": "3,800,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "dankook.ac.kr"
@@ -3354,7 +3327,7 @@
      "name": "Dong-A University",
      "location": "Busan",
      "fields": "Law, Medicine, Engineering",
-     "tuition": "3,500,000–6,500, 000",
+     "tuition": "3,500,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "dau.ac.kr"
@@ -3363,7 +3336,7 @@
      "name": "Gachon University",
      "location": "Seongnam, Gyeonggi",
      "fields": "Medicine, Pharmacy, Engineering",
-     "tuition": "3,800,000–7,000, 000",
+     "tuition": "3,800,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Medical: very competitive",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "gachon.ac.kr"
@@ -3372,7 +3345,7 @@
      "name": "Hallym University",
      "location": "Chuncheon, Gangwon",
      "fields": "Medicine, Sciences, Business",
-     "tuition": "3,500,000–7,000, 000",
+     "tuition": "3,500,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "hallym.ac.kr"
@@ -3381,7 +3354,7 @@
      "name": "Handong Global University",
      "location": "Pohang, N. Gyeongsang",
      "fields": "Intl Studies, Engineering (English medium)",
-     "tuition": "3,000,000–5,500, 000",
+     "tuition": "3,000,000–5,500000",
      "requirements": "IELTS 5.5/TOEFL 72+ (English medium); GPA 2.5+",
      "apply": "Spring: Oct–Nov | Fall: Apr–May",
      "website": "handong.edu"
@@ -3390,7 +3363,7 @@
      "name": "Myongji University",
      "location": "Seoul / Yongin",
      "fields": "Engineering, Business, Humanities",
-     "tuition": "3,500,000–6,000, 000",
+     "tuition": "3,500,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "mju.ac.kr"
@@ -3399,7 +3372,7 @@
      "name": "Soongsil University",
      "location": "Seoul",
      "fields": "Engineering, Business, IT",
-     "tuition": "3,500,000–6,000, 000",
+     "tuition": "3,500,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "soongsil.ac.kr"
@@ -3408,7 +3381,7 @@
      "name": "Catholic University of Korea",
      "location": "Seoul",
      "fields": "Medicine, Theology, Sciences",
-     "tuition": "4,000,000–8,000, 000",
+     "tuition": "4,000,000–8,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Medical: very competitive",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "catholic.ac.kr"
@@ -3417,7 +3390,7 @@
      "name": "Keimyung University",
      "location": "Daegu",
      "fields": "Medicine, Business, Engineering",
-     "tuition": "3,500,000–6,500, 000",
+     "tuition": "3,500,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "kmu.ac.kr"
@@ -3426,7 +3399,7 @@
      "name": "Cha University (CHA)",
      "location": "Seongnam, Gyeonggi",
      "fields": "Medicine, Biomedical Sciences",
-     "tuition": "4,000,000–8,000, 000",
+     "tuition": "4,000,000–8,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+; Medical: very competitive",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "cha.ac.kr"
@@ -3435,7 +3408,7 @@
      "name": "Chosun University",
      "location": "Gwangju",
      "fields": "Medicine, Engineering, Liberal Arts",
-     "tuition": "3,000,000–6,500, 000",
+     "tuition": "3,000,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–Jun",
      "website": "chosun.ac.kr"
@@ -3444,7 +3417,7 @@
      "name": "Daejeon University",
      "location": "Daejeon",
      "fields": "Oriental Medicine, Engineering, Business",
-     "tuition": "3,000,000–6,500, 000",
+     "tuition": "3,000,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "dju.ac.kr"
@@ -3453,7 +3426,7 @@
      "name": "Yeungnam University",
      "location": "Gyeongsan, N. Gyeongsang",
      "fields": "Engineering, Business, Medicine",
-     "tuition": "3,000,000–6,000, 000",
+     "tuition": "3,000,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "yu.ac.kr"
@@ -3462,7 +3435,7 @@
      "name": "George Mason University Korea",
      "location": "Songdo, Incheon",
      "fields": "Liberal Arts, Sciences (US branch)",
-     "tuition": "6,500,000–9,000, 000",
+     "tuition": "6,500,000–9,000000",
      "requirements": "TOEFL iBT 80+/IELTS 6.0; GPA 3.0+; SAT optional",
      "apply": "Nov–Apr",
      "website": "korea.gmu.edu"
@@ -3471,7 +3444,7 @@
      "name": "Ghent University Global Campus",
      "location": "Songdo, Incheon",
      "fields": "Sciences (Belgian branch)",
-     "tuition": "4,200,000–7,000, 000",
+     "tuition": "4,200,000–7,000000",
      "requirements": "IELTS 6.0/TOEFL 79+; GPA 3.0+",
      "apply": "Oct–Apr",
      "website": "ghent.ac.kr"
@@ -3489,7 +3462,7 @@
      "name": "Univ. of Utah Asia Campus",
      "location": "Songdo, Incheon",
      "fields": "Business, Engineering (US branch)",
-     "tuition": "6,000,000–8,500, 000",
+     "tuition": "6,000,000–8,500000",
      "requirements": "TOEFL iBT 80+/IELTS 6.0; GPA 2.8+",
      "apply": "Oct–Apr",
      "website": "uofuasia.ac.kr"
@@ -3498,7 +3471,7 @@
      "name": "Pai Chai University",
      "location": "Daejeon",
      "fields": "Humanities, Engineering, Business",
-     "tuition": "3,000,000–5,500, 000",
+     "tuition": "3,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "pcu.ac.kr"
@@ -3507,7 +3480,7 @@
      "name": "Soonchunhyang University",
      "location": "Asan, S. Chungcheong",
      "fields": "Medicine, Business, Engineering",
-     "tuition": "3,500,000–7,000, 000",
+     "tuition": "3,500,000–7,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "sch.ac.kr"
@@ -3516,7 +3489,7 @@
      "name": "Wonkwang University",
      "location": "Iksan, N. Jeolla",
      "fields": "Oriental Medicine, Dentistry, Business",
-     "tuition": "3,000,000–6,500, 000",
+     "tuition": "3,000,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "wonkwang.ac.kr"
@@ -3525,7 +3498,7 @@
      "name": "Woosong University",
      "location": "Daejeon",
      "fields": "Engineering, Business, Culinary Arts",
-     "tuition": "2,500,000–5,000, 000",
+     "tuition": "2,500,000–5,000000",
      "requirements": "TOPIK 2+ or TOEFL 61+; GPA 2.0+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "woosong.ac.kr"
@@ -3534,7 +3507,7 @@
      "name": "Jeonju University",
      "location": "Jeonju, N. Jeolla",
      "fields": "Engineering, Business, Liberal Arts",
-     "tuition": "2,800,000–5,000, 000",
+     "tuition": "2,800,000–5,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "jj.ac.kr"
@@ -3543,7 +3516,7 @@
      "name": "Kwangwoon University",
      "location": "Seoul",
      "fields": "Electronics, Engineering, IT",
-     "tuition": "3,500,000–6,000, 000",
+     "tuition": "3,500,000–6,000000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "kw.ac.kr"
@@ -3552,7 +3525,7 @@
      "name": "Kyonggi University",
      "location": "Suwon / Seoul",
      "fields": "Business, Engineering, Hospitality",
-     "tuition": "3,000,000–5,500, 000",
+     "tuition": "3,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "kyonggi.ac.kr"
@@ -3561,7 +3534,7 @@
      "name": "Sun Moon University",
      "location": "Asan, S. Chungcheong",
      "fields": "Intl Studies, Business",
-     "tuition": "2,500,000–5,000, 000",
+     "tuition": "2,500,000–5,000000",
      "requirements": "TOPIK 2+ or TOEFL 61+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "sunmoon.ac.kr"
@@ -3570,7 +3543,7 @@
      "name": "Dong-eui University",
      "location": "Busan",
      "fields": "Engineering, Business, Oriental Medicine",
-     "tuition": "3,000,000–5,500, 000",
+     "tuition": "3,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "deu.ac.kr"
@@ -3579,7 +3552,7 @@
      "name": "Dongseo University",
      "location": "Busan",
      "fields": "Design, Business, IT, Tourism",
-     "tuition": "3,000,000–5,500, 000",
+     "tuition": "3,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "dongseo.ac.kr"
@@ -3588,7 +3561,7 @@
      "name": "Hoseo University",
      "location": "Asan, S. Chungcheong",
      "fields": "Engineering, Business, Nursing",
-     "tuition": "3,000,000–5,500, 000",
+     "tuition": "3,000,000–5,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "hoseo.ac.kr"
@@ -3597,7 +3570,7 @@
      "name": "Inje University",
      "location": "Gimhae, S. Gyeongsang",
      "fields": "Medicine, Engineering",
-     "tuition": "3,000,000–6,500, 000",
+     "tuition": "3,000,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "inje.ac.kr"
@@ -3606,7 +3579,7 @@
      "name": "Konyang University",
      "location": "Nonsan, S. Chungcheong",
      "fields": "Medicine, Allied Health Sciences",
-     "tuition": "3,000,000–6,500, 000",
+     "tuition": "3,000,000–6,500000",
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "konyang.ac.kr"
