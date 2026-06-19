@@ -5,7 +5,7 @@ import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
 import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
-  Compass, GraduationCap, Award, ClipboardList, Video, CalendarDays,
+  Compass, GraduationCap, Award, ClipboardList, Video,
   Calculator, FileText, Target, Cat, MessagesSquare,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
@@ -20,7 +20,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     items: [
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
       { to: "/tasks", label: "Planner", icon: ListTodo },
-      { to: "/calendar", label: "Calendar", icon: CalendarDays },
       { to: "/focus", label: "Focus", icon: Timer },
       { to: "/notes", label: "Notes", icon: NotebookPen },
       { to: "/flashcards", label: "Flashcards", icon: Layers },

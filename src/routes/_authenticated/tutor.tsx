@@ -107,7 +107,7 @@ function TutorPage() {
                   <Sparkles className="size-5" />
                 </div>
                 <div>
-                  <div className="font-display font-bold">Ask Mochi anything</div>
+                  <div className="font-display font-bold">Ask StudyHub anything</div>
                   <p className="text-xs text-muted-foreground">Try one of these to get started.</p>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center">
@@ -138,7 +138,7 @@ function TutorPage() {
             ))}
             {loading && (
               <div className="flex gap-1 text-muted-foreground text-sm px-2">
-                <span className="animate-pulse">Mochi is thinking</span>
+                <span className="animate-pulse">StudyHub is thinking</span>
                 <span className="animate-pulse [animation-delay:120ms]">.</span>
                 <span className="animate-pulse [animation-delay:240ms]">.</span>
                 <span className="animate-pulse [animation-delay:360ms]">.</span>

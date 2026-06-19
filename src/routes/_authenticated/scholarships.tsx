@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { Award, Search } from "lucide-react";
+import { Award, Search, ExternalLink } from "lucide-react";
 import {
   scholarshipsFor,
   COUNTRY_LABEL,
@@ -22,17 +22,14 @@ function ScholarshipsPage() {
   const [level, setLevel] = useState("");
 
   const all = useMemo(() => scholarshipsFor(country), [country]);
-  const levels = useMemo(
-    () => Array.from(new Set(all.map((s) => s.level))).filter(Boolean),
-    [all],
-  );
+  const levels = useMemo(() => Array.from(new Set(all.map((s) => s.level))).filter(Boolean), [all]);
 
   const filtered = useMemo(
     () => all.filter((s) => {
       if (level && s.level !== level) return false;
       if (!q) return true;
       const t = q.toLowerCase();
-      return [s.name, s.type, s.coverage, s.notes].some((v) => v.toLowerCase().includes(t));
+      return [s.name, s.type, s.coverage, s.notes].some((v) => (v ?? "").toLowerCase().includes(t));
     }),
     [all, q, level],
   );
@@ -52,15 +49,12 @@ function ScholarshipsPage() {
 
         <div className="flex gap-2 flex-wrap">
           {COUNTRIES.map((c) => (
-            <button
-              key={c}
-              onClick={() => { setCountry(c); setLevel(""); }}
+            <button key={c} onClick={() => { setCountry(c); setLevel(""); }}
               className={`px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition ${
                 country === c
                   ? "bg-primary text-primary-foreground shadow-soft"
                   : "bg-white border border-border text-foreground/70 hover:bg-secondary"
-              }`}
-            >
+              }`}>
               <span>{COUNTRY_FLAG[c]}</span>
               {COUNTRY_LABEL[c]}
               <span className="text-[10px] opacity-70">({DIRECTORY_TOTALS[c].scholarships})</span>
@@ -71,18 +65,11 @@ function ScholarshipsPage() {
         <div className="bg-white border border-border rounded-3xl p-4 grid sm:grid-cols-3 gap-2">
           <div className="relative sm:col-span-2">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
+            <input value={q} onChange={(e) => setQ(e.target.value)}
               placeholder="Search by name, provider, or benefit"
-              className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none"
-            />
+              className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none" />
           </div>
-          <select
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-            className="bg-cream rounded-2xl px-3 py-2.5 text-sm"
-          >
+          <select value={level} onChange={(e) => setLevel(e.target.value)} className="bg-cream rounded-2xl px-3 py-2.5 text-sm">
             <option value="">All levels</option>
             {levels.map((l) => <option key={l} value={l}>{l}</option>)}
           </select>
@@ -107,11 +94,17 @@ function ScholarshipsPage() {
                 </div>
                 {s.notes && (
                   <div>
-                    <span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Notes</span>
+                    <span className="font-bold text-xs uppercase tracking-wider text-muted-foreground">Eligibility / Deadline</span>
                     <p>{s.notes}</p>
                   </div>
                 )}
               </div>
+              {s.website && /\./.test(s.website) && (
+                <a href={`https://${s.website.replace(/^https?:\/\//, "")}`} target="_blank" rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                  {s.website} <ExternalLink className="size-3" />
+                </a>
+              )}
             </article>
           ))}
           {filtered.length === 0 && (

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { GraduationCap, Search, MapPin } from "lucide-react";
+import { GraduationCap, Search, MapPin, Calendar, BookOpen, ExternalLink, Wallet } from "lucide-react";
 import {
   universitiesFor,
   COUNTRY_LABEL,
@@ -24,19 +24,14 @@ function UniversitiesPage() {
   const [type, setType] = useState<string>("");
 
   const all = useMemo(() => universitiesFor(country), [country]);
-  const types = useMemo(
-    () => Array.from(new Set(all.map((u) => u.type))),
-    [all],
-  );
+  const types = useMemo(() => Array.from(new Set(all.map((u) => u.type))), [all]);
   const filtered = useMemo(
     () => all.filter((u) => {
       if (type && u.type !== type) return false;
       if (!q) return true;
       const s = q.toLowerCase();
-      return (
-        u.name.toLowerCase().includes(s) ||
-        u.location.toLowerCase().includes(s) ||
-        u.fields.toLowerCase().includes(s)
+      return [u.name, u.location, u.fields, u.requirements ?? "", u.tuition ?? ""].some((v) =>
+        v.toLowerCase().includes(s),
       );
     }),
     [all, q, type],
@@ -53,22 +48,18 @@ function UniversitiesPage() {
             <GraduationCap className="size-7 text-primary" /> University Finder
           </h1>
           <p className="text-sm text-muted-foreground">
-            {DIRECTORY_TOTALS.japan.universities + DIRECTORY_TOTALS.china.universities + DIRECTORY_TOTALS.korea.universities}+ verified universities across Japan, China, and South Korea.
+            {DIRECTORY_TOTALS.japan.universities + DIRECTORY_TOTALS.china.universities + DIRECTORY_TOTALS.korea.universities}+ verified universities across Japan, China, and South Korea — with tuition, requirements, and apply windows.
           </p>
         </header>
 
-        {/* Country tabs */}
         <div className="flex gap-2 flex-wrap">
           {COUNTRIES.map((c) => (
-            <button
-              key={c}
-              onClick={() => { setCountry(c); setType(""); }}
+            <button key={c} onClick={() => { setCountry(c); setType(""); }}
               className={`px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition ${
                 country === c
                   ? "bg-primary text-primary-foreground shadow-soft"
                   : "bg-white border border-border text-foreground/70 hover:bg-secondary"
-              }`}
-            >
+              }`}>
               <span>{COUNTRY_FLAG[c]}</span>
               {COUNTRY_LABEL[c]}
               <span className="text-[10px] opacity-70">({DIRECTORY_TOTALS[c].universities})</span>
@@ -76,43 +67,29 @@ function UniversitiesPage() {
           ))}
         </div>
 
-        {/* Country brief */}
         <div className="rounded-3xl bg-white/85 backdrop-blur border border-border p-4 grid sm:grid-cols-3 gap-3 text-xs">
           <Brief label="Language" value={notes.language} />
           <Brief label="Visa" value={notes.visa} />
           <Brief label="Yearly cost" value={notes.cost} />
         </div>
 
-        {/* Filters */}
         <div className="bg-white border border-border rounded-3xl p-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
           <div className="relative sm:col-span-2">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search name, city, or field"
-              className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none"
-            />
+            <input value={q} onChange={(e) => setQ(e.target.value)}
+              placeholder="Search name, city, field, or requirement"
+              className="w-full bg-cream rounded-2xl pl-10 pr-3 py-2.5 text-sm outline-none" />
           </div>
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="bg-cream rounded-2xl px-3 py-2.5 text-sm"
-          >
+          <select value={type} onChange={(e) => setType(e.target.value)} className="bg-cream rounded-2xl px-3 py-2.5 text-sm">
             <option value="">All types</option>
-            {types.map((t) => (
-              <option key={t} value={t}>{UNI_TYPE_LABEL[t] ?? t}</option>
-            ))}
+            {types.map((t) => <option key={t} value={t}>{UNI_TYPE_LABEL[t] ?? t}</option>)}
           </select>
-          <div className="text-xs text-muted-foreground self-center px-2">
-            {filtered.length} of {all.length} shown
-          </div>
+          <div className="text-xs text-muted-foreground self-center px-2">{filtered.length} of {all.length} shown</div>
         </div>
 
-        {/* List */}
         <div className="grid md:grid-cols-2 gap-3">
           {filtered.map((u) => (
-            <article key={u.name} className="bg-white border border-border rounded-3xl p-5 shadow-soft space-y-2">
+            <article key={u.name + u.type} className="bg-white border border-border rounded-3xl p-5 shadow-soft space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <h3 className="font-display text-lg font-bold leading-tight">{u.name}</h3>
@@ -124,7 +101,31 @@ function UniversitiesPage() {
                   {UNI_TYPE_LABEL[u.type] ?? u.type}
                 </span>
               </div>
-              <p className="text-xs leading-relaxed">{u.fields}</p>
+              <p className="text-xs leading-relaxed flex items-start gap-1.5">
+                <BookOpen className="size-3 mt-0.5 shrink-0 text-muted-foreground" /> <span>{u.fields}</span>
+              </p>
+              {u.tuition && (
+                <p className="text-xs flex items-start gap-1.5">
+                  <Wallet className="size-3 mt-0.5 shrink-0 text-muted-foreground" />
+                  <span><span className="font-semibold">Tuition:</span> {u.tuition}{country !== "japan" ? "/yr" : ""}</span>
+                </p>
+              )}
+              {u.requirements && (
+                <p className="text-xs text-foreground/80"><span className="font-semibold">Requirements:</span> {u.requirements}</p>
+              )}
+              <div className="flex items-center justify-between gap-2 text-xs pt-1 border-t border-border/60">
+                {u.apply && (
+                  <span className="inline-flex items-center gap-1 text-muted-foreground">
+                    <Calendar className="size-3" /> Apply {u.apply}
+                  </span>
+                )}
+                {u.website && (
+                  <a href={`https://www.${u.website}`} target="_blank" rel="noreferrer"
+                    className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+                    {u.website} <ExternalLink className="size-3" />
+                  </a>
+                )}
+              </div>
             </article>
           ))}
           {filtered.length === 0 && (
