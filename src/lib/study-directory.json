@@ -1778,6 +1778,177 @@
      "requirements": "JLPT N2+ or TOEFL 72+",
      "apply": "Sep–Jan",
      "website": "meijigakuin.ac.jp"
+    },
+    {
+     "name": "Ryukoku University",
+     "location": "Kyoto",
+     "fields": "Buddhism, Literature, Law, Economics",
+     "tuition": "JPY 720,000– 950,000",
+     "requirements": "EJU; JLPT N2+",
+     "apply": "Sep–Jan",
+     "website": "ryukoku.ac.jp"
+    },
+    {
+     "name": "Kanda Univ. of International Studies",
+     "location": "Chiba",
+     "fields": "Languages, International Studies",
+     "tuition": "JPY 780,000– 1,000,000",
+     "requirements": "JLPT N2+ or TOEFL 72+; language test",
+     "apply": "Sep–Jan",
+     "website": "kanda.kuis.ac.jp"
+    },
+    {
+     "name": "Kansai Gaidai University",
+     "location": "Hirakata, Osaka",
+     "fields": "International Studies",
+     "tuition": "JPY 780,000– 1,000,000",
+     "requirements": "TOEFL iBT 72+ or JLPT N2+",
+     "apply": "Sep–Jan",
+     "website": "kansaigaidai.ac.jp"
+    },
+    {
+     "name": "Kanazawa Institute of Technology",
+     "location": "Nonoichi, Ishikawa",
+     "fields": "Engineering",
+     "tuition": "JPY 780,000– 1,000,000",
+     "requirements": "EJU; JLPT N2+; Math exam",
+     "apply": "Sep–Jan",
+     "website": "kanazawa-it.ac.jp"
+    },
+    {
+     "name": "Kyoto Pharmaceutical University",
+     "location": "Kyoto",
+     "fields": "Pharmacy",
+     "tuition": "JPY 800,000– 1,100,000",
+     "requirements": "EJU; JLPT N2+; Chemistry exam",
+     "apply": "Sep–Jan",
+     "website": "kyoto-phu.ac.jp"
+    },
+    {
+     "name": "Osaka Inst. of Technology",
+     "location": "Osaka",
+     "fields": "Engineering",
+     "tuition": "JPY 800,000– 1,100,000",
+     "requirements": "EJU; JLPT N2+",
+     "apply": "Sep–Jan",
+     "website": "oit.ac.jp"
+    },
+    {
+     "name": "Kyorin University",
+     "location": "Mitaka, Tokyo",
+     "fields": "Medicine, Health Science",
+     "tuition": "JPY 800,000– 9,000,000",
+     "requirements": "EJU; JLPT N1+; Medical entrance",
+     "apply": "Sep–Jan",
+     "website": "kyorin-u.ac.jp"
+    },
+    {
+     "name": "St. Marianna Univ. School of Medicine",
+     "location": "Kawasaki",
+     "fields": "Medicine",
+     "tuition": "JPY 7,000,000+",
+     "requirements": "EJU; JLPT N1+; Medical entrance exam",
+     "apply": "Sep–Nov",
+     "website": "marianna-u.ac.jp"
+    },
+    {
+     "name": "Fujita Health University",
+     "location": "Toyoake, Aichi",
+     "fields": "Medicine, Health Sciences",
+     "tuition": "JPY 800,000– 9,000,000",
+     "requirements": "EJU; JLPT N1+; Medical exam",
+     "apply": "Sep–Jan",
+     "website": "fujita-hu.ac.jp"
+    },
+    {
+     "name": "Kitasato University",
+     "location": "Minato, Tokyo",
+     "fields": "Medicine, Pharmacy, Science",
+     "tuition": "JPY 800,000– 9,000,000",
+     "requirements": "EJU; JLPT N1+ (Medical); JLPT N2+ (others)",
+     "apply": "Sep–Jan",
+     "website": "kitasato-u.ac.jp"
+    },
+    {
+     "name": "Tokyo Medical University",
+     "location": "Shinjuku, Tokyo",
+     "fields": "Medicine",
+     "tuition": "JPY 8,000,000+",
+     "requirements": "EJU; JLPT N1+; Medical entrance exam",
+     "apply": "Sep–Nov",
+     "website": "tokyo-med.ac.jp"
+    },
+    {
+     "name": "Tokyo Women's Medical University",
+     "location": "Shinjuku, Tokyo",
+     "fields": "Medicine (Women's)",
+     "tuition": "JPY 7,500,000+",
+     "requirements": "EJU; JLPT N1+; Women's university",
+     "apply": "Sep–Nov",
+     "website": "twmu.ac.jp"
+    },
+    {
+     "name": "Kanazawa Medical University",
+     "location": "Uchinada, Ishikawa",
+     "fields": "Medicine",
+     "tuition": "JPY 9,000,000+",
+     "requirements": "EJU; JLPT N1+; Medical entrance exam",
+     "apply": "Sep–Nov",
+     "website": "kanazawa-med.ac.jp"
+    },
+    {
+     "name": "Hitotsubashi Univ. (private programs)",
+     "location": "Tokyo",
+     "fields": "MBA, Executive Programs",
+     "tuition": "JPY 1,500,00 0–2,500,000",
+     "requirements": "Work exp. 3+ yrs; TOEFL 100+; GMAT recommended",
+     "apply": "Oct–Jan",
+     "website": "hit-u.ac.jp"
+    },
+    {
+     "name": "International Univ. of Japan",
+     "location": "Minami-Uonuma, Niigata",
+     "fields": "International Relations, MPA",
+     "tuition": "JPY 1,500,000",
+     "requirements": "TOEFL iBT 90+; Work experience preferred; interview",
+     "apply": "Oct–Feb",
+     "website": "iuj.ac.jp"
+    },
+    {
+     "name": "J.F. Oberlin University",
+     "location": "Machida, Tokyo",
+     "fields": "Liberal Arts",
+     "tuition": "JPY 780,000– 980,000",
+     "requirements": "EJU; JLPT N2+",
+     "apply": "Sep–Jan",
+     "website": "obirin.ac.jp"
+    },
+    {
+     "name": "Rotary Yoneyama Foundation",
+     "location": "rotary-yoneyama.or.j p",
+     "fields": "Private",
+     "tuition": "UG/PG",
+     "requirements": "JPY 100,000–180,000/mo",
+     "apply": "Academic excellence; community involvement; interview",
+     "website": "Oct–Dec"
+    },
+    {
+     "name": "Asian Cultural Council Japan",
+     "location": "asianculturalcouncil. org",
+     "fields": "NGO",
+     "tuition": "Research/ Arts",
+     "requirements": "Project grants",
+     "apply": "Arts/culture exchange; project proposal",
+     "website": "Jan–Mar"
+    },
+    {
+     "name": "Local Gov't Prefecture Scholarships",
+     "location": "nnnnnnnnnn",
+     "fields": "Local Gov.",
+     "tuition": "UG/PG",
+     "requirements": "Varies by prefecture",
+     "apply": "Tokyo, Osaka, Kyoto, Aichi etc. have own grants",
+     "website": "Mar–Jun"
     }
    ]
   },
@@ -2441,6 +2612,204 @@
      "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
      "apply": "Jan–Apr",
      "website": "shmtu.edu.cn"
+    },
+    {
+     "name": "Shanghai University",
+     "location": "Shanghai",
+     "fields": "Sciences, Engineering, Liberal Arts",
+     "tuition": "18,000–50,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "shu.edu.cn"
+    },
+    {
+     "name": "Shanghai Univ. Finance & Economics",
+     "location": "Shanghai",
+     "fields": "Finance, Economics, Business",
+     "tuition": "20,000–55,000",
+     "requirements": "HSK 4+ or IELTS 6.5/TOEFL 90+",
+     "apply": "Jan–Apr",
+     "website": "sufe.edu.cn"
+    },
+    {
+     "name": "Shaanxi Normal University",
+     "location": "Xi'an",
+     "fields": "Education, Sciences, Humanities",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "snnu.edu.cn"
+    },
+    {
+     "name": "Shenzhen University",
+     "location": "Shenzhen",
+     "fields": "Engineering, Business, Sciences",
+     "tuition": "18,000–50,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "szu.edu.cn"
+    },
+    {
+     "name": "Soochow University",
+     "location": "Suzhou, Jiangsu",
+     "fields": "Sciences, Medicine, Engineering",
+     "tuition": "18,000–50,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "suda.edu.cn"
+    },
+    {
+     "name": "South China Agricultural University",
+     "location": "Guangzhou",
+     "fields": "Agriculture, Life Sciences",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "scau.edu.cn"
+    },
+    {
+     "name": "South China Univ. of Technology",
+     "location": "Guangzhou",
+     "fields": "Engineering, Architecture, Business",
+     "tuition": "18,000–50,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "scut.edu.cn"
+    },
+    {
+     "name": "Southwest Jiaotong University",
+     "location": "Chengdu",
+     "fields": "Transportation Engineering",
+     "tuition": "16,000–45,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "swjtu.edu.cn"
+    },
+    {
+     "name": "Southwest University",
+     "location": "Chongqing",
+     "fields": "Agriculture, Life Sciences, Education",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "swu.edu.cn"
+    },
+    {
+     "name": "Southwest Univ. Finance & Economics",
+     "location": "Chengdu",
+     "fields": "Finance, Economics",
+     "tuition": "16,000–45,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "swufe.edu.cn"
+    },
+    {
+     "name": "Taiyuan Univ. of Technology",
+     "location": "Taiyuan, Shanxi",
+     "fields": "Engineering",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "tyut.edu.cn"
+    },
+    {
+     "name": "Tibet University",
+     "location": "Lhasa, Tibet",
+     "fields": "Tibetan Studies, Sciences, Agriculture",
+     "tuition": "12,000–35,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "utibet.edu.cn"
+    },
+    {
+     "name": "Wuhan Univ. of Technology",
+     "location": "Wuhan",
+     "fields": "Materials Science, Engineering",
+     "tuition": "16,000–45,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "whut.edu.cn"
+    },
+    {
+     "name": "Yanbian University",
+     "location": "Yanji, Jilin",
+     "fields": "Korean Studies, Medicine, Sciences",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+; Korean helpful",
+     "apply": "Jan–Apr",
+     "website": "ybu.edu.cn"
+    },
+    {
+     "name": "Yangzhou University",
+     "location": "Yangzhou, Jiangsu",
+     "fields": "Agriculture, Sciences, Engineering",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "yzu.edu.cn"
+    },
+    {
+     "name": "Zhengzhou University",
+     "location": "Zhengzhou, Henan",
+     "fields": "Sciences, Engineering, Medicine",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "zzu.edu.cn"
+    },
+    {
+     "name": "Minzu University of China",
+     "location": "Beijing",
+     "fields": "Ethnic Studies, Languages",
+     "tuition": "16,000–45,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "muc.edu.cn"
+    },
+    {
+     "name": "South-Central Minzu University",
+     "location": "Wuhan",
+     "fields": "Ethnic Studies",
+     "tuition": "14,000–40,000",
+     "requirements": "HSK 4+ or IELTS 5.5/TOEFL 70+",
+     "apply": "Jan–Apr",
+     "website": "scuec.edu.cn"
+    },
+    {
+     "name": "SUSTech",
+     "location": "Shenzhen",
+     "fields": "STEM",
+     "tuition": "28,000–60,000",
+     "requirements": "Top math/science record; IELTS 6.5/TOEFL 90+; very competitive",
+     "apply": "Dec–Mar",
+     "website": "sustech.edu.cn"
+    },
+    {
+     "name": "CUHK - Shenzhen",
+     "location": "Shenzhen",
+     "fields": "Business, Data Science (English medium)",
+     "tuition": "90,000–115,000",
+     "requirements": "IELTS 6.5/TOEFL 90+; English medium; very competitive",
+     "apply": "Oct–Mar",
+     "website": "cuhk.edu.cn"
+    },
+    {
+     "name": "Capital Normal University",
+     "location": "Beijing",
+     "fields": "Education, Sciences, Humanities",
+     "tuition": "16,000–45,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+",
+     "apply": "Jan–Apr",
+     "website": "cnu.edu.cn"
+    },
+    {
+     "name": "Univ. of Chinese Academy of Sciences",
+     "location": "Beijing",
+     "fields": "Sciences, Technology (graduate only)",
+     "tuition": "20,000–50,000",
+     "requirements": "HSK 4+ or IELTS 6.0/TOEFL 80+; research supervisor",
+     "apply": "Jan–Apr",
+     "website": "ucas.ac.cn"
     }
    ]
   },
@@ -3133,140 +3502,120 @@
      "requirements": "TOPIK 3+ or TOEFL 72+",
      "apply": "Spring: Sep–Nov | Fall: Mar–May",
      "website": "pcu.ac.kr"
+    },
+    {
+     "name": "Soonchunhyang University",
+     "location": "Asan, S. Chungcheong",
+     "fields": "Medicine, Business, Engineering",
+     "tuition": "3,500,000–7,000, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "sch.ac.kr"
+    },
+    {
+     "name": "Wonkwang University",
+     "location": "Iksan, N. Jeolla",
+     "fields": "Oriental Medicine, Dentistry, Business",
+     "tuition": "3,000,000–6,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "wonkwang.ac.kr"
+    },
+    {
+     "name": "Woosong University",
+     "location": "Daejeon",
+     "fields": "Engineering, Business, Culinary Arts",
+     "tuition": "2,500,000–5,000, 000",
+     "requirements": "TOPIK 2+ or TOEFL 61+; GPA 2.0+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "woosong.ac.kr"
+    },
+    {
+     "name": "Jeonju University",
+     "location": "Jeonju, N. Jeolla",
+     "fields": "Engineering, Business, Liberal Arts",
+     "tuition": "2,800,000–5,000, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "jj.ac.kr"
+    },
+    {
+     "name": "Kwangwoon University",
+     "location": "Seoul",
+     "fields": "Electronics, Engineering, IT",
+     "tuition": "3,500,000–6,000, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "kw.ac.kr"
+    },
+    {
+     "name": "Kyonggi University",
+     "location": "Suwon / Seoul",
+     "fields": "Business, Engineering, Hospitality",
+     "tuition": "3,000,000–5,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "kyonggi.ac.kr"
+    },
+    {
+     "name": "Sun Moon University",
+     "location": "Asan, S. Chungcheong",
+     "fields": "Intl Studies, Business",
+     "tuition": "2,500,000–5,000, 000",
+     "requirements": "TOPIK 2+ or TOEFL 61+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "sunmoon.ac.kr"
+    },
+    {
+     "name": "Dong-eui University",
+     "location": "Busan",
+     "fields": "Engineering, Business, Oriental Medicine",
+     "tuition": "3,000,000–5,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "deu.ac.kr"
+    },
+    {
+     "name": "Dongseo University",
+     "location": "Busan",
+     "fields": "Design, Business, IT, Tourism",
+     "tuition": "3,000,000–5,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "dongseo.ac.kr"
+    },
+    {
+     "name": "Hoseo University",
+     "location": "Asan, S. Chungcheong",
+     "fields": "Engineering, Business, Nursing",
+     "tuition": "3,000,000–5,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "hoseo.ac.kr"
+    },
+    {
+     "name": "Inje University",
+     "location": "Gimhae, S. Gyeongsang",
+     "fields": "Medicine, Engineering",
+     "tuition": "3,000,000–6,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "inje.ac.kr"
+    },
+    {
+     "name": "Konyang University",
+     "location": "Nonsan, S. Chungcheong",
+     "fields": "Medicine, Allied Health Sciences",
+     "tuition": "3,000,000–6,500, 000",
+     "requirements": "TOPIK 3+ or TOEFL 72+",
+     "apply": "Spring: Sep–Nov | Fall: Mar–May",
+     "website": "konyang.ac.kr"
     }
    ]
   }
  },
  "scholarships": {
   "japan": [
-   {
-    "name": "Ryukoku University",
-    "website": "Kyoto",
-    "type": "Buddhism, Literature, Law, Economics",
-    "level": "JPY 720,000– 950,000",
-    "coverage": "EJU; JLPT N2+",
-    "notes": "Sep–Jan · ryukoku.ac.jp"
-   },
-   {
-    "name": "Kanda Univ. of International Studies",
-    "website": "Chiba",
-    "type": "Languages, International Studies",
-    "level": "JPY 780,000– 1,000,000",
-    "coverage": "JLPT N2+ or TOEFL 72+; language test",
-    "notes": "Sep–Jan · kanda.kuis.ac.jp"
-   },
-   {
-    "name": "Kansai Gaidai University",
-    "website": "Hirakata, Osaka",
-    "type": "International Studies",
-    "level": "JPY 780,000– 1,000,000",
-    "coverage": "TOEFL iBT 72+ or JLPT N2+",
-    "notes": "Sep–Jan · kansaigaidai.ac.jp"
-   },
-   {
-    "name": "Kanazawa Institute of Technology",
-    "website": "Nonoichi, Ishikawa",
-    "type": "Engineering",
-    "level": "JPY 780,000– 1,000,000",
-    "coverage": "EJU; JLPT N2+; Math exam",
-    "notes": "Sep–Jan · kanazawa-it.ac.jp"
-   },
-   {
-    "name": "Kyoto Pharmaceutical University",
-    "website": "Kyoto",
-    "type": "Pharmacy",
-    "level": "JPY 800,000– 1,100,000",
-    "coverage": "EJU; JLPT N2+; Chemistry exam",
-    "notes": "Sep–Jan · kyoto-phu.ac.jp"
-   },
-   {
-    "name": "Osaka Inst. of Technology",
-    "website": "Osaka",
-    "type": "Engineering",
-    "level": "JPY 800,000– 1,100,000",
-    "coverage": "EJU; JLPT N2+",
-    "notes": "Sep–Jan · oit.ac.jp"
-   },
-   {
-    "name": "Kyorin University",
-    "website": "Mitaka, Tokyo",
-    "type": "Medicine, Health Science",
-    "level": "JPY 800,000– 9,000,000",
-    "coverage": "EJU; JLPT N1+; Medical entrance",
-    "notes": "Sep–Jan · kyorin-u.ac.jp"
-   },
-   {
-    "name": "St. Marianna Univ. School of Medicine",
-    "website": "Kawasaki",
-    "type": "Medicine",
-    "level": "JPY 7,000,000+",
-    "coverage": "EJU; JLPT N1+; Medical entrance exam",
-    "notes": "Sep–Nov · marianna-u.ac.jp"
-   },
-   {
-    "name": "Fujita Health University",
-    "website": "Toyoake, Aichi",
-    "type": "Medicine, Health Sciences",
-    "level": "JPY 800,000– 9,000,000",
-    "coverage": "EJU; JLPT N1+; Medical exam",
-    "notes": "Sep–Jan · fujita-hu.ac.jp"
-   },
-   {
-    "name": "Kitasato University",
-    "website": "Minato, Tokyo",
-    "type": "Medicine, Pharmacy, Science",
-    "level": "JPY 800,000– 9,000,000",
-    "coverage": "EJU; JLPT N1+ (Medical); JLPT N2+ (others)",
-    "notes": "Sep–Jan · kitasato-u.ac.jp"
-   },
-   {
-    "name": "Tokyo Medical University",
-    "website": "Shinjuku, Tokyo",
-    "type": "Medicine",
-    "level": "JPY 8,000,000+",
-    "coverage": "EJU; JLPT N1+; Medical entrance exam",
-    "notes": "Sep–Nov · tokyo-med.ac.jp"
-   },
-   {
-    "name": "Tokyo Women's Medical University",
-    "website": "Shinjuku, Tokyo",
-    "type": "Medicine (Women's)",
-    "level": "JPY 7,500,000+",
-    "coverage": "EJU; JLPT N1+; Women's university",
-    "notes": "Sep–Nov · twmu.ac.jp"
-   },
-   {
-    "name": "Kanazawa Medical University",
-    "website": "Uchinada, Ishikawa",
-    "type": "Medicine",
-    "level": "JPY 9,000,000+",
-    "coverage": "EJU; JLPT N1+; Medical entrance exam",
-    "notes": "Sep–Nov · kanazawa-med.ac.jp"
-   },
-   {
-    "name": "Hitotsubashi Univ. (private programs)",
-    "website": "Tokyo",
-    "type": "MBA, Executive Programs",
-    "level": "JPY 1,500,00 0–2,500,000",
-    "coverage": "Work exp. 3+ yrs; TOEFL 100+; GMAT recommended",
-    "notes": "Oct–Jan · hit-u.ac.jp"
-   },
-   {
-    "name": "International Univ. of Japan",
-    "website": "Minami-Uonuma, Niigata",
-    "type": "International Relations, MPA",
-    "level": "JPY 1,500,000",
-    "coverage": "TOEFL iBT 90+; Work experience preferred; interview",
-    "notes": "Oct–Feb · iuj.ac.jp"
-   },
-   {
-    "name": "J.F. Oberlin University",
-    "website": "Machida, Tokyo",
-    "type": "Liberal Arts",
-    "level": "JPY 780,000– 980,000",
-    "coverage": "EJU; JLPT N2+",
-    "notes": "Sep–Jan · obirin.ac.jp"
-   },
    {
     "name": "MEXT — Research Student",
     "website": "studyinjapan.go.jp",
@@ -3356,14 +3705,6 @@
     "notes": "Competitive; innovative study-abroad projects · Oct–Dec"
    },
    {
-    "name": "Rotary Yoneyama Foundation",
-    "website": "rotary-yoneyama.or.j p",
-    "type": "Private",
-    "level": "UG/PG",
-    "coverage": "JPY 100,000–180,000/mo",
-    "notes": "Academic excellence; community involvement; interview · Oct–Dec"
-   },
-   {
     "name": "Mitsui Bussan Scholarship",
     "website": "mitsui-bussan-schol arship.com",
     "type": "Corporate",
@@ -3428,14 +3769,6 @@
     "notes": "Japanese studies researchers; portfolio · Oct–Feb"
    },
    {
-    "name": "Asian Cultural Council Japan",
-    "website": "asianculturalcouncil. org",
-    "type": "NGO",
-    "level": "Research/ Arts",
-    "coverage": "Project grants",
-    "notes": "Arts/culture exchange; project proposal · Jan–Mar"
-   },
-   {
     "name": "Daiwa Anglo-Japanese Foundation",
     "website": "dajf.org.uk",
     "type": "NGO (UK-Japan)",
@@ -3482,193 +3815,9 @@
     "level": "UG/PG",
     "coverage": "Partial tuition",
     "notes": "Multiple scholarships; merit-based selection · Sep–Nov"
-   },
-   {
-    "name": "Local Gov't Prefecture Scholarships",
-    "website": "nnnnnnnnnn",
-    "type": "Local Gov.",
-    "level": "UG/PG",
-    "coverage": "Varies by prefecture",
-    "notes": "Tokyo, Osaka, Kyoto, Aichi etc. have own grants · Mar–Jun"
    }
   ],
   "china": [
-   {
-    "name": "Shanghai University",
-    "website": "Shanghai",
-    "type": "Sciences, Engineering, Liberal Arts",
-    "level": "18,000–50,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · shu.edu.cn"
-   },
-   {
-    "name": "Shanghai Univ. Finance & Economics",
-    "website": "Shanghai",
-    "type": "Finance, Economics, Business",
-    "level": "20,000–55,000",
-    "coverage": "HSK 4+ or IELTS 6.5/TOEFL 90+",
-    "notes": "Jan–Apr · sufe.edu.cn"
-   },
-   {
-    "name": "Shaanxi Normal University",
-    "website": "Xi'an",
-    "type": "Education, Sciences, Humanities",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · snnu.edu.cn"
-   },
-   {
-    "name": "Shenzhen University",
-    "website": "Shenzhen",
-    "type": "Engineering, Business, Sciences",
-    "level": "18,000–50,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · szu.edu.cn"
-   },
-   {
-    "name": "Soochow University",
-    "website": "Suzhou, Jiangsu",
-    "type": "Sciences, Medicine, Engineering",
-    "level": "18,000–50,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · suda.edu.cn"
-   },
-   {
-    "name": "South China Agricultural University",
-    "website": "Guangzhou",
-    "type": "Agriculture, Life Sciences",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · scau.edu.cn"
-   },
-   {
-    "name": "South China Univ. of Technology",
-    "website": "Guangzhou",
-    "type": "Engineering, Architecture, Business",
-    "level": "18,000–50,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · scut.edu.cn"
-   },
-   {
-    "name": "Southwest Jiaotong University",
-    "website": "Chengdu",
-    "type": "Transportation Engineering",
-    "level": "16,000–45,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · swjtu.edu.cn"
-   },
-   {
-    "name": "Southwest University",
-    "website": "Chongqing",
-    "type": "Agriculture, Life Sciences, Education",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · swu.edu.cn"
-   },
-   {
-    "name": "Southwest Univ. Finance & Economics",
-    "website": "Chengdu",
-    "type": "Finance, Economics",
-    "level": "16,000–45,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · swufe.edu.cn"
-   },
-   {
-    "name": "Taiyuan Univ. of Technology",
-    "website": "Taiyuan, Shanxi",
-    "type": "Engineering",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · tyut.edu.cn"
-   },
-   {
-    "name": "Tibet University",
-    "website": "Lhasa, Tibet",
-    "type": "Tibetan Studies, Sciences, Agriculture",
-    "level": "12,000–35,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · utibet.edu.cn"
-   },
-   {
-    "name": "Wuhan Univ. of Technology",
-    "website": "Wuhan",
-    "type": "Materials Science, Engineering",
-    "level": "16,000–45,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · whut.edu.cn"
-   },
-   {
-    "name": "Yanbian University",
-    "website": "Yanji, Jilin",
-    "type": "Korean Studies, Medicine, Sciences",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+; Korean helpful",
-    "notes": "Jan–Apr · ybu.edu.cn"
-   },
-   {
-    "name": "Yangzhou University",
-    "website": "Yangzhou, Jiangsu",
-    "type": "Agriculture, Sciences, Engineering",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · yzu.edu.cn"
-   },
-   {
-    "name": "Zhengzhou University",
-    "website": "Zhengzhou, Henan",
-    "type": "Sciences, Engineering, Medicine",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · zzu.edu.cn"
-   },
-   {
-    "name": "Minzu University of China",
-    "website": "Beijing",
-    "type": "Ethnic Studies, Languages",
-    "level": "16,000–45,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · muc.edu.cn"
-   },
-   {
-    "name": "South-Central Minzu University",
-    "website": "Wuhan",
-    "type": "Ethnic Studies",
-    "level": "14,000–40,000",
-    "coverage": "HSK 4+ or IELTS 5.5/TOEFL 70+",
-    "notes": "Jan–Apr · scuec.edu.cn"
-   },
-   {
-    "name": "SUSTech",
-    "website": "Shenzhen",
-    "type": "STEM",
-    "level": "28,000–60,000",
-    "coverage": "Top math/science record; IELTS 6.5/TOEFL 90+; very competitive",
-    "notes": "Dec–Mar · sustech.edu.cn"
-   },
-   {
-    "name": "CUHK - Shenzhen",
-    "website": "Shenzhen",
-    "type": "Business, Data Science (English medium)",
-    "level": "90,000–115,000",
-    "coverage": "IELTS 6.5/TOEFL 90+; English medium; very competitive",
-    "notes": "Oct–Mar · cuhk.edu.cn"
-   },
-   {
-    "name": "Capital Normal University",
-    "website": "Beijing",
-    "type": "Education, Sciences, Humanities",
-    "level": "16,000–45,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+",
-    "notes": "Jan–Apr · cnu.edu.cn"
-   },
-   {
-    "name": "Univ. of Chinese Academy of Sciences",
-    "website": "Beijing",
-    "type": "Sciences, Technology (graduate only)",
-    "level": "20,000–50,000",
-    "coverage": "HSK 4+ or IELTS 6.0/TOEFL 80+; research supervisor",
-    "notes": "Jan–Apr · ucas.ac.cn"
-   },
    {
     "name": "Chinese Gov. Scholarship (CSC) — Embassy Track",
     "website": "csc.edu.cn",
@@ -3871,102 +4020,6 @@
    }
   ],
   "korea": [
-   {
-    "name": "Soonchunhyang University",
-    "website": "Asan, S. Chungcheong",
-    "type": "Medicine, Business, Engineering",
-    "level": "3,500,000–7,000, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · sch.ac.kr"
-   },
-   {
-    "name": "Wonkwang University",
-    "website": "Iksan, N. Jeolla",
-    "type": "Oriental Medicine, Dentistry, Business",
-    "level": "3,000,000–6,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · wonkwang.ac.kr"
-   },
-   {
-    "name": "Woosong University",
-    "website": "Daejeon",
-    "type": "Engineering, Business, Culinary Arts",
-    "level": "2,500,000–5,000, 000",
-    "coverage": "TOPIK 2+ or TOEFL 61+; GPA 2.0+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · woosong.ac.kr"
-   },
-   {
-    "name": "Jeonju University",
-    "website": "Jeonju, N. Jeolla",
-    "type": "Engineering, Business, Liberal Arts",
-    "level": "2,800,000–5,000, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · jj.ac.kr"
-   },
-   {
-    "name": "Kwangwoon University",
-    "website": "Seoul",
-    "type": "Electronics, Engineering, IT",
-    "level": "3,500,000–6,000, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · kw.ac.kr"
-   },
-   {
-    "name": "Kyonggi University",
-    "website": "Suwon / Seoul",
-    "type": "Business, Engineering, Hospitality",
-    "level": "3,000,000–5,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · kyonggi.ac.kr"
-   },
-   {
-    "name": "Sun Moon University",
-    "website": "Asan, S. Chungcheong",
-    "type": "Intl Studies, Business",
-    "level": "2,500,000–5,000, 000",
-    "coverage": "TOPIK 2+ or TOEFL 61+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · sunmoon.ac.kr"
-   },
-   {
-    "name": "Dong-eui University",
-    "website": "Busan",
-    "type": "Engineering, Business, Oriental Medicine",
-    "level": "3,000,000–5,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · deu.ac.kr"
-   },
-   {
-    "name": "Dongseo University",
-    "website": "Busan",
-    "type": "Design, Business, IT, Tourism",
-    "level": "3,000,000–5,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · dongseo.ac.kr"
-   },
-   {
-    "name": "Hoseo University",
-    "website": "Asan, S. Chungcheong",
-    "type": "Engineering, Business, Nursing",
-    "level": "3,000,000–5,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · hoseo.ac.kr"
-   },
-   {
-    "name": "Inje University",
-    "website": "Gimhae, S. Gyeongsang",
-    "type": "Medicine, Engineering",
-    "level": "3,000,000–6,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · inje.ac.kr"
-   },
-   {
-    "name": "Konyang University",
-    "website": "Nonsan, S. Chungcheong",
-    "type": "Medicine, Allied Health Sciences",
-    "level": "3,000,000–6,500, 000",
-    "coverage": "TOPIK 3+ or TOEFL 72+",
-    "notes": "Spring: Sep–Nov | Fall: Mar–May · konyang.ac.kr"
-   },
    {
     "name": "Global Korea Scholarship (GKS) — Graduate",
     "website": "niied.go.kr",
