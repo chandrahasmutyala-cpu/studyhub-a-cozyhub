@@ -36,7 +36,6 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
 import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
-import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 import { Route as AuthenticatedAdmissionRoadmapRouteImport } from './routes/_authenticated/admission-roadmap'
 
@@ -183,11 +182,6 @@ const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
   path: '/career',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCalendarRoute = AuthenticatedCalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedApplicationsRoute =
   AuthenticatedApplicationsRouteImport.update({
     id: '/applications',
@@ -208,7 +202,6 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
   '/applications': typeof AuthenticatedApplicationsRoute
-  '/calendar': typeof AuthenticatedCalendarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
   '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
@@ -239,7 +232,6 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
   '/applications': typeof AuthenticatedApplicationsRoute
-  '/calendar': typeof AuthenticatedCalendarRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
   '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
@@ -272,7 +264,6 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
-  '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/chinese': typeof AuthenticatedChineseRoute
   '/_authenticated/cost-calculator': typeof AuthenticatedCostCalculatorRoute
@@ -305,7 +296,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admission-roadmap'
     | '/applications'
-    | '/calendar'
     | '/career'
     | '/chinese'
     | '/cost-calculator'
@@ -336,7 +326,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admission-roadmap'
     | '/applications'
-    | '/calendar'
     | '/career'
     | '/chinese'
     | '/cost-calculator'
@@ -368,7 +357,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_authenticated/admission-roadmap'
     | '/_authenticated/applications'
-    | '/_authenticated/calendar'
     | '/_authenticated/career'
     | '/_authenticated/chinese'
     | '/_authenticated/cost-calculator'
@@ -592,13 +580,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCareerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/calendar': {
-      id: '/_authenticated/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof AuthenticatedCalendarRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/applications': {
       id: '/_authenticated/applications'
       path: '/applications'
@@ -619,7 +600,6 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdmissionRoadmapRoute: typeof AuthenticatedAdmissionRoadmapRoute
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
-  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
   AuthenticatedCostCalculatorRoute: typeof AuthenticatedCostCalculatorRoute
@@ -647,7 +627,6 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdmissionRoadmapRoute: AuthenticatedAdmissionRoadmapRoute,
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
-  AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedChineseRoute: AuthenticatedChineseRoute,
   AuthenticatedCostCalculatorRoute: AuthenticatedCostCalculatorRoute,
