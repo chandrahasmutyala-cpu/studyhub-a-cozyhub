@@ -56,7 +56,7 @@ const ImageSchema = z.object({
 export const translateScreenshot = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => ImageSchema.parse(input))
-  .handler(async () => {
+  .handler(async (): Promise<{ result: JsonValue }> => {
     throw new Error(
       "Screenshot translation is temporarily unavailable — the current AI provider (Groq) doesn't support image input. Paste the text into the transcript translator instead.",
     );
