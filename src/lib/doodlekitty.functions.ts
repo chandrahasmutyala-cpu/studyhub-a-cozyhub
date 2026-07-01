@@ -13,7 +13,7 @@ const Input = z.object({
 export const doodleKittyEdit = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => Input.parse(input))
-  .handler(async () => {
+  .handler(async (): Promise<{ imageUrl: string; summary: { detected: string[]; doodles: string[]; annotations: string[] } }> => {
     throw new Error(
       "DoodleKitty is temporarily disabled — the current AI provider doesn't support image generation. It'll return once an image model is connected.",
     );
