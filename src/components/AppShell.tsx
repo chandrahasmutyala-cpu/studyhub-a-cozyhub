@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
-  Calculator, FileText, Target, Cat, MessagesSquare,
+  Calculator, FileText, Target, Cat, MessagesSquare, Map,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { PandaBackground } from "@/components/PandaBackground";
@@ -48,6 +48,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "Creative",
     items: [
+      { to: "/world-explorer", label: "World Explorer", icon: Map },
       { to: "/doodlekitty", label: "DoodleKitty", icon: Cat },
     ],
   },
