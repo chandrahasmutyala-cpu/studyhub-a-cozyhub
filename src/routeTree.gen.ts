@@ -14,6 +14,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedWorldExplorerRouteImport } from './routes/_authenticated/world-explorer'
 import { Route as AuthenticatedUniversityAdvisorRouteImport } from './routes/_authenticated/university-advisor'
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
@@ -63,6 +64,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedWorldExplorerRoute =
+  AuthenticatedWorldExplorerRouteImport.update({
+    id: '/world-explorer',
+    path: '/world-explorer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedUniversityAdvisorRoute =
   AuthenticatedUniversityAdvisorRouteImport.update({
     id: '/university-advisor',
@@ -224,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
   '/university-advisor': typeof AuthenticatedUniversityAdvisorRoute
+  '/world-explorer': typeof AuthenticatedWorldExplorerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -254,6 +262,7 @@ export interface FileRoutesByTo {
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
   '/university-advisor': typeof AuthenticatedUniversityAdvisorRoute
+  '/world-explorer': typeof AuthenticatedWorldExplorerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -286,6 +295,7 @@ export interface FileRoutesById {
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
   '/_authenticated/university-advisor': typeof AuthenticatedUniversityAdvisorRoute
+  '/_authenticated/world-explorer': typeof AuthenticatedWorldExplorerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -318,6 +328,7 @@ export interface FileRouteTypes {
     | '/tutor'
     | '/universities'
     | '/university-advisor'
+    | '/world-explorer'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -348,6 +359,7 @@ export interface FileRouteTypes {
     | '/tutor'
     | '/universities'
     | '/university-advisor'
+    | '/world-explorer'
   id:
     | '__root__'
     | '/'
@@ -379,6 +391,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
     | '/_authenticated/university-advisor'
+    | '/_authenticated/world-explorer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -425,6 +438,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/world-explorer': {
+      id: '/_authenticated/world-explorer'
+      path: '/world-explorer'
+      fullPath: '/world-explorer'
+      preLoaderRoute: typeof AuthenticatedWorldExplorerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/university-advisor': {
       id: '/_authenticated/university-advisor'
@@ -622,6 +642,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
   AuthenticatedUniversityAdvisorRoute: typeof AuthenticatedUniversityAdvisorRoute
+  AuthenticatedWorldExplorerRoute: typeof AuthenticatedWorldExplorerRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -650,6 +671,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
   AuthenticatedUniversityAdvisorRoute: AuthenticatedUniversityAdvisorRoute,
+  AuthenticatedWorldExplorerRoute: AuthenticatedWorldExplorerRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -665,13 +687,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

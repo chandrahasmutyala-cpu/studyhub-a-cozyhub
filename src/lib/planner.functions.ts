@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
+import { groqChat } from "./groq.server";
 
 const InputSchema = z.object({
   career_goal: z.string().min(2).max(200),
@@ -10,7 +11,7 @@ const InputSchema = z.object({
   notes: z.string().max(800).optional().default(""),
 });
 
-const SYSTEM = `You are an academic & career planner. Given a student's goal, return a STRICT JSON object (no prose, no markdown fences) with this shape:
+const SYSTEM = `You are an academic & career planner. Return a STRICT JSON object (no prose, no markdown fences) with this shape:
 {
   "summary": string,
   "subjects": [{"name": string, "why": string}],
@@ -21,15 +22,12 @@ const SYSTEM = `You are an academic & career planner. Given a student's goal, re
   "scholarships_hint": [string],
   "timeline": [{"phase": string, "when": string, "actions": [string]}]
 }
-Keep arrays focused (3-7 items). Be realistic and specific to the country/university where possible. Never invent scholarship names or URLs — only general categories under scholarships_hint. Output ONLY the JSON object, no markdown fences.`;
+Keep arrays focused (3-7 items). Be realistic and specific. Never invent scholarship names/URLs. Output ONLY the JSON object.`;
 
 export const generatePlan = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data, context }) => {
-    const apiKey = process.env.LOVABLE_API_KEY;
-    if (!apiKey) throw new Error("AI is not configured.");
-
     const userPrompt = `Student profile:
 - Current grade/year: ${data.current_grade}
 - Career goal: ${data.career_goal}
@@ -39,27 +37,16 @@ export const generatePlan = createServerFn({ method: "POST" })
 
 Return the JSON plan now.`;
 
-    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: { "Lovable-API-Key": apiKey, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [
-          { role: "system", content: SYSTEM },
-          { role: "user", content: userPrompt },
-        ],
-      }),
+    let raw = await groqChat({
+      messages: [
+        { role: "system", content: SYSTEM },
+        { role: "user", content: userPrompt },
+      ],
+      jsonMode: true,
+      temperature: 0.4,
     });
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      if (res.status === 429) throw new Error("AI is busy — try again shortly.");
-      if (res.status === 402) throw new Error("AI credits exhausted. Add credits in workspace billing.");
-      throw new Error(`AI error ${res.status}: ${text.slice(0, 200)}`);
-    }
-    const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    let raw = json.choices?.[0]?.message?.content ?? "{}";
-    // Strip code fences if present
     raw = raw.trim().replace(/^```(?:json)?\s*/i, "").replace(/```$/i, "").trim();
+
     let plan: unknown;
     try { plan = JSON.parse(raw); } catch { throw new Error("Planner returned invalid JSON."); }
 
