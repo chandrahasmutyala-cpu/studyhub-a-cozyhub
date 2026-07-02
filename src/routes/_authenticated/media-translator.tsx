@@ -13,7 +13,7 @@ export const Route = createFileRoute("/_authenticated/media-translator")({
 type Lang = "japanese" | "chinese" | "korean";
 type Sentence = { i?: number; src: string; en: string; reading?: string; notes?: string };
 type TranscriptResult = { sentences?: Sentence[]; raw?: string };
-type ImageResult = { sentences?: Sentence[]; vocab?: { w: string; reading?: string; en: string }[]; grammar?: string[]; raw?: string };
+type ImageResult = { overlayUrl?: string; note?: string; sentences?: Sentence[]; vocab?: { w: string; reading?: string; en: string }[]; grammar?: string[]; raw?: string };
 
 function TranslatorPage() {
   const [tab, setTab] = useState<"transcript" | "screenshot">("transcript");
@@ -139,6 +139,15 @@ function ScreenshotPanel() {
         {preview && <img src={preview} alt="upload" className="max-h-72 rounded-2xl mx-auto" />}
         {loading && <div className="text-xs text-muted-foreground flex items-center gap-2"><Loader2 className="size-3 animate-spin" /> Reading the image…</div>}
       </div>
+
+      {result?.overlayUrl && (
+        <section className="bg-white/85 backdrop-blur border border-border rounded-3xl p-5 space-y-3">
+          <h3 className="font-display font-bold">English overlay</h3>
+          <img src={result.overlayUrl} alt="translated screenshot" className="rounded-2xl mx-auto max-h-[70vh] border border-border" />
+          {result.note && <p className="text-xs text-muted-foreground">{result.note}</p>}
+          <a href={result.overlayUrl} download="translated.png" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-xs font-bold">Download</a>
+        </section>
+      )}
 
       {result?.sentences && result.sentences.length > 0 && <SentenceList sentences={result.sentences} />}
       {result?.vocab && result.vocab.length > 0 && (
