@@ -13,7 +13,7 @@ export const Route = createFileRoute("/_authenticated/media-translator")({
 type Lang = "japanese" | "chinese" | "korean";
 type Sentence = { i?: number; src: string; en: string; reading?: string; notes?: string };
 type TranscriptResult = { sentences?: Sentence[]; raw?: string };
-type ImageResult = { sentences?: Sentence[]; vocab?: { w: string; reading?: string; en: string }[]; grammar?: string[]; raw?: string };
+type ImageResult = { overlayUrl?: string; note?: string; sentences?: Sentence[]; vocab?: { w: string; reading?: string; en: string }[]; grammar?: string[]; raw?: string };
 
 function TranslatorPage() {
   const [tab, setTab] = useState<"transcript" | "screenshot">("transcript");
