@@ -41,6 +41,10 @@
   --color-matcha-soft: var(--matcha-soft);
   --color-lavender: var(--lavender);
   --color-lavender-soft: var(--lavender-soft);
+  --color-mint: var(--mint);
+  --color-mint-soft: var(--mint-soft);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
   --color-honey: var(--honey);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
@@ -54,12 +58,13 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-display: "Fredoka", sans-serif;
-  --font-body: "Quicksand", sans-serif;
-  --font-sans: "Quicksand", sans-serif;
+  --font-display: "Plus Jakarta Sans", "Fredoka", sans-serif;
+  --font-body: "Plus Jakarta Sans", "Quicksand", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Quicksand", sans-serif;
 
-  --shadow-soft: 0 8px 24px -8px oklch(0.7 0.08 40 / 0.18);
-  --shadow-pop: 0 18px 40px -16px oklch(0.7 0.12 30 / 0.25);
+  --shadow-soft: 0 10px 30px -12px oklch(0.6 0.06 250 / 0.18);
+  --shadow-pop: 0 24px 50px -20px oklch(0.55 0.09 260 / 0.28);
+  --shadow-glass: 0 8px 32px -8px oklch(0.6 0.06 250 / 0.22), inset 0 1px 0 0 rgb(255 255 255 / 0.6);
 }
 
 :root {
