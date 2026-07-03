@@ -64,15 +64,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
 
 const allItems = navGroups.flatMap((g) => g.items);
 
-// Floating bottom nav — 5 tabs that map to primary destinations.
-const bottomTabs: (NavItem & { drawer?: boolean })[] = [
-  { to: "/dashboard",  label: "Home",    icon: Home },
-  { to: "/tasks",      label: "Study",   icon: BookOpen },
-  { to: "/world-explorer", label: "Explore", icon: Map },
-  { to: "/tutor",      label: "AI",      icon: Sparkles },
-  { to: "/profile",    label: "Profile", icon: User },
-];
-
 function Monogram({ className = "" }: { className?: string }) {
   return <Logo className={className} />;
 }
