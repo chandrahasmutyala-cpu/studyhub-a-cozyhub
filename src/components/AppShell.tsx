@@ -231,12 +231,21 @@ export function AppShell({ children }: { children: ReactNode }) {
 }
 
 function ProfileCard({
-  xp, level, next, pct, name,
-}: { xp: number; level: number; next: number; pct: number; name?: string | null }) {
+  xp, level, next, pct, name, avatarPath,
+}: { xp: number; level: number; next: number; pct: number; name?: string | null; avatarPath?: string | null }) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    if (!avatarPath) { setUrl(null); return; }
+    supabase.storage.from("avatars").createSignedUrl(avatarPath, 60 * 60).then(({ data }) => {
+      if (!cancelled) setUrl(data?.signedUrl ?? null);
+    });
+    return () => { cancelled = true; };
+  }, [avatarPath]);
   return (
     <div className="rounded-3xl glass-panel p-4 flex items-center gap-3">
-      <div className="size-12 rounded-2xl gradient-primary grid place-items-center text-lg font-display font-bold text-white">
-        {(name?.[0] ?? "S").toUpperCase()}
+      <div className="size-12 rounded-2xl overflow-hidden gradient-primary grid place-items-center text-lg font-display font-bold text-white">
+        {url ? <img src={url} alt="" className="w-full h-full object-cover" /> : (name?.[0] ?? "S").toUpperCase()}
       </div>
       <div className="min-w-0 flex-1">
         <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lvl {level}</div>
