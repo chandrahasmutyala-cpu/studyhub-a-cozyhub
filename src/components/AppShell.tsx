@@ -227,28 +227,6 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {/* MOBILE — floating pill bottom nav */}
-      <nav className="md:hidden fixed bottom-3 inset-x-3 z-30 h-16 rounded-full floating-pill flex items-center justify-between px-2">
-        {bottomTabs.map((t) => {
-          const Icon = t.icon;
-          const active = pathname.startsWith(t.to);
-          return (
-            <Link
-              key={t.to}
-              to={t.to as "/dashboard"}
-              className={`flex-1 h-12 mx-0.5 rounded-full grid place-items-center transition ${
-                active ? "gradient-primary text-white shadow-soft" : "text-muted-foreground"
-              }`}
-              aria-label={t.label}
-            >
-              <div className="flex flex-col items-center gap-0.5">
-                <Icon className="size-5" />
-                <span className="text-[10px] font-bold tracking-wide">{t.label}</span>
-              </div>
-            </Link>
-          );
-        })}
-      </nav>
     </div>
   );
 }
