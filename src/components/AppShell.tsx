@@ -49,7 +49,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "Creative",
     items: [
-      { to: "/world-explorer", label: "World Explorer", icon: Map },
       { to: "/doodlekitty", label: "DoodleKitty", icon: Cat },
     ],
   },
