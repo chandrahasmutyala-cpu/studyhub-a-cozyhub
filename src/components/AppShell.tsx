@@ -141,7 +141,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <span className="font-display font-bold text-2xl tracking-tight">StudyHub</span>
           </Link>
 
-          <ProfileCard xp={xp} level={level} next={next} pct={pct} name={profile?.display_name} />
+          <ProfileCard xp={xp} level={level} next={next} pct={pct} name={profile?.display_name} avatarPath={profile?.avatar_url} />
 
           <div className="relative">
             <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -195,7 +195,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               </button>
             </div>
             <div className="px-5">
-              <ProfileCard xp={xp} level={level} next={next} pct={pct} name={profile?.display_name} />
+              <ProfileCard xp={xp} level={level} next={next} pct={pct} name={profile?.display_name} avatarPath={profile?.avatar_url} />
             </div>
             <div className="px-5 pt-3">
               <div className="relative">
