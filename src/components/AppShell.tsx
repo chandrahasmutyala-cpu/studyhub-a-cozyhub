@@ -49,7 +49,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   {
     label: "Creative",
     items: [
-      { to: "/world-explorer", label: "World Explorer", icon: Map },
       { to: "/doodlekitty", label: "DoodleKitty", icon: Cat },
     ],
   },
@@ -63,15 +62,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
 ];
 
 const allItems = navGroups.flatMap((g) => g.items);
-
-// Floating bottom nav — 5 tabs that map to primary destinations.
-const bottomTabs: (NavItem & { drawer?: boolean })[] = [
-  { to: "/dashboard",  label: "Home",    icon: Home },
-  { to: "/tasks",      label: "Study",   icon: BookOpen },
-  { to: "/world-explorer", label: "Explore", icon: Map },
-  { to: "/tutor",      label: "AI",      icon: Sparkles },
-  { to: "/profile",    label: "Profile", icon: User },
-];
 
 function Monogram({ className = "" }: { className?: string }) {
   return <Logo className={className} />;
@@ -236,28 +226,6 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {/* MOBILE — floating pill bottom nav */}
-      <nav className="md:hidden fixed bottom-3 inset-x-3 z-30 h-16 rounded-full floating-pill flex items-center justify-between px-2">
-        {bottomTabs.map((t) => {
-          const Icon = t.icon;
-          const active = pathname.startsWith(t.to);
-          return (
-            <Link
-              key={t.to}
-              to={t.to as "/dashboard"}
-              className={`flex-1 h-12 mx-0.5 rounded-full grid place-items-center transition ${
-                active ? "gradient-primary text-white shadow-soft" : "text-muted-foreground"
-              }`}
-              aria-label={t.label}
-            >
-              <div className="flex flex-col items-center gap-0.5">
-                <Icon className="size-5" />
-                <span className="text-[10px] font-bold tracking-wide">{t.label}</span>
-              </div>
-            </Link>
-          );
-        })}
-      </nav>
     </div>
   );
 }
