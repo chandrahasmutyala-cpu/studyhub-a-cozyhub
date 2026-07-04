@@ -7,7 +7,8 @@ import {
   LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
   Calculator, FileText, Target, Cat, MessagesSquare,
-  Home, Search, Menu, X, ChevronRight, GraduationCap as AcademyIcon,
+  Home, Search, Menu, X, ChevronRight,
+
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
