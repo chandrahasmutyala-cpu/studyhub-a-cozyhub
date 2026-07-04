@@ -20,7 +20,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     label: "Study",
     items: [
       { to: "/dashboard", label: "Home", icon: Home },
-      { to: "/learning-academy", label: "Learning Academy", icon: AcademyIcon },
+      { to: "/learning-academy", label: "Learning Academy", icon: GraduationCap },
       { to: "/tasks", label: "Planner", icon: ListTodo },
       { to: "/tutor", label: "AI Tutor", icon: Sparkles },
       { to: "/focus", label: "Focus", icon: Timer },
@@ -61,7 +61,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
 
 const bottomTabs: NavItem[] = [
   { to: "/dashboard", label: "Home", icon: Home },
-  { to: "/learning-academy", label: "Academy", icon: AcademyIcon },
+  { to: "/learning-academy", label: "Academy", icon: GraduationCap },
   { to: "/tasks", label: "Planner", icon: ListTodo },
   { to: "/tutor", label: "Tutor", icon: Sparkles },
 ];
