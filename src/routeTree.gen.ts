@@ -26,6 +26,7 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
 import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
+import { Route as AuthenticatedLearningAcademyRouteImport } from './routes/_authenticated/learning-academy'
 import { Route as AuthenticatedLanguageGoalsRouteImport } from './routes/_authenticated/language-goals'
 import { Route as AuthenticatedKoreanRouteImport } from './routes/_authenticated/korean'
 import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticated/japanese'
@@ -130,6 +131,12 @@ const AuthenticatedMediaTranslatorRoute =
     path: '/media-translator',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedLearningAcademyRoute =
+  AuthenticatedLearningAcademyRouteImport.update({
+    id: '/learning-academy',
+    path: '/learning-academy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLanguageGoalsRoute =
   AuthenticatedLanguageGoalsRouteImport.update({
     id: '/language-goals',
@@ -220,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/japanese': typeof AuthenticatedJapaneseRoute
   '/korean': typeof AuthenticatedKoreanRoute
   '/language-goals': typeof AuthenticatedLanguageGoalsRoute
+  '/learning-academy': typeof AuthenticatedLearningAcademyRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
@@ -251,6 +259,7 @@ export interface FileRoutesByTo {
   '/japanese': typeof AuthenticatedJapaneseRoute
   '/korean': typeof AuthenticatedKoreanRoute
   '/language-goals': typeof AuthenticatedLanguageGoalsRoute
+  '/learning-academy': typeof AuthenticatedLearningAcademyRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
@@ -284,6 +293,7 @@ export interface FileRoutesById {
   '/_authenticated/japanese': typeof AuthenticatedJapaneseRoute
   '/_authenticated/korean': typeof AuthenticatedKoreanRoute
   '/_authenticated/language-goals': typeof AuthenticatedLanguageGoalsRoute
+  '/_authenticated/learning-academy': typeof AuthenticatedLearningAcademyRoute
   '/_authenticated/media-translator': typeof AuthenticatedMediaTranslatorRoute
   '/_authenticated/notes': typeof AuthenticatedNotesRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
@@ -317,6 +327,7 @@ export interface FileRouteTypes {
     | '/japanese'
     | '/korean'
     | '/language-goals'
+    | '/learning-academy'
     | '/media-translator'
     | '/notes'
     | '/onboarding'
@@ -348,6 +359,7 @@ export interface FileRouteTypes {
     | '/japanese'
     | '/korean'
     | '/language-goals'
+    | '/learning-academy'
     | '/media-translator'
     | '/notes'
     | '/onboarding'
@@ -380,6 +392,7 @@ export interface FileRouteTypes {
     | '/_authenticated/japanese'
     | '/_authenticated/korean'
     | '/_authenticated/language-goals'
+    | '/_authenticated/learning-academy'
     | '/_authenticated/media-translator'
     | '/_authenticated/notes'
     | '/_authenticated/onboarding'
@@ -523,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMediaTranslatorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/learning-academy': {
+      id: '/_authenticated/learning-academy'
+      path: '/learning-academy'
+      fullPath: '/learning-academy'
+      preLoaderRoute: typeof AuthenticatedLearningAcademyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/language-goals': {
       id: '/_authenticated/language-goals'
       path: '/language-goals'
@@ -631,6 +651,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedJapaneseRoute: typeof AuthenticatedJapaneseRoute
   AuthenticatedKoreanRoute: typeof AuthenticatedKoreanRoute
   AuthenticatedLanguageGoalsRoute: typeof AuthenticatedLanguageGoalsRoute
+  AuthenticatedLearningAcademyRoute: typeof AuthenticatedLearningAcademyRoute
   AuthenticatedMediaTranslatorRoute: typeof AuthenticatedMediaTranslatorRoute
   AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
@@ -659,6 +680,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedJapaneseRoute: AuthenticatedJapaneseRoute,
   AuthenticatedKoreanRoute: AuthenticatedKoreanRoute,
   AuthenticatedLanguageGoalsRoute: AuthenticatedLanguageGoalsRoute,
+  AuthenticatedLearningAcademyRoute: AuthenticatedLearningAcademyRoute,
   AuthenticatedMediaTranslatorRoute: AuthenticatedMediaTranslatorRoute,
   AuthenticatedNotesRoute: AuthenticatedNotesRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
@@ -687,13 +709,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
