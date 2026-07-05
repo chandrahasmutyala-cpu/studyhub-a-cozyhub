@@ -4,29 +4,31 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useProfile } from "@/lib/useProfile";
-import { Play, Pause, RotateCcw, Maximize2, Minimize2, Timer as TimerIcon, Clock, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, RotateCcw, Maximize2, Minimize2, Timer as TimerIcon, Clock, Volume2, VolumeX, CloudRain, Trees, Coffee, Music2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/focus")({
   component: FocusPage,
 });
 
-type Scene = { id: string; label: string; bg: string };
+type Scene = { id: string; label: string; bg: string; ink: string };
 const SCENES: Scene[] = [
-  { id: "minimal",   label: "Minimal Workspace", bg: "linear-gradient(135deg, #f5f1ea, #e8e1d3)" },
-  { id: "library",   label: "Japanese Library",  bg: "linear-gradient(135deg, #ece4d8, #c8b89a)" },
-  { id: "study",     label: "Study Room",        bg: "linear-gradient(135deg, #fff3e6, #ffd9bb)" },
-  { id: "rain",      label: "Rainy Window",      bg: "linear-gradient(135deg, #dde7f0, #99b0c8)" },
-  { id: "mountain",  label: "Mountain View",     bg: "linear-gradient(180deg, #cfe2f3, #f1f5ea 60%, #d6c8a8)" },
+  { id: "sage",    label: "Sage",    bg: "linear-gradient(160deg, #f5f0e8 0%, #dce5d4 60%, #a8c0a0 100%)", ink: "#33422f" },
+  { id: "cream",   label: "Cream",   bg: "linear-gradient(160deg, #faf6ee 0%, #efe8d8 100%)",              ink: "#3b3427" },
+  { id: "meadow",  label: "Meadow",  bg: "linear-gradient(180deg, #dce5d4 0%, #a8c0a0 70%, #7d9b76 100%)",  ink: "#2a3a26" },
+  { id: "stone",   label: "Stone",   bg: "linear-gradient(160deg, #eeeae2 0%, #cfc9bd 100%)",              ink: "#3a362e" },
+  { id: "mist",    label: "Mist",    bg: "linear-gradient(160deg, #edf1ea 0%, #cfdac8 100%)",              ink: "#2f3a2b" },
 ];
 
-type Ambience = "off" | "rain" | "forest" | "river" | "wind";
-const AMBIENCE_OPTS: { id: Ambience; label: string }[] = [
-  { id: "off",    label: "Silence" },
-  { id: "rain",   label: "Rain" },
-  { id: "forest", label: "Forest" },
-  { id: "river",  label: "River" },
-  { id: "wind",   label: "Wind" },
+type SoundId = "off" | "rain" | "forest" | "cafe" | "lofi";
+type Sound = { id: SoundId; label: string; icon: typeof CloudRain; src?: string };
+// Hotlink-friendly public loop URLs. If any 404, only that pack fails; UI still works.
+const SOUNDS: Sound[] = [
+  { id: "off",    label: "Silence",   icon: VolumeX },
+  { id: "rain",   label: "Rain",      icon: CloudRain, src: "https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73e3a.mp3" },
+  { id: "forest", label: "Forest",    icon: Trees,     src: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_1808fbf07a.mp3" },
+  { id: "cafe",   label: "Café",      icon: Coffee,    src: "https://cdn.pixabay.com/download/audio/2021/10/25/audio_ff02b1b880.mp3" },
+  { id: "lofi",   label: "Lo-fi",     icon: Music2,    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
 ];
 
 const DURATIONS = [
@@ -42,7 +44,8 @@ function FocusPage() {
   const { profile, update } = useProfile();
   const [mode, setMode] = useState<Mode>("pomodoro");
   const [scene, setScene] = useState<Scene>(SCENES[0]);
-  const [ambience, setAmbience] = useState<Ambience>("off");
+  const [sound, setSound] = useState<SoundId>("off");
+  const [volume, setVolume] = useState(0.5);
   const [fullscreen, setFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -63,29 +66,43 @@ function FocusPage() {
 
   return (
     <AppShell>
-      <div className="max-w-3xl space-y-5">
-        <div>
-          <h1 className="font-display text-3xl font-bold">Focus</h1>
-          <p className="text-sm text-muted-foreground">Pomodoro, stopwatch, fullscreen mode — pure productivity. No music, ambient only.</p>
-        </div>
+      <div className="max-w-4xl mx-auto space-y-8">
+        <header>
+          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">Focus</div>
+          <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight mt-2">A quiet room to think.</h1>
+          <p className="text-sm text-muted-foreground mt-2 max-w-md">Pomodoro or stopwatch, five sage scenes, four ambient packs. No noise, no clutter.</p>
+        </header>
 
-        <div className="flex gap-1 bg-white/80 backdrop-blur p-1 rounded-full border border-border w-fit">
+        {/* Mode pill */}
+        <div className="inline-flex gap-1 bg-card border border-border/60 p-1 rounded-full">
           {([
             { id: "pomodoro" as Mode, label: "Pomodoro", icon: TimerIcon },
             { id: "stopwatch" as Mode, label: "Stopwatch", icon: Clock },
           ]).map((t) => (
-            <button key={t.id} onClick={() => setMode(t.id)}
-              className={`px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 ${mode === t.id ? "bg-primary" : "text-muted-foreground"}`}>
-              <t.icon className="size-3.5" /> {t.label}
+            <button
+              key={t.id}
+              onClick={() => setMode(t.id)}
+              className={`px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition ${
+                mode === t.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <t.icon className="size-3.5 stroke-[1.75]" /> {t.label}
             </button>
           ))}
         </div>
 
-        <div ref={containerRef}
-          className="rounded-[2.5rem] p-8 sm:p-12 border-8 border-white shadow-pop relative overflow-hidden"
-          style={{ background: scene.bg }}>
-          <button onClick={toggleFullscreen} className="absolute top-4 right-4 size-9 rounded-full bg-white/80 grid place-items-center" aria-label="Fullscreen">
-            {fullscreen ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+        {/* Main scene card */}
+        <div
+          ref={containerRef}
+          className="rounded-[2.5rem] p-8 sm:p-14 border border-border/60 shadow-[0_30px_60px_-30px_rgb(45_60_45/0.28)] relative overflow-hidden"
+          style={{ background: scene.bg, color: scene.ink }}
+        >
+          <button
+            onClick={toggleFullscreen}
+            className="absolute top-5 right-5 size-10 rounded-full bg-white/70 backdrop-blur grid place-items-center hover:bg-white transition"
+            aria-label="Fullscreen"
+          >
+            {fullscreen ? <Minimize2 className="size-[18px] stroke-[1.75]" /> : <Maximize2 className="size-[18px] stroke-[1.75]" />}
           </button>
           {mode === "pomodoro"
             ? <Pomodoro scene={scene} profile={profile} update={update} qc={qc} />
@@ -93,34 +110,70 @@ function FocusPage() {
           }
         </div>
 
-        <section className="grid sm:grid-cols-2 gap-4">
-          <div className="bg-white border border-border rounded-3xl p-4">
-            <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Scene</div>
-            <div className="flex gap-2 flex-wrap">
-              {SCENES.map((b) => (
-                <button key={b.id} onClick={() => setScene(b)}
-                  className={`px-3 py-2 rounded-full text-xs font-bold border ${scene.id === b.id ? "border-primary" : "border-border"}`}
-                  style={{ background: b.bg }}>{b.label}</button>
-              ))}
-            </div>
-          </div>
-          <div className="bg-white border border-border rounded-3xl p-4">
-            <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
-              {ambience === "off" ? <VolumeX className="size-3.5" /> : <Volume2 className="size-3.5" />} Ambient sound
-            </div>
-            <div className="flex gap-2 flex-wrap">
-              {AMBIENCE_OPTS.map((a) => (
-                <button key={a.id} onClick={() => setAmbience(a.id)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-bold border ${ambience === a.id ? "bg-primary border-primary" : "bg-white border-border"}`}>
-                  {a.label}
+        {/* Scene picker */}
+        <section>
+          <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-3 px-1">Scene</div>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            {SCENES.map((s) => {
+              const active = scene.id === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setScene(s)}
+                  className={`group rounded-2xl overflow-hidden border transition ${active ? "border-primary ring-2 ring-primary/25" : "border-border/60 hover:border-primary/40"}`}
+                >
+                  <div className="h-16" style={{ background: s.bg }} />
+                  <div className="px-3 py-2 bg-card text-left">
+                    <div className="text-xs font-bold" style={{ color: active ? undefined : undefined }}>{s.label}</div>
+                  </div>
                 </button>
-              ))}
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-2">Procedurally generated — no music, no playlists.</p>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Sound picker */}
+        <section>
+          <div className="flex items-center justify-between mb-3 px-1">
+            <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Ambient sound</div>
+            {sound !== "off" && (
+              <div className="flex items-center gap-2">
+                <Volume2 className="size-3.5 stroke-[1.75] text-muted-foreground" />
+                <input
+                  type="range"
+                  min={0}
+                  max={1}
+                  step={0.05}
+                  value={volume}
+                  onChange={(e) => setVolume(parseFloat(e.target.value))}
+                  className="w-28 accent-primary"
+                />
+              </div>
+            )}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            {SOUNDS.map((s) => {
+              const Icon = s.icon;
+              const active = sound === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setSound(s.id)}
+                  className={`rounded-2xl border p-4 flex flex-col items-center gap-2 transition ${
+                    active
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border/60 bg-card hover:border-primary/40 text-foreground/80"
+                  }`}
+                >
+                  <Icon className="size-5 stroke-[1.75]" />
+                  <span className="text-xs font-bold">{s.label}</span>
+                </button>
+              );
+            })}
           </div>
         </section>
       </div>
-      <AmbiencePlayer ambience={ambience} />
+      <SoundPlayer sound={sound} volume={volume} />
     </AppShell>
   );
 }
@@ -143,7 +196,7 @@ function Pomodoro({ scene, profile, update, qc }: {
     if (!running) { if (timer.current) clearInterval(timer.current); return; }
     timer.current = setInterval(() => {
       setSeconds((s) => {
-        if (s <= 1) { handleComplete(); return 0; }
+        if (s <= 1) { void handleComplete(); return 0; }
         return s - 1;
       });
     }, 1000);
@@ -196,25 +249,38 @@ function Pomodoro({ scene, profile, update, qc }: {
 
   return (
     <>
-      <div className="text-[10px] font-bold uppercase tracking-widest text-foreground/70 mb-2">
+      <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-70 mb-3">
         {mode === "focus" ? "Deep Focus" : "Break"}
       </div>
-      <div className="font-display text-7xl sm:text-8xl font-bold tabular-nums">{mm}:{ss}</div>
-      <div className="h-2 bg-white/50 rounded-full overflow-hidden mt-4">
-        <div className="h-full bg-foreground/70 transition-all" style={{ width: `${pct}%` }} />
+      <div className="font-display text-7xl sm:text-8xl font-bold tabular-nums leading-none">{mm}:{ss}</div>
+      <div className="h-1.5 bg-white/40 rounded-full overflow-hidden mt-6 max-w-md">
+        <div className="h-full bg-current/80 transition-all" style={{ width: `${pct}%` }} />
       </div>
-      <div className="flex gap-2 mt-6">
-        <button onClick={() => setRunning((r) => !r)} className="bg-white rounded-full px-6 py-3 font-bold shadow-soft flex items-center gap-2">
-          {running ? <><Pause className="size-4" />Pause</> : <><Play className="size-4" />Start</>}
+      <div className="flex gap-2 mt-7">
+        <button
+          onClick={() => setRunning((r) => !r)}
+          className="bg-white text-foreground rounded-full px-6 py-3 font-bold shadow-sm flex items-center gap-2 hover:shadow-md transition"
+        >
+          {running ? <><Pause className="size-4 stroke-[1.75]" />Pause</> : <><Play className="size-4 stroke-[1.75]" />Start</>}
         </button>
-        <button onClick={reset} className="bg-white/70 rounded-full px-4 py-3 font-bold flex items-center gap-2">
-          <RotateCcw className="size-4" />Reset
+        <button
+          onClick={reset}
+          className="bg-white/60 rounded-full px-4 py-3 font-bold flex items-center gap-2 hover:bg-white/80 transition"
+        >
+          <RotateCcw className="size-4 stroke-[1.75]" />Reset
         </button>
       </div>
-      <div className="flex gap-2 mt-4 flex-wrap">
+      <div className="flex gap-2 mt-5 flex-wrap">
         {DURATIONS.map((d) => (
-          <button key={d.label} onClick={() => setConfig(d)}
-            className={`px-3 py-1.5 rounded-full text-xs font-bold border ${config.label === d.label ? "bg-white" : "bg-white/40"}`}>{d.label}</button>
+          <button
+            key={d.label}
+            onClick={() => setConfig(d)}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold border transition ${
+              config.label === d.label ? "bg-white border-white" : "bg-white/30 border-white/50 hover:bg-white/50"
+            }`}
+          >
+            {d.label}
+          </button>
         ))}
       </div>
     </>
@@ -249,83 +315,34 @@ function Stopwatch() {
 
   return (
     <>
-      <div className="text-[10px] font-bold uppercase tracking-widest text-foreground/70 mb-2">Stopwatch</div>
-      <div className="font-display text-7xl sm:text-8xl font-bold tabular-nums">{hh}:{mm}:{ss}</div>
-      <div className="flex gap-2 mt-6">
-        <button onClick={toggle} className="bg-white rounded-full px-6 py-3 font-bold shadow-soft flex items-center gap-2">
-          {running ? <><Pause className="size-4" />Pause</> : <><Play className="size-4" />Start</>}
+      <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-70 mb-3">Stopwatch</div>
+      <div className="font-display text-7xl sm:text-8xl font-bold tabular-nums leading-none">{hh}:{mm}:{ss}</div>
+      <div className="flex gap-2 mt-7">
+        <button onClick={toggle} className="bg-white text-foreground rounded-full px-6 py-3 font-bold shadow-sm flex items-center gap-2 hover:shadow-md transition">
+          {running ? <><Pause className="size-4 stroke-[1.75]" />Pause</> : <><Play className="size-4 stroke-[1.75]" />Start</>}
         </button>
-        <button onClick={reset} className="bg-white/70 rounded-full px-4 py-3 font-bold flex items-center gap-2">
-          <RotateCcw className="size-4" />Reset
+        <button onClick={reset} className="bg-white/60 rounded-full px-4 py-3 font-bold flex items-center gap-2 hover:bg-white/80 transition">
+          <RotateCcw className="size-4 stroke-[1.75]" />Reset
         </button>
       </div>
     </>
   );
 }
 
-/** Procedural ambience using Web Audio API — no music files. */
-function AmbiencePlayer({ ambience }: { ambience: Ambience }) {
-  const ctxRef = useRef<AudioContext | null>(null);
-  const nodesRef = useRef<{ stop: () => void } | null>(null);
+/** HTML5 loop player for ambient packs. */
+function SoundPlayer({ sound, volume }: { sound: SoundId; volume: number }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const s = SOUNDS.find((x) => x.id === sound);
 
   useEffect(() => {
-    nodesRef.current?.stop();
-    nodesRef.current = null;
-    if (ambience === "off") return;
+    const el = audioRef.current;
+    if (!el) return;
+    el.volume = volume;
+    if (!s?.src) { el.pause(); el.removeAttribute("src"); return; }
+    if (el.src !== s.src) el.src = s.src;
+    el.loop = true;
+    el.play().catch(() => { /* autoplay blocked until user gesture; the button click counts */ });
+  }, [sound, volume, s?.src]);
 
-    const AC = (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
-    if (!AC) return;
-    let ctx = ctxRef.current;
-    if (!ctx) { ctx = new AC(); ctxRef.current = ctx; }
-    void ctx.resume();
-
-    // Pink-ish noise generator
-    const bufSize = 2 * ctx.sampleRate;
-    const noiseBuf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
-    const out = noiseBuf.getChannelData(0);
-    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
-    for (let i = 0; i < bufSize; i++) {
-      const w = Math.random() * 2 - 1;
-      b0 = 0.99886*b0 + w*0.0555179;
-      b1 = 0.99332*b1 + w*0.0750759;
-      b2 = 0.96900*b2 + w*0.1538520;
-      b3 = 0.86650*b3 + w*0.3104856;
-      b4 = 0.55000*b4 + w*0.5329522;
-      b5 = -0.7616*b5 - w*0.0168980;
-      out[i] = (b0+b1+b2+b3+b4+b5+b6+w*0.5362) * 0.11;
-      b6 = w * 0.115926;
-    }
-    const src = ctx.createBufferSource();
-    src.buffer = noiseBuf; src.loop = true;
-
-    const filter = ctx.createBiquadFilter();
-    const gain = ctx.createGain();
-
-    // Per-ambience tuning
-    switch (ambience) {
-      case "rain":   filter.type = "bandpass"; filter.frequency.value = 1800; filter.Q.value = 0.6; gain.gain.value = 0.22; break;
-      case "wind":   filter.type = "lowpass";  filter.frequency.value = 600;  filter.Q.value = 0.4; gain.gain.value = 0.20; break;
-      case "forest": filter.type = "highpass"; filter.frequency.value = 700;  filter.Q.value = 0.7; gain.gain.value = 0.10; break;
-      case "river":  filter.type = "bandpass"; filter.frequency.value = 900;  filter.Q.value = 0.5; gain.gain.value = 0.18; break;
-    }
-
-    src.connect(filter).connect(gain).connect(ctx.destination);
-    src.start();
-
-    // Subtle LFO on filter to feel organic
-    const lfo = ctx.createOscillator();
-    const lfoGain = ctx.createGain();
-    lfo.frequency.value = ambience === "wind" ? 0.15 : 0.4;
-    lfoGain.gain.value = ambience === "wind" ? 200 : 120;
-    lfo.connect(lfoGain).connect(filter.frequency);
-    lfo.start();
-
-    nodesRef.current = {
-      stop: () => { try { src.stop(); lfo.stop(); } catch { /* already stopped */ } },
-    };
-    return () => { nodesRef.current?.stop(); nodesRef.current = null; };
-  }, [ambience]);
-
-  useEffect(() => () => { ctxRef.current?.close().catch(() => {}); }, []);
-  return null;
+  return <audio ref={audioRef} preload="none" />;
 }
