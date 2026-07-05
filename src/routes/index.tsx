@@ -1,14 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Sparkles, Languages, Timer, Layers, NotebookPen, Compass, GraduationCap, Award } from "lucide-react";
+import { Sparkles, Languages, Timer, Compass, GraduationCap, Award, ArrowRight, ClipboardList, Cat } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { PandaBackground } from "@/components/PandaBackground";
 import { SplashScreen } from "@/components/SplashScreen";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "StudyHub — Learn. Plan. Achieve." },
-      { name: "description", content: "A calm study platform with AI tutor, full Japanese path (hiragana, katakana, JLPT N5–N1 kanji with stroke order), Chinese and Korean lessons, focus timer, flashcards, and StudentHub for universities and scholarships." },
+      { title: "StudyHub — A calm bento for deep work" },
+      { name: "description", content: "A minimalist study platform: AI tutor, Japanese, Chinese and Korean academies, focus sessions with ambient sound, planner, and a StudentHub for universities, scholarships and applications." },
+      { property: "og:title", content: "StudyHub — A calm bento for deep work" },
+      { property: "og:description", content: "AI tutor, three language academies, focus timer with ambient sound, and a full StudentHub for your next step." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Landing,
@@ -16,112 +19,155 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   return (
-    <div className="min-h-screen text-foreground relative">
+    <div className="min-h-screen bg-background text-foreground">
       <SplashScreen />
-      <PandaBackground />
 
-      <nav className="px-6 lg:px-12 py-5 flex justify-between items-center relative z-10">
-        <div className="flex items-center gap-2">
-          <Logo className="size-10" />
-          <span className="font-display text-2xl font-bold tracking-tight text-ink">StudyHub</span>
+      {/* Nav */}
+      <nav className="px-6 lg:px-12 py-6 flex justify-between items-center relative z-10 max-w-7xl mx-auto">
+        <div className="flex items-center gap-2.5">
+          <Logo className="size-9" />
+          <span className="font-display text-xl font-bold tracking-tight">StudyHub</span>
         </div>
-        <div className="hidden md:flex items-center gap-8 font-semibold text-foreground/70">
-          <a href="#features" className="hover:text-primary transition-colors">Features</a>
-          <a href="#studenthub" className="hover:text-primary transition-colors">StudentHub</a>
-          <a href="#languages" className="hover:text-primary transition-colors">Languages</a>
+        <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-foreground/70">
+          <a href="#bento" className="hover:text-foreground transition">Features</a>
+          <a href="#academies" className="hover:text-foreground transition">Academies</a>
+          <a href="#studenthub" className="hover:text-foreground transition">StudentHub</a>
         </div>
         <div className="flex items-center gap-2">
-          <Link to="/auth" className="px-5 py-2.5 rounded-full bg-white/90 backdrop-blur border border-border font-bold text-sm hover:shadow-soft transition-all">Login</Link>
-          <Link to="/auth" search={{ tab: "signup" as const }} className="px-5 py-2.5 rounded-full bg-primary font-bold text-sm shadow-soft hover:-translate-y-0.5 transition-all">Sign up</Link>
+          <Link to="/auth" className="hidden sm:inline-flex px-4 py-2 rounded-full text-sm font-semibold hover:bg-muted transition">
+            Log in
+          </Link>
+          <Link to="/auth" search={{ tab: "signup" as const }} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-sm font-semibold hover:opacity-90 transition">
+            Get started <ArrowRight className="size-3.5 stroke-[1.75]" />
+          </Link>
         </div>
       </nav>
 
-      <section className="px-6 lg:px-12 pt-12 pb-24 max-w-3xl mx-auto text-center relative z-10">
-        <div className="space-y-7 animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur rounded-full text-xs font-bold border border-border">
-            <span className="size-2 rounded-full bg-primary"></span>
-            A calm place to actually focus
-          </div>
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.05] font-bold text-balance text-ink">
-            Learn. <span className="text-primary">Plan.</span> Achieve.
-          </h1>
-          <p className="text-lg text-foreground/70 max-w-xl mx-auto leading-relaxed">
-            Plan your day, focus deeply, learn Japanese, Chinese, and Korean, and map out your university and scholarship path inside one cozy hub.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/auth" search={{ tab: "signup" as const }} className="px-7 py-3.5 rounded-3xl bg-primary text-base font-bold shadow-pop hover:scale-[1.02] active:scale-[0.98] transition-transform">
-              Start studying — it's free
-            </Link>
-            <a href="#features" className="px-7 py-3.5 rounded-3xl bg-white/90 backdrop-blur border border-border text-base font-bold hover:bg-white transition-colors">
-              See features
-            </a>
-          </div>
+      {/* Hero */}
+      <section className="px-6 lg:px-12 pt-10 pb-16 max-w-5xl mx-auto text-center">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-card border border-border/60 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+          <span className="size-1.5 rounded-full bg-primary" /> Sage & Cream · v1
+        </div>
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.02] mt-6">
+          A calm bento for<br /><span className="text-primary">deep work.</span>
+        </h1>
+        <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mt-5 leading-relaxed">
+          One quiet workspace for planning, focus, three language academies, and the full path to university — all in a soft sage palette designed to lower your shoulders.
+        </p>
+        <div className="flex flex-wrap gap-3 justify-center mt-8">
+          <Link to="/auth" search={{ tab: "signup" as const }} className="px-6 py-3 rounded-full bg-foreground text-background text-sm font-bold hover:opacity-90 transition inline-flex items-center gap-2">
+            Start studying <ArrowRight className="size-4 stroke-[1.75]" />
+          </Link>
+          <a href="#bento" className="px-6 py-3 rounded-full bg-card border border-border/60 text-sm font-bold hover:border-primary/40 transition">
+            Explore the bento
+          </a>
         </div>
       </section>
 
-      <section id="features" className="px-6 lg:px-12 py-20 bg-white/40 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 space-y-3">
-            <h2 className="font-display text-4xl font-bold text-ink">Everything you need to focus</h2>
-            <p className="text-foreground/60">Tools designed to feel calm, not loud.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { Icon: Sparkles, t: "AI Tutor", d: "Japanese, Chinese, Korean, and general study help with clear explanations." },
-              { Icon: Languages, t: "Language Path", d: "Hiragana to JLPT N1 kanji with stroke order, plus Chinese and Korean." },
-              { Icon: Timer, t: "Focus Sessions", d: "Pomodoro timer with calm backgrounds and ambient sounds." },
-              { Icon: NotebookPen, t: "Notes", d: "Markdown notes that sync everywhere and stay yours." },
-              { Icon: Layers, t: "Flashcards", d: "Spaced repetition that knows when you'll forget." },
-              { Icon: Compass, t: "AI Future Planner", d: "Map a realistic roadmap from your current grade to your dream career." },
-            ].map(({ Icon, t, d }) => (
-              <div key={t} className="group bg-white/85 backdrop-blur p-7 rounded-[2rem] border border-border hover:shadow-pop hover:-translate-y-1 transition-all">
-                <div className="size-12 bg-primary/40 rounded-2xl grid place-items-center mb-5">
-                  <Icon className="size-5" />
-                </div>
-                <h3 className="font-display text-xl font-bold mb-2 text-ink">{t}</h3>
-                <p className="text-sm leading-relaxed text-foreground/70">{d}</p>
+      {/* Bento grid */}
+      <section id="bento" className="px-6 lg:px-12 pb-24 max-w-6xl mx-auto">
+        <div className="grid grid-cols-6 auto-rows-[minmax(9rem,auto)] gap-4">
+          {/* Tutor — large */}
+          <div className="col-span-6 md:col-span-4 row-span-2 rounded-3xl bg-card border border-border/60 p-7 md:p-8 flex flex-col justify-between relative overflow-hidden hover:border-primary/40 transition">
+            <div>
+              <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                <Sparkles className="size-3.5 stroke-[1.75]" /> AI Tutor
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="studenthub" className="px-6 lg:px-12 py-24 max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-10 space-y-3">
-          <h2 className="font-display text-4xl font-bold text-ink">StudentHub</h2>
-          <p className="text-foreground/60 max-w-xl mx-auto">Career planning, universities, scholarships, and application tracking — all in one place.</p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { Icon: Compass, t: "Career Hub", d: "Set goals, get an AI roadmap." },
-            { Icon: GraduationCap, t: "Universities", d: "Browse verified programs." },
-            { Icon: Award, t: "Scholarships", d: "Discover and save opportunities." },
-            { Icon: NotebookPen, t: "Applications", d: "Track deadlines and status." },
-          ].map(({ Icon, t, d }) => (
-            <div key={t} className="bg-white/85 backdrop-blur rounded-3xl p-6 border border-border">
-              <div className="size-10 bg-primary/40 rounded-2xl grid place-items-center mb-3"><Icon className="size-5" /></div>
-              <div className="font-display font-bold text-ink">{t}</div>
-              <p className="text-xs text-muted-foreground mt-1">{d}</p>
+              <h3 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight leading-tight">
+                Ask anything.<br />Get calm, precise answers.
+              </h3>
+              <p className="text-sm text-muted-foreground mt-3 max-w-md">Japanese, Chinese, Korean, or general study help — with clear explanations, worked examples and gentle follow-ups.</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="languages" className="px-6 lg:px-12 py-20 bg-white/40 relative z-10">
-        <div className="max-w-3xl mx-auto text-center space-y-5">
-          <h2 className="font-display text-4xl font-bold text-ink">Japanese · Chinese · Korean</h2>
-          <p className="text-foreground/70">A complete language path: kana foundations, JLPT N5→N1 kanji with numbered stroke-order arrows, HSK Chinese, and Korean Hangul — with an AI tutor that speaks each language with you.</p>
-          <Link to="/auth" search={{ tab: "signup" as const }} className="inline-block px-7 py-3 rounded-3xl bg-primary font-bold shadow-soft">Start the path</Link>
-        </div>
-      </section>
-
-      <footer className="px-6 lg:px-12 py-12 border-t border-border bg-white/40 relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Logo className="size-8" />
-            <span className="font-display text-xl font-bold text-ink">StudyHub</span>
+            <div className="absolute -bottom-16 -right-16 size-56 rounded-full bg-primary/10 blur-2xl" aria-hidden />
           </div>
-          <p className="text-sm text-foreground/50">© {new Date().getFullYear()} StudyHub — made for calm learners.</p>
+
+          {/* Focus */}
+          <div className="col-span-3 md:col-span-2 rounded-3xl bg-primary text-primary-foreground p-6 flex flex-col justify-between hover:opacity-95 transition">
+            <Timer className="size-6 stroke-[1.75]" />
+            <div>
+              <div className="font-display text-2xl font-bold leading-tight">Focus.</div>
+              <div className="text-xs opacity-80 mt-1">Pomodoro + ambient sound.</div>
+            </div>
+          </div>
+
+          {/* Academies */}
+          <div id="academies" className="col-span-3 md:col-span-2 rounded-3xl bg-card border border-border/60 p-6 hover:border-primary/40 transition">
+            <Languages className="size-6 stroke-[1.75] text-primary" />
+            <div className="font-display text-xl font-bold mt-3">日本語 · 中文 · 한국어</div>
+            <div className="text-xs text-muted-foreground mt-1">Three full academies.</div>
+          </div>
+
+          {/* Planner */}
+          <div className="col-span-3 md:col-span-2 rounded-3xl bg-card border border-border/60 p-6 hover:border-primary/40 transition">
+            <ClipboardList className="size-6 stroke-[1.75] text-primary" />
+            <div className="font-display text-xl font-bold mt-3">Planner</div>
+            <div className="text-xs text-muted-foreground mt-1">Today, this week, deadlines.</div>
+          </div>
+
+          {/* StudentHub — wide */}
+          <div id="studenthub" className="col-span-6 md:col-span-4 rounded-3xl bg-secondary text-secondary-foreground p-7 md:p-8 hover:opacity-95 transition">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest opacity-70">
+                  <Compass className="size-3.5 stroke-[1.75]" /> StudentHub
+                </div>
+                <h3 className="font-display text-2xl md:text-3xl font-bold mt-2 tracking-tight leading-tight">Career, universities,<br />scholarships & applications.</h3>
+              </div>
+              <ArrowRight className="size-5 stroke-[1.75] shrink-0" />
+            </div>
+            <div className="grid grid-cols-4 gap-3 mt-5 text-[11px] font-semibold">
+              {[
+                { icon: Compass, label: "Career" },
+                { icon: GraduationCap, label: "Uni" },
+                { icon: Award, label: "Scholar" },
+                { icon: ClipboardList, label: "Apps" },
+              ].map(({ icon: Icon, label }) => (
+                <div key={label} className="rounded-2xl bg-background/40 backdrop-blur px-3 py-3 flex items-center gap-2">
+                  <Icon className="size-4 stroke-[1.75]" /> {label}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* DoodleKitty */}
+          <div className="col-span-3 md:col-span-2 rounded-3xl bg-card border border-border/60 p-6 hover:border-primary/40 transition">
+            <Cat className="size-6 stroke-[1.75] text-primary" />
+            <div className="font-display text-xl font-bold mt-3">DoodleKitty</div>
+            <div className="text-xs text-muted-foreground mt-1">AI-powered drawing companion.</div>
+          </div>
+
+          {/* Streak */}
+          <div className="col-span-3 md:col-span-2 rounded-3xl bg-card border border-border/60 p-6 hover:border-primary/40 transition">
+            <div className="font-display text-4xl font-bold text-primary">7d</div>
+            <div className="text-xs text-muted-foreground mt-2">Median streak in the first month.</div>
+          </div>
+
+          {/* Quote — wide */}
+          <div className="col-span-6 md:col-span-4 rounded-3xl bg-foreground text-background p-7 md:p-8 flex flex-col justify-between hover:opacity-95 transition">
+            <div className="text-xs font-bold uppercase tracking-[0.22em] opacity-60">Manifesto</div>
+            <p className="font-display text-2xl md:text-3xl font-medium leading-snug mt-3">
+              &ldquo;Small, quiet sessions beat loud, brittle sprints. StudyHub is built for the long climb.&rdquo;
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-6 lg:px-12 pb-24 max-w-3xl mx-auto text-center">
+        <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">Ready to lower your shoulders?</h2>
+        <p className="text-muted-foreground mt-3">Free to start. No noise, no upsells — just a quiet room to work.</p>
+        <Link to="/auth" search={{ tab: "signup" as const }} className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background text-sm font-bold hover:opacity-90 transition">
+          Create your account <ArrowRight className="size-4 stroke-[1.75]" />
+        </Link>
+      </section>
+
+      <footer className="px-6 lg:px-12 py-10 border-t border-border/60">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Logo className="size-7" />
+            <span className="font-display text-base font-bold">StudyHub</span>
+          </div>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} StudyHub — a calm place to actually focus.</p>
         </div>
       </footer>
     </div>
