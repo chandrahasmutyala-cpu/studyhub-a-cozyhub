@@ -4,11 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
 import { Progress } from "@/components/ui/progress";
 import {
-  LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
+  LayoutDashboard, ListTodo, Sparkles, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
-  Calculator, FileText, Target, Cat, MessagesSquare,
-  Home, Search, Menu, X, ChevronRight,
-
+  Calculator, Cat, MessagesSquare,
+  Home, Search, Menu, X, ChevronRight, Timer,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
