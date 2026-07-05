@@ -24,10 +24,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/tasks", label: "Planner", icon: ListTodo },
       { to: "/tutor", label: "AI Tutor", icon: Sparkles },
       { to: "/focus", label: "Focus", icon: Timer },
-      { to: "/notes", label: "Notes", icon: NotebookPen },
-      { to: "/flashcards", label: "Flashcards", icon: Layers },
       { to: "/media-translator", label: "Media Translator", icon: Video },
-      { to: "/language-goals", label: "Language Goals", icon: Target },
     ],
   },
   {
