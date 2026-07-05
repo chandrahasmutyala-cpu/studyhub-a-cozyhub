@@ -58,9 +58,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-display: "Plus Jakarta Sans", "Fredoka", sans-serif;
-  --font-body: "Plus Jakarta Sans", "Quicksand", sans-serif;
-  --font-sans: "Plus Jakarta Sans", "Quicksand", sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 
   --shadow-soft: 0 10px 30px -12px oklch(0.6 0.06 250 / 0.18);
   --shadow-pop: 0 24px 50px -20px oklch(0.55 0.09 260 / 0.28);
