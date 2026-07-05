@@ -4,11 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useProfile, levelFromXp, xpForNextLevel } from "@/lib/useProfile";
 import { Progress } from "@/components/ui/progress";
 import {
-  LayoutDashboard, ListTodo, NotebookPen, Layers, Timer, Sparkles, Languages, User, Settings, Flame, LogOut,
+  LayoutDashboard, ListTodo, Sparkles, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
-  Calculator, FileText, Target, Cat, MessagesSquare,
-  Home, Search, Menu, X, ChevronRight,
-
+  Calculator, Cat, MessagesSquare,
+  Home, Search, Menu, X, ChevronRight, Timer,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
@@ -24,10 +23,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/tasks", label: "Planner", icon: ListTodo },
       { to: "/tutor", label: "AI Tutor", icon: Sparkles },
       { to: "/focus", label: "Focus", icon: Timer },
-      { to: "/notes", label: "Notes", icon: NotebookPen },
-      { to: "/flashcards", label: "Flashcards", icon: Layers },
       { to: "/media-translator", label: "Media Translator", icon: Video },
-      { to: "/language-goals", label: "Language Goals", icon: Target },
     ],
   },
   {
@@ -41,7 +37,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/admission-roadmap", label: "Admission Roadmap", icon: Compass },
       { to: "/scholarship-eligibility", label: "Scholarship Match", icon: Award },
       { to: "/cost-calculator", label: "Cost Calculator", icon: Calculator },
-      { to: "/essay-reviewer", label: "Essay Reviewer", icon: FileText },
     ],
   },
   {

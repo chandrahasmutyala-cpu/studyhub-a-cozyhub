@@ -24,15 +24,11 @@ import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authent
 import { Route as AuthenticatedScholarshipEligibilityRouteImport } from './routes/_authenticated/scholarship-eligibility'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
-import { Route as AuthenticatedNotesRouteImport } from './routes/_authenticated/notes'
 import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
 import { Route as AuthenticatedLearningAcademyRouteImport } from './routes/_authenticated/learning-academy'
-import { Route as AuthenticatedLanguageGoalsRouteImport } from './routes/_authenticated/language-goals'
 import { Route as AuthenticatedKoreanRouteImport } from './routes/_authenticated/korean'
 import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticated/japanese'
 import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
-import { Route as AuthenticatedFlashcardsRouteImport } from './routes/_authenticated/flashcards'
-import { Route as AuthenticatedEssayReviewerRouteImport } from './routes/_authenticated/essay-reviewer'
 import { Route as AuthenticatedDoodlekittyRouteImport } from './routes/_authenticated/doodlekitty'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
@@ -120,11 +116,6 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedNotesRoute = AuthenticatedNotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedMediaTranslatorRoute =
   AuthenticatedMediaTranslatorRouteImport.update({
     id: '/media-translator',
@@ -135,12 +126,6 @@ const AuthenticatedLearningAcademyRoute =
   AuthenticatedLearningAcademyRouteImport.update({
     id: '/learning-academy',
     path: '/learning-academy',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedLanguageGoalsRoute =
-  AuthenticatedLanguageGoalsRouteImport.update({
-    id: '/language-goals',
-    path: '/language-goals',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedKoreanRoute = AuthenticatedKoreanRouteImport.update({
@@ -158,17 +143,6 @@ const AuthenticatedFocusRoute = AuthenticatedFocusRouteImport.update({
   path: '/focus',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedFlashcardsRoute = AuthenticatedFlashcardsRouteImport.update({
-  id: '/flashcards',
-  path: '/flashcards',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedEssayReviewerRoute =
-  AuthenticatedEssayReviewerRouteImport.update({
-    id: '/essay-reviewer',
-    path: '/essay-reviewer',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedDoodlekittyRoute =
   AuthenticatedDoodlekittyRouteImport.update({
     id: '/doodlekitty',
@@ -221,15 +195,11 @@ export interface FileRoutesByFullPath {
   '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/doodlekitty': typeof AuthenticatedDoodlekittyRoute
-  '/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
-  '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
   '/japanese': typeof AuthenticatedJapaneseRoute
   '/korean': typeof AuthenticatedKoreanRoute
-  '/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/learning-academy': typeof AuthenticatedLearningAcademyRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
-  '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
@@ -253,15 +223,11 @@ export interface FileRoutesByTo {
   '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/doodlekitty': typeof AuthenticatedDoodlekittyRoute
-  '/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
-  '/flashcards': typeof AuthenticatedFlashcardsRoute
   '/focus': typeof AuthenticatedFocusRoute
   '/japanese': typeof AuthenticatedJapaneseRoute
   '/korean': typeof AuthenticatedKoreanRoute
-  '/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/learning-academy': typeof AuthenticatedLearningAcademyRoute
   '/media-translator': typeof AuthenticatedMediaTranslatorRoute
-  '/notes': typeof AuthenticatedNotesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
@@ -287,15 +253,11 @@ export interface FileRoutesById {
   '/_authenticated/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/doodlekitty': typeof AuthenticatedDoodlekittyRoute
-  '/_authenticated/essay-reviewer': typeof AuthenticatedEssayReviewerRoute
-  '/_authenticated/flashcards': typeof AuthenticatedFlashcardsRoute
   '/_authenticated/focus': typeof AuthenticatedFocusRoute
   '/_authenticated/japanese': typeof AuthenticatedJapaneseRoute
   '/_authenticated/korean': typeof AuthenticatedKoreanRoute
-  '/_authenticated/language-goals': typeof AuthenticatedLanguageGoalsRoute
   '/_authenticated/learning-academy': typeof AuthenticatedLearningAcademyRoute
   '/_authenticated/media-translator': typeof AuthenticatedMediaTranslatorRoute
-  '/_authenticated/notes': typeof AuthenticatedNotesRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
@@ -321,15 +283,11 @@ export interface FileRouteTypes {
     | '/cost-calculator'
     | '/dashboard'
     | '/doodlekitty'
-    | '/essay-reviewer'
-    | '/flashcards'
     | '/focus'
     | '/japanese'
     | '/korean'
-    | '/language-goals'
     | '/learning-academy'
     | '/media-translator'
-    | '/notes'
     | '/onboarding'
     | '/profile'
     | '/scholarship-eligibility'
@@ -353,15 +311,11 @@ export interface FileRouteTypes {
     | '/cost-calculator'
     | '/dashboard'
     | '/doodlekitty'
-    | '/essay-reviewer'
-    | '/flashcards'
     | '/focus'
     | '/japanese'
     | '/korean'
-    | '/language-goals'
     | '/learning-academy'
     | '/media-translator'
-    | '/notes'
     | '/onboarding'
     | '/profile'
     | '/scholarship-eligibility'
@@ -386,15 +340,11 @@ export interface FileRouteTypes {
     | '/_authenticated/cost-calculator'
     | '/_authenticated/dashboard'
     | '/_authenticated/doodlekitty'
-    | '/_authenticated/essay-reviewer'
-    | '/_authenticated/flashcards'
     | '/_authenticated/focus'
     | '/_authenticated/japanese'
     | '/_authenticated/korean'
-    | '/_authenticated/language-goals'
     | '/_authenticated/learning-academy'
     | '/_authenticated/media-translator'
-    | '/_authenticated/notes'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
     | '/_authenticated/scholarship-eligibility'
@@ -522,13 +472,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/notes': {
-      id: '/_authenticated/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof AuthenticatedNotesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/media-translator': {
       id: '/_authenticated/media-translator'
       path: '/media-translator'
@@ -541,13 +484,6 @@ declare module '@tanstack/react-router' {
       path: '/learning-academy'
       fullPath: '/learning-academy'
       preLoaderRoute: typeof AuthenticatedLearningAcademyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/language-goals': {
-      id: '/_authenticated/language-goals'
-      path: '/language-goals'
-      fullPath: '/language-goals'
-      preLoaderRoute: typeof AuthenticatedLanguageGoalsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/korean': {
@@ -569,20 +505,6 @@ declare module '@tanstack/react-router' {
       path: '/focus'
       fullPath: '/focus'
       preLoaderRoute: typeof AuthenticatedFocusRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/flashcards': {
-      id: '/_authenticated/flashcards'
-      path: '/flashcards'
-      fullPath: '/flashcards'
-      preLoaderRoute: typeof AuthenticatedFlashcardsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/essay-reviewer': {
-      id: '/_authenticated/essay-reviewer'
-      path: '/essay-reviewer'
-      fullPath: '/essay-reviewer'
-      preLoaderRoute: typeof AuthenticatedEssayReviewerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/doodlekitty': {
@@ -645,15 +567,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCostCalculatorRoute: typeof AuthenticatedCostCalculatorRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDoodlekittyRoute: typeof AuthenticatedDoodlekittyRoute
-  AuthenticatedEssayReviewerRoute: typeof AuthenticatedEssayReviewerRoute
-  AuthenticatedFlashcardsRoute: typeof AuthenticatedFlashcardsRoute
   AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
   AuthenticatedJapaneseRoute: typeof AuthenticatedJapaneseRoute
   AuthenticatedKoreanRoute: typeof AuthenticatedKoreanRoute
-  AuthenticatedLanguageGoalsRoute: typeof AuthenticatedLanguageGoalsRoute
   AuthenticatedLearningAcademyRoute: typeof AuthenticatedLearningAcademyRoute
   AuthenticatedMediaTranslatorRoute: typeof AuthenticatedMediaTranslatorRoute
-  AuthenticatedNotesRoute: typeof AuthenticatedNotesRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedScholarshipEligibilityRoute: typeof AuthenticatedScholarshipEligibilityRoute
@@ -674,15 +592,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCostCalculatorRoute: AuthenticatedCostCalculatorRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDoodlekittyRoute: AuthenticatedDoodlekittyRoute,
-  AuthenticatedEssayReviewerRoute: AuthenticatedEssayReviewerRoute,
-  AuthenticatedFlashcardsRoute: AuthenticatedFlashcardsRoute,
   AuthenticatedFocusRoute: AuthenticatedFocusRoute,
   AuthenticatedJapaneseRoute: AuthenticatedJapaneseRoute,
   AuthenticatedKoreanRoute: AuthenticatedKoreanRoute,
-  AuthenticatedLanguageGoalsRoute: AuthenticatedLanguageGoalsRoute,
   AuthenticatedLearningAcademyRoute: AuthenticatedLearningAcademyRoute,
   AuthenticatedMediaTranslatorRoute: AuthenticatedMediaTranslatorRoute,
-  AuthenticatedNotesRoute: AuthenticatedNotesRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedScholarshipEligibilityRoute:

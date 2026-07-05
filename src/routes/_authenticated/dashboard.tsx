@@ -53,13 +53,6 @@ function Dashboard() {
     },
   });
 
-  const recentNotesQ = useQuery({
-    queryKey: ["notes", "recent"],
-    queryFn: async () => {
-      const { data } = await supabase.from("notes").select("id,title,updated_at").order("updated_at",{ascending:false}).limit(3);
-      return data ?? [];
-    },
-  });
 
   const weekly = useMemo(() => {
     const days = Array.from({ length: 7 }, (_, i) => {
@@ -157,7 +150,7 @@ function Dashboard() {
           </Card>
         </section>
 
-        {/* Deadlines + notes */}
+        {/* Deadlines + continue */}
         <section className="grid lg:grid-cols-2 gap-4">
           <Card title="Upcoming deadlines" action={<Link to="/applications" className="text-xs font-bold text-primary">All →</Link>}>
             {deadlinesQ.data && deadlinesQ.data.length > 0 ? (
@@ -177,21 +170,18 @@ function Dashboard() {
             )}
           </Card>
 
-          <Card title="Continue learning" action={<Link to="/notes" className="text-xs font-bold text-primary">Notes →</Link>}>
-            {recentNotesQ.data && recentNotesQ.data.length > 0 ? (
-              <ul className="space-y-1.5">
-                {recentNotesQ.data.map((n) => (
-                  <li key={n.id} className="p-3 rounded-2xl hover:bg-muted/60 transition">
-                    <div className="text-sm font-semibold truncate">{n.title || "Untitled note"}</div>
-                    <div className="text-[11px] text-muted-foreground mt-0.5">{new Date(n.updated_at).toLocaleString()}</div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <EmptyHint to="/notes" label="Open notes" desc="Pick up where you left off." />
-            )}
+          <Card title="Keep the streak" action={<Link to="/learning-academy" className="text-xs font-bold text-primary">Academy →</Link>}>
+            <div className="rounded-2xl bg-muted/60 p-5">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's suggestion</div>
+              <div className="font-display text-xl font-bold mt-1">A 25 min sage-quiet session.</div>
+              <p className="text-xs text-muted-foreground mt-1.5">Short, doable, and enough to bank a win before the day gets loud.</p>
+              <Link to="/focus" className="mt-4 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-xs font-bold">
+                Start focus <ArrowRight className="size-3.5" />
+              </Link>
+            </div>
           </Card>
         </section>
+
 
         {/* Quick actions */}
         <section>
