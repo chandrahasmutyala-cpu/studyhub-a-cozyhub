@@ -59,12 +59,8 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   },
 ];
 
-const bottomTabs: NavItem[] = [
-  { to: "/dashboard", label: "Home", icon: Home },
-  { to: "/learning-academy", label: "Academy", icon: GraduationCap },
-  { to: "/tasks", label: "Planner", icon: ListTodo },
-  { to: "/tutor", label: "Tutor", icon: Sparkles },
-];
+
+
 
 const allItems = navGroups.flatMap((g) => g.items);
 
