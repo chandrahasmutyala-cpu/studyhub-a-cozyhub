@@ -53,13 +53,6 @@ function Dashboard() {
     },
   });
 
-  const recentNotesQ = useQuery({
-    queryKey: ["notes", "recent"],
-    queryFn: async () => {
-      const { data } = await supabase.from("notes").select("id,title,updated_at").order("updated_at",{ascending:false}).limit(3);
-      return data ?? [];
-    },
-  });
 
   const weekly = useMemo(() => {
     const days = Array.from({ length: 7 }, (_, i) => {
