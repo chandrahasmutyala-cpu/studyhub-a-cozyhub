@@ -82,31 +82,35 @@ function Dashboard() {
 
   return (
     <AppShell>
-      <div className="space-y-8 max-w-6xl animate-fade-up">
-        {/* Minimalist welcome */}
-        <section className="bg-white/85 backdrop-blur rounded-[2rem] border border-border p-6 lg:p-10 shadow-soft">
-          <div className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+      <div className="space-y-10 max-w-5xl mx-auto animate-fade-up">
+        {/* Hero */}
+        <section>
+          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
             {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
           </div>
-          <h1 className="font-display text-3xl sm:text-5xl font-bold mt-2 tracking-tight">
-            {greeting()}, {profile?.display_name ?? "friend"}.
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mt-3 tracking-tight leading-[1.05]">
+            {greeting()},<br />
+            <span className="text-primary">{profile?.display_name ?? "friend"}.</span>
           </h1>
-          <p className="text-sm text-muted-foreground mt-2 max-w-xl">
+          <p className="text-base text-muted-foreground mt-4 max-w-lg">
             {todayMin >= dailyTarget
               ? "You've already hit today's goal. Anything more is bonus."
               : `${dailyTarget - todayMin} minutes to today's goal. One small session at a time.`}
           </p>
-          <div className="mt-6 grid sm:grid-cols-[1fr_auto] items-end gap-4">
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Today's focus</div>
-              <div className="h-2 mt-1.5 bg-secondary rounded-full overflow-hidden max-w-md">
-                <div className="h-full bg-primary transition-all" style={{ width: `${dailyPct}%` }} />
+
+          <div className="mt-8 rounded-3xl border border-border/60 bg-card p-6 md:p-7 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_20px_45px_-30px_rgb(15_23_42/0.18)]">
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's focus</div>
+                <div className="font-display text-2xl font-bold mt-1">{todayMin}<span className="text-muted-foreground text-base font-medium"> / {dailyTarget} min</span></div>
               </div>
-              <div className="text-xs text-muted-foreground mt-1.5">{todayMin} / {dailyTarget} min</div>
+              <Link to="/focus" className="shrink-0 inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
+                Start session <ArrowRight className="size-4 stroke-[1.75]" />
+              </Link>
             </div>
-            <Link to="/focus" className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-2.5 text-sm font-bold w-fit">
-              Start a session <ArrowRight className="size-4" />
-            </Link>
+            <div className="h-2 mt-5 bg-muted rounded-full overflow-hidden">
+              <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${dailyPct}%` }} />
+            </div>
           </div>
         </section>
 
@@ -118,17 +122,18 @@ function Dashboard() {
           <Stat icon={Clock} label="This week" value={`${Math.round(weekTotal / 60 * 10) / 10}h`} />
         </section>
 
-        <section className="grid lg:grid-cols-[1.3fr_1fr] gap-5">
+        {/* Tasks + week */}
+        <section className="grid lg:grid-cols-[1.3fr_1fr] gap-4">
           <Card title="Upcoming tasks" action={<Link to="/tasks" className="text-xs font-bold text-primary">Open planner →</Link>}>
             {tasksQ.isLoading ? (
               <Skeleton rows={3} />
             ) : tasksQ.data && tasksQ.data.length > 0 ? (
-              <ul className="space-y-2">
+              <ul className="space-y-1.5">
                 {tasksQ.data.slice(0, 6).map((t) => (
-                  <li key={t.id} className="flex items-center gap-3 p-3 rounded-2xl bg-cream/70">
-                    <span className={`size-5 rounded-full border-2 ${t.completed ? "bg-primary border-primary" : "border-foreground/30"}`} />
-                    <span className={`flex-1 text-sm font-semibold ${t.completed ? "line-through text-muted-foreground" : ""}`}>{t.title}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{t.category}</span>
+                  <li key={t.id} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-muted/60 transition">
+                    <span className={`size-5 rounded-full border-2 shrink-0 ${t.completed ? "bg-primary border-primary" : "border-foreground/25"}`} />
+                    <span className={`flex-1 text-sm font-medium truncate ${t.completed ? "line-through text-muted-foreground" : ""}`}>{t.title}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground shrink-0">{t.category}</span>
                   </li>
                 ))}
               </ul>
@@ -141,7 +146,7 @@ function Dashboard() {
             <div className="flex items-end gap-2 h-32">
               {weekly.map((d) => (
                 <div key={d.key} className="flex-1 flex flex-col items-center gap-1.5">
-                  <div className="w-full bg-secondary rounded-xl overflow-hidden flex items-end h-24">
+                  <div className="w-full bg-muted rounded-xl overflow-hidden flex items-end h-24">
                     <div className="w-full bg-primary rounded-xl transition-all" style={{ height: `${(d.minutes / maxMin) * 100}%` }} />
                   </div>
                   <div className="text-[10px] font-bold text-muted-foreground">{d.label}</div>
@@ -152,15 +157,18 @@ function Dashboard() {
           </Card>
         </section>
 
-        <section className="grid lg:grid-cols-2 gap-5">
+        {/* Deadlines + notes */}
+        <section className="grid lg:grid-cols-2 gap-4">
           <Card title="Upcoming deadlines" action={<Link to="/applications" className="text-xs font-bold text-primary">All →</Link>}>
             {deadlinesQ.data && deadlinesQ.data.length > 0 ? (
-              <ul className="space-y-2">
+              <ul className="space-y-1.5">
                 {deadlinesQ.data.map((d) => (
-                  <li key={d.id} className="flex items-center gap-3 p-3 rounded-2xl bg-cream/70">
-                    <CalendarClock className="size-4 text-primary" />
-                    <span className="flex-1 text-sm font-semibold truncate">{d.name}</span>
-                    <span className="text-[11px] text-muted-foreground">{d.deadline && new Date(d.deadline).toLocaleDateString()}</span>
+                  <li key={d.id} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-muted/60 transition">
+                    <span className="size-9 rounded-2xl bg-muted grid place-items-center shrink-0">
+                      <CalendarClock className="size-[18px] stroke-[1.75] text-foreground/70" />
+                    </span>
+                    <span className="flex-1 text-sm font-medium truncate">{d.name}</span>
+                    <span className="text-[11px] text-muted-foreground shrink-0">{d.deadline && new Date(d.deadline).toLocaleDateString()}</span>
                   </li>
                 ))}
               </ul>
@@ -171,11 +179,11 @@ function Dashboard() {
 
           <Card title="Continue learning" action={<Link to="/notes" className="text-xs font-bold text-primary">Notes →</Link>}>
             {recentNotesQ.data && recentNotesQ.data.length > 0 ? (
-              <ul className="space-y-2">
+              <ul className="space-y-1.5">
                 {recentNotesQ.data.map((n) => (
-                  <li key={n.id} className="p-3 rounded-2xl bg-cream/70">
+                  <li key={n.id} className="p-3 rounded-2xl hover:bg-muted/60 transition">
                     <div className="text-sm font-semibold truncate">{n.title || "Untitled note"}</div>
-                    <div className="text-[11px] text-muted-foreground">{new Date(n.updated_at).toLocaleString()}</div>
+                    <div className="text-[11px] text-muted-foreground mt-0.5">{new Date(n.updated_at).toLocaleString()}</div>
                   </li>
                 ))}
               </ul>
@@ -185,11 +193,15 @@ function Dashboard() {
           </Card>
         </section>
 
-        <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <QuickAction to="/focus" icon={Timer} title="Focus session" />
-          <QuickAction to="/tutor" icon={Sparkles} title="Ask AI Tutor" />
-          <QuickAction to="/japanese" icon={Languages} title="Japanese practice" />
-          <QuickAction to="/tasks" icon={ListTodo} title="Plan tomorrow" />
+        {/* Quick actions */}
+        <section>
+          <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-3 px-1">Quick actions</div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <QuickAction to="/focus" icon={Timer} title="Focus session" />
+            <QuickAction to="/tutor" icon={Sparkles} title="Ask AI Tutor" />
+            <QuickAction to="/japanese" icon={Languages} title="Japanese practice" />
+            <QuickAction to="/tasks" icon={ListTodo} title="Plan tomorrow" />
+          </div>
         </section>
       </div>
     </AppShell>
@@ -198,11 +210,13 @@ function Dashboard() {
 
 function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode }) {
   return (
-    <div className="bg-white/85 backdrop-blur rounded-3xl border border-border p-4 flex items-center gap-3">
-      <div className="size-10 rounded-2xl bg-secondary grid place-items-center"><Icon className="size-5" /></div>
-      <div>
+    <div className="rounded-3xl border border-border/60 bg-card p-4 flex items-center gap-3">
+      <div className="size-10 rounded-2xl bg-muted grid place-items-center shrink-0">
+        <Icon className="size-[18px] stroke-[1.75] text-foreground/75" />
+      </div>
+      <div className="min-w-0">
         <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
-        <div className="font-display text-xl font-bold">{value}</div>
+        <div className="font-display text-xl font-bold truncate">{value}</div>
       </div>
     </div>
   );
@@ -210,9 +224,9 @@ function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ classN
 
 function Card({ title, action, children }: { title: string; action?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="bg-white/85 backdrop-blur rounded-[2rem] border border-border p-5 lg:p-6 shadow-soft">
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="font-display text-lg font-bold">{title}</h2>
+    <div className="rounded-3xl border border-border/60 bg-card p-5 md:p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-display text-base font-bold tracking-tight">{title}</h2>
         {action}
       </div>
       {children}
@@ -221,23 +235,28 @@ function Card({ title, action, children }: { title: string; action?: React.React
 }
 
 function Skeleton({ rows = 3 }) {
-  return <div className="space-y-2">{Array.from({ length: rows }).map((_, i) => <div key={i} className="h-10 bg-cream rounded-2xl animate-pulse" />)}</div>;
+  return <div className="space-y-2">{Array.from({ length: rows }).map((_, i) => <div key={i} className="h-11 bg-muted rounded-2xl animate-pulse" />)}</div>;
 }
 
 function EmptyHint({ to, label, desc }: { to: string; label: string; desc: string }) {
   return (
-    <div className="text-center py-6 text-sm text-muted-foreground">
+    <div className="text-center py-8 text-sm text-muted-foreground">
       {desc}
-      <div className="mt-3"><Link to={to} className="inline-block px-4 py-2 rounded-full bg-primary font-bold text-foreground">{label}</Link></div>
+      <div className="mt-3">
+        <Link to={to} className="inline-block px-4 py-2 rounded-full bg-primary text-primary-foreground font-semibold text-xs">{label}</Link>
+      </div>
     </div>
   );
 }
 
 function QuickAction({ to, icon: Icon, title }: { to: string; icon: React.ComponentType<{ className?: string }>; title: string }) {
   return (
-    <Link to={to} className="bg-white/85 backdrop-blur rounded-3xl border border-border p-5 flex items-center gap-3 hover:shadow-pop hover:-translate-y-0.5 transition-all">
-      <div className="size-10 rounded-2xl bg-secondary grid place-items-center"><Icon className="size-5" /></div>
-      <span className="text-sm font-bold">{title}</span>
+    <Link to={to} className="rounded-3xl border border-border/60 bg-card p-5 flex items-center gap-3 hover:border-primary/40 hover:-translate-y-0.5 transition-all">
+      <div className="size-10 rounded-2xl bg-muted grid place-items-center shrink-0">
+        <Icon className="size-[18px] stroke-[1.75] text-foreground/75" />
+      </div>
+      <span className="text-sm font-semibold truncate">{title}</span>
     </Link>
   );
 }
+

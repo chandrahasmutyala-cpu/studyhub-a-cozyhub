@@ -59,12 +59,8 @@ const navGroups: { label: string; items: NavItem[] }[] = [
   },
 ];
 
-const bottomTabs: NavItem[] = [
-  { to: "/dashboard", label: "Home", icon: Home },
-  { to: "/learning-academy", label: "Academy", icon: GraduationCap },
-  { to: "/tasks", label: "Planner", icon: ListTodo },
-  { to: "/tutor", label: "Tutor", icon: Sparkles },
-];
+
+
 
 const allItems = navGroups.flatMap((g) => g.items);
 
@@ -163,34 +159,13 @@ export function AppShell({ children }: { children: ReactNode }) {
 
         <main
           data-appshell-main
-          className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 pt-[72px] md:pt-8 pb-24 md:pb-10 animate-fade-up"
+          className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 pt-[72px] md:pt-8 pb-10 animate-fade-up"
         >
           {children}
         </main>
       </div>
 
-      {/* MOBILE FIXED BOTTOM NAV — 4 items */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-background/95 backdrop-blur border-t border-border/60 pb-[env(safe-area-inset-bottom)]">
-        <div className="grid grid-cols-4 h-16">
-          {bottomTabs.map((t) => {
-            const Icon = t.icon;
-            const active = pathname === t.to || (t.to !== "/dashboard" && pathname.startsWith(t.to));
-            return (
-              <Link
-                key={t.to}
-                to={t.to as "/dashboard"}
-                className="relative flex flex-col items-center justify-center gap-1 text-[11px] font-semibold transition-colors"
-                aria-label={t.label}
-              >
-                <span className={`grid place-items-center rounded-full px-4 py-1.5 transition-all duration-300 ${active ? "bg-primary/15 scale-105" : ""}`}>
-                  <Icon className={`size-[22px] stroke-[1.75] transition-colors ${active ? "text-primary" : "text-foreground/70"}`} />
-                </span>
-                <span className={`transition-colors ${active ? "text-primary" : "text-foreground/60"}`}>{t.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+
 
       {/* MOBILE DRAWER */}
       {drawer && (
