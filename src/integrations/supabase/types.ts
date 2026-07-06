@@ -179,6 +179,36 @@ export type Database = {
         }
         Relationships: []
       }
+      desk_layouts: {
+        Row: {
+          created_at: string
+          id: string
+          layout: Json
+          name: string
+          theme: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          layout?: Json
+          name: string
+          theme?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          layout?: Json
+          name?: string
+          theme?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       flashcards: {
         Row: {
           back: string
@@ -245,6 +275,42 @@ export type Database = {
           minutes?: number
           mode?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      lesson_progress: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          language: string
+          lesson_key: string
+          stars: number
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          language: string
+          lesson_key: string
+          stars?: number
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          language?: string
+          lesson_key?: string
+          stars?: number
+          updated_at?: string
+          user_id?: string
+          xp?: number
         }
         Relationships: []
       }
@@ -431,6 +497,42 @@ export type Database = {
         }
         Relationships: []
       }
+      semester_plans: {
+        Row: {
+          created_at: string
+          end_date: string
+          events: Json
+          id: string
+          plan: Json
+          start_date: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          events?: Json
+          id?: string
+          plan?: Json
+          start_date: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          events?: Json
+          id?: string
+          plan?: Json
+          start_date?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       tasks: {
         Row: {
           category: string | null
@@ -527,6 +629,36 @@ export type Database = {
           updated_at?: string
           verified?: boolean
           website?: string | null
+        }
+        Relationships: []
+      }
+      word_bookmarks: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          language: string
+          meta: Json
+          term: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind?: string
+          language: string
+          meta?: Json
+          term: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          language?: string
+          meta?: Json
+          term?: string
+          user_id?: string
         }
         Relationships: []
       }
