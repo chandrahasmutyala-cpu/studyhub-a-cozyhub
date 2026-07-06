@@ -37,7 +37,7 @@ const DURATIONS = [
   { label: "15 / 3",  focus: 15, brk: 3  },
 ];
 
-type Mode = "pomodoro" | "stopwatch";
+type Mode = "pomodoro" | "stopwatch" | "desk";
 
 function FocusPage() {
   const qc = useQueryClient();
@@ -74,15 +74,16 @@ function FocusPage() {
         </header>
 
         {/* Mode pill */}
-        <div className="inline-flex gap-1 bg-card border border-border/60 p-1 rounded-full">
+        <div className="inline-flex gap-1 bg-card border border-border/60 p-1 rounded-full overflow-x-auto">
           {([
             { id: "pomodoro" as Mode, label: "Pomodoro", icon: TimerIcon },
             { id: "stopwatch" as Mode, label: "Stopwatch", icon: Clock },
+            { id: "desk" as Mode, label: "Study Desk", icon: Coffee },
           ]).map((t) => (
             <button
               key={t.id}
               onClick={() => setMode(t.id)}
-              className={`px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition ${
+              className={`px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition whitespace-nowrap ${
                 mode === t.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -99,15 +100,14 @@ function FocusPage() {
         >
           <button
             onClick={toggleFullscreen}
-            className="absolute top-5 right-5 size-10 rounded-full bg-white/70 backdrop-blur grid place-items-center hover:bg-white transition"
+            className="absolute top-5 right-5 size-10 rounded-full bg-white/70 backdrop-blur grid place-items-center hover:bg-white transition z-10"
             aria-label="Fullscreen"
           >
             {fullscreen ? <Minimize2 className="size-[18px] stroke-[1.75]" /> : <Maximize2 className="size-[18px] stroke-[1.75]" />}
           </button>
-          {mode === "pomodoro"
-            ? <Pomodoro scene={scene} profile={profile} update={update} qc={qc} />
-            : <Stopwatch />
-          }
+          {mode === "pomodoro" && <Pomodoro scene={scene} profile={profile} update={update} qc={qc} />}
+          {mode === "stopwatch" && <Stopwatch />}
+          {mode === "desk" && <SmartStudyDesk />}
         </div>
 
         {/* Scene picker */}
