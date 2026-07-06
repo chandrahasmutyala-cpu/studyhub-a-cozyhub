@@ -45,14 +45,14 @@ function RoadmapPicker() {
   return (
     <section className="grid gap-4">
       {academies.map((a) => (
-        <AcademyCard key={a.key} {...a} />
+        <AcademyCard key={a.key} language={a.key} to={a.to} name={a.name} native={a.native} tag={a.tag} ink={a.ink} />
       ))}
     </section>
   );
 }
 
-function AcademyCard(props: { key: LanguageKey; to: string; name: string; native: string; tag: string; ink: string }) {
-  const { completedKeys } = useLessonProgress(props.key);
+function AcademyCard(props: { language: LanguageKey; to: string; name: string; native: string; tag: string; ink: string }) {
+  const { completedKeys } = useLessonProgress(props.language);
   const total = ROADMAPS[props.key].length;
   const pct = Math.round((completedKeys.size / total) * 100);
   return (
