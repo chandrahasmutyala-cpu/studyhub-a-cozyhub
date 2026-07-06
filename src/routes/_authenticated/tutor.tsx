@@ -152,7 +152,7 @@ function LearningDnaTab() {
       if (!user) return { minutes: 0, lessons: 0 };
       const since = new Date(); since.setDate(since.getDate() - 7);
       const [fs, lp] = await Promise.all([
-        supabase.from("focus_sessions").select("minutes,created_at").eq("user_id", user.id).gte("created_at", since.toISOString()),
+        supabase.from("focus_sessions").select("minutes,completed_at").eq("user_id", user.id).gte("completed_at", since.toISOString()),
         supabase.from("lesson_progress").select("id").eq("user_id", user.id).not("completed_at", "is", null),
       ]);
       const minutes = (fs.data ?? []).reduce((a, r) => a + (r.minutes ?? 0), 0);
