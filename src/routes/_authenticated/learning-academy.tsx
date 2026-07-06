@@ -53,7 +53,7 @@ function RoadmapPicker() {
 
 function AcademyCard(props: { language: LanguageKey; to: string; name: string; native: string; tag: string; ink: string }) {
   const { completedKeys } = useLessonProgress(props.language);
-  const total = ROADMAPS[props.key].length;
+  const total = ROADMAPS[props.language].length;
   const pct = Math.round((completedKeys.size / total) * 100);
   return (
     <Link to={props.to as "/japanese"}
