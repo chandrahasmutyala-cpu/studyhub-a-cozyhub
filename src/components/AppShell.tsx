@@ -37,7 +37,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/admission-roadmap", label: "Admission Roadmap", icon: Compass },
       { to: "/scholarship-eligibility", label: "Scholarship Match", icon: Award },
       { to: "/cost-calculator", label: "Cost Calculator", icon: Calculator },
-      { to: "/world-clock", label: "World Clock", icon: Timer },
     ],
   },
   {
