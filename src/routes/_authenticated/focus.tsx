@@ -346,3 +346,160 @@ function SoundPlayer({ sound, volume }: { sound: SoundId; volume: number }) {
 
   return <audio ref={audioRef} preload="none" />;
 }
+
+/* ============================================================
+ * Smart Study Desk — cozy virtual desk with interactive objects
+ * ============================================================ */
+type DeskItem = {
+  id: string;
+  emoji: string;
+  label: string;
+  x: number;
+  y: number;
+  action?: string; // route to navigate to
+  unlockXp?: number;
+};
+
+const DEFAULT_DESK: DeskItem[] = [
+  { id: "laptop",   emoji: "💻", label: "Laptop → AI Tutor",         x: 42, y: 45, action: "/tutor" },
+  { id: "notebook", emoji: "📓", label: "Notebook → Planner",         x: 15, y: 55, action: "/tasks" },
+  { id: "planner",  emoji: "🗓️", label: "Planner",                    x: 70, y: 55, action: "/tasks" },
+  { id: "calendar", emoji: "📅", label: "Calendar",                   x: 82, y: 25, action: "/tasks" },
+  { id: "books",    emoji: "📚", label: "Books → Learning Academy",   x: 8,  y: 22, action: "/learning-academy" },
+  { id: "sticky",   emoji: "🗒️", label: "Sticky notes",               x: 30, y: 18 },
+  { id: "coffee",   emoji: "☕", label: "Coffee",                     x: 62, y: 20 },
+  { id: "tea",      emoji: "🍵", label: "Tea",                        x: 72, y: 78 },
+  { id: "plant",    emoji: "🪴", label: "Plant",                      x: 4,  y: 78 },
+  { id: "anime",    emoji: "🧸", label: "Anime figure",               x: 90, y: 80, unlockXp: 200 },
+  { id: "cat",      emoji: "🐈", label: "Cat companion",              x: 55, y: 82, unlockXp: 100 },
+  { id: "headset",  emoji: "🎧", label: "Headphones",                 x: 24, y: 82 },
+  { id: "clock",    emoji: "⏰", label: "Clock",                       x: 50, y: 8 },
+  { id: "pencils",  emoji: "✏️", label: "Pencil holder",              x: 78, y: 42 },
+  { id: "lamp",     emoji: "💡", label: "Lamp",                       x: 20, y: 8 },
+];
+
+function SmartStudyDesk() {
+  const nav = useNavigateSafe();
+  const { profile } = useProfile();
+  const xp = profile?.xp ?? 0;
+  const [items, setItems] = useState<DeskItem[]>(() => loadDesk());
+  const [brightness, setBrightness] = useState(1);
+  const [dragging, setDragging] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const areaRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => { saveDesk(items); }, [items]);
+
+  function onPointerDown(e: React.PointerEvent, id: string) {
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    setDragging(id);
+  }
+  function onPointerMove(e: React.PointerEvent) {
+    if (!dragging || !areaRef.current) return;
+    const rect = areaRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    setItems((prev) => prev.map((it) => (it.id === dragging ? { ...it, x, y } : it)));
+  }
+  function onPointerUp(e: React.PointerEvent) {
+    if (dragging) {
+      (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
+      setDragging(null);
+    }
+  }
+  function onItemClick(it: DeskItem) {
+    if (dragging) return;
+    if (it.unlockXp && xp < it.unlockXp) {
+      toast(`Locked — earn ${it.unlockXp} XP to unlock ${it.label}`);
+      return;
+    }
+    if (it.id === "clock") { toast(new Date().toLocaleTimeString()); return; }
+    if (it.id === "lamp") { setBrightness((b) => (b >= 1.2 ? 0.6 : b + 0.2)); return; }
+    if (it.action) nav(it.action);
+    else toast(it.label);
+  }
+  function resetLayout() { setItems(DEFAULT_DESK); }
+  function saveLayoutRemote() {
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      await supabase.from("desk_layouts").insert({
+        user_id: user.id,
+        name: `Layout ${new Date().toLocaleString()}`,
+        layout: { items, brightness } as unknown as Record<string, unknown>,
+        theme: "sage",
+      });
+      toast.success("Desk layout saved");
+    })();
+  }
+
+  return (
+    <div className="relative">
+      <div className="text-[10px] font-bold uppercase tracking-[0.22em] opacity-70 mb-3">Smart Study Desk</div>
+      <div
+        ref={areaRef}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        className="relative aspect-[4/3] w-full rounded-3xl bg-gradient-to-b from-[#e8e0cf] to-[#c9b791] border border-[#b09b78]/40 overflow-hidden select-none"
+        style={{ filter: `brightness(${brightness})` }}
+      >
+        {/* desk surface */}
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-[#a17d55] to-[#7d5a3a]" />
+        {items.map((it) => {
+          const locked = it.unlockXp !== undefined && xp < it.unlockXp;
+          return (
+            <button
+              key={it.id}
+              onPointerDown={(e) => onPointerDown(e, it.id)}
+              onClick={() => onItemClick(it)}
+              onMouseEnter={() => setHovered(it.id)}
+              onMouseLeave={() => setHovered(null)}
+              style={{ left: `${it.x}%`, top: `${it.y}%`, transform: "translate(-50%, -50%)" }}
+              className={`absolute text-2xl sm:text-3xl transition ${dragging === it.id ? "scale-110" : "hover:scale-110"} ${locked ? "opacity-40 grayscale" : ""}`}
+              aria-label={it.label}
+            >
+              <span>{it.emoji}</span>
+              {hovered === it.id && (
+                <span className="absolute left-1/2 -translate-x-1/2 -top-6 bg-foreground text-background text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
+                  {locked ? `Unlock at ${it.unlockXp} XP` : it.label}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-wrap gap-2 mt-4 items-center">
+        <button onClick={resetLayout} className="rounded-full bg-white/60 px-4 py-2 text-xs font-bold hover:bg-white/80">Reset layout</button>
+        <button onClick={saveLayoutRemote} className="rounded-full bg-white px-4 py-2 text-xs font-bold shadow-sm">Save layout</button>
+        <label className="flex items-center gap-2 ml-auto text-[11px] font-bold opacity-80">
+          Lamp
+          <input type="range" min={0.5} max={1.3} step={0.05} value={brightness} onChange={(e) => setBrightness(parseFloat(e.target.value))} className="accent-primary" />
+        </label>
+      </div>
+      <p className="text-[11px] opacity-60 mt-2">Drag any object to rearrange. Tap objects to open features. Earn XP to unlock decor.</p>
+    </div>
+  );
+}
+
+const DESK_STORAGE = "studyhub.desk.v1";
+function loadDesk(): DeskItem[] {
+  if (typeof window === "undefined") return DEFAULT_DESK;
+  try {
+    const raw = window.localStorage.getItem(DESK_STORAGE);
+    if (!raw) return DEFAULT_DESK;
+    const parsed = JSON.parse(raw) as DeskItem[];
+    if (!Array.isArray(parsed)) return DEFAULT_DESK;
+    // ensure any newly-added defaults are present
+    const map = new Map(parsed.map((p) => [p.id, p]));
+    return DEFAULT_DESK.map((d) => map.get(d.id) ?? d);
+  } catch { return DEFAULT_DESK; }
+}
+function saveDesk(items: DeskItem[]) {
+  try { window.localStorage.setItem(DESK_STORAGE, JSON.stringify(items)); } catch { /* */ }
+}
+
+function useNavigateSafe() {
+  const nav = useRouterNavigate();
+  return (to: string) => nav({ to: to as "/tutor" });
+}
