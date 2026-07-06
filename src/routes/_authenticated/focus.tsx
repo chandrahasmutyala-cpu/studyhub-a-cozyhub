@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate as useRouterNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -426,7 +426,7 @@ function SmartStudyDesk() {
       await supabase.from("desk_layouts").insert({
         user_id: user.id,
         name: `Layout ${new Date().toLocaleString()}`,
-        layout: { items, brightness } as unknown as Record<string, unknown>,
+        layout: JSON.parse(JSON.stringify({ items, brightness })),
         theme: "sage",
       });
       toast.success("Desk layout saved");
