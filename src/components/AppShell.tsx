@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
+import { useFocusEngine } from "@/lib/useFocusEngine";
+import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
 
@@ -59,6 +61,24 @@ const navGroups: { label: string; items: NavItem[] }[] = [
 
 const allItems = navGroups.flatMap((g) => g.items);
 
+/** Persistent mini timer so a running session is visible on every page. */
+function FloatingFocusChip() {
+  const t = useFocusTimer();
+  useTick(1000, t.running);
+  if (!t.running) return null;
+  const left = focusTimer.remaining(Date.now(), t);
+  return (
+    <Link
+      to="/focus"
+      className="fixed bottom-5 right-5 z-30 inline-flex items-center gap-2.5 rounded-full bg-foreground text-background pl-4 pr-5 py-3 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.5)] hover:opacity-95 active:scale-[0.98] transition"
+    >
+      <Timer className="size-4 stroke-[1.75]" />
+      <span className="font-bold tabular-nums text-sm">{formatMs(left)}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest opacity-70">{t.phase}</span>
+    </Link>
+  );
+}
+
 function isImmersiveRoute(pathname: string) {
   return pathname.startsWith("/world-explorer");
 }
@@ -71,6 +91,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [drawer, setDrawer] = useState(false);
   const [search, setSearch] = useState("");
   const immersive = isImmersiveRoute(pathname);
+  useFocusEngine();
 
   const xp = profile?.xp ?? 0;
   const level = levelFromXp(xp);
@@ -159,6 +180,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           {children}
         </main>
       </div>
+
+      {pathname !== "/focus" && <FloatingFocusChip />}
 
 
 

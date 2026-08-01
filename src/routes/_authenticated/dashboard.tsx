@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 
 import { useProfile } from "@/lib/useProfile";
+import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
 import { Flame, Star, Coins, Clock, Sparkles, Timer, ListTodo, Languages, ArrowRight, CalendarClock } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -17,6 +18,23 @@ function greeting() {
   if (h < 12) return "Good morning";
   if (h < 18) return "Good afternoon";
   return "Good evening";
+}
+
+/** Mirrors the persistent global focus timer on the home screen. */
+function LiveFocus() {
+  const t = useFocusTimer();
+  useTick(1000, t.running);
+  const left = focusTimer.remaining(Date.now(), t);
+  return (
+    <div className="shrink-0 flex items-center gap-3">
+      {t.running && (
+        <span className="font-display text-xl font-bold tabular-nums text-primary">{formatMs(left)}</span>
+      )}
+      <Link to="/focus" className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
+        {t.running ? "Open timer" : "Start session"} <ArrowRight className="size-4 stroke-[1.75]" />
+      </Link>
+    </div>
+  );
 }
 
 function Dashboard() {
@@ -97,9 +115,7 @@ function Dashboard() {
                 <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's focus</div>
                 <div className="font-display text-2xl font-bold mt-1">{todayMin}<span className="text-muted-foreground text-base font-medium"> / {dailyTarget} min</span></div>
               </div>
-              <Link to="/focus" className="shrink-0 inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
-                Start session <ArrowRight className="size-4 stroke-[1.75]" />
-              </Link>
+              <LiveFocus />
             </div>
             <div className="h-2 mt-5 bg-muted rounded-full overflow-hidden">
               <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${dailyPct}%` }} />

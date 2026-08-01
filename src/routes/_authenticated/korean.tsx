@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { AppShell } from "@/components/AppShell";
 import { HANGUL_VOWELS, HANGUL_CONSONANTS, TOPIK_STARTERS, TOPIK_LEVELS, KOREAN_GRAMMAR_POINTS, type TopikLevel } from "@/lib/korean-data";
 import { tutorChat } from "@/lib/tutor.functions";
-import { BookOpen, Sparkles, Loader2, Volume2 } from "lucide-react";
+import { BookOpen, Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/korean")({
@@ -13,11 +13,6 @@ export const Route = createFileRoute("/_authenticated/korean")({
 
 type Tab = "hangul" | "vocab" | "grammar" | "stories" | "quiz";
 
-function speak(text: string) {
-  if (typeof window === "undefined" || !window.speechSynthesis) return;
-  const u = new SpeechSynthesisUtterance(text); u.lang = "ko-KR";
-  window.speechSynthesis.speak(u);
-}
 
 function KoreanPage() {
   const [tab, setTab] = useState<Tab>("hangul");
@@ -53,13 +48,13 @@ function HangulTab() {
         <h2 className="font-display text-lg font-bold mb-2">Vowels (모음)</h2>
         <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
           {HANGUL_VOWELS.map((j) => (
-            <button key={j.ko} onClick={() => speak(j.ko)}
-              className="bg-white/85 backdrop-blur border border-border rounded-2xl aspect-square grid place-items-center hover:bg-primary/30">
+            <div key={j.ko}
+              className="bg-white/85 backdrop-blur border border-border rounded-2xl aspect-square grid place-items-center">
               <div className="text-center">
                 <div className="text-2xl font-bold">{j.ko}</div>
                 <div className="text-[10px] text-muted-foreground font-semibold">{j.rom}</div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </section>
@@ -67,17 +62,17 @@ function HangulTab() {
         <h2 className="font-display text-lg font-bold mb-2">Consonants (자음)</h2>
         <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
           {HANGUL_CONSONANTS.map((j) => (
-            <button key={j.ko} onClick={() => speak(j.ko)}
-              className="bg-white/85 backdrop-blur border border-border rounded-2xl aspect-square grid place-items-center hover:bg-primary/30">
+            <div key={j.ko}
+              className="bg-white/85 backdrop-blur border border-border rounded-2xl aspect-square grid place-items-center">
               <div className="text-center">
                 <div className="text-2xl font-bold">{j.ko}</div>
                 <div className="text-[10px] text-muted-foreground font-semibold">{j.rom}</div>
                 {j.note && <div className="text-[9px] text-primary-foreground bg-primary rounded-full px-1.5 mt-0.5">{j.note}</div>}
               </div>
-            </button>
+            </div>
           ))}
         </div>
-        <p className="text-[11px] text-muted-foreground mt-2">Tap a jamo to hear it. Ask the AI Tutor about batchim (받침) rules.</p>
+        <p className="text-[11px] text-muted-foreground mt-2">Ask the AI Tutor about batchim (받침) rules.</p>
       </section>
     </div>
   );
@@ -97,15 +92,14 @@ function VocabTab() {
       {list.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {list.map((w) => (
-            <button key={w.ko} onClick={() => speak(w.ko)}
-              className="text-left bg-white/85 backdrop-blur border border-border rounded-2xl p-3 hover:shadow-soft flex items-start gap-3">
-              <Volume2 className="size-4 text-muted-foreground mt-1" />
+            <div key={w.ko}
+              className="text-left bg-white/85 backdrop-blur border border-border rounded-2xl p-3 flex items-start gap-3">
               <div className="flex-1">
                 <div className="font-bold text-lg">{w.ko}</div>
                 <div className="text-[11px] text-muted-foreground">{w.rom}</div>
                 <div className="text-xs mt-1">{w.en}</div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       ) : (

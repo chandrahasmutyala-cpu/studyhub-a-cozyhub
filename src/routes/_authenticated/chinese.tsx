@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { AppShell } from "@/components/AppShell";
 import { HSK_VOCAB, HSK_COUNTS, HSK_TOTAL, PINYIN_INITIALS, PINYIN_FINALS, TONES, type HskLevel } from "@/lib/hsk-data";
 import { tutorChat } from "@/lib/tutor.functions";
-import { BookOpen, Sparkles, Loader2, Volume2 } from "lucide-react";
+import { BookOpen, Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/chinese")({
@@ -14,12 +14,6 @@ export const Route = createFileRoute("/_authenticated/chinese")({
 type Tab = "pinyin" | "vocab" | "stories" | "quiz";
 const LEVELS: HskLevel[] = [1, 2, 3, 4, 5, 6];
 
-function speak(text: string, lang = "zh-CN") {
-  if (typeof window === "undefined" || !window.speechSynthesis) return;
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = lang;
-  window.speechSynthesis.speak(u);
-}
 
 function ChinesePage() {
   const [tab, setTab] = useState<Tab>("pinyin");
@@ -67,8 +61,8 @@ function PinyinTab() {
         <h2 className="font-display text-lg font-bold mb-2">Initials</h2>
         <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5">
           {PINYIN_INITIALS.map((i) => (
-            <button key={i} onClick={() => speak(i + "a")}
-              className="bg-cream hover:bg-primary/30 rounded-xl py-2 font-bold text-sm">{i}</button>
+            <div key={i}
+              className="bg-cream rounded-xl py-2 font-bold text-sm text-center">{i}</div>
           ))}
         </div>
       </section>
@@ -76,11 +70,11 @@ function PinyinTab() {
         <h2 className="font-display text-lg font-bold mb-2">Finals</h2>
         <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5">
           {PINYIN_FINALS.map((f) => (
-            <button key={f} onClick={() => speak(f)}
-              className="bg-cream hover:bg-primary/30 rounded-xl py-2 font-bold text-sm">{f}</button>
+            <div key={f}
+              className="bg-cream rounded-xl py-2 font-bold text-sm text-center">{f}</div>
           ))}
         </div>
-        <p className="text-[11px] text-muted-foreground mt-2">Tap any sound to hear it (uses your browser's zh-CN voice).</p>
+        <p className="text-[11px] text-muted-foreground mt-2">Reference chart for pinyin initials and finals.</p>
       </section>
     </div>
   );
@@ -111,14 +105,13 @@ function VocabTab() {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
         {filtered.slice(0, 400).map((w) => (
-          <button key={w.s + w.p} onClick={() => speak(w.s)}
+          <div key={w.s + w.p}
             className="text-left bg-white/85 backdrop-blur border border-border rounded-2xl p-3 hover:shadow-soft hover:border-primary transition-all">
             <div className="flex items-baseline justify-between gap-2">
               <div className="text-2xl font-bold leading-none">{w.s}</div>
-              <Volume2 className="size-3.5 text-muted-foreground" />
             </div>
             <div className="text-[11px] text-muted-foreground mt-1">{w.p}</div>
-          </button>
+          </div>
         ))}
       </div>
       {filtered.length > 400 && (
@@ -207,7 +200,6 @@ function QuizTab() {
     <div className="bg-white/85 backdrop-blur rounded-[2rem] border border-border p-8 shadow-soft text-center max-w-md mx-auto">
       <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">What's the pinyin?</div>
       <div className="text-7xl font-bold my-4">{card.s}</div>
-      <button onClick={() => speak(card.s)} className="inline-flex items-center gap-1 text-xs bg-cream rounded-full px-3 py-1 mb-3"><Volume2 className="size-3" /> Hear it</button>
       <form onSubmit={check}>
         <input autoFocus value={guess} onChange={(e) => setGuess(e.target.value)}
           className={`w-full bg-cream rounded-2xl px-4 py-3 outline-none text-center font-bold text-lg border-2 ${result === "right" ? "border-matcha" : result === "wrong" ? "border-destructive" : "border-transparent"}`}
