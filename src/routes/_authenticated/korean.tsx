@@ -69,7 +69,7 @@ function HangulTab() {
                 <div className="text-[10px] text-muted-foreground font-semibold">{j.rom}</div>
                 {j.note && <div className="text-[9px] text-primary-foreground bg-primary rounded-full px-1.5 mt-0.5">{j.note}</div>}
               </div>
-            </button>
+            </div>
           ))}
         </div>
         <p className="text-[11px] text-muted-foreground mt-2">Ask the AI Tutor about batchim (받침) rules.</p>
