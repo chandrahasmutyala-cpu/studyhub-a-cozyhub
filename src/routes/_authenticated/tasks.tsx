@@ -83,7 +83,7 @@ function PlannerPage() {
   const deadlinesQ = useQuery({
     queryKey: ["deadlines", "planner"],
     queryFn: async () => {
-      const { data } = await supabase.from("deadlines").select("id,title,date,kind").gte("date", todayISO()).order("date").limit(5);
+      const { data } = await supabase.from("deadlines").select("id,title,date,kind").order("date");
       return data ?? [];
     },
   });
@@ -327,9 +327,9 @@ function PlannerPage() {
               title="Upcoming deadlines"
               hint={<Link to="/applications" className="text-xs font-bold text-primary">All →</Link>}
             >
-              {deadlinesQ.data && deadlinesQ.data.length > 0 ? (
+              {deadlinesQ.data && deadlinesQ.data.some((d) => d.date >= todayISO()) ? (
                 <ul className="space-y-1.5">
-                  {deadlinesQ.data.map((d) => {
+                  {deadlinesQ.data.filter((d) => d.date >= todayISO()).slice(0, 5).map((d) => {
                     const days = Math.max(0, Math.ceil((new Date(d.date).getTime() - Date.now()) / 86_400_000));
                     return (
                       <li key={d.id} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-muted/60 transition">
