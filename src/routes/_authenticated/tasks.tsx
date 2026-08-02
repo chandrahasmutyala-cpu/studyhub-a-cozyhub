@@ -224,8 +224,45 @@ function PlannerPage() {
         </section>
 
         <div className="grid lg:grid-cols-[1.35fr_1fr] gap-5 items-start">
-          {/* LEFT: tasks */}
+          {/* LEFT: calendar + tasks */}
           <div className="space-y-4">
+            <MonthCalendar
+              cursor={cursor}
+              setCursor={setCursor}
+              selected={selected}
+              onSelect={(d) => { setSelected(d); setDue(d); }}
+              tasks={all}
+              deadlines={(deadlinesQ.data ?? []).map((d) => d.date as string)}
+            />
+
+            <Panel
+              title={new Date(selected).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
+              hint={`${all.filter((t) => t.due_date === selected).length} scheduled`}
+            >
+              <ul className="space-y-1.5">
+                {all.filter((t) => t.due_date === selected).map((t) => (
+                  <li key={t.id} className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-muted/60 transition">
+                    <button onClick={() => toggle.mutate({ id: t.id, completed: !t.completed })} aria-label="Toggle complete" className="shrink-0 text-foreground/70 hover:text-primary transition">
+                      {t.completed ? <CheckCircle2 className="size-5 stroke-[1.6] text-primary" /> : <Circle className="size-5 stroke-[1.6]" />}
+                    </button>
+                    <span className={`flex-1 text-sm font-medium truncate ${t.completed ? "line-through text-muted-foreground" : ""}`}>{t.title}</span>
+                    {alarms[t.id] && <span className="text-[11px] font-bold text-muted-foreground shrink-0">{alarms[t.id]}</span>}
+                  </li>
+                ))}
+                {(deadlinesQ.data ?? []).filter((d) => d.date === selected).map((d) => (
+                  <li key={d.id} className="flex items-center gap-3 p-2.5 rounded-2xl bg-muted/40">
+                    <CalendarDays className="size-5 stroke-[1.6] text-foreground/60 shrink-0" />
+                    <span className="flex-1 text-sm font-medium truncate">{d.title}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground shrink-0">deadline</span>
+                  </li>
+                ))}
+                {all.filter((t) => t.due_date === selected).length === 0 &&
+                  (deadlinesQ.data ?? []).filter((d) => d.date === selected).length === 0 && (
+                    <li className="text-sm text-muted-foreground py-3">Nothing scheduled — a good day for a focus block.</li>
+                  )}
+              </ul>
+            </Panel>
+
             <form
               onSubmit={(e) => { e.preventDefault(); if (title.trim()) add.mutate(); }}
               className="rounded-3xl border border-border/60 bg-card p-4 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_20px_45px_-32px_rgb(15_23_42/0.2)] space-y-3"
