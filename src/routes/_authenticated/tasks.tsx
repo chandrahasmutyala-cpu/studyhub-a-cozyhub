@@ -306,7 +306,14 @@ function PlannerPage() {
 
           {/* RIGHT: rail */}
           <div className="space-y-4">
-            <FocusCard />
+            <FocusSection />
+
+            <section className="rounded-3xl border border-border/60 bg-card p-6 text-center">
+              <CozyCat className="w-40 mx-auto text-foreground/85" />
+              <p className="font-display text-base font-bold mt-4">{cozyQuote()}</p>
+              <p className="text-xs text-muted-foreground mt-1">StudyHub keeps you company.</p>
+            </section>
+
 
             <Panel title="Focus this week" hint={`${weekTotal} min`}>
               <div className="flex items-end gap-2 h-28">
