@@ -117,28 +117,19 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen relative bg-background">
-      {/* MOBILE FIXED TOP BAR */}
-      <header className="md:hidden fixed top-0 inset-x-0 z-30 h-14 bg-background/95 backdrop-blur border-b border-border/60 flex items-center justify-between px-4">
+      {/* MOBILE FIXED TOP BAR — menu only */}
+      <header className="md:hidden fixed top-0 inset-x-0 z-30 h-14 bg-background/90 backdrop-blur-xl flex items-center px-4">
         <button
           onClick={() => setDrawer(true)}
           className="size-10 -ml-2 rounded-2xl grid place-items-center hover:bg-muted transition"
           aria-label="Open menu"
         >
-          <Menu className="size-[22px] stroke-[1.75]" />
+          <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M4 9h16M4 15h10" />
+          </svg>
         </button>
-        <Link to="/dashboard" className="flex items-center gap-2 font-display font-bold">
-          <Logo className="size-7 text-xs" />
-          <span className="tracking-tight text-[15px]">StudyHub</span>
-        </Link>
-        <div className="flex items-center gap-1">
-          <Link to="/dashboard" search={{ q: "" } as never} className="size-10 rounded-2xl grid place-items-center hover:bg-muted transition" aria-label="Search" onClick={(e) => { e.preventDefault(); setDrawer(true); }}>
-            <Search className="size-[20px] stroke-[1.75]" />
-          </Link>
-          <Link to="/settings" className="size-10 -mr-2 rounded-2xl grid place-items-center hover:bg-muted transition" aria-label="Settings">
-            <Settings className="size-[20px] stroke-[1.75]" />
-          </Link>
-        </div>
       </header>
+
 
       <div className="md:flex">
         {/* DESKTOP SIDEBAR */}
