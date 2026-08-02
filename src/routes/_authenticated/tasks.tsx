@@ -58,6 +58,9 @@ function PlannerPage() {
   const [alarm, setAlarm] = useState<string>("");
   const [filter, setFilter] = useState<"today" | "upcoming" | "done" | "all">("today");
   const [alarms, setAlarms] = useState<AlarmMap>(() => loadJSON<AlarmMap>(ALARM_KEY, {}));
+  const [selected, setSelected] = useState<string>(todayISO());
+  const [cursor, setCursor] = useState(() => { const d = new Date(); d.setDate(1); return d; });
+
 
   const q = useQuery({
     queryKey: ["tasks"],
