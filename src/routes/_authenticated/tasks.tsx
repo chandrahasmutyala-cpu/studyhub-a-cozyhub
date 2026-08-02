@@ -232,7 +232,7 @@ function PlannerPage() {
               selected={selected}
               onSelect={(d) => { setSelected(d); setDue(d); }}
               tasks={all}
-              deadlines={(deadlinesQ.data ?? []).map((d) => d.date as string)}
+              deadlines={(deadlinesQ.data ?? []).map((d: { date: string }) => d.date)}
             />
 
             <Panel
@@ -462,7 +462,7 @@ function Digit({ value }: { value: string }) {
   );
 }
 
-type Weather = { temp: number; code: number; city: string };
+type Weather = { temp: number; code: number };
 const WEATHER_KEY = "studyhub-weather-v1";
 
 function weatherLabel(code: number) {
@@ -490,7 +490,6 @@ function WeatherCard() {
         const next: Weather = {
           temp: Math.round(j?.current?.temperature_2m ?? 0),
           code: j?.current?.weather_code ?? 0,
-          city: j?.timezone?.split("/").pop()?.replace(/_/g, " ") ?? "Local",
         };
         setW(next); saveJSON(WEATHER_KEY, next); setState("idle");
       } catch { setState("denied"); }
@@ -509,43 +508,9 @@ function WeatherCard() {
         <span className="font-display text-2xl font-bold">{w ? `${w.temp}°` : state === "loading" ? "…" : "--"}</span>
       </div>
       <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-2 truncate">
-        {w ? `${weatherLabel(w.code)} · ${w.city}` : state === "denied" ? "Tap to allow location" : "Loading weather"}
+        {w ? weatherLabel(w.code) : state === "denied" ? "Tap to allow location" : "Loading weather"}
       </div>
     </button>
-  );
-}
-
-/** Live view of the persistent global focus timer. */
-function FocusCard() {
-  const t = useFocusTimer();
-  useTick(1000, t.running);
-  const total = (t.phase === "focus" ? t.focusMin : t.breakMin) * 60_000;
-  const left = focusTimer.remaining(Date.now(), t);
-  const pct = total > 0 ? ((total - left) / total) * 100 : 0;
-
-  return (
-    <section className="rounded-3xl border border-border/60 bg-card p-5">
-      <div className="flex items-center justify-between">
-        <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-          <Timer className="size-3.5 stroke-[1.75]" /> {t.phase === "focus" ? "Focus session" : "Break"}
-        </div>
-        <Link to="/focus" className="text-xs font-bold text-primary">Open →</Link>
-      </div>
-      <div className="font-display text-4xl font-bold tabular-nums mt-2">{formatMs(left)}</div>
-      <div className="h-2 mt-4 bg-muted rounded-full overflow-hidden">
-        <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${pct}%` }} />
-      </div>
-      <div className="flex gap-2 mt-4">
-        <button onClick={() => focusTimer.toggle()}
-          className="flex-1 rounded-full bg-foreground text-background py-2.5 text-xs font-bold hover:opacity-90 active:scale-[0.98] transition">
-          {t.running ? "Pause" : "Start"}
-        </button>
-        <button onClick={() => focusTimer.reset()}
-          className="rounded-full border border-border/60 px-4 py-2.5 text-xs font-bold hover:bg-muted transition">
-          Reset
-        </button>
-      </div>
-    </section>
   );
 }
 
@@ -609,5 +574,195 @@ function HabitTracker() {
         <button className="rounded-full border border-border/60 px-3 py-2 text-xs font-bold hover:bg-muted transition">Add</button>
       </form>
     </Panel>
+  );
+}
+
+/** Month calendar with task/deadline markers. */
+function MonthCalendar({
+  cursor, setCursor, selected, onSelect, tasks, deadlines,
+}: {
+  cursor: Date;
+  setCursor: (d: Date) => void;
+  selected: string;
+  onSelect: (iso: string) => void;
+  tasks: Task[];
+  deadlines: string[];
+}) {
+  const year = cursor.getFullYear();
+  const month = cursor.getMonth();
+  const first = new Date(year, month, 1);
+  const startPad = (first.getDay() + 6) % 7; // Monday-first
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const cells: (string | null)[] = [
+    ...Array.from({ length: startPad }, () => null),
+    ...Array.from({ length: daysInMonth }, (_, i) => {
+      const d = new Date(year, month, i + 1);
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    }),
+  ];
+  const today = todayISO();
+  const shift = (n: number) => setCursor(new Date(year, month + n, 1));
+
+  return (
+    <section className="rounded-3xl border border-border/60 bg-card p-5">
+      <div className="flex items-center justify-between mb-4">
+        <div className="font-display text-lg font-bold tracking-tight">
+          {first.toLocaleDateString(undefined, { month: "long", year: "numeric" })}
+        </div>
+        <div className="flex items-center gap-1">
+          <button onClick={() => shift(-1)} aria-label="Previous month"
+            className="size-9 rounded-full grid place-items-center hover:bg-muted transition">
+            <ChevronLeft className="size-[18px] stroke-[1.75]" />
+          </button>
+          <button onClick={() => { const d = new Date(); d.setDate(1); setCursor(d); onSelect(today); }}
+            className="px-3 h-9 rounded-full text-xs font-bold hover:bg-muted transition">Today</button>
+          <button onClick={() => shift(1)} aria-label="Next month"
+            className="size-9 rounded-full grid place-items-center hover:bg-muted transition">
+            <ChevronRight className="size-[18px] stroke-[1.75]" />
+          </button>
+        </div>
+      </div>
+      <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
+        {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => <div key={i}>{d}</div>)}
+      </div>
+      <div className="grid grid-cols-7 gap-1">
+        {cells.map((iso, i) => {
+          if (!iso) return <div key={`p${i}`} />;
+          const dayTasks = tasks.filter((t) => t.due_date === iso);
+          const open = dayTasks.filter((t) => !t.completed).length;
+          const hasDeadline = deadlines.includes(iso);
+          const isToday = iso === today;
+          const isSel = iso === selected;
+          return (
+            <button
+              key={iso}
+              onClick={() => onSelect(iso)}
+              className={`aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 text-sm font-semibold transition ${
+                isSel ? "bg-foreground text-background"
+                  : isToday ? "bg-primary/10 text-primary" : "hover:bg-muted"
+              }`}
+            >
+              <span className="tabular-nums">{Number(iso.slice(8))}</span>
+              <span className="flex gap-0.5 h-1">
+                {open > 0 && <span className={`size-1 rounded-full ${isSel ? "bg-background" : "bg-primary"}`} />}
+                {hasDeadline && <span className={`size-1 rounded-full ${isSel ? "bg-background/70" : "bg-foreground/50"}`} />}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+const FOCUS_PRESETS = [
+  { label: "25 / 5", focus: 25, brk: 5 },
+  { label: "50 / 10", focus: 50, brk: 10 },
+  { label: "15 / 3", focus: 15, brk: 3 },
+  { label: "90 / 15", focus: 90, brk: 15 },
+];
+
+/** Full focus mode, folded into the planner. */
+function FocusSection() {
+  const t = useFocusTimer();
+  useTick(500, t.running);
+  const { profile, update } = useProfile();
+  const total = (t.phase === "focus" ? t.focusMin : t.breakMin) * 60_000;
+  const left = focusTimer.remaining(Date.now(), t);
+  const pct = total > 0 ? ((total - left) / total) * 100 : 0;
+
+  const todayQ = useQuery({
+    queryKey: ["focus", "today"],
+    queryFn: async () => {
+      const since = new Date(); since.setHours(0, 0, 0, 0);
+      const { data } = await supabase.from("focus_sessions").select("minutes").gte("completed_at", since.toISOString());
+      return (data ?? []).reduce((a, b) => a + (b.minutes ?? 0), 0);
+    },
+  });
+  const target = profile?.daily_minutes_target ?? 60;
+  const done = todayQ.data ?? 0;
+  const goalPct = Math.min(100, (done / Math.max(1, target)) * 100);
+
+  return (
+    <section className="rounded-3xl border border-border/60 bg-card p-6 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)]">
+      <div className="flex items-center justify-between">
+        <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+          <Timer className="size-3.5 stroke-[1.75]" /> {t.phase === "focus" ? "Deep focus" : "Break"}
+        </div>
+        <button
+          onClick={() => focusTimer.setPhase(t.phase === "focus" ? "break" : "focus")}
+          className="text-xs font-bold text-primary"
+        >
+          {t.phase === "focus" ? "Take a break" : "Back to focus"}
+        </button>
+      </div>
+
+      <div className="font-display text-6xl font-bold tabular-nums leading-none mt-3">{formatMs(left)}</div>
+      <div className="h-1.5 mt-5 bg-muted rounded-full overflow-hidden">
+        <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${pct}%` }} />
+      </div>
+
+      <div className="flex gap-2 mt-5">
+        <button onClick={() => focusTimer.toggle()}
+          className="flex-1 rounded-full bg-foreground text-background py-3 text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition">
+          {t.running ? <><Pause className="size-4 stroke-[1.75]" />Pause</> : <><Play className="size-4 stroke-[1.75]" />Start</>}
+        </button>
+        <button onClick={() => focusTimer.reset()}
+          className="rounded-full border border-border/60 px-4 py-3 text-sm font-bold flex items-center gap-2 hover:bg-muted transition">
+          <RotateCcw className="size-4 stroke-[1.75]" />Reset
+        </button>
+      </div>
+
+      <div className="flex gap-2 mt-4 flex-wrap">
+        {FOCUS_PRESETS.map((d) => (
+          <button key={d.label} onClick={() => focusTimer.setDurations(d.focus, d.brk)}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold border transition ${
+              t.focusMin === d.focus && t.breakMin === d.brk
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-border/60 hover:bg-muted"
+            }`}>{d.label}</button>
+        ))}
+      </div>
+
+      <div className="mt-6 pt-5 border-t border-border/60">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+            <Target className="size-3.5 stroke-[1.75]" /> Daily goal
+          </div>
+          <GoalEditor value={target} onSave={(v) => update.mutate({ daily_minutes_target: v })} />
+        </div>
+        <div className="font-display text-xl font-bold mt-2">
+          {done}<span className="text-muted-foreground text-sm font-medium"> / {target} min today</span>
+        </div>
+        <div className="h-2 mt-3 bg-muted rounded-full overflow-hidden">
+          <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${goalPct}%` }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GoalEditor({ value, onSave }: { value: number; onSave: (v: number) => void }) {
+  const [draft, setDraft] = useState(String(value));
+  useEffect(() => { setDraft(String(value)); }, [value]);
+  const n = Number(draft);
+  const valid = Number.isFinite(n) && n >= 1 && n <= 1440;
+  return (
+    <div className="flex items-center gap-1.5">
+      {[30, 60, 120].map((p) => (
+        <button key={p} onClick={() => { setDraft(String(p)); onSave(p); toast.success(`Daily goal set to ${p} min`); }}
+          className={`px-2.5 py-1.5 rounded-full text-[11px] font-bold border transition ${
+            value === p ? "bg-primary text-primary-foreground border-primary" : "border-border/60 hover:bg-muted"
+          }`}>{p}m</button>
+      ))}
+      <input type="number" min={1} max={1440} value={draft} onChange={(e) => setDraft(e.target.value)}
+        aria-label="Custom daily goal in minutes"
+        className="w-16 rounded-full border border-border/60 bg-card px-2.5 py-1.5 text-[11px] font-bold outline-none focus:border-primary" />
+      <button disabled={!valid} onClick={() => { onSave(n); toast.success(`Daily goal set to ${n} min`); }}
+        aria-label="Save goal"
+        className="size-7 rounded-full bg-foreground text-background grid place-items-center disabled:opacity-40">
+        <Check className="size-3.5 stroke-[1.75]" />
+      </button>
+    </div>
   );
 }
