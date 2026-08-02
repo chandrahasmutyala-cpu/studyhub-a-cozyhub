@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
       { title: "StudyHub — A calm bento for deep work" },
       { name: "description", content: "A minimalist study platform: AI tutor, Japanese, Chinese and Korean academies, focus sessions with ambient sound, planner, and a StudentHub for universities, scholarships and applications." },
       { property: "og:title", content: "StudyHub — A calm bento for deep work" },
-      { property: "og:description", content: "AI tutor, three language academies, focus timer with ambient sound, and a full StudentHub for your next step." },
+      { property: "og:description", content: "A minimalist study platform: AI tutor, Japanese, Chinese and Korean academies, focus sessions with ambient sound, planner, and a StudentHub for universities, scholarships and applications." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
