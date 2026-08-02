@@ -30,7 +30,7 @@ function LiveFocus() {
       {t.running && (
         <span className="font-display text-xl font-bold tabular-nums text-primary">{formatMs(left)}</span>
       )}
-      <Link to="/focus" className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
+      <Link to="/tasks" className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
         {t.running ? "Open timer" : "Start session"} <ArrowRight className="size-4 stroke-[1.75]" />
       </Link>
     </div>
@@ -126,7 +126,7 @@ function Dashboard() {
         {/* Stats */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <Stat icon={Flame} label="Streak" value={`${profile?.current_streak ?? 0}d`} />
-          <Stat icon={Star} label="Level" value={profile?.level ?? 1} />
+          <Stat icon={Star} label="Level" value={levelFromXp(profile?.xp ?? 0)} />
           <Stat icon={Coins} label="Coins" value={profile?.coins ?? 0} />
           <Stat icon={Clock} label="This week" value={`${Math.round(weekTotal / 60 * 10) / 10}h`} />
         </section>
@@ -191,7 +191,7 @@ function Dashboard() {
               <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's suggestion</div>
               <div className="font-display text-xl font-bold mt-1">A 25 min sage-quiet session.</div>
               <p className="text-xs text-muted-foreground mt-1.5">Short, doable, and enough to bank a win before the day gets loud.</p>
-              <Link to="/focus" className="mt-4 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-xs font-bold">
+              <Link to="/tasks" className="mt-4 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-xs font-bold">
                 Start focus <ArrowRight className="size-3.5" />
               </Link>
             </div>
@@ -203,7 +203,7 @@ function Dashboard() {
         <section>
           <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-3 px-1">Quick actions</div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <QuickAction to="/focus" icon={Timer} title="Focus session" />
+            <QuickAction to="/tasks" icon={Timer} title="Focus session" />
             <QuickAction to="/tutor" icon={Sparkles} title="Ask AI Tutor" />
             <QuickAction to="/japanese" icon={Languages} title="Japanese practice" />
             <QuickAction to="/tasks" icon={ListTodo} title="Plan tomorrow" />

@@ -24,7 +24,6 @@ const navGroups: { label: string; items: NavItem[] }[] = [
       { to: "/learning-academy", label: "Learning Academy", icon: GraduationCap },
       { to: "/tasks", label: "Planner", icon: ListTodo },
       { to: "/tutor", label: "AI Tutor", icon: Sparkles },
-      { to: "/focus", label: "Focus", icon: Timer },
       { to: "/media-translator", label: "Media Translator", icon: Video },
     ],
   },
@@ -69,7 +68,7 @@ function FloatingFocusChip() {
   const left = focusTimer.remaining(Date.now(), t);
   return (
     <Link
-      to="/focus"
+      to="/tasks"
       className="fixed bottom-5 right-5 z-30 inline-flex items-center gap-2.5 rounded-full bg-foreground text-background pl-4 pr-5 py-3 shadow-[0_18px_40px_-18px_rgb(0_0_0/0.5)] hover:opacity-95 active:scale-[0.98] transition"
     >
       <Timer className="size-4 stroke-[1.75]" />
@@ -181,7 +180,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </main>
       </div>
 
-      {pathname !== "/focus" && <FloatingFocusChip />}
+      {pathname !== "/tasks" && <FloatingFocusChip />}
 
 
 
