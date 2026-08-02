@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 
-import { useProfile } from "@/lib/useProfile";
+import { useProfile, levelFromXp } from "@/lib/useProfile";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
 import { Flame, Star, Coins, Clock, Sparkles, Timer, ListTodo, Languages, ArrowRight, CalendarClock } from "lucide-react";
 
