@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, Languages, Timer, Compass, GraduationCap, Award, ArrowRight, ClipboardList, Cat } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { SplashScreen } from "@/components/SplashScreen";
+import { AuthStartupGate } from "@/components/AuthStartupGate";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
