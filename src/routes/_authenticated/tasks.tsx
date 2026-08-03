@@ -607,7 +607,7 @@ function MonthCalendar({
     <section className="rounded-3xl border border-border/60 bg-card p-5">
       <div className="flex items-center justify-between mb-4">
         <div className="font-display text-lg font-bold tracking-tight">
-          {first.toLocaleDateString(undefined, { month: "long", year: "numeric" })}
+          {jpYearMonth(first)}
         </div>
         <div className="flex items-center gap-1">
           <button onClick={() => shift(-1)} aria-label="Previous month"
