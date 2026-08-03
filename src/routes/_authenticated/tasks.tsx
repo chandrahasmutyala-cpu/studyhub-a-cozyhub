@@ -360,7 +360,7 @@ function PlannerPage() {
               </div>
             </Panel>
 
-            <HabitTracker />
+
 
             <Panel
               title="Upcoming deadlines"
