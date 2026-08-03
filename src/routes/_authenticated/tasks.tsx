@@ -766,3 +766,18 @@ function GoalEditor({ value, onSave }: { value: number; onSave: (v: number) => v
     </div>
   );
 }
+
+/* ---------- Japanese calendar formatting (Planner calendar only) ---------- */
+/** Monday-first weekday labels, matching the calendar grid order. */
+const JP_WEEKDAYS_MON_FIRST = ["月", "火", "水", "木", "金", "土", "日"] as const;
+const JP_WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"] as const;
+
+/** 2026年8月 */
+function jpYearMonth(d: Date) {
+  return `${d.getFullYear()}年${d.getMonth() + 1}月`;
+}
+
+/** 2026年8月2日（日） */
+function jpFullDate(d: Date) {
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${JP_WEEKDAYS[d.getDay()]}）`;
+}
