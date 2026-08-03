@@ -236,7 +236,7 @@ function PlannerPage() {
             />
 
             <Panel
-              title={new Date(selected).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
+              title={jpFullDate(new Date(selected))}
               hint={`${all.filter((t) => t.due_date === selected).length} scheduled`}
             >
               <ul className="space-y-1.5">
@@ -607,7 +607,7 @@ function MonthCalendar({
     <section className="rounded-3xl border border-border/60 bg-card p-5">
       <div className="flex items-center justify-between mb-4">
         <div className="font-display text-lg font-bold tracking-tight">
-          {first.toLocaleDateString(undefined, { month: "long", year: "numeric" })}
+          {jpYearMonth(first)}
         </div>
         <div className="flex items-center gap-1">
           <button onClick={() => shift(-1)} aria-label="Previous month"
@@ -623,7 +623,7 @@ function MonthCalendar({
         </div>
       </div>
       <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
-        {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => <div key={i}>{d}</div>)}
+        {JP_WEEKDAYS_MON_FIRST.map((d, i) => <div key={i} className={i === 5 ? "text-sky-500" : i === 6 ? "text-rose-400" : ""}>{d}</div>)}
       </div>
       <div className="grid grid-cols-7 gap-1">
         {cells.map((iso, i) => {
@@ -765,4 +765,19 @@ function GoalEditor({ value, onSave }: { value: number; onSave: (v: number) => v
       </button>
     </div>
   );
+}
+
+/* ---------- Japanese calendar formatting (Planner calendar only) ---------- */
+/** Monday-first weekday labels, matching the calendar grid order. */
+const JP_WEEKDAYS_MON_FIRST = ["月", "火", "水", "木", "金", "土", "日"] as const;
+const JP_WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"] as const;
+
+/** 2026年8月 */
+function jpYearMonth(d: Date) {
+  return `${d.getFullYear()}年${d.getMonth() + 1}月`;
+}
+
+/** 2026年8月2日（日） */
+function jpFullDate(d: Date) {
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${JP_WEEKDAYS[d.getDay()]}）`;
 }

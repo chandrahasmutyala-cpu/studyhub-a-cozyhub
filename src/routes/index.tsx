@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, Languages, Timer, Compass, GraduationCap, Award, ArrowRight, ClipboardList, Cat } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { SplashScreen } from "@/components/SplashScreen";
+import { AuthStartupGate } from "@/components/AuthStartupGate";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,7 +22,9 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <AuthStartupGate />
       <SplashScreen />
+
 
       {/* Nav */}
       <nav className="px-6 lg:px-12 py-6 flex justify-between items-center relative z-10 max-w-7xl mx-auto">
