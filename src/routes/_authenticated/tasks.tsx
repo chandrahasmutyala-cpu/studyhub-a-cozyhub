@@ -236,7 +236,7 @@ function PlannerPage() {
             />
 
             <Panel
-              title={new Date(selected).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
+              title={jpFullDate(new Date(selected))}
               hint={`${all.filter((t) => t.due_date === selected).length} scheduled`}
             >
               <ul className="space-y-1.5">
