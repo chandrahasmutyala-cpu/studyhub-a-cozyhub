@@ -26,7 +26,7 @@ type Task = {
 type AlarmMap = Record<string, string>;
 const ALARM_KEY = "task-alarms-v1";
 const FIRED_KEY = "task-alarms-fired-v1";
-const HABIT_KEY = "studyhub-habits-v1";
+
 
 const CATEGORIES = ["study", "japanese", "chinese", "korean", "coding", "reading", "exam", "other"] as const;
 const CATEGORY_TINT: Record<string, string> = {
