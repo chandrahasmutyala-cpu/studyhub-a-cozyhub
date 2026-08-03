@@ -20,7 +20,9 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <AuthStartupGate />
       <SplashScreen />
+
 
       {/* Nav */}
       <nav className="px-6 lg:px-12 py-6 flex justify-between items-center relative z-10 max-w-7xl mx-auto">
