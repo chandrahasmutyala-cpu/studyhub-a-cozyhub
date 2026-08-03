@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useProfile } from "@/lib/useProfile";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
-import { CozyCat, cozyQuote } from "@/components/CozyCat";
+
 import {
   Plus, Trash2, Bell, BellOff, CalendarDays, CloudSun, Timer, Flame,
   CheckCircle2, Circle, ArrowRight, Sparkles, ListTodo,
@@ -26,7 +26,7 @@ type Task = {
 type AlarmMap = Record<string, string>;
 const ALARM_KEY = "task-alarms-v1";
 const FIRED_KEY = "task-alarms-fired-v1";
-const HABIT_KEY = "studyhub-habits-v1";
+
 
 const CATEGORIES = ["study", "japanese", "chinese", "korean", "coding", "reading", "exam", "other"] as const;
 const CATEGORY_TINT: Record<string, string> = {
@@ -345,11 +345,6 @@ function PlannerPage() {
           <div className="space-y-4">
             <FocusSection />
 
-            <section className="rounded-3xl border border-border/60 bg-card p-6 text-center">
-              <CozyCat className="w-40 mx-auto text-foreground/85" />
-              <p className="font-display text-base font-bold mt-4">{cozyQuote()}</p>
-              <p className="text-xs text-muted-foreground mt-1">StudyHub keeps you company.</p>
-            </section>
 
 
             <Panel title="Focus this week" hint={`${weekTotal} min`}>
@@ -365,7 +360,7 @@ function PlannerPage() {
               </div>
             </Panel>
 
-            <HabitTracker />
+
 
             <Panel
               title="Upcoming deadlines"
@@ -514,68 +509,6 @@ function WeatherCard() {
   );
 }
 
-const DEFAULT_HABITS = ["Vocabulary review", "Read 10 minutes", "Deep focus block"];
-type HabitLog = Record<string, string[]>; // habit -> ISO dates
-
-function HabitTracker() {
-  const [habits, setHabits] = useState<string[]>(() => loadJSON<string[]>(`${HABIT_KEY}-list`, DEFAULT_HABITS));
-  const [log, setLog] = useState<HabitLog>(() => loadJSON<HabitLog>(HABIT_KEY, {}));
-  const [draft, setDraft] = useState("");
-  const today = todayISO();
-  const last7 = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(); d.setDate(d.getDate() - (6 - i));
-    return d.toISOString().slice(0, 10);
-  });
-
-  function toggleHabit(h: string) {
-    const dates = new Set(log[h] ?? []);
-    dates.has(today) ? dates.delete(today) : dates.add(today);
-    const next = { ...log, [h]: [...dates] };
-    setLog(next); saveJSON(HABIT_KEY, next);
-  }
-  function addHabit(e: React.FormEvent) {
-    e.preventDefault();
-    const name = draft.trim();
-    if (!name || habits.includes(name)) return;
-    const next = [...habits, name];
-    setHabits(next); saveJSON(`${HABIT_KEY}-list`, next); setDraft("");
-  }
-  function removeHabit(h: string) {
-    const next = habits.filter((x) => x !== h);
-    setHabits(next); saveJSON(`${HABIT_KEY}-list`, next);
-  }
-
-  return (
-    <Panel title="Habits" hint={`${habits.filter((h) => (log[h] ?? []).includes(today)).length}/${habits.length} today`}>
-      <ul className="space-y-2">
-        {habits.map((h) => {
-          const done = (log[h] ?? []).includes(today);
-          return (
-            <li key={h} className="group flex items-center gap-3">
-              <button onClick={() => toggleHabit(h)} className="shrink-0 text-foreground/70 hover:text-primary transition" aria-label={`Toggle ${h}`}>
-                {done ? <CheckCircle2 className="size-5 stroke-[1.6] text-primary" /> : <Circle className="size-5 stroke-[1.6]" />}
-              </button>
-              <span className={`flex-1 text-sm font-medium truncate ${done ? "text-muted-foreground line-through" : ""}`}>{h}</span>
-              <span className="flex gap-1 shrink-0">
-                {last7.map((d) => (
-                  <span key={d} className={`size-2 rounded-full ${(log[h] ?? []).includes(d) ? "bg-primary" : "bg-muted"}`} />
-                ))}
-              </span>
-              <button onClick={() => removeHabit(h)} className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition" aria-label={`Remove ${h}`}>
-                <Trash2 className="size-4 stroke-[1.75]" />
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      <form onSubmit={addHabit} className="mt-3 flex gap-2">
-        <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="New habit"
-          className="flex-1 bg-muted/60 rounded-2xl px-3 py-2 text-xs font-medium outline-none border border-transparent focus:border-primary/50" />
-        <button className="rounded-full border border-border/60 px-3 py-2 text-xs font-bold hover:bg-muted transition">Add</button>
-      </form>
-    </Panel>
-  );
-}
 
 /** Month calendar with task/deadline markers. */
 function MonthCalendar({
