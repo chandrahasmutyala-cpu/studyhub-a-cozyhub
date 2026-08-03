@@ -198,18 +198,8 @@ function Dashboard() {
           </Card>
         </section>
 
-
-        {/* Quick actions */}
-        <section>
-          <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-3 px-1">Quick actions</div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <QuickAction to="/tasks" icon={Timer} title="Focus session" />
-            <QuickAction to="/tutor" icon={Sparkles} title="Ask AI Tutor" />
-            <QuickAction to="/japanese" icon={Languages} title="Japanese practice" />
-            <QuickAction to="/tasks" icon={ListTodo} title="Plan tomorrow" />
-          </div>
-        </section>
       </div>
+
     </AppShell>
   );
 }
