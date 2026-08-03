@@ -6,7 +6,7 @@ import { AppShell } from "@/components/AppShell";
 
 import { useProfile, levelFromXp } from "@/lib/useProfile";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
-import { Flame, Star, Coins, Clock, Sparkles, Timer, ListTodo, Languages, ArrowRight, CalendarClock } from "lucide-react";
+import { Flame, Star, Coins, Clock, ArrowRight, CalendarClock } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
@@ -244,15 +244,3 @@ function EmptyHint({ to, label, desc }: { to: string; label: string; desc: strin
     </div>
   );
 }
-
-function QuickAction({ to, icon: Icon, title }: { to: string; icon: React.ComponentType<{ className?: string }>; title: string }) {
-  return (
-    <Link to={to} className="rounded-3xl border border-border/60 bg-card p-5 flex items-center gap-3 hover:border-primary/40 hover:-translate-y-0.5 transition-all">
-      <div className="size-10 rounded-2xl bg-muted grid place-items-center shrink-0">
-        <Icon className="size-[18px] stroke-[1.75] text-foreground/75" />
-      </div>
-      <span className="text-sm font-semibold truncate">{title}</span>
-    </Link>
-  );
-}
-
