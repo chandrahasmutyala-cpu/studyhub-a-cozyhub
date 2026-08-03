@@ -623,7 +623,7 @@ function MonthCalendar({
         </div>
       </div>
       <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">
-        {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => <div key={i}>{d}</div>)}
+        {JP_WEEKDAYS_MON_FIRST.map((d, i) => <div key={i} className={i === 5 ? "text-sky-500" : i === 6 ? "text-rose-400" : ""}>{d}</div>)}
       </div>
       <div className="grid grid-cols-7 gap-1">
         {cells.map((iso, i) => {
