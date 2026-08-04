@@ -7,7 +7,7 @@ import {
   LayoutDashboard, ListTodo, Sparkles, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
   Calculator, Cat, MessagesSquare,
-  Home, Search, Menu, X, ChevronRight, Timer,
+  Home, Search, Menu, X, ChevronRight, Timer, ShoppingBag,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
@@ -44,6 +44,7 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     label: "Creative",
     items: [
       { to: "/doodlekitty", label: "DoodleKitty", icon: Cat },
+      { to: "/shop", label: "Shop", icon: ShoppingBag },
     ],
   },
   {

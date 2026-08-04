@@ -23,6 +23,7 @@ export type Profile = {
   languages: string[] | null;
   selected_pet: string | null;
   selected_theme: string | null;
+  selected_wallpaper: string | null;
   japanese_level: string | null;
   age_group: string | null;
   avatar_config: Record<string, number> | null;
