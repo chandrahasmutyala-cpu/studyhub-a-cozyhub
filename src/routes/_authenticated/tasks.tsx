@@ -5,11 +5,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useProfile } from "@/lib/useProfile";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
-
+import { useShop, WALLPAPERS, wallpaperById, wallpaperPrefs } from "@/lib/shop";
 import {
   Plus, Trash2, Bell, BellOff, CalendarDays, CloudSun, Timer, Flame,
   CheckCircle2, Circle, ArrowRight, Sparkles, ListTodo,
   ChevronLeft, ChevronRight, Play, Pause, RotateCcw, Target, Check,
+  Shuffle, Star,
 } from "lucide-react";
 import { toast } from "sonner";
 
