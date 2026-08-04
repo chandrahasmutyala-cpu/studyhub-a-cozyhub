@@ -19,6 +19,7 @@ import { Route as AuthenticatedUniversityAdvisorRouteImport } from './routes/_au
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
+import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
 import { Route as AuthenticatedScholarshipEligibilityRouteImport } from './routes/_authenticated/scholarship-eligibility'
@@ -87,6 +88,11 @@ const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
 const AuthenticatedTasksRoute = AuthenticatedTasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedShopRoute = AuthenticatedShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
   '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/shop': typeof AuthenticatedShopRoute
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
@@ -233,6 +240,7 @@ export interface FileRoutesByTo {
   '/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
   '/scholarships': typeof AuthenticatedScholarshipsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/shop': typeof AuthenticatedShopRoute
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/_authenticated/scholarship-eligibility': typeof AuthenticatedScholarshipEligibilityRoute
   '/_authenticated/scholarships': typeof AuthenticatedScholarshipsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/shop': typeof AuthenticatedShopRoute
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
@@ -293,6 +302,7 @@ export interface FileRouteTypes {
     | '/scholarship-eligibility'
     | '/scholarships'
     | '/settings'
+    | '/shop'
     | '/tasks'
     | '/tutor'
     | '/universities'
@@ -321,6 +331,7 @@ export interface FileRouteTypes {
     | '/scholarship-eligibility'
     | '/scholarships'
     | '/settings'
+    | '/shop'
     | '/tasks'
     | '/tutor'
     | '/universities'
@@ -350,6 +361,7 @@ export interface FileRouteTypes {
     | '/_authenticated/scholarship-eligibility'
     | '/_authenticated/scholarships'
     | '/_authenticated/settings'
+    | '/_authenticated/shop'
     | '/_authenticated/tasks'
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
@@ -435,6 +447,13 @@ declare module '@tanstack/react-router' {
       path: '/tasks'
       fullPath: '/tasks'
       preLoaderRoute: typeof AuthenticatedTasksRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/shop': {
+      id: '/_authenticated/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof AuthenticatedShopRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings': {
@@ -577,6 +596,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedScholarshipEligibilityRoute: typeof AuthenticatedScholarshipEligibilityRoute
   AuthenticatedScholarshipsRoute: typeof AuthenticatedScholarshipsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedShopRoute: typeof AuthenticatedShopRoute
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
@@ -603,6 +623,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedScholarshipEligibilityRoute,
   AuthenticatedScholarshipsRoute: AuthenticatedScholarshipsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedShopRoute: AuthenticatedShopRoute,
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,

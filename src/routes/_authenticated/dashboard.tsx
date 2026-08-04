@@ -93,88 +93,96 @@ function Dashboard() {
 
   return (
     <AppShell>
-      <div className="space-y-10 max-w-5xl mx-auto animate-fade-up">
-        {/* Hero */}
-        <section>
-          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-            {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
-          </div>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mt-3 tracking-tight leading-[1.05]">
-            {greeting()},<br />
-            <span className="text-primary">{profile?.display_name ?? "friend"}.</span>
-          </h1>
-          <p className="text-base text-muted-foreground mt-4 max-w-lg">
-            {todayMin >= dailyTarget
-              ? "You've already hit today's goal. Anything more is bonus."
-              : `${dailyTarget - todayMin} minutes to today's goal. One small session at a time.`}
-          </p>
+      <div className="max-w-5xl mx-auto animate-fade-in">
+        {/* BENTO GRID */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 
-          <div className="mt-8 rounded-3xl border border-border/60 bg-card p-6 md:p-7 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_20px_45px_-30px_rgb(15_23_42/0.18)]">
-            <div className="flex items-center justify-between gap-4">
-              <div className="min-w-0">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's focus</div>
-                <div className="font-display text-2xl font-bold mt-1">{todayMin}<span className="text-muted-foreground text-base font-medium"> / {dailyTarget} min</span></div>
-              </div>
-              <LiveFocus />
+          {/* Greeting — wide */}
+          <Tile className="col-span-2 md:col-span-4 p-6 md:p-8">
+            <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+              {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
             </div>
-            <div className="h-2 mt-5 bg-muted rounded-full overflow-hidden">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mt-2 tracking-tight leading-[1.05]">
+              {greeting()},{" "}
+              <span className="text-primary">{profile?.display_name ?? "friend"}.</span>
+            </h1>
+            <p className="text-sm text-muted-foreground mt-3 max-w-lg">
+              {todayMin >= dailyTarget
+                ? "You've already hit today's goal. Anything more is bonus."
+                : `${dailyTarget - todayMin} minutes to today's goal. One small session at a time.`}
+            </p>
+          </Tile>
+
+          {/* Focus — tall, wide on mobile */}
+          <Tile className="col-span-2 p-6">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's focus</div>
+            <div className="font-display text-4xl font-bold mt-2 tabular-nums">
+              {todayMin}<span className="text-muted-foreground text-base font-medium"> / {dailyTarget} min</span>
+            </div>
+            <div className="h-2 mt-4 bg-muted rounded-full overflow-hidden">
               <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${dailyPct}%` }} />
             </div>
-          </div>
-        </section>
+            <div className="mt-5"><LiveFocus /></div>
+          </Tile>
 
-        {/* Stats */}
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {/* Week chart */}
+          <Tile className="col-span-2 p-6">
+            <div className="flex items-center justify-between">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">This week</div>
+              <div className="text-[11px] font-bold text-muted-foreground">{weekTotal} min</div>
+            </div>
+            <div className="flex items-end gap-2 h-28 mt-4">
+              {weekly.map((d) => (
+                <div key={d.key} className="flex-1 flex flex-col items-center gap-1.5">
+                  <div className="w-full bg-muted rounded-xl overflow-hidden flex items-end h-20">
+                    <div className="w-full bg-primary rounded-xl transition-all duration-500" style={{ height: `${(d.minutes / maxMin) * 100}%` }} />
+                  </div>
+                  <div className="text-[10px] font-bold text-muted-foreground">{d.label}</div>
+                </div>
+              ))}
+            </div>
+          </Tile>
+
+          {/* Small stat tiles */}
           <Stat icon={Flame} label="Streak" value={`${profile?.current_streak ?? 0}d`} />
           <Stat icon={Star} label="Level" value={levelFromXp(profile?.xp ?? 0)} />
-          <Stat icon={Coins} label="Coins" value={profile?.coins ?? 0} />
-          <Stat icon={Clock} label="This week" value={`${Math.round(weekTotal / 60 * 10) / 10}h`} />
-        </section>
+          <Stat icon={Coins} label="Coins" value={profile?.coins ?? 0} to="/shop" />
+          <Stat icon={Clock} label="Total" value={`${Math.round((profile?.total_minutes ?? 0) / 60)}h`} />
 
-        {/* Tasks + week */}
-        <section className="grid lg:grid-cols-[1.3fr_1fr] gap-4">
-          <Card title="Upcoming tasks" action={<Link to="/tasks" className="text-xs font-bold text-primary">Open planner →</Link>}>
+          {/* Tasks */}
+          <Tile className="col-span-2 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-display text-base font-bold tracking-tight">Up next</h2>
+              <Link to="/tasks" className="text-xs font-bold text-primary">Planner →</Link>
+            </div>
             {tasksQ.isLoading ? (
               <Skeleton rows={3} />
             ) : tasksQ.data && tasksQ.data.length > 0 ? (
-              <ul className="space-y-1.5">
-                {tasksQ.data.slice(0, 6).map((t) => (
-                  <li key={t.id} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-muted/60 transition">
-                    <span className={`size-5 rounded-full border-2 shrink-0 ${t.completed ? "bg-primary border-primary" : "border-foreground/25"}`} />
+              <ul className="space-y-1">
+                {tasksQ.data.slice(0, 5).map((t) => (
+                  <li key={t.id} className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-muted/60 transition">
+                    <span className={`size-4 rounded-full border-2 shrink-0 ${t.completed ? "bg-primary border-primary" : "border-foreground/25"}`} />
                     <span className={`flex-1 text-sm font-medium truncate ${t.completed ? "line-through text-muted-foreground" : ""}`}>{t.title}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground shrink-0">{t.category}</span>
                   </li>
                 ))}
               </ul>
             ) : (
               <EmptyHint to="/tasks" label="Add your first task" desc="Your planner is clear." />
             )}
-          </Card>
+          </Tile>
 
-          <Card title="This week">
-            <div className="flex items-end gap-2 h-32">
-              {weekly.map((d) => (
-                <div key={d.key} className="flex-1 flex flex-col items-center gap-1.5">
-                  <div className="w-full bg-muted rounded-xl overflow-hidden flex items-end h-24">
-                    <div className="w-full bg-primary rounded-xl transition-all" style={{ height: `${(d.minutes / maxMin) * 100}%` }} />
-                  </div>
-                  <div className="text-[10px] font-bold text-muted-foreground">{d.label}</div>
-                </div>
-              ))}
+          {/* Deadlines */}
+          <Tile className="col-span-2 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-display text-base font-bold tracking-tight">Deadlines</h2>
+              <Link to="/applications" className="text-xs font-bold text-primary">All →</Link>
             </div>
-            <div className="text-xs text-muted-foreground mt-3">Total: {weekTotal} min · last 7 days</div>
-          </Card>
-        </section>
-
-        {/* Deadlines + continue */}
-        <section className="grid lg:grid-cols-2 gap-4">
-          <Card title="Upcoming deadlines" action={<Link to="/applications" className="text-xs font-bold text-primary">All →</Link>}>
             {deadlinesQ.data && deadlinesQ.data.length > 0 ? (
-              <ul className="space-y-1.5">
+              <ul className="space-y-1">
                 {deadlinesQ.data.map((d) => (
-                  <li key={d.id} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-muted/60 transition">
-                    <span className="size-9 rounded-2xl bg-muted grid place-items-center shrink-0">
-                      <CalendarClock className="size-[18px] stroke-[1.75] text-foreground/70" />
+                  <li key={d.id} className="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-muted/60 transition">
+                    <span className="size-8 rounded-2xl bg-muted grid place-items-center shrink-0">
+                      <CalendarClock className="size-4 stroke-[1.75] text-foreground/70" />
                     </span>
                     <span className="flex-1 text-sm font-medium truncate">{d.name}</span>
                     <span className="text-[11px] text-muted-foreground shrink-0">{d.deadline && new Date(d.deadline).toLocaleDateString()}</span>
@@ -184,29 +192,35 @@ function Dashboard() {
             ) : (
               <EmptyHint to="/universities" label="Track a university" desc="No deadlines saved yet." />
             )}
-          </Card>
+          </Tile>
 
-          <Card title="Keep the streak" action={<Link to="/learning-academy" className="text-xs font-bold text-primary">Academy →</Link>}>
-            <div className="rounded-2xl bg-muted/60 p-5">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's suggestion</div>
-              <div className="font-display text-xl font-bold mt-1">A 25 min sage-quiet session.</div>
-              <p className="text-xs text-muted-foreground mt-1.5">Short, doable, and enough to bank a win before the day gets loud.</p>
-              <Link to="/tasks" className="mt-4 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-xs font-bold">
-                Start focus <ArrowRight className="size-3.5" />
-              </Link>
+          {/* Shop callout */}
+          <Link to="/shop" className="col-span-2 md:col-span-4 rounded-3xl border border-border/60 bg-card p-6 hover:-translate-y-[2px] hover:shadow-[0_24px_50px_-34px_rgb(15_23_42/0.35)] transition-all">
+            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+              <Coins className="size-3.5 stroke-[1.75]" /> Study Coin Shop
             </div>
-          </Card>
-        </section>
-
+            <div className="font-display text-lg font-bold mt-1.5">Spend today's coins on a new focus room.</div>
+            <p className="text-xs text-muted-foreground mt-1">Pixel wallpapers, planner themes, desk decorations and badges.</p>
+            <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-primary">Browse the shop <ArrowRight className="size-3.5" /></span>
+          </Link>
+        </div>
       </div>
-
     </AppShell>
   );
 }
 
-function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode }) {
+function Tile({ className = "", children }: { className?: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-3xl border border-border/60 bg-card p-4 flex items-center gap-3">
+    <section className={`rounded-3xl border border-border/60 bg-card shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)] ${className}`}>
+      {children}
+    </section>
+  );
+}
+
+
+function Stat({ icon: Icon, label, value, to }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode; to?: string }) {
+  const inner = (
+    <>
       <div className="size-10 rounded-2xl bg-muted grid place-items-center shrink-0">
         <Icon className="size-[18px] stroke-[1.75] text-foreground/75" />
       </div>
@@ -214,21 +228,12 @@ function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ classN
         <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
         <div className="font-display text-xl font-bold truncate">{value}</div>
       </div>
-    </div>
+    </>
   );
+  const cls = "rounded-3xl border border-border/60 bg-card p-4 flex items-center gap-3 transition-all hover:-translate-y-[2px]";
+  return to ? <Link to={to} className={cls}>{inner}</Link> : <div className={cls}>{inner}</div>;
 }
 
-function Card({ title, action, children }: { title: string; action?: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <div className="rounded-3xl border border-border/60 bg-card p-5 md:p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-display text-base font-bold tracking-tight">{title}</h2>
-        {action}
-      </div>
-      {children}
-    </div>
-  );
-}
 
 function Skeleton({ rows = 3 }) {
   return <div className="space-y-2">{Array.from({ length: rows }).map((_, i) => <div key={i} className="h-11 bg-muted rounded-2xl animate-pulse" />)}</div>;

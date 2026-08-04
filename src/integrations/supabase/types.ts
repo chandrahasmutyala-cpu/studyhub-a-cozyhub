@@ -370,6 +370,7 @@ export type Database = {
           preferred_time: string | null
           selected_pet: string | null
           selected_theme: string | null
+          selected_wallpaper: string | null
           study_goal: string | null
           subjects: string[] | null
           teacher_name: string | null
@@ -405,6 +406,7 @@ export type Database = {
           preferred_time?: string | null
           selected_pet?: string | null
           selected_theme?: string | null
+          selected_wallpaper?: string | null
           study_goal?: string | null
           subjects?: string[] | null
           teacher_name?: string | null
@@ -440,6 +442,7 @@ export type Database = {
           preferred_time?: string | null
           selected_pet?: string | null
           selected_theme?: string | null
+          selected_wallpaper?: string | null
           study_goal?: string | null
           subjects?: string[] | null
           teacher_name?: string | null
@@ -529,6 +532,30 @@ export type Database = {
           start_date?: string
           title?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      shop_purchases: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          price: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          price?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          price?: number
           user_id?: string
         }
         Relationships: []
