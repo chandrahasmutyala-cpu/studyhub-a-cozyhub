@@ -616,13 +616,77 @@ function FocusSection() {
   const done = todayQ.data ?? 0;
   const goalPct = Math.min(100, (done / Math.max(1, target)) * 100);
 
+  // Full-bleed wallpaper picker — swipe/arrow through wallpapers you own.
+  const { owned, selectedWallpaper, setWallpaper } = useShop();
+  const ownedWalls = WALLPAPERS.filter((w) => owned(w.id));
+  const current = wallpaperById(selectedWallpaper);
+  const idx = Math.max(0, ownedWalls.findIndex((w) => w.id === current.id));
+  const [favs, setFavs] = useState<string[]>(() => wallpaperPrefs.favorites());
+  const touchX = useRef<number | null>(null);
+
+  function step(dir: 1 | -1) {
+    if (ownedWalls.length < 2) return;
+    const next = ownedWalls[(idx + dir + ownedWalls.length) % ownedWalls.length];
+    setWallpaper(next.id);
+  }
+  function randomWall() {
+    if (ownedWalls.length < 2) return;
+    const pool = ownedWalls.filter((w) => w.id !== current.id);
+    setWallpaper(pool[Math.floor(Math.random() * pool.length)].id);
+  }
+
+  const hasImage = Boolean(current.image);
+
   return (
-    <section className="rounded-3xl border border-border/60 bg-card p-6 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)]">
+    <section
+      onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+      onTouchEnd={(e) => {
+        if (touchX.current === null) return;
+        const dx = e.changedTouches[0].clientX - touchX.current;
+        if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+        touchX.current = null;
+      }}
+      className="relative isolate overflow-hidden rounded-3xl border border-border/60 bg-card p-6 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)]"
+    >
+      {hasImage && (
+        <>
+          <img src={current.image} alt={current.name} loading="lazy" width={1536} height={1024}
+            className="absolute inset-0 -z-20 size-full object-cover" />
+          <div className="absolute inset-0 -z-10 bg-card/78 backdrop-blur-[2px] dark:bg-card/72" />
+        </>
+      )}
+
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-1">
+          <button onClick={() => step(-1)} aria-label="Previous wallpaper"
+            className="size-8 grid place-items-center rounded-full border border-border/60 bg-card/70 backdrop-blur hover:bg-muted transition disabled:opacity-40"
+            disabled={ownedWalls.length < 2}>
+            <ChevronLeft className="size-4 stroke-[1.75]" />
+          </button>
+          <button onClick={() => step(1)} aria-label="Next wallpaper"
+            className="size-8 grid place-items-center rounded-full border border-border/60 bg-card/70 backdrop-blur hover:bg-muted transition disabled:opacity-40"
+            disabled={ownedWalls.length < 2}>
+            <ChevronRight className="size-4 stroke-[1.75]" />
+          </button>
+          <button onClick={randomWall} aria-label="Random wallpaper"
+            className="size-8 grid place-items-center rounded-full border border-border/60 bg-card/70 backdrop-blur hover:bg-muted transition disabled:opacity-40"
+            disabled={ownedWalls.length < 2}>
+            <Shuffle className="size-4 stroke-[1.75]" />
+          </button>
+          <button onClick={() => setFavs(wallpaperPrefs.toggleFavorite(current.id))} aria-label="Favorite wallpaper"
+            className="size-8 grid place-items-center rounded-full border border-border/60 bg-card/70 backdrop-blur hover:bg-muted transition">
+            <Star className={`size-4 stroke-[1.75] ${favs.includes(current.id) ? "fill-primary text-primary" : ""}`} />
+          </button>
+        </div>
+        <Link to="/shop" className="text-xs font-bold text-primary shrink-0">Shop →</Link>
+      </div>
+
       <div className="flex items-center justify-between">
         <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
           <Timer className="size-3.5 stroke-[1.75]" /> {t.phase === "focus" ? "Deep focus" : "Break"}
         </div>
         <button
+
           onClick={() => focusTimer.setPhase(t.phase === "focus" ? "break" : "focus")}
           className="text-xs font-bold text-primary"
         >
