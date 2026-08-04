@@ -218,9 +218,9 @@ function Tile({ className = "", children }: { className?: string; children: Reac
 }
 
 
-function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode }) {
-  return (
-    <div className="rounded-3xl border border-border/60 bg-card p-4 flex items-center gap-3">
+function Stat({ icon: Icon, label, value, to }: { icon: React.ComponentType<{ className?: string }>; label: string; value: React.ReactNode; to?: string }) {
+  const inner = (
+    <>
       <div className="size-10 rounded-2xl bg-muted grid place-items-center shrink-0">
         <Icon className="size-[18px] stroke-[1.75] text-foreground/75" />
       </div>
@@ -228,21 +228,12 @@ function Stat({ icon: Icon, label, value }: { icon: React.ComponentType<{ classN
         <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
         <div className="font-display text-xl font-bold truncate">{value}</div>
       </div>
-    </div>
+    </>
   );
+  const cls = "rounded-3xl border border-border/60 bg-card p-4 flex items-center gap-3 transition-all hover:-translate-y-[2px]";
+  return to ? <Link to={to} className={cls}>{inner}</Link> : <div className={cls}>{inner}</div>;
 }
 
-function Card({ title, action, children }: { title: string; action?: React.ReactNode; children: React.ReactNode }) {
-  return (
-    <div className="rounded-3xl border border-border/60 bg-card p-5 md:p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-display text-base font-bold tracking-tight">{title}</h2>
-        {action}
-      </div>
-      {children}
-    </div>
-  );
-}
 
 function Skeleton({ rows = 3 }) {
   return <div className="space-y-2">{Array.from({ length: rows }).map((_, i) => <div key={i} className="h-11 bg-muted rounded-2xl animate-pulse" />)}</div>;
