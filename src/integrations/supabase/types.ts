@@ -104,27 +104,6 @@ export type Database = {
         }
         Relationships: []
       }
-      blocks: {
-        Row: {
-          blocked_id: string
-          blocker_id: string
-          created_at: string
-          id: string
-        }
-        Insert: {
-          blocked_id: string
-          blocker_id: string
-          created_at?: string
-          id?: string
-        }
-        Update: {
-          blocked_id?: string
-          blocker_id?: string
-          created_at?: string
-          id?: string
-        }
-        Relationships: []
-      }
       career_plans: {
         Row: {
           career_goal: string | null
@@ -230,59 +209,6 @@ export type Database = {
         }
         Relationships: []
       }
-      dm_messages: {
-        Row: {
-          attachment_url: string | null
-          body: string | null
-          created_at: string
-          deleted_for: string[]
-          deleted_for_all: boolean
-          id: string
-          kind: string
-          reactions: Json
-          read_at: string | null
-          recipient_id: string
-          reply_to: string | null
-          sender_id: string
-        }
-        Insert: {
-          attachment_url?: string | null
-          body?: string | null
-          created_at?: string
-          deleted_for?: string[]
-          deleted_for_all?: boolean
-          id?: string
-          kind?: string
-          reactions?: Json
-          read_at?: string | null
-          recipient_id: string
-          reply_to?: string | null
-          sender_id: string
-        }
-        Update: {
-          attachment_url?: string | null
-          body?: string | null
-          created_at?: string
-          deleted_for?: string[]
-          deleted_for_all?: boolean
-          id?: string
-          kind?: string
-          reactions?: Json
-          read_at?: string | null
-          recipient_id?: string
-          reply_to?: string | null
-          sender_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "dm_messages_reply_to_fkey"
-            columns: ["reply_to"]
-            isOneToOne: false
-            referencedRelation: "dm_messages"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       flashcards: {
         Row: {
           back: string
@@ -352,106 +278,6 @@ export type Database = {
         }
         Relationships: []
       }
-      friendships: {
-        Row: {
-          addressee_id: string
-          created_at: string
-          id: string
-          requester_id: string
-          status: string
-          updated_at: string
-        }
-        Insert: {
-          addressee_id: string
-          created_at?: string
-          id?: string
-          requester_id: string
-          status?: string
-          updated_at?: string
-        }
-        Update: {
-          addressee_id?: string
-          created_at?: string
-          id?: string
-          requester_id?: string
-          status?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      group_members: {
-        Row: {
-          created_at: string
-          group_id: string
-          id: string
-          role: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          group_id: string
-          id?: string
-          role?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          group_id?: string
-          id?: string
-          role?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "group_members_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "study_groups"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      group_messages: {
-        Row: {
-          attachment_url: string | null
-          body: string | null
-          created_at: string
-          group_id: string
-          id: string
-          is_ai: boolean
-          kind: string
-          sender_id: string | null
-        }
-        Insert: {
-          attachment_url?: string | null
-          body?: string | null
-          created_at?: string
-          group_id: string
-          id?: string
-          is_ai?: boolean
-          kind?: string
-          sender_id?: string | null
-        }
-        Update: {
-          attachment_url?: string | null
-          body?: string | null
-          created_at?: string
-          group_id?: string
-          id?: string
-          is_ai?: boolean
-          kind?: string
-          sender_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "group_messages_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "study_groups"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       lesson_progress: {
         Row: {
           completed_at: string | null
@@ -518,43 +344,9 @@ export type Database = {
         }
         Relationships: []
       }
-      notifications: {
-        Row: {
-          body: string | null
-          created_at: string
-          id: string
-          kind: string
-          link: string | null
-          read_at: string | null
-          title: string
-          user_id: string
-        }
-        Insert: {
-          body?: string | null
-          created_at?: string
-          id?: string
-          kind: string
-          link?: string | null
-          read_at?: string | null
-          title: string
-          user_id: string
-        }
-        Update: {
-          body?: string | null
-          created_at?: string
-          id?: string
-          kind?: string
-          link?: string | null
-          read_at?: string | null
-          title?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           age_group: string | null
-          appearance: Json
           avatar_config: Json | null
           avatar_url: string | null
           bio: string | null
@@ -562,7 +354,6 @@ export type Database = {
           created_at: string
           current_grade: string | null
           current_streak: number
-          custom_wallpaper_url: string | null
           daily_minutes_target: number | null
           display_name: string | null
           dream_career: string | null
@@ -572,13 +363,11 @@ export type Database = {
           id: string
           japanese_level: string | null
           languages: string[] | null
-          last_seen: string | null
           last_study_date: string | null
           level: number
           longest_streak: number
           onboarded: boolean
           preferred_time: string | null
-          privacy: Json
           selected_pet: string | null
           selected_theme: string | null
           selected_wallpaper: string | null
@@ -594,7 +383,6 @@ export type Database = {
         }
         Insert: {
           age_group?: string | null
-          appearance?: Json
           avatar_config?: Json | null
           avatar_url?: string | null
           bio?: string | null
@@ -602,7 +390,6 @@ export type Database = {
           created_at?: string
           current_grade?: string | null
           current_streak?: number
-          custom_wallpaper_url?: string | null
           daily_minutes_target?: number | null
           display_name?: string | null
           dream_career?: string | null
@@ -612,13 +399,11 @@ export type Database = {
           id: string
           japanese_level?: string | null
           languages?: string[] | null
-          last_seen?: string | null
           last_study_date?: string | null
           level?: number
           longest_streak?: number
           onboarded?: boolean
           preferred_time?: string | null
-          privacy?: Json
           selected_pet?: string | null
           selected_theme?: string | null
           selected_wallpaper?: string | null
@@ -634,7 +419,6 @@ export type Database = {
         }
         Update: {
           age_group?: string | null
-          appearance?: Json
           avatar_config?: Json | null
           avatar_url?: string | null
           bio?: string | null
@@ -642,7 +426,6 @@ export type Database = {
           created_at?: string
           current_grade?: string | null
           current_streak?: number
-          custom_wallpaper_url?: string | null
           daily_minutes_target?: number | null
           display_name?: string | null
           dream_career?: string | null
@@ -652,13 +435,11 @@ export type Database = {
           id?: string
           japanese_level?: string | null
           languages?: string[] | null
-          last_seen?: string | null
           last_study_date?: string | null
           level?: number
           longest_streak?: number
           onboarded?: boolean
           preferred_time?: string | null
-          privacy?: Json
           selected_pet?: string | null
           selected_theme?: string | null
           selected_wallpaper?: string | null
@@ -671,36 +452,6 @@ export type Database = {
           total_minutes?: number
           updated_at?: string
           xp?: number
-        }
-        Relationships: []
-      }
-      reports: {
-        Row: {
-          context: string | null
-          created_at: string
-          details: string | null
-          id: string
-          reason: string
-          reporter_id: string
-          target_user_id: string | null
-        }
-        Insert: {
-          context?: string | null
-          created_at?: string
-          details?: string | null
-          id?: string
-          reason: string
-          reporter_id: string
-          target_user_id?: string | null
-        }
-        Update: {
-          context?: string | null
-          created_at?: string
-          details?: string | null
-          id?: string
-          reason?: string
-          reporter_id?: string
-          target_user_id?: string | null
         }
         Relationships: []
       }
@@ -806,45 +557,6 @@ export type Database = {
           item_id?: string
           price?: number
           user_id?: string
-        }
-        Relationships: []
-      }
-      study_groups: {
-        Row: {
-          age_group: string | null
-          created_at: string
-          description: string | null
-          id: string
-          is_public: boolean
-          kind: string
-          name: string
-          owner_id: string
-          topic: string | null
-          updated_at: string
-        }
-        Insert: {
-          age_group?: string | null
-          created_at?: string
-          description?: string | null
-          id?: string
-          is_public?: boolean
-          kind?: string
-          name: string
-          owner_id: string
-          topic?: string | null
-          updated_at?: string
-        }
-        Update: {
-          age_group?: string | null
-          created_at?: string
-          description?: string | null
-          id?: string
-          is_public?: boolean
-          kind?: string
-          name?: string
-          owner_id?: string
-          topic?: string | null
-          updated_at?: string
         }
         Relationships: []
       }
@@ -982,11 +694,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      are_friends: { Args: { _a: string; _b: string }; Returns: boolean }
-      is_group_member: {
-        Args: { _group: string; _user: string }
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never

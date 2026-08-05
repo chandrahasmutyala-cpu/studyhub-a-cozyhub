@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedWorldExplorerRouteImport } from './routes/_authenticated/world-explorer'
+import { Route as AuthenticatedUniversityAdvisorRouteImport } from './routes/_authenticated/university-advisor'
 import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
@@ -31,11 +32,10 @@ import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
 import { Route as AuthenticatedDoodlekittyRouteImport } from './routes/_authenticated/doodlekitty'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
+import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
 import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
-import { Route as AuthenticatedAppearanceRouteImport } from './routes/_authenticated/appearance'
 import { Route as AuthenticatedAdmissionRoadmapRouteImport } from './routes/_authenticated/admission-roadmap'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -66,6 +66,12 @@ const AuthenticatedWorldExplorerRoute =
   AuthenticatedWorldExplorerRouteImport.update({
     id: '/world-explorer',
     path: '/world-explorer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUniversityAdvisorRoute =
+  AuthenticatedUniversityAdvisorRouteImport.update({
+    id: '/university-advisor',
+    path: '/university-advisor',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedUniversitiesRoute =
@@ -154,11 +160,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCommunityRoute = AuthenticatedCommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
+const AuthenticatedCostCalculatorRoute =
+  AuthenticatedCostCalculatorRouteImport.update({
+    id: '/cost-calculator',
+    path: '/cost-calculator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedChineseRoute = AuthenticatedChineseRouteImport.update({
   id: '/chinese',
   path: '/chinese',
@@ -175,11 +182,6 @@ const AuthenticatedApplicationsRoute =
     path: '/applications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAppearanceRoute = AuthenticatedAppearanceRouteImport.update({
-  id: '/appearance',
-  path: '/appearance',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedAdmissionRoadmapRoute =
   AuthenticatedAdmissionRoadmapRouteImport.update({
     id: '/admission-roadmap',
@@ -193,11 +195,10 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
-  '/appearance': typeof AuthenticatedAppearanceRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
-  '/community': typeof AuthenticatedCommunityRoute
+  '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/doodlekitty': typeof AuthenticatedDoodlekittyRoute
   '/focus': typeof AuthenticatedFocusRoute
@@ -214,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
+  '/university-advisor': typeof AuthenticatedUniversityAdvisorRoute
   '/world-explorer': typeof AuthenticatedWorldExplorerRoute
 }
 export interface FileRoutesByTo {
@@ -222,11 +224,10 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
-  '/appearance': typeof AuthenticatedAppearanceRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
-  '/community': typeof AuthenticatedCommunityRoute
+  '/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/doodlekitty': typeof AuthenticatedDoodlekittyRoute
   '/focus': typeof AuthenticatedFocusRoute
@@ -243,6 +244,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksRoute
   '/tutor': typeof AuthenticatedTutorRoute
   '/universities': typeof AuthenticatedUniversitiesRoute
+  '/university-advisor': typeof AuthenticatedUniversityAdvisorRoute
   '/world-explorer': typeof AuthenticatedWorldExplorerRoute
 }
 export interface FileRoutesById {
@@ -253,11 +255,10 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
-  '/_authenticated/appearance': typeof AuthenticatedAppearanceRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/chinese': typeof AuthenticatedChineseRoute
-  '/_authenticated/community': typeof AuthenticatedCommunityRoute
+  '/_authenticated/cost-calculator': typeof AuthenticatedCostCalculatorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/doodlekitty': typeof AuthenticatedDoodlekittyRoute
   '/_authenticated/focus': typeof AuthenticatedFocusRoute
@@ -274,6 +275,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks': typeof AuthenticatedTasksRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRoute
   '/_authenticated/universities': typeof AuthenticatedUniversitiesRoute
+  '/_authenticated/university-advisor': typeof AuthenticatedUniversityAdvisorRoute
   '/_authenticated/world-explorer': typeof AuthenticatedWorldExplorerRoute
 }
 export interface FileRouteTypes {
@@ -284,11 +286,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admission-roadmap'
-    | '/appearance'
     | '/applications'
     | '/career'
     | '/chinese'
-    | '/community'
+    | '/cost-calculator'
     | '/dashboard'
     | '/doodlekitty'
     | '/focus'
@@ -305,6 +306,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/tutor'
     | '/universities'
+    | '/university-advisor'
     | '/world-explorer'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -313,11 +315,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admission-roadmap'
-    | '/appearance'
     | '/applications'
     | '/career'
     | '/chinese'
-    | '/community'
+    | '/cost-calculator'
     | '/dashboard'
     | '/doodlekitty'
     | '/focus'
@@ -334,6 +335,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/tutor'
     | '/universities'
+    | '/university-advisor'
     | '/world-explorer'
   id:
     | '__root__'
@@ -343,11 +345,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/_authenticated/admission-roadmap'
-    | '/_authenticated/appearance'
     | '/_authenticated/applications'
     | '/_authenticated/career'
     | '/_authenticated/chinese'
-    | '/_authenticated/community'
+    | '/_authenticated/cost-calculator'
     | '/_authenticated/dashboard'
     | '/_authenticated/doodlekitty'
     | '/_authenticated/focus'
@@ -364,6 +365,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks'
     | '/_authenticated/tutor'
     | '/_authenticated/universities'
+    | '/_authenticated/university-advisor'
     | '/_authenticated/world-explorer'
   fileRoutesById: FileRoutesById
 }
@@ -417,6 +419,13 @@ declare module '@tanstack/react-router' {
       path: '/world-explorer'
       fullPath: '/world-explorer'
       preLoaderRoute: typeof AuthenticatedWorldExplorerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/university-advisor': {
+      id: '/_authenticated/university-advisor'
+      path: '/university-advisor'
+      fullPath: '/university-advisor'
+      preLoaderRoute: typeof AuthenticatedUniversityAdvisorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/universities': {
@@ -531,11 +540,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/community': {
-      id: '/_authenticated/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof AuthenticatedCommunityRouteImport
+    '/_authenticated/cost-calculator': {
+      id: '/_authenticated/cost-calculator'
+      path: '/cost-calculator'
+      fullPath: '/cost-calculator'
+      preLoaderRoute: typeof AuthenticatedCostCalculatorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chinese': {
@@ -559,13 +568,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/appearance': {
-      id: '/_authenticated/appearance'
-      path: '/appearance'
-      fullPath: '/appearance'
-      preLoaderRoute: typeof AuthenticatedAppearanceRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/admission-roadmap': {
       id: '/_authenticated/admission-roadmap'
       path: '/admission-roadmap'
@@ -578,11 +580,10 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdmissionRoadmapRoute: typeof AuthenticatedAdmissionRoadmapRoute
-  AuthenticatedAppearanceRoute: typeof AuthenticatedAppearanceRoute
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
-  AuthenticatedCommunityRoute: typeof AuthenticatedCommunityRoute
+  AuthenticatedCostCalculatorRoute: typeof AuthenticatedCostCalculatorRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDoodlekittyRoute: typeof AuthenticatedDoodlekittyRoute
   AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
@@ -599,16 +600,16 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRoute
   AuthenticatedUniversitiesRoute: typeof AuthenticatedUniversitiesRoute
+  AuthenticatedUniversityAdvisorRoute: typeof AuthenticatedUniversityAdvisorRoute
   AuthenticatedWorldExplorerRoute: typeof AuthenticatedWorldExplorerRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdmissionRoadmapRoute: AuthenticatedAdmissionRoadmapRoute,
-  AuthenticatedAppearanceRoute: AuthenticatedAppearanceRoute,
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedChineseRoute: AuthenticatedChineseRoute,
-  AuthenticatedCommunityRoute: AuthenticatedCommunityRoute,
+  AuthenticatedCostCalculatorRoute: AuthenticatedCostCalculatorRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDoodlekittyRoute: AuthenticatedDoodlekittyRoute,
   AuthenticatedFocusRoute: AuthenticatedFocusRoute,
@@ -626,6 +627,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTasksRoute: AuthenticatedTasksRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRoute,
   AuthenticatedUniversitiesRoute: AuthenticatedUniversitiesRoute,
+  AuthenticatedUniversityAdvisorRoute: AuthenticatedUniversityAdvisorRoute,
   AuthenticatedWorldExplorerRoute: AuthenticatedWorldExplorerRoute,
 }
 
