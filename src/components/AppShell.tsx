@@ -31,13 +31,11 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     label: "StudentHub",
     items: [
       { to: "/career", label: "Career Hub", icon: Compass },
-      { to: "/university-advisor", label: "University Advisor", icon: MessagesSquare },
       { to: "/universities", label: "Universities", icon: GraduationCap },
       { to: "/scholarships", label: "Scholarships", icon: Award },
       { to: "/applications", label: "Applications", icon: ClipboardList },
       { to: "/admission-roadmap", label: "Admission Roadmap", icon: Compass },
       { to: "/scholarship-eligibility", label: "Scholarship Match", icon: Award },
-      { to: "/cost-calculator", label: "Cost Calculator", icon: Calculator },
     ],
   },
   {
