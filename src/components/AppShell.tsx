@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import {
   LayoutDashboard, ListTodo, Sparkles, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
-  Calculator, Cat, MessagesSquare,
+  Cat,
   Home, Search, Menu, X, ChevronRight, Timer, ShoppingBag,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
