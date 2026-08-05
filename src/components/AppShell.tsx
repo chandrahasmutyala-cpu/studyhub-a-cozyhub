@@ -7,10 +7,12 @@ import {
   LayoutDashboard, ListTodo, Sparkles, User, Settings, Flame, LogOut,
   Compass, GraduationCap, Award, ClipboardList, Video,
   Cat,
-  Home, Search, Menu, X, ChevronRight, Timer, ShoppingBag,
+  Home, Search, Menu, X, ChevronRight, Timer, ShoppingBag, Users, Palette,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
+import { WallpaperLayer } from "@/components/WallpaperLayer";
+import { useAppearanceSync } from "@/lib/appearance";
 import { useFocusEngine } from "@/lib/useFocusEngine";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
 
@@ -43,12 +45,14 @@ const navGroups: { label: string; items: NavItem[] }[] = [
     items: [
       { to: "/doodlekitty", label: "DoodleKitty", icon: Cat },
       { to: "/shop", label: "Shop", icon: ShoppingBag },
+      { to: "/community", label: "Community", icon: Users },
     ],
   },
   {
     label: "Account",
     items: [
       { to: "/profile", label: "Profile", icon: User },
+      { to: "/appearance", label: "Appearance", icon: Palette },
       { to: "/settings", label: "Settings", icon: Settings },
     ],
   },
@@ -90,6 +94,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState("");
   const immersive = isImmersiveRoute(pathname);
   useFocusEngine();
+  useAppearanceSync((profile as unknown as { appearance?: Record<string, unknown> | null })?.appearance ?? null);
 
   const xp = profile?.xp ?? 0;
   const level = levelFromXp(xp);
@@ -116,6 +121,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen relative bg-background">
+      <WallpaperLayer />
       {/* MOBILE FIXED TOP BAR — menu only */}
       <header className="md:hidden fixed top-0 inset-x-0 z-30 h-14 bg-background/90 backdrop-blur-xl flex items-center px-4">
         <button

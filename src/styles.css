@@ -208,3 +208,49 @@
 @media (max-width: 767px) {
   main[data-appshell-main] { padding-bottom: 1.5rem !important; }
 }
+
+/* ---- StudyHub 2.0 · appearance engine ---- */
+:root {
+  --wallpaper-blur: 0px;
+  --wallpaper-opacity: 1;
+  --wallpaper-brightness: 1;
+  --card-alpha: 1;
+  --glass-blur: 20px;
+  --app-font-scale: 1;
+  --motion-scale: 1;
+  --glass-tint: 255 255 255;
+}
+
+html { font-size: calc(16px * var(--app-font-scale)); }
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+.wallpaper-media {
+  filter: blur(var(--wallpaper-blur)) brightness(var(--wallpaper-brightness));
+  opacity: var(--wallpaper-opacity);
+  transform: scale(1.04);
+}
+
+/* Keeps text readable over any wallpaper, light or dark */
+.wallpaper-scrim {
+  background: color-mix(in oklch, var(--background) 82%, transparent);
+}
+.hero-scrim {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--background) 55%, transparent),
+    color-mix(in oklch, var(--background) 88%, transparent)
+  );
+  backdrop-filter: blur(2px);
+}
+
+@utility glass-card {
+  background: rgb(var(--glass-tint) / 0.62);
+  backdrop-filter: saturate(160%) blur(var(--glass-blur));
+  border: 1px solid color-mix(in oklch, var(--border) 100%, transparent);
+}
