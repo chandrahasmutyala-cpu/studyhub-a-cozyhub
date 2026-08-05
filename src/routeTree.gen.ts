@@ -34,6 +34,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
 import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
 import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
+import { Route as AuthenticatedAppearanceRouteImport } from './routes/_authenticated/appearance'
 import { Route as AuthenticatedAdmissionRoadmapRouteImport } from './routes/_authenticated/admission-roadmap'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -168,6 +169,11 @@ const AuthenticatedApplicationsRoute =
     path: '/applications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAppearanceRoute = AuthenticatedAppearanceRouteImport.update({
+  id: '/appearance',
+  path: '/appearance',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdmissionRoadmapRoute =
   AuthenticatedAdmissionRoadmapRouteImport.update({
     id: '/admission-roadmap',
@@ -181,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
+  '/appearance': typeof AuthenticatedAppearanceRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
@@ -208,6 +215,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
+  '/appearance': typeof AuthenticatedAppearanceRoute
   '/applications': typeof AuthenticatedApplicationsRoute
   '/career': typeof AuthenticatedCareerRoute
   '/chinese': typeof AuthenticatedChineseRoute
@@ -237,6 +245,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admission-roadmap': typeof AuthenticatedAdmissionRoadmapRoute
+  '/_authenticated/appearance': typeof AuthenticatedAppearanceRoute
   '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/career': typeof AuthenticatedCareerRoute
   '/_authenticated/chinese': typeof AuthenticatedChineseRoute
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admission-roadmap'
+    | '/appearance'
     | '/applications'
     | '/career'
     | '/chinese'
@@ -293,6 +303,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admission-roadmap'
+    | '/appearance'
     | '/applications'
     | '/career'
     | '/chinese'
@@ -321,6 +332,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/_authenticated/admission-roadmap'
+    | '/_authenticated/appearance'
     | '/_authenticated/applications'
     | '/_authenticated/career'
     | '/_authenticated/chinese'
@@ -528,6 +540,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/appearance': {
+      id: '/_authenticated/appearance'
+      path: '/appearance'
+      fullPath: '/appearance'
+      preLoaderRoute: typeof AuthenticatedAppearanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admission-roadmap': {
       id: '/_authenticated/admission-roadmap'
       path: '/admission-roadmap'
@@ -540,6 +559,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdmissionRoadmapRoute: typeof AuthenticatedAdmissionRoadmapRoute
+  AuthenticatedAppearanceRoute: typeof AuthenticatedAppearanceRoute
   AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedCareerRoute: typeof AuthenticatedCareerRoute
   AuthenticatedChineseRoute: typeof AuthenticatedChineseRoute
@@ -564,6 +584,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdmissionRoadmapRoute: AuthenticatedAdmissionRoadmapRoute,
+  AuthenticatedAppearanceRoute: AuthenticatedAppearanceRoute,
   AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedCareerRoute: AuthenticatedCareerRoute,
   AuthenticatedChineseRoute: AuthenticatedChineseRoute,
