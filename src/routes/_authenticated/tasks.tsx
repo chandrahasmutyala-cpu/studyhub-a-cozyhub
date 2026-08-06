@@ -5,13 +5,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { useProfile } from "@/lib/useProfile";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
-import { useShop, WALLPAPERS, wallpaperById, wallpaperPrefs } from "@/lib/shop";
+import { useShop, useActiveWallpaper, WALLPAPERS, wallpaperById, wallpaperPrefs } from "@/lib/shop";
+import { FocusImmersive } from "@/components/FocusImmersive";
 import {
   Plus, Trash2, Bell, BellOff, CalendarDays, CloudSun, Timer, Flame,
   CheckCircle2, Circle, ArrowRight, Sparkles, ListTodo,
   ChevronLeft, ChevronRight, Play, Pause, RotateCcw, Target, Check,
-  Shuffle, Star,
+  Shuffle, Star, Maximize2,
 } from "lucide-react";
+
 import { toast } from "sonner";
 
 
@@ -619,10 +621,12 @@ function FocusSection() {
 
   // Full-bleed wallpaper picker — swipe/arrow through wallpapers you own.
   const { owned, selectedWallpaper, setWallpaper } = useShop();
+  const activeWall = useActiveWallpaper();
   const ownedWalls = WALLPAPERS.filter((w) => owned(w.id));
   const current = wallpaperById(selectedWallpaper);
   const idx = Math.max(0, ownedWalls.findIndex((w) => w.id === current.id));
   const [favs, setFavs] = useState<string[]>(() => wallpaperPrefs.favorites());
+  const [immersive, setImmersive] = useState(false);
   const touchX = useRef<number | null>(null);
 
   function step(dir: 1 | -1) {
@@ -636,7 +640,7 @@ function FocusSection() {
     setWallpaper(pool[Math.floor(Math.random() * pool.length)].id);
   }
 
-  const hasImage = Boolean(current.image);
+  const bg = activeWall.url;
 
   return (
     <section
@@ -649,13 +653,16 @@ function FocusSection() {
       }}
       className="relative isolate overflow-hidden rounded-3xl border border-border/60 bg-card p-6 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)]"
     >
-      {hasImage && (
+      <FocusImmersive open={immersive} onClose={() => setImmersive(false)} />
+
+      {bg && (
         <>
-          <img src={current.image} alt={current.name} loading="lazy" width={1536} height={1024}
+          <img src={bg} alt={activeWall.name} loading="lazy"
             className="absolute inset-0 -z-20 size-full object-cover" />
           <div className="absolute inset-0 -z-10 bg-card/78 backdrop-blur-[2px] dark:bg-card/72" />
         </>
       )}
+
 
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-1">
@@ -679,7 +686,14 @@ function FocusSection() {
             <Star className={`size-4 stroke-[1.75] ${favs.includes(current.id) ? "fill-primary text-primary" : ""}`} />
           </button>
         </div>
-        <Link to="/shop" className="text-xs font-bold text-primary shrink-0">Shop →</Link>
+        <div className="flex items-center gap-2 shrink-0">
+          <button onClick={() => setImmersive(true)}
+            className="inline-flex items-center gap-1.5 rounded-full bg-foreground text-background px-3.5 py-1.5 text-xs font-bold hover:opacity-90 active:scale-95 transition">
+            <Maximize2 className="size-3.5 stroke-[1.75]" /> Full screen
+          </button>
+          <Link to="/shop" className="text-xs font-bold text-primary">Shop →</Link>
+        </div>
+
       </div>
 
       <div className="flex items-center justify-between">

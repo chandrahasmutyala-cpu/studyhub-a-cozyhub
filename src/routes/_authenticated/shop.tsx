@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { SHOP_ITEMS, CATEGORY_LABELS, useShop, type ShopCategory, type ShopItem } from "@/lib/shop";
-import { Coins, Search, Check, Lock, X, Sparkles } from "lucide-react";
+import {
+  SHOP_ITEMS, CATEGORY_LABELS, useShop, useCustomWallpaper, useActiveWallpaper,
+  CUSTOM_WALLPAPER_ID, type ShopCategory, type ShopItem,
+} from "@/lib/shop";
+import { Coins, Search, Check, Lock, X, Sparkles, Upload, Trash2, Loader2 } from "lucide-react";
+
 
 export const Route = createFileRoute("/_authenticated/shop")({
   component: ShopPage,
@@ -28,6 +32,10 @@ function ShopPage() {
   const [q, setQ] = useState("");
   const [preview, setPreview] = useState<ShopItem | null>(null);
   const [showHistory, setShowHistory] = useState(false);
+  const custom = useCustomWallpaper();
+  const activeWall = useActiveWallpaper();
+  const fileRef = useRef<HTMLInputElement>(null);
+
 
   const items = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -96,6 +104,49 @@ function ShopPage() {
             )}
           </section>
         )}
+
+        {(tab === "all" || tab === "wallpapers") && (
+          <section className="rounded-3xl border border-border/60 bg-card p-5 flex items-center gap-4">
+            <div className="size-16 shrink-0 rounded-2xl overflow-hidden bg-muted grid place-items-center">
+              {activeWall.isCustom && activeWall.url
+                ? <img src={activeWall.url} alt="Your wallpaper" className="size-full object-cover" />
+                : <Upload className="size-5 stroke-[1.75] text-muted-foreground" />}
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="font-display text-base font-bold">Your own wallpaper</h2>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Upload an image once — it follows you to every device you sign in on.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <input ref={fileRef} type="file" accept="image/*" className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) custom.upload.mutate(f);
+                    if (fileRef.current) fileRef.current.value = "";
+                  }} />
+                <button onClick={() => fileRef.current?.click()} disabled={custom.upload.isPending}
+                  className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-4 py-2 text-xs font-bold disabled:opacity-50 hover:opacity-90 transition">
+                  {custom.upload.isPending
+                    ? <><Loader2 className="size-3.5 animate-spin" /> Uploading…</>
+                    : <><Upload className="size-3.5 stroke-[1.75]" /> {custom.path ? "Replace image" : "Upload image"}</>}
+                </button>
+                {custom.path && (
+                  <>
+                    <button onClick={() => setWallpaper(CUSTOM_WALLPAPER_ID)}
+                      className="rounded-full border border-border/60 px-4 py-2 text-xs font-bold hover:bg-muted transition">
+                      {selectedWallpaper === CUSTOM_WALLPAPER_ID ? "In use" : "Use in Focus"}
+                    </button>
+                    <button onClick={() => custom.remove.mutate()} disabled={custom.remove.isPending}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-4 py-2 text-xs font-bold text-destructive hover:bg-muted transition disabled:opacity-50">
+                      <Trash2 className="size-3.5 stroke-[1.75]" /> Remove
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
 
         {/* Grid */}
         <section className="grid grid-cols-2 lg:grid-cols-3 gap-3 pb-10">
