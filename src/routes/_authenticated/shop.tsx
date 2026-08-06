@@ -32,6 +32,10 @@ function ShopPage() {
   const [q, setQ] = useState("");
   const [preview, setPreview] = useState<ShopItem | null>(null);
   const [showHistory, setShowHistory] = useState(false);
+  const custom = useCustomWallpaper();
+  const activeWall = useActiveWallpaper();
+  const fileRef = useRef<HTMLInputElement>(null);
+
 
   const items = useMemo(() => {
     const s = q.trim().toLowerCase();
