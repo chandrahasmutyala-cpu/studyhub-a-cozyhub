@@ -121,18 +121,26 @@ function ProfilePage() {
   }
 
   async function save() {
-    await update.mutateAsync({
-      display_name: form.display_name || null,
-      bio: form.bio || null,
-      age_group: form.age_group || null,
-      current_grade: form.current_grade || null,
-      subjects: form.subjects ? form.subjects.split(",").map((s) => s.trim()).filter(Boolean) : null,
-      dream_career: form.dream_career || null,
-      dream_country: form.dream_country || null,
-      dream_university: form.dream_university || null,
-    });
-    toast.success("Profile saved");
+    const name = form.display_name.trim();
+    if (name.length > 60) { toast.error("Name must be under 60 characters."); return; }
+    if (form.bio.trim().length > 400) { toast.error("Bio must be under 400 characters."); return; }
+    try {
+      await update.mutateAsync({
+        display_name: name || null,
+        bio: form.bio.trim() || null,
+        age_group: form.age_group || null,
+        current_grade: form.current_grade || null,
+        subjects: form.subjects ? form.subjects.split(",").map((s) => s.trim()).filter(Boolean) : null,
+        dream_career: form.dream_career.trim() || null,
+        dream_country: form.dream_country.trim() || null,
+        dream_university: form.dream_university.trim() || null,
+      });
+      toast.success("Profile saved");
+    } catch {
+      /* useProfile already surfaces the reason */
+    }
   }
+
 
   const level = levelFromXp(profile?.xp ?? 0);
   const initial = (form.display_name?.[0] ?? email?.[0] ?? "S").toUpperCase();
