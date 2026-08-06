@@ -686,7 +686,14 @@ function FocusSection() {
             <Star className={`size-4 stroke-[1.75] ${favs.includes(current.id) ? "fill-primary text-primary" : ""}`} />
           </button>
         </div>
-        <Link to="/shop" className="text-xs font-bold text-primary shrink-0">Shop →</Link>
+        <div className="flex items-center gap-2 shrink-0">
+          <button onClick={() => setImmersive(true)}
+            className="inline-flex items-center gap-1.5 rounded-full bg-foreground text-background px-3.5 py-1.5 text-xs font-bold hover:opacity-90 active:scale-95 transition">
+            <Maximize2 className="size-3.5 stroke-[1.75]" /> Full screen
+          </button>
+          <Link to="/shop" className="text-xs font-bold text-primary">Shop →</Link>
+        </div>
+
       </div>
 
       <div className="flex items-center justify-between">
