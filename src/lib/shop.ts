@@ -3,12 +3,26 @@ import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/useProfile";
 import { toast } from "sonner";
 
-import wpJapaneseRoom from "@/assets/wp-japanese-room.jpg";
-import wpRainyCafe from "@/assets/wp-rainy-cafe.jpg";
-import wpLibrary from "@/assets/wp-library.jpg";
-import wpForestCabin from "@/assets/wp-forest-cabin.jpg";
-import wpNightCity from "@/assets/wp-night-city.jpg";
-import wpSakura from "@/assets/wp-sakura.jpg";
+import wpCozyBedroom from "@/assets/wp/cozy-bedroom.jpg";
+import wpJapaneseShrine from "@/assets/wp/japanese-shrine.jpg";
+import wpRainyCafe from "@/assets/wp/rainy-cafe.jpg";
+import wpSakuraStreet from "@/assets/wp/sakura-street.jpg";
+import wpKyotoEvening from "@/assets/wp/kyoto-evening.jpg";
+import wpTokyoNight from "@/assets/wp/tokyo-night.jpg";
+import wpTatamiRoom from "@/assets/wp/tatami-room.jpg";
+import wpAnimeLibrary from "@/assets/wp/anime-library.jpg";
+import wpPixelCity from "@/assets/wp/pixel-city.jpg";
+import wpMountainCabin from "@/assets/wp/mountain-cabin.jpg";
+import wpMoonlitStudy from "@/assets/wp/moonlit-study.jpg";
+import wpSunsetClassroom from "@/assets/wp/sunset-classroom.jpg";
+import wpFantasyAcademy from "@/assets/wp/fantasy-academy.jpg";
+import wpLofiBedroom from "@/assets/wp/lofi-bedroom.jpg";
+import wpSakuraPark from "@/assets/wp/sakura-park.jpg";
+import wpBambooForest from "@/assets/wp/bamboo-forest.jpg";
+import wpTrainWindow from "@/assets/wp/train-window.jpg";
+import wpOceanSunset from "@/assets/wp/ocean-sunset.jpg";
+import wpSnowyVillage from "@/assets/wp/snowy-village.jpg";
+import wpLanternFestival from "@/assets/wp/lantern-festival.jpg";
 
 export type ShopCategory = "wallpapers" | "themes" | "decor" | "badges";
 
@@ -32,9 +46,13 @@ export const CATEGORY_LABELS: Record<ShopCategory, string> = {
   badges: "Badges",
 };
 
+/** Custom uploaded wallpaper sentinel id. */
+export const CUSTOM_WALLPAPER_ID = "wp-custom";
+export const DEFAULT_WALLPAPER_ID = "wp-minimal";
+
 export const SHOP_ITEMS: ShopItem[] = [
   {
-    id: "wp-minimal",
+    id: DEFAULT_WALLPAPER_ID,
     name: "Minimal Workspace",
     description: "Clean, distraction-free focus canvas.",
     category: "wallpapers",
@@ -42,12 +60,28 @@ export const SHOP_ITEMS: ShopItem[] = [
     free: true,
     swatch: "linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--card)) 100%)",
   },
-  { id: "wp-japanese-room", name: "Japanese Study Room", description: "Pixel-art tatami room, lamp on, night outside.", category: "wallpapers", price: 120, image: wpJapaneseRoom },
-  { id: "wp-rainy-cafe", name: "Rainy Café", description: "Warm lights, rain on the window, coffee steaming.", category: "wallpapers", price: 120, image: wpRainyCafe },
-  { id: "wp-library", name: "Old Library", description: "Tall shelves and a single beam of daylight.", category: "wallpapers", price: 150, image: wpLibrary },
-  { id: "wp-forest-cabin", name: "Forest Cabin", description: "Pines through the glass, fire in the hearth.", category: "wallpapers", price: 150, image: wpForestCabin },
-  { id: "wp-night-city", name: "Night City", description: "Neon skyline from a quiet desk.", category: "wallpapers", price: 180, image: wpNightCity },
-  { id: "wp-sakura", name: "Sakura Garden", description: "Cherry blossom study nook in full bloom.", category: "wallpapers", price: 180, image: wpSakura },
+
+  // --- Anime-inspired study wallpapers (original artwork) ---
+  { id: "wp-cozy-bedroom", name: "Cozy Anime Bedroom", description: "Warm lamp, open books, city lights outside.", category: "wallpapers", price: 0, free: true, image: wpCozyBedroom },
+  { id: "wp-lofi-bedroom", name: "Lo-fi Bedroom", description: "Records, plants and string lights.", category: "wallpapers", price: 0, free: true, image: wpLofiBedroom },
+  { id: "wp-rainy-cafe", name: "Rainy Café", description: "Rain on the glass, coffee steaming.", category: "wallpapers", price: 100, image: wpRainyCafe },
+  { id: "wp-sakura-street", name: "Cherry Blossom Street", description: "Petals drifting down a quiet lane.", category: "wallpapers", price: 100, image: wpSakuraStreet },
+  { id: "wp-sakura-park", name: "Sakura Park", description: "Blossoms mirrored in a still pond.", category: "wallpapers", price: 100, image: wpSakuraPark },
+  { id: "wp-tatami-room", name: "Traditional Japanese Room", description: "Tatami, shoji screens, garden light.", category: "wallpapers", price: 120, image: wpTatamiRoom },
+  { id: "wp-japanese-shrine", name: "Japanese Shrine", description: "Torii gate under autumn maples.", category: "wallpapers", price: 120, image: wpJapaneseShrine },
+  { id: "wp-bamboo-forest", name: "Bamboo Forest", description: "Green light through tall stalks.", category: "wallpapers", price: 120, image: wpBambooForest },
+  { id: "wp-sunset-classroom", name: "Sunset Classroom", description: "Golden hour on empty desks.", category: "wallpapers", price: 130, image: wpSunsetClassroom },
+  { id: "wp-train-window", name: "Train Window", description: "Countryside rolling by at dusk.", category: "wallpapers", price: 130, image: wpTrainWindow },
+  { id: "wp-ocean-sunset", name: "Ocean Sunset", description: "Waves under an orange sky.", category: "wallpapers", price: 130, image: wpOceanSunset },
+  { id: "wp-mountain-cabin", name: "Mountain Cabin", description: "Fire in the hearth, snow outside.", category: "wallpapers", price: 150, image: wpMountainCabin },
+  { id: "wp-snowy-village", name: "Snowy Village", description: "Warm windows in falling snow.", category: "wallpapers", price: 150, image: wpSnowyVillage },
+  { id: "wp-anime-library", name: "Anime Library", description: "Tall shelves and one long sunbeam.", category: "wallpapers", price: 150, image: wpAnimeLibrary },
+  { id: "wp-moonlit-study", name: "Moonlit Study Room", description: "A huge moon over a quiet desk.", category: "wallpapers", price: 160, image: wpMoonlitStudy },
+  { id: "wp-kyoto-evening", name: "Kyoto Evening", description: "Lanterns glowing along old machiya.", category: "wallpapers", price: 170, image: wpKyotoEvening },
+  { id: "wp-tokyo-night", name: "Tokyo Night", description: "Neon skyline under a starry sky.", category: "wallpapers", price: 170, image: wpTokyoNight },
+  { id: "wp-lantern-festival", name: "Lantern Festival", description: "A river of floating paper lanterns.", category: "wallpapers", price: 180, image: wpLanternFestival },
+  { id: "wp-fantasy-academy", name: "Fantasy Academy", description: "A magic school on a lantern-lit hill.", category: "wallpapers", price: 180, image: wpFantasyAcademy },
+  { id: "wp-pixel-city", name: "Pixel City", description: "16-bit rooftops at dusk.", category: "wallpapers", price: 110, image: wpPixelCity },
 
   { id: "theme-sage", name: "Sage Planner", description: "Soft green planner accents.", category: "themes", price: 90, swatch: "linear-gradient(135deg,#a8c0a0,#7d9b76)" },
   { id: "theme-sky", name: "Sky Planner", description: "Light blue planner accents.", category: "themes", price: 90, swatch: "linear-gradient(135deg,#b8d4e8,#6ba3c8)" },
@@ -65,10 +99,9 @@ export const SHOP_ITEMS: ShopItem[] = [
 ];
 
 export const WALLPAPERS = SHOP_ITEMS.filter((i) => i.category === "wallpapers");
-export const DEFAULT_WALLPAPER_ID = "wp-minimal";
 
 export function wallpaperById(id: string | null | undefined) {
-  return WALLPAPERS.find((w) => w.id === id) ?? WALLPAPERS[0];
+  return WALLPAPERS.find((w) => w.id === id) ?? WALLPAPERS[0]!;
 }
 
 const FAV_KEY = "studyhub-wallpaper-favs-v1";
@@ -106,7 +139,10 @@ export function useShop() {
   const purchasesQ = useQuery({
     queryKey: ["shop", "purchases"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("shop_purchases").select("item_id,price,created_at").order("created_at", { ascending: false });
+      const { data, error } = await supabase
+        .from("shop_purchases")
+        .select("item_id,price,created_at")
+        .order("created_at", { ascending: false });
       if (error) throw error;
       return data ?? [];
     },
@@ -120,10 +156,16 @@ export function useShop() {
   const buy = useMutation({
     mutationFn: async (item: ShopItem) => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Not signed in");
-      const coins = profile?.coins ?? 0;
+      if (!user) throw new Error("You need to be signed in to buy this.");
+      // Read the freshest coin balance so a stale cache can never over-spend.
+      const { data: fresh, error: readErr } = await supabase
+        .from("profiles").select("coins").eq("id", user.id).maybeSingle();
+      if (readErr) throw readErr;
+      const coins = fresh?.coins ?? 0;
       if (coins < item.price) throw new Error("Not enough Study Coins yet.");
-      const { error } = await supabase.from("shop_purchases").insert({ user_id: user.id, item_id: item.id, price: item.price });
+      const { error } = await supabase
+        .from("shop_purchases")
+        .insert({ user_id: user.id, item_id: item.id, price: item.price });
       if (error) throw error;
       await update.mutateAsync({ coins: coins - item.price });
       return item;
@@ -132,20 +174,98 @@ export function useShop() {
       qc.invalidateQueries({ queryKey: ["shop", "purchases"] });
       toast.success(`${item.name} unlocked.`);
     },
-    onError: (e: Error) => toast.error(e.message),
+    onError: (e: Error) => toast.error(e.message || "Purchase failed"),
   });
 
   return {
     coins: profile?.coins ?? 0,
     purchases: purchasesQ.data ?? [],
     isLoading: purchasesQ.isLoading,
+    error: purchasesQ.error,
     owned: (id: string) => ownedIds.has(id),
     ownedIds,
     buy,
-    selectedWallpaper: (profile?.selected_wallpaper as string | null) ?? DEFAULT_WALLPAPER_ID,
+    selectedWallpaper: profile?.selected_wallpaper ?? DEFAULT_WALLPAPER_ID,
     setWallpaper: (id: string) => {
       wallpaperPrefs.pushRecent(id);
-      update.mutate({ selected_wallpaper: id } as never);
+      update.mutate({ selected_wallpaper: id });
     },
   };
+}
+
+/**
+ * Resolves the wallpaper that should render behind Focus mode, including a
+ * user-uploaded custom wallpaper (stored privately in the `wallpapers` bucket).
+ */
+export function useActiveWallpaper() {
+  const { profile } = useProfile();
+  const selected = profile?.selected_wallpaper ?? DEFAULT_WALLPAPER_ID;
+  const customPath = profile?.custom_wallpaper_url ?? null;
+
+  const signed = useQuery({
+    queryKey: ["wallpaper", "signed", customPath],
+    enabled: Boolean(customPath) && selected === CUSTOM_WALLPAPER_ID,
+    staleTime: 45 * 60_000,
+    queryFn: async () => {
+      const { data, error } = await supabase.storage
+        .from("wallpapers")
+        .createSignedUrl(customPath!, 60 * 60);
+      if (error) throw error;
+      return data?.signedUrl ?? null;
+    },
+  });
+
+  if (selected === CUSTOM_WALLPAPER_ID && customPath) {
+    return { id: CUSTOM_WALLPAPER_ID, name: "Your wallpaper", url: signed.data ?? null, isCustom: true as const };
+  }
+  const item = wallpaperById(selected);
+  return { id: item.id, name: item.name, url: item.image ?? null, isCustom: false as const };
+}
+
+/** Upload / remove a personal wallpaper. */
+export function useCustomWallpaper() {
+  const { profile, update } = useProfile();
+  const qc = useQueryClient();
+
+  const upload = useMutation({
+    mutationFn: async (file: File) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("You need to be signed in.");
+      if (!file.type.startsWith("image/")) throw new Error("Please pick an image file.");
+      if (file.size > 8 * 1024 * 1024) throw new Error("Image must be under 8MB.");
+      const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+      const path = `${user.id}/wallpaper-${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from("wallpapers")
+        .upload(path, file, { upsert: true, contentType: file.type });
+      if (error) throw error;
+      const previous = profile?.custom_wallpaper_url;
+      await update.mutateAsync({ custom_wallpaper_url: path, selected_wallpaper: CUSTOM_WALLPAPER_ID });
+      if (previous && previous !== path) {
+        await supabase.storage.from("wallpapers").remove([previous]);
+      }
+      return path;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["wallpaper"] });
+      toast.success("Wallpaper uploaded.");
+    },
+    onError: (e: Error) => toast.error(e.message || "Upload failed"),
+  });
+
+  const remove = useMutation({
+    mutationFn: async () => {
+      const path = profile?.custom_wallpaper_url;
+      if (!path) return;
+      await supabase.storage.from("wallpapers").remove([path]);
+      await update.mutateAsync({ custom_wallpaper_url: null, selected_wallpaper: DEFAULT_WALLPAPER_ID });
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["wallpaper"] });
+      toast.success("Custom wallpaper removed.");
+    },
+    onError: (e: Error) => toast.error(e.message || "Could not remove wallpaper"),
+  });
+
+  return { path: profile?.custom_wallpaper_url ?? null, upload, remove };
 }
