@@ -621,10 +621,12 @@ function FocusSection() {
 
   // Full-bleed wallpaper picker — swipe/arrow through wallpapers you own.
   const { owned, selectedWallpaper, setWallpaper } = useShop();
+  const activeWall = useActiveWallpaper();
   const ownedWalls = WALLPAPERS.filter((w) => owned(w.id));
   const current = wallpaperById(selectedWallpaper);
   const idx = Math.max(0, ownedWalls.findIndex((w) => w.id === current.id));
   const [favs, setFavs] = useState<string[]>(() => wallpaperPrefs.favorites());
+  const [immersive, setImmersive] = useState(false);
   const touchX = useRef<number | null>(null);
 
   function step(dir: 1 | -1) {
@@ -638,7 +640,7 @@ function FocusSection() {
     setWallpaper(pool[Math.floor(Math.random() * pool.length)].id);
   }
 
-  const hasImage = Boolean(current.image);
+  const bg = activeWall.url;
 
   return (
     <section
@@ -651,13 +653,16 @@ function FocusSection() {
       }}
       className="relative isolate overflow-hidden rounded-3xl border border-border/60 bg-card p-6 shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)]"
     >
-      {hasImage && (
+      <FocusImmersive open={immersive} onClose={() => setImmersive(false)} />
+
+      {bg && (
         <>
-          <img src={current.image} alt={current.name} loading="lazy" width={1536} height={1024}
+          <img src={bg} alt={activeWall.name} loading="lazy"
             className="absolute inset-0 -z-20 size-full object-cover" />
           <div className="absolute inset-0 -z-10 bg-card/78 backdrop-blur-[2px] dark:bg-card/72" />
         </>
       )}
+
 
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-1">
