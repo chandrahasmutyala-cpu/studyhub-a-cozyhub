@@ -30,8 +30,12 @@ function ProfilePage() {
     });
   }, []);
 
+  // Seed the form once per user so a background refetch can never wipe
+  // whatever the student is currently typing.
+  const seeded = useRef<string | null>(null);
   useEffect(() => {
-    if (!profile) return;
+    if (!profile || seeded.current === profile.id) return;
+    seeded.current = profile.id;
     setForm({
       display_name: profile.display_name ?? "",
       bio: profile.bio ?? "",
@@ -43,6 +47,7 @@ function ProfilePage() {
       dream_university: profile.dream_university ?? "",
     });
   }, [profile]);
+
 
   // Resolve signed URL for the (private) avatar
   useEffect(() => {
