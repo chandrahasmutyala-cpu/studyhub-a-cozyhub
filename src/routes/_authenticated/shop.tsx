@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { SHOP_ITEMS, CATEGORY_LABELS, useShop, type ShopCategory, type ShopItem } from "@/lib/shop";
-import { Coins, Search, Check, Lock, X, Sparkles } from "lucide-react";
+import {
+  SHOP_ITEMS, CATEGORY_LABELS, useShop, useCustomWallpaper, useActiveWallpaper,
+  CUSTOM_WALLPAPER_ID, type ShopCategory, type ShopItem,
+} from "@/lib/shop";
+import { Coins, Search, Check, Lock, X, Sparkles, Upload, Trash2, Loader2 } from "lucide-react";
+
 
 export const Route = createFileRoute("/_authenticated/shop")({
   component: ShopPage,
