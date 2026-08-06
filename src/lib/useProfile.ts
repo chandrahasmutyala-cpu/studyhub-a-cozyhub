@@ -113,12 +113,14 @@ export function useProfile() {
       const { data: cur, error: readErr } = await supabase
         .from("profiles").select("xp,coins,total_minutes").eq("id", user.id).maybeSingle();
       if (readErr) throw readErr;
+      const xp = (cur?.xp ?? 0) + (delta.xp ?? 0);
       const next = {
-        xp: (cur?.xp ?? 0) + (delta.xp ?? 0),
+        xp,
+        level: levelFromXp(xp),
         coins: (cur?.coins ?? 0) + (delta.coins ?? 0),
         total_minutes: (cur?.total_minutes ?? 0) + (delta.total_minutes ?? 0),
       };
-      next.level = levelFromXp(next.xp);
+
       const { error } = await supabase.from("profiles").update(next as never).eq("id", user.id);
       if (error) throw error;
     },
