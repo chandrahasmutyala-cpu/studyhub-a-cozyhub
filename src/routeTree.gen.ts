@@ -9,43 +9,42 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedWorldExplorerRouteImport } from './routes/_authenticated/world-explorer'
-import { Route as AuthenticatedUniversityAdvisorRouteImport } from './routes/_authenticated/university-advisor'
-import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
-import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
-import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
-import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
-import { Route as AuthenticatedScholarshipEligibilityRouteImport } from './routes/_authenticated/scholarship-eligibility'
-import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
-import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
-import { Route as AuthenticatedLearningAcademyRouteImport } from './routes/_authenticated/learning-academy'
-import { Route as AuthenticatedKoreanRouteImport } from './routes/_authenticated/korean'
-import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticated/japanese'
-import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
-import { Route as AuthenticatedDoodlekittyRouteImport } from './routes/_authenticated/doodlekitty'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
-import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
-import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
-import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdmissionRoadmapRouteImport } from './routes/_authenticated/admission-roadmap'
+import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
+import { Route as AuthenticatedCareerRouteImport } from './routes/_authenticated/career'
+import { Route as AuthenticatedChineseRouteImport } from './routes/_authenticated/chinese'
+import { Route as AuthenticatedCostCalculatorRouteImport } from './routes/_authenticated/cost-calculator'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDoodlekittyRouteImport } from './routes/_authenticated/doodlekitty'
+import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
+import { Route as AuthenticatedJapaneseRouteImport } from './routes/_authenticated/japanese'
+import { Route as AuthenticatedKoreanRouteImport } from './routes/_authenticated/korean'
+import { Route as AuthenticatedLearningAcademyRouteImport } from './routes/_authenticated/learning-academy'
+import { Route as AuthenticatedMediaTranslatorRouteImport } from './routes/_authenticated/media-translator'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedScholarshipEligibilityRouteImport } from './routes/_authenticated/scholarship-eligibility'
+import { Route as AuthenticatedScholarshipsRouteImport } from './routes/_authenticated/scholarships'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
+import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
+import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
+import { Route as AuthenticatedUniversitiesRouteImport } from './routes/_authenticated/universities'
+import { Route as AuthenticatedUniversityAdvisorRouteImport } from './routes/_authenticated/university-advisor'
+import { Route as AuthenticatedWorldExplorerRouteImport } from './routes/_authenticated/world-explorer'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -53,111 +52,36 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedWorldExplorerRoute =
-  AuthenticatedWorldExplorerRouteImport.update({
-    id: '/world-explorer',
-    path: '/world-explorer',
+const AuthenticatedAdmissionRoadmapRoute =
+  AuthenticatedAdmissionRoadmapRouteImport.update({
+    id: '/admission-roadmap',
+    path: '/admission-roadmap',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedUniversityAdvisorRoute =
-  AuthenticatedUniversityAdvisorRouteImport.update({
-    id: '/university-advisor',
-    path: '/university-advisor',
+const AuthenticatedApplicationsRoute =
+  AuthenticatedApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedUniversitiesRoute =
-  AuthenticatedUniversitiesRouteImport.update({
-    id: '/universities',
-    path: '/universities',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
-  id: '/tutor',
-  path: '/tutor',
+const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
+  id: '/career',
+  path: '/career',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedTasksRoute = AuthenticatedTasksRouteImport.update({
-  id: '/tasks',
-  path: '/tasks',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedShopRoute = AuthenticatedShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedScholarshipsRoute =
-  AuthenticatedScholarshipsRouteImport.update({
-    id: '/scholarships',
-    path: '/scholarships',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedScholarshipEligibilityRoute =
-  AuthenticatedScholarshipEligibilityRouteImport.update({
-    id: '/scholarship-eligibility',
-    path: '/scholarship-eligibility',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMediaTranslatorRoute =
-  AuthenticatedMediaTranslatorRouteImport.update({
-    id: '/media-translator',
-    path: '/media-translator',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedLearningAcademyRoute =
-  AuthenticatedLearningAcademyRouteImport.update({
-    id: '/learning-academy',
-    path: '/learning-academy',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedKoreanRoute = AuthenticatedKoreanRouteImport.update({
-  id: '/korean',
-  path: '/korean',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedJapaneseRoute = AuthenticatedJapaneseRouteImport.update({
-  id: '/japanese',
-  path: '/japanese',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedFocusRoute = AuthenticatedFocusRouteImport.update({
-  id: '/focus',
-  path: '/focus',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedDoodlekittyRoute =
-  AuthenticatedDoodlekittyRouteImport.update({
-    id: '/doodlekitty',
-    path: '/doodlekitty',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const AuthenticatedChineseRoute = AuthenticatedChineseRouteImport.update({
+  id: '/chinese',
+  path: '/chinese',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCostCalculatorRoute =
@@ -166,26 +90,102 @@ const AuthenticatedCostCalculatorRoute =
     path: '/cost-calculator',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedChineseRoute = AuthenticatedChineseRouteImport.update({
-  id: '/chinese',
-  path: '/chinese',
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCareerRoute = AuthenticatedCareerRouteImport.update({
-  id: '/career',
-  path: '/career',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedApplicationsRoute =
-  AuthenticatedApplicationsRouteImport.update({
-    id: '/applications',
-    path: '/applications',
+const AuthenticatedDoodlekittyRoute =
+  AuthenticatedDoodlekittyRouteImport.update({
+    id: '/doodlekitty',
+    path: '/doodlekitty',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdmissionRoadmapRoute =
-  AuthenticatedAdmissionRoadmapRouteImport.update({
-    id: '/admission-roadmap',
-    path: '/admission-roadmap',
+const AuthenticatedFocusRoute = AuthenticatedFocusRouteImport.update({
+  id: '/focus',
+  path: '/focus',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedJapaneseRoute = AuthenticatedJapaneseRouteImport.update({
+  id: '/japanese',
+  path: '/japanese',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedKoreanRoute = AuthenticatedKoreanRouteImport.update({
+  id: '/korean',
+  path: '/korean',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLearningAcademyRoute =
+  AuthenticatedLearningAcademyRouteImport.update({
+    id: '/learning-academy',
+    path: '/learning-academy',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMediaTranslatorRoute =
+  AuthenticatedMediaTranslatorRouteImport.update({
+    id: '/media-translator',
+    path: '/media-translator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedScholarshipEligibilityRoute =
+  AuthenticatedScholarshipEligibilityRouteImport.update({
+    id: '/scholarship-eligibility',
+    path: '/scholarship-eligibility',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedScholarshipsRoute =
+  AuthenticatedScholarshipsRouteImport.update({
+    id: '/scholarships',
+    path: '/scholarships',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedShopRoute = AuthenticatedShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTasksRoute = AuthenticatedTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
+  id: '/tutor',
+  path: '/tutor',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedUniversitiesRoute =
+  AuthenticatedUniversitiesRouteImport.update({
+    id: '/universities',
+    path: '/universities',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUniversityAdvisorRoute =
+  AuthenticatedUniversityAdvisorRouteImport.update({
+    id: '/university-advisor',
+    path: '/university-advisor',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedWorldExplorerRoute =
+  AuthenticatedWorldExplorerRouteImport.update({
+    id: '/world-explorer',
+    path: '/world-explorer',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -379,25 +379,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -407,158 +393,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/world-explorer': {
-      id: '/_authenticated/world-explorer'
-      path: '/world-explorer'
-      fullPath: '/world-explorer'
-      preLoaderRoute: typeof AuthenticatedWorldExplorerRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/university-advisor': {
-      id: '/_authenticated/university-advisor'
-      path: '/university-advisor'
-      fullPath: '/university-advisor'
-      preLoaderRoute: typeof AuthenticatedUniversityAdvisorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/universities': {
-      id: '/_authenticated/universities'
-      path: '/universities'
-      fullPath: '/universities'
-      preLoaderRoute: typeof AuthenticatedUniversitiesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/tutor': {
-      id: '/_authenticated/tutor'
-      path: '/tutor'
-      fullPath: '/tutor'
-      preLoaderRoute: typeof AuthenticatedTutorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/tasks': {
-      id: '/_authenticated/tasks'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof AuthenticatedTasksRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/shop': {
-      id: '/_authenticated/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof AuthenticatedShopRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/scholarships': {
-      id: '/_authenticated/scholarships'
-      path: '/scholarships'
-      fullPath: '/scholarships'
-      preLoaderRoute: typeof AuthenticatedScholarshipsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/scholarship-eligibility': {
-      id: '/_authenticated/scholarship-eligibility'
-      path: '/scholarship-eligibility'
-      fullPath: '/scholarship-eligibility'
-      preLoaderRoute: typeof AuthenticatedScholarshipEligibilityRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/profile': {
-      id: '/_authenticated/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedProfileRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/onboarding': {
-      id: '/_authenticated/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/media-translator': {
-      id: '/_authenticated/media-translator'
-      path: '/media-translator'
-      fullPath: '/media-translator'
-      preLoaderRoute: typeof AuthenticatedMediaTranslatorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/learning-academy': {
-      id: '/_authenticated/learning-academy'
-      path: '/learning-academy'
-      fullPath: '/learning-academy'
-      preLoaderRoute: typeof AuthenticatedLearningAcademyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/korean': {
-      id: '/_authenticated/korean'
-      path: '/korean'
-      fullPath: '/korean'
-      preLoaderRoute: typeof AuthenticatedKoreanRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/japanese': {
-      id: '/_authenticated/japanese'
-      path: '/japanese'
-      fullPath: '/japanese'
-      preLoaderRoute: typeof AuthenticatedJapaneseRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/focus': {
-      id: '/_authenticated/focus'
-      path: '/focus'
-      fullPath: '/focus'
-      preLoaderRoute: typeof AuthenticatedFocusRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/doodlekitty': {
-      id: '/_authenticated/doodlekitty'
-      path: '/doodlekitty'
-      fullPath: '/doodlekitty'
-      preLoaderRoute: typeof AuthenticatedDoodlekittyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/cost-calculator': {
-      id: '/_authenticated/cost-calculator'
-      path: '/cost-calculator'
-      fullPath: '/cost-calculator'
-      preLoaderRoute: typeof AuthenticatedCostCalculatorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/chinese': {
-      id: '/_authenticated/chinese'
-      path: '/chinese'
-      fullPath: '/chinese'
-      preLoaderRoute: typeof AuthenticatedChineseRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/career': {
-      id: '/_authenticated/career'
-      path: '/career'
-      fullPath: '/career'
-      preLoaderRoute: typeof AuthenticatedCareerRouteImport
+    '/_authenticated/admission-roadmap': {
+      id: '/_authenticated/admission-roadmap'
+      path: '/admission-roadmap'
+      fullPath: '/admission-roadmap'
+      preLoaderRoute: typeof AuthenticatedAdmissionRoadmapRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/applications': {
@@ -568,11 +428,151 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admission-roadmap': {
-      id: '/_authenticated/admission-roadmap'
-      path: '/admission-roadmap'
-      fullPath: '/admission-roadmap'
-      preLoaderRoute: typeof AuthenticatedAdmissionRoadmapRouteImport
+    '/_authenticated/career': {
+      id: '/_authenticated/career'
+      path: '/career'
+      fullPath: '/career'
+      preLoaderRoute: typeof AuthenticatedCareerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chinese': {
+      id: '/_authenticated/chinese'
+      path: '/chinese'
+      fullPath: '/chinese'
+      preLoaderRoute: typeof AuthenticatedChineseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cost-calculator': {
+      id: '/_authenticated/cost-calculator'
+      path: '/cost-calculator'
+      fullPath: '/cost-calculator'
+      preLoaderRoute: typeof AuthenticatedCostCalculatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/doodlekitty': {
+      id: '/_authenticated/doodlekitty'
+      path: '/doodlekitty'
+      fullPath: '/doodlekitty'
+      preLoaderRoute: typeof AuthenticatedDoodlekittyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/focus': {
+      id: '/_authenticated/focus'
+      path: '/focus'
+      fullPath: '/focus'
+      preLoaderRoute: typeof AuthenticatedFocusRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/japanese': {
+      id: '/_authenticated/japanese'
+      path: '/japanese'
+      fullPath: '/japanese'
+      preLoaderRoute: typeof AuthenticatedJapaneseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/korean': {
+      id: '/_authenticated/korean'
+      path: '/korean'
+      fullPath: '/korean'
+      preLoaderRoute: typeof AuthenticatedKoreanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/learning-academy': {
+      id: '/_authenticated/learning-academy'
+      path: '/learning-academy'
+      fullPath: '/learning-academy'
+      preLoaderRoute: typeof AuthenticatedLearningAcademyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/media-translator': {
+      id: '/_authenticated/media-translator'
+      path: '/media-translator'
+      fullPath: '/media-translator'
+      preLoaderRoute: typeof AuthenticatedMediaTranslatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scholarship-eligibility': {
+      id: '/_authenticated/scholarship-eligibility'
+      path: '/scholarship-eligibility'
+      fullPath: '/scholarship-eligibility'
+      preLoaderRoute: typeof AuthenticatedScholarshipEligibilityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scholarships': {
+      id: '/_authenticated/scholarships'
+      path: '/scholarships'
+      fullPath: '/scholarships'
+      preLoaderRoute: typeof AuthenticatedScholarshipsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/shop': {
+      id: '/_authenticated/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof AuthenticatedShopRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tasks': {
+      id: '/_authenticated/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof AuthenticatedTasksRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tutor': {
+      id: '/_authenticated/tutor'
+      path: '/tutor'
+      fullPath: '/tutor'
+      preLoaderRoute: typeof AuthenticatedTutorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/universities': {
+      id: '/_authenticated/universities'
+      path: '/universities'
+      fullPath: '/universities'
+      preLoaderRoute: typeof AuthenticatedUniversitiesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/university-advisor': {
+      id: '/_authenticated/university-advisor'
+      path: '/university-advisor'
+      fullPath: '/university-advisor'
+      preLoaderRoute: typeof AuthenticatedUniversityAdvisorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/world-explorer': {
+      id: '/_authenticated/world-explorer'
+      path: '/world-explorer'
+      fullPath: '/world-explorer'
+      preLoaderRoute: typeof AuthenticatedWorldExplorerRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -644,3 +644,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
