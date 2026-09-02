@@ -982,55 +982,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      record_focus_session: {
-        Args: { _background?: string; _minutes: number }
-        Returns: {
-          age_group: string | null
-          appearance: Json
-          avatar_config: Json | null
-          avatar_url: string | null
-          bio: string | null
-          coins: number
-          created_at: string
-          current_grade: string | null
-          current_streak: number
-          custom_wallpaper_url: string | null
-          daily_minutes_target: number | null
-          display_name: string | null
-          dream_career: string | null
-          dream_country: string | null
-          dream_university: string | null
-          exam_target: string | null
-          id: string
-          japanese_level: string | null
-          languages: string[] | null
-          last_seen: string | null
-          last_study_date: string | null
-          level: number
-          longest_streak: number
-          onboarded: boolean
-          preferred_time: string | null
-          privacy: Json
-          selected_pet: string | null
-          selected_theme: string | null
-          selected_wallpaper: string | null
-          study_goal: string | null
-          subjects: string[] | null
-          teacher_name: string | null
-          teacher_personality: string | null
-          teacher_style: string | null
-          teacher_voice: string | null
-          total_minutes: number
-          updated_at: string
-          xp: number
-        }
-        SetofOptions: {
-          from: "*"
-          to: "profiles"
-          isOneToOne: true
-          isSetofReturn: false
-        }
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
