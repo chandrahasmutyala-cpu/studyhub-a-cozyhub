@@ -10,11 +10,13 @@ export async function groqChat(opts: {
   jsonMode?: boolean;
   maxTokens?: number;
 }): Promise<string> {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) throw new Error("AI is not configured — GROQ_API_KEY is missing.");
+  const apiKey = process.env["GROQ_API_KEY"]?.trim();
+  if (!apiKey) throw new Error("AI is not configured yet. Add GROQ_API_KEY in the project secrets.");
+
+  const model = process.env["GROQ_MODEL"]?.trim() || "llama-3.3-70b-versatile";
 
   const body: Record<string, unknown> = {
-    model: opts.model ?? "llama-3.3-70b-versatile",
+    model: opts.model ?? model,
     messages: opts.messages,
     temperature: opts.temperature ?? 0.7,
   };
@@ -33,8 +35,9 @@ export async function groqChat(opts: {
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     if (res.status === 429) throw new Error("AI is busy right now — try again in a moment.");
-    if (res.status === 401) throw new Error("Groq API key is invalid. Please update GROQ_API_KEY.");
-    throw new Error(`AI error ${res.status}: ${text.slice(0, 300)}`);
+    if (res.status === 401) throw new Error("The Groq key was rejected. Update GROQ_API_KEY in the project secrets.");
+    if (res.status === 404) throw new Error("The configured Groq model was not found. Update GROQ_MODEL in the project secrets.");
+    throw new Error(`Groq could not complete the request (${res.status}). ${text.slice(0, 240)}`);
   }
 
   const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };

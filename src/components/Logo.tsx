@@ -1,10 +1,10 @@
-import bunny from "@/assets/studyhub-bunny.png.asset.json";
+import catIcon from "@/assets/studyhub-cat-icon.jpg.asset.json";
 
-/** StudyHub bunny mark. */
+/** StudyHub cat mark supplied by the user. */
 export function Logo({ className = "size-10" }: { className?: string }) {
   return (
     <img
-      src={bunny.url}
+      src={catIcon.url}
       alt="StudyHub"
       className={`${className} object-contain select-none`}
       draggable={false}
