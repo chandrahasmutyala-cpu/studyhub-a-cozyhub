@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { tutorChat } from "@/lib/tutor.functions";
 import { AppShell } from "@/components/AppShell";
-import { Send, GraduationCap, Trash2 } from "lucide-react";
+import { AlertCircle, GraduationCap, RotateCcw, Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/university-advisor")({
@@ -34,6 +34,8 @@ function AdvisorPage() {
   });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [retryMessages, setRetryMessages] = useState<Msg[] | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
 
   useEffect(() => bottom.current?.scrollIntoView({ behavior: "smooth" }), [messages, loading]);
@@ -49,6 +51,8 @@ function AdvisorPage() {
     const text = (prompt ?? input).trim();
     if (!text || loading) return;
     setInput("");
+    setError(null);
+    setRetryMessages(null);
     const next: Msg[] = [...messages, { role: "user", content: text }];
     setMessages(next);
     setLoading(true);
@@ -56,7 +60,27 @@ function AdvisorPage() {
       const res = await chat({ data: { messages: next, mode: "university" } });
       setMessages([...next, { role: "assistant", content: res.content }]);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Advisor unavailable");
+      const message = err instanceof Error ? err.message : "The University Advisor is unavailable right now.";
+      setError(message);
+      setRetryMessages(next);
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function retry() {
+    if (!retryMessages || loading) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await chat({ data: { messages: retryMessages, mode: "university" } });
+      setMessages([...retryMessages, { role: "assistant", content: res.content }]);
+      setRetryMessages(null);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "The University Advisor is unavailable right now.";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -121,6 +145,17 @@ function AdvisorPage() {
             ))}
             {loading && (
               <div className="text-sm text-muted-foreground px-2 animate-pulse">Advisor is thinking…</div>
+            )}
+            {error && (
+              <div className="flex items-center justify-between gap-3 rounded-2xl border border-destructive/30 bg-destructive/5 px-3 py-2.5 text-xs text-destructive">
+                <div className="flex min-w-0 items-center gap-2">
+                  <AlertCircle className="size-4 shrink-0" />
+                  <span>{error}</span>
+                </div>
+                <button type="button" onClick={retry} disabled={loading} className="inline-flex shrink-0 items-center gap-1.5 font-bold hover:underline disabled:opacity-50">
+                  <RotateCcw className="size-3.5" /> Retry
+                </button>
+              </div>
             )}
             <div ref={bottom} />
           </div>
