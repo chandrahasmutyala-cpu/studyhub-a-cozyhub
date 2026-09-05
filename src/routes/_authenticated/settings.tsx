@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { type ComponentType } from "react";
 import { User, Info, ChevronRight, LogOut, Shield, Lock } from "lucide-react";
+import { THEMES, type ThemeId } from "@/lib/themes";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   component: SettingsPage,
@@ -19,7 +21,7 @@ type Row = {
 };
 
 function SettingsPage() {
-  const { profile } = useProfile();
+  const { profile, update } = useProfile();
   const navigate = useNavigate();
   const qc = useQueryClient();
 
@@ -70,6 +72,37 @@ function SettingsPage() {
                 <button key={r.label} onClick={r.onClick} className="w-full text-left">{body}</button>
               );
             })}
+          </div>
+        </section>
+
+        <section>
+          <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground px-4 mb-2">Appearance</div>
+          <div className="rounded-3xl border border-border/60 bg-card p-4">
+            <div className="mb-3">
+              <div className="text-[15px] font-semibold">Study atmosphere</div>
+              <div className="text-xs text-muted-foreground">Choose a palette for your study space.</div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {THEMES.map((theme) => {
+                const selected = (profile?.selected_theme ?? "peach") === theme.id;
+                return (
+                  <Button
+                    key={theme.id}
+                    type="button"
+                    variant="outline"
+                    aria-pressed={selected}
+                    onClick={() => update.mutate({ selected_theme: theme.id as ThemeId })}
+                    className={`h-auto justify-start gap-2.5 rounded-2xl px-3 py-2.5 text-left ${selected ? "border-primary ring-2 ring-primary/20" : ""}`}
+                  >
+                    <span className="size-6 rounded-full border border-foreground/10 shrink-0" style={{ backgroundColor: theme.swatch }} />
+                    <span className="min-w-0">
+                      <span className="block truncate text-xs font-bold">{theme.name}</span>
+                      <span className="block truncate text-[10px] text-muted-foreground font-normal">{theme.mood}</span>
+                    </span>
+                  </Button>
+                );
+              })}
+            </div>
           </div>
         </section>
 

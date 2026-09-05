@@ -2,6 +2,7 @@ import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { THEMES } from "@/lib/themes";
 
 export type Profile = {
   id: string;
@@ -76,9 +77,10 @@ export function useProfile() {
 
   // Apply theme to <html>
   useEffect(() => {
-    const theme = q.data?.selected_theme ?? "peach";
+    const requested = q.data?.selected_theme;
+    const theme = THEMES.some((item) => item.id === requested) ? requested : "peach";
     const root = document.documentElement;
-    root.classList.remove("theme-peach", "theme-matcha", "theme-lavender", "theme-honey");
+    root.classList.remove(...THEMES.map((item) => `theme-${item.id}`));
     root.classList.add(`theme-${theme}`);
   }, [q.data?.selected_theme]);
 
