@@ -13,6 +13,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
 import { useFocusEngine } from "@/lib/useFocusEngine";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
+import { FloatingKanaBackground } from "@/components/FloatingKanaBackground";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
 
@@ -118,6 +119,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen relative bg-background">
+      <FloatingKanaBackground />
       {/* MOBILE FIXED TOP BAR — menu only */}
       <header className="md:hidden fixed top-0 inset-x-0 z-30 h-14 bg-background/90 backdrop-blur-xl flex items-center px-4">
         <button
@@ -132,7 +134,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
 
 
-      <div className="md:flex">
+      <div className="md:flex relative z-10">
         {/* DESKTOP SIDEBAR */}
         <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-5 gap-4 border-r border-border/60 bg-card/40">
           <Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
