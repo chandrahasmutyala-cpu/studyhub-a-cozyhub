@@ -92,9 +92,10 @@ function SettingsPage() {
                     variant="outline"
                     aria-pressed={selected}
                     onClick={() => update.mutate({ selected_theme: theme.id as ThemeId })}
+                    data-theme-swatch={theme.id}
                     className={`h-auto justify-start gap-2.5 rounded-2xl px-3 py-2.5 text-left ${selected ? "border-primary ring-2 ring-primary/20" : ""}`}
                   >
-                    <span className="size-6 rounded-full border border-foreground/10 shrink-0" style={{ backgroundColor: theme.swatch }} />
+                    <span className={`theme-swatch theme-swatch-${theme.id} size-6 rounded-full border border-foreground/10 shrink-0`} />
                     <span className="min-w-0">
                       <span className="block truncate text-xs font-bold">{theme.name}</span>
                       <span className="block truncate text-[10px] text-muted-foreground font-normal">{theme.mood}</span>

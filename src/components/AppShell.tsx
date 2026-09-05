@@ -134,7 +134,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </header>
 
 
-      <div className="md:flex">
+      <div className="md:flex relative z-10">
         {/* DESKTOP SIDEBAR */}
         <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-5 gap-4 border-r border-border/60 bg-card/40">
           <Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
