@@ -1,7 +1,7 @@
 export type ThemeId =
   | "peach" | "matcha" | "lavender" | "honey" | "sky"
   | "sakura" | "ocean" | "midnight" | "burgundy" | "crimson"
-  | "forest" | "citrus" | "mono" | "paper" | "cyber";
+  | "forest" | "citrus" | "mono" | "paper" | "cyber" | "charcoal";
 
 export const THEMES: { id: ThemeId; name: string; swatch: string; mood: string }[] = [
   { id: "peach", name: "Peach Sorbet", swatch: "#ffd5c2", mood: "Warm and gentle" },
@@ -19,4 +19,5 @@ export const THEMES: { id: ThemeId; name: string; swatch: string; mood: string }
   { id: "mono", name: "Monochrome", swatch: "#55585f", mood: "Minimal and precise" },
   { id: "paper", name: "Paper White", swatch: "#c9bca8", mood: "Editorial and quiet" },
   { id: "cyber", name: "Neon Desk", swatch: "#54b8b0", mood: "Modern and playful" },
+  { id: "charcoal", name: "Matcha & Charcoal", swatch: "#1d2b23", mood: "Moody, zen, night-desk calm" },
 ];
