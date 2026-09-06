@@ -3,7 +3,14 @@ import process from "node:process";
 
 export type ChatMsg = { role: "system" | "user" | "assistant"; content: string };
 
-export const DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile";
+export const DEFAULT_GROQ_MODEL = "openai/gpt-oss-120b";
+
+const MODEL_FALLBACKS = [
+  DEFAULT_GROQ_MODEL,
+  "llama-3.3-70b-versatile",
+  "llama-4-scout-17b-16e-instruct",
+  "llama-3.1-8b-instant",
+] as const;
 
 type GroqResponse = {
   choices?: { message?: { content?: string } }[];
@@ -19,6 +26,62 @@ async function requestGroq(body: Record<string, unknown>, apiKey: string) {
     },
     body: JSON.stringify(body),
   });
+}
+
+async function listAvailableModels(apiKey: string): Promise<Set<string>> {
+  const res = await fetch("https://api.groq.com/openai/v1/models", {
+    headers: { Authorization: `Bearer ${apiKey}` },
+  });
+
+  if (!res.ok) return new Set();
+
+  const json = (await res.json().catch(() => null)) as
+    | { data?: { id?: string }[] }
+    | null;
+  return new Set(
+    (json?.data ?? [])
+      .map((entry) => entry.id)
+      .filter((id): id is string => Boolean(id)),
+  );
+}
+
+async function chooseFallbackModel(apiKey: string, configuredModel?: string) {
+  const available = await listAvailableModels(apiKey);
+  const candidates = [configuredModel, ...MODEL_FALLBACKS].filter(
+    (model): model is string => Boolean(model),
+  );
+
+  return candidates.find((model) => available.has(model)) ?? DEFAULT_GROQ_MODEL;
+}
+
+async function isModelUnavailableResponse(response: Response) {
+  if (response.status === 404) return true;
+  if (response.ok) return false;
+
+  const text = await response.clone().text().catch(() => "");
+  return /model|decommission|not found|unsupported/i.test(text);
+}
+
+async function requestWithModelFallback(
+  body: Record<string, unknown>,
+  apiKey: string,
+  configuredModel?: string,
+) {
+  const availableModel = await chooseFallbackModel(apiKey, configuredModel);
+  const candidates = [
+    availableModel,
+    configuredModel,
+    ...MODEL_FALLBACKS,
+  ].filter((model, index, all): model is string => Boolean(model) && all.indexOf(model) === index);
+
+  let lastResponse: Response | null = null;
+  for (const candidate of candidates) {
+    const response = await requestGroq({ ...body, model: candidate }, apiKey);
+    if (!(await isModelUnavailableResponse(response))) return response;
+    lastResponse = response;
+  }
+
+  return lastResponse ?? requestGroq({ ...body, model: DEFAULT_GROQ_MODEL }, apiKey);
 }
 
 export async function groqChat(opts: {
@@ -47,8 +110,8 @@ export async function groqChat(opts: {
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     const isMissingModel = res.status === 404 || /model|decommission|not found/i.test(text);
-    if (isMissingModel && model !== DEFAULT_GROQ_MODEL) {
-      res = await requestGroq({ ...body, model: DEFAULT_GROQ_MODEL }, apiKey);
+    if (isMissingModel) {
+      res = await requestWithModelFallback(body, apiKey, configuredModel);
       if (res.ok) {
         const json = (await res.json()) as GroqResponse;
         return json.choices?.[0]?.message?.content ?? "";
@@ -56,7 +119,7 @@ export async function groqChat(opts: {
     }
     if (res.status === 429) throw new Error("AI is busy right now — try again in a moment.");
     if (res.status === 401) throw new Error("The Groq key was rejected. Update GROQ_API_KEY in the project secrets.");
-    if (isMissingModel) throw new Error("The configured AI model is unavailable. Update GROQ_MODEL in the project secrets.");
+    if (isMissingModel) throw new Error("No available Groq AI model could complete this request. Check the Groq account and model access.");
     if (res.status >= 500) throw new Error("AI is temporarily unavailable. Please try again shortly.");
     console.error("Groq request failed", { status: res.status, body: text.slice(0, 500) });
     throw new Error("AI could not complete that request. Please try again.");
