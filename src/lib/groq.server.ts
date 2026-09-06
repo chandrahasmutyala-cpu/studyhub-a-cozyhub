@@ -54,6 +54,28 @@ async function chooseFallbackModel(apiKey: string, configuredModel?: string) {
   return candidates.find((model) => available.has(model)) ?? DEFAULT_GROQ_MODEL;
 }
 
+async function requestWithModelFallback(
+  body: Record<string, unknown>,
+  apiKey: string,
+  configuredModel?: string,
+) {
+  const availableModel = await chooseFallbackModel(apiKey, configuredModel);
+  const candidates = [
+    availableModel,
+    configuredModel,
+    ...MODEL_FALLBACKS,
+  ].filter((model, index, all): model is string => Boolean(model) && all.indexOf(model) === index);
+
+  let lastResponse: Response | null = null;
+  for (const candidate of candidates) {
+    const response = await requestGroq({ ...body, model: candidate }, apiKey);
+    if (response.ok || response.status !== 404) return response;
+    lastResponse = response;
+  }
+
+  return lastResponse ?? requestGroq({ ...body, model: DEFAULT_GROQ_MODEL }, apiKey);
+}
+
 export async function groqChat(opts: {
   messages: ChatMsg[];
   model?: string;
@@ -81,8 +103,7 @@ export async function groqChat(opts: {
     const text = await res.text().catch(() => "");
     const isMissingModel = res.status === 404 || /model|decommission|not found/i.test(text);
     if (isMissingModel) {
-      const fallbackModel = await chooseFallbackModel(apiKey, configuredModel);
-      res = await requestGroq({ ...body, model: fallbackModel }, apiKey);
+      res = await requestWithModelFallback(body, apiKey, configuredModel);
       if (res.ok) {
         const json = (await res.json()) as GroqResponse;
         return json.choices?.[0]?.message?.content ?? "";
