@@ -54,6 +54,14 @@ async function chooseFallbackModel(apiKey: string, configuredModel?: string) {
   return candidates.find((model) => available.has(model)) ?? DEFAULT_GROQ_MODEL;
 }
 
+async function isModelUnavailableResponse(response: Response) {
+  if (response.status === 404) return true;
+  if (response.ok) return false;
+
+  const text = await response.clone().text().catch(() => "");
+  return /model|decommission|not found|unsupported/i.test(text);
+}
+
 async function requestWithModelFallback(
   body: Record<string, unknown>,
   apiKey: string,
@@ -69,7 +77,7 @@ async function requestWithModelFallback(
   let lastResponse: Response | null = null;
   for (const candidate of candidates) {
     const response = await requestGroq({ ...body, model: candidate }, apiKey);
-    if (response.ok || response.status !== 404) return response;
+    if (!(await isModelUnavailableResponse(response))) return response;
     lastResponse = response;
   }
 
