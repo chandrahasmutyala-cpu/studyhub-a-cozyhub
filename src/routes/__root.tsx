@@ -57,21 +57,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "StudyHub — A calm bento for deep work" },
       { name: "description", content: "A minimalist study platform: AI tutor, Japanese, Chinese and Korean academies, focus sessions with ambient sound, planner, and a StudentHub for universities, scholarships and applications." },
-      { name: "theme-color", content: "#fff9f5" },
+      { name: "theme-color", content: "#FFFFFF" },
       { property: "og:title", content: "StudyHub — A calm bento for deep work" },
       { property: "og:description", content: "A minimalist study platform: AI tutor, Japanese, Chinese and Korean academies, focus sessions with ambient sound, planner, and a StudentHub for universities, scholarships and applications." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "StudyHub — A calm bento for deep work" },
       { name: "twitter:description", content: "A minimalist study platform: AI tutor, Japanese, Chinese and Korean academies, focus sessions with ambient sound, planner, and a StudentHub for universities, scholarships and applications." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e6ab0b1b-e504-4946-a2ca-e08574ac5a99" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e6ab0b1b-e504-4946-a2ca-e08574ac5a99" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700&family=Noto+Serif+JP:wght@500;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700&display=swap" },
+      { rel: "stylesheet", href: "https://api.fontshare.com/v2/css?f[]=sentient@400,500,600&display=swap" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "icon", type: "image/png", sizes: "64x64", href: "/favicon.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/icons/studyhub-icon-180.png" },
@@ -86,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <head><HeadContent /></head>
+      <head><HeadContent /><script dangerouslySetInnerHTML={{ __html: "try{if(localStorage.getItem('studyhub-color-mode')==='dark')document.documentElement.classList.add('dark')}catch(e){}" }} /></head>
       <body>{children}<Scripts /></body>
     </html>
   );

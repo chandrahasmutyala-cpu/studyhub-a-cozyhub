@@ -14,6 +14,7 @@ import { Logo } from "@/components/Logo";
 import { useFocusEngine } from "@/lib/useFocusEngine";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
 import { FloatingKanaBackground } from "@/components/FloatingKanaBackground";
+import { ColorModeToggle } from "@/components/ColorModeToggle";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
 
@@ -121,26 +122,27 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen relative bg-background">
       <FloatingKanaBackground />
       {/* MOBILE FIXED TOP BAR — menu only */}
-      <header className="md:hidden fixed top-0 inset-x-0 z-30 h-14 bg-background/90 backdrop-blur-xl flex items-center px-4">
+      <header className="md:hidden fixed top-0 inset-x-0 z-30 h-16 bg-background/90 backdrop-blur-xl flex items-center justify-between px-4 border-b border-border">
         <button
           onClick={() => setDrawer(true)}
-          className="size-10 -ml-2 rounded-2xl grid place-items-center hover:bg-muted transition"
+          className="size-11 rounded-lg grid place-items-center hover:bg-muted transition"
           aria-label="Open menu"
         >
           <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M4 9h16M4 15h10" />
           </svg>
         </button>
+        <ColorModeToggle />
       </header>
 
 
       <div className="md:flex relative z-10">
         {/* DESKTOP SIDEBAR */}
-        <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-5 gap-4 border-r border-border/60 bg-card/40">
-          <Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
+        <aside className="hidden md:flex md:w-72 lg:w-80 md:flex-col md:sticky md:top-0 md:h-screen p-6 gap-4 border-r border-border bg-background">
+          <div className="flex items-center justify-between gap-2"><Link to="/dashboard" className="flex items-center gap-2 px-2 py-1">
             <Logo className="size-10 text-base" />
             <span className="font-display font-bold text-xl tracking-tight">StudyHub</span>
-          </Link>
+          </Link><ColorModeToggle /></div>
 
           <ProfileCard xp={xp} level={level} next={next} pct={pct} name={profile?.display_name} avatarPath={profile?.avatar_url} />
 
@@ -168,7 +170,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
         <main
           data-appshell-main
-          className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 pt-[72px] md:pt-8 pb-10 animate-fade-up"
+          className="flex-1 min-w-0 px-4 sm:px-6 lg:px-10 pt-20 md:pt-8 pb-10 animate-fade-up"
         >
           {children}
         </main>
@@ -186,12 +188,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             onClick={() => setDrawer(false)}
             aria-label="Close menu"
           />
-          <aside className="absolute inset-y-0 left-0 w-[86vw] max-w-sm bg-background flex flex-col animate-slide-in-left shadow-2xl">
+          <aside className="absolute inset-y-0 left-0 w-[86vw] max-w-sm bg-background/95 backdrop-blur-xl flex flex-col animate-slide-in-left shadow-pop">
             <div className="p-5 flex items-center justify-between border-b border-border/60">
               <Link to="/dashboard" className="flex items-center gap-2 font-display font-bold text-lg">
                 <Logo className="size-9 text-sm" /> StudyHub
               </Link>
-              <button onClick={() => setDrawer(false)} className="size-9 rounded-2xl hover:bg-muted grid place-items-center" aria-label="Close">
+              <button onClick={() => setDrawer(false)} className="size-11 rounded-lg hover:bg-muted grid place-items-center" aria-label="Close">
                 <X className="size-5 stroke-[1.75]" />
               </button>
             </div>
@@ -239,7 +241,7 @@ function ProfileCard({
   }, [avatarPath]);
   return (
     <div className="rounded-2xl bg-card border border-border/60 p-4 flex items-center gap-3">
-      <div className="size-12 rounded-2xl overflow-hidden gradient-primary grid place-items-center text-lg font-display font-bold text-white shrink-0">
+      <div className="size-12 rounded-xl overflow-hidden bg-primary grid place-items-center text-lg font-display font-bold text-primary-foreground shrink-0">
         {url ? <img src={url} alt="" className="w-full h-full object-cover" /> : (name?.[0] ?? "S").toUpperCase()}
       </div>
       <div className="min-w-0 flex-1">
