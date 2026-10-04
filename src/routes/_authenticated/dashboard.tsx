@@ -7,6 +7,7 @@ import { AppShell } from "@/components/AppShell";
 import { useProfile, levelFromXp } from "@/lib/useProfile";
 import { focusTimer, useFocusTimer, useTick, formatMs } from "@/lib/focus-timer";
 import { Flame, Star, Coins, Clock, ArrowRight, CalendarClock } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
@@ -30,7 +31,7 @@ function LiveFocus() {
       {t.running && (
         <span className="font-display text-xl font-bold tabular-nums text-primary">{formatMs(left)}</span>
       )}
-      <Link to="/tasks" className="inline-flex items-center gap-2 bg-foreground text-background rounded-full px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
+      <Link to="/tasks" className="inline-flex min-h-11 items-center gap-2 bg-primary text-primary-foreground rounded-lg px-5 py-3 text-sm font-bold hover:opacity-90 active:scale-[0.98] transition">
         {t.running ? "Open timer" : "Start session"} <ArrowRight className="size-4 stroke-[1.75]" />
       </Link>
     </div>
@@ -95,14 +96,15 @@ function Dashboard() {
     <AppShell>
       <div className="max-w-5xl mx-auto animate-fade-in">
         {/* BENTO GRID */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
 
           {/* Greeting — wide */}
-          <Tile className="col-span-2 md:col-span-4 p-6 md:p-8">
+          <Tile className="col-span-2 md:col-span-4 p-6 md:p-8 relative overflow-hidden">
+            <div className="pointer-events-none absolute right-4 top-4 sm:right-8 sm:top-6 size-12 sm:size-16 opacity-75 animate-float-soft [animation-duration:8s] max-sm:animate-none" aria-hidden="true"><Logo className="size-full" /></div>
             <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
               {new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mt-2 tracking-tight leading-[1.05]">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mt-2 leading-[1.05] pr-14 sm:pr-20">
               {greeting()},{" "}
               <span className="text-primary">{profile?.display_name ?? "friend"}.</span>
             </h1>
@@ -116,7 +118,7 @@ function Dashboard() {
           {/* Focus — tall, wide on mobile */}
           <Tile className="col-span-2 p-6">
             <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Today's focus</div>
-            <div className="font-display text-4xl font-bold mt-2 tabular-nums">
+            <div className="font-mono text-4xl font-bold mt-2 tabular-nums">
               {todayMin}<span className="text-muted-foreground text-base font-medium"> / {dailyTarget} min</span>
             </div>
             <div className="h-2 mt-4 bg-muted rounded-full overflow-hidden">
@@ -195,7 +197,7 @@ function Dashboard() {
           </Tile>
 
           {/* Shop callout */}
-          <Link to="/shop" className="col-span-2 md:col-span-4 rounded-3xl border border-border/60 bg-card p-6 hover:-translate-y-[2px] hover:shadow-[0_24px_50px_-34px_rgb(15_23_42/0.35)] transition-all">
+          <Link to="/shop" className="col-span-2 md:col-span-4 rounded-xl border border-border bg-card p-6 hover:-translate-y-[2px] hover:shadow-soft transition-all">
             <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
               <Coins className="size-3.5 stroke-[1.75]" /> Study Coin Shop
             </div>
@@ -211,7 +213,7 @@ function Dashboard() {
 
 function Tile({ className = "", children }: { className?: string; children: React.ReactNode }) {
   return (
-    <section className={`rounded-3xl border border-border/60 bg-card shadow-[0_1px_0_0_rgb(0_0_0/0.02),0_24px_50px_-34px_rgb(15_23_42/0.25)] ${className}`}>
+    <section className={`rounded-xl border border-border bg-card shadow-soft ${className}`}>
       {children}
     </section>
   );
@@ -226,11 +228,11 @@ function Stat({ icon: Icon, label, value, to }: { icon: React.ComponentType<{ cl
       </div>
       <div className="min-w-0">
         <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
-        <div className="font-display text-xl font-bold truncate">{value}</div>
+        <div className="font-mono text-xl font-bold truncate">{value}</div>
       </div>
     </>
   );
-  const cls = "rounded-3xl border border-border/60 bg-card p-4 flex items-center gap-3 transition-all hover:-translate-y-[2px]";
+  const cls = "rounded-xl border border-border bg-card shadow-soft p-4 flex items-center gap-3 transition-all hover:-translate-y-[2px]";
   return to ? <Link to={to} className={cls}>{inner}</Link> : <div className={cls}>{inner}</div>;
 }
 
