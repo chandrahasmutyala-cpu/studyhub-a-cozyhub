@@ -13,7 +13,13 @@ const positions = [
 export function FloatingKanaBackground() {
   const glyphs = useMemo(() => {
     const source = [...HIRAGANA_BASIC, ...KATAKANA_BASIC];
-    return positions.map((_, index) => source[(index * 7 + 3) % source.length]?.kana ?? "あ");
+    const korean = ["가", "한", "글", "봄", "빛", "별"];
+    const chinese = ["学", "书", "月", "光", "梦", "文"];
+    return positions.map((_, index) => index % 3 === 1
+      ? korean[index % korean.length]
+      : index % 3 === 2
+        ? chinese[index % chinese.length]
+        : source[(index * 7 + 3) % source.length]?.kana ?? "あ");
   }, []);
 
   return (
