@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
 import { Logo } from "@/components/Logo";
+import { ColorModeToggle } from "@/components/ColorModeToggle";
 
 const search = z.object({
   tab: z.enum(["login", "signup", "reset"]).optional(),
@@ -21,6 +22,10 @@ export const Route = createFileRoute("/auth")({
     meta: [
       { title: "Sign in — Study" },
       { name: "description", content: "Sign in or create your Study account to start your cozy learning journey." },
+      { property: "og:title", content: "Sign in — StudyHub" },
+      { property: "og:description", content: "Sign in or create your StudyHub account to continue learning." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Auth,
@@ -85,20 +90,21 @@ function Auth() {
   }
 
   return (
-    <div className="min-h-screen paw-bg grid place-items-center px-4 py-10">
+    <div className="min-h-screen bg-background grid place-items-center px-4 py-10">
       <div className="w-full max-w-md">
+        <div className="flex justify-end"><ColorModeToggle /></div>
         <Link to="/" className="flex items-center gap-2 justify-center mb-6">
           <Logo className="size-12" />
           <span className="font-display text-2xl font-bold">StudyHub</span>
         </Link>
 
-        <div className="bg-white rounded-[2rem] border border-border p-7 shadow-soft">
-          <div className="flex gap-1 bg-cream p-1 rounded-full mb-6">
+        <div className="bg-card rounded-xl border border-border p-7 shadow-soft">
+          <div className="flex gap-1 bg-muted p-1 rounded-lg mb-6">
             {(["login","signup"] as const).map((m) => (
               <button
                 key={m}
                 onClick={() => setMode(m)}
-                className={`flex-1 py-2 rounded-full text-sm font-bold transition-colors ${mode === m ? "bg-primary" : "text-foreground/60"}`}
+                className={`flex-1 min-h-11 py-2 rounded-lg text-sm font-bold transition-colors ${mode === m ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
               >
                 {m === "login" ? "Log in" : "Sign up"}
               </button>
@@ -117,7 +123,7 @@ function Auth() {
               <button
                 onClick={handleGoogle}
                 disabled={loading}
-                className="w-full bg-white border border-border rounded-full py-3 font-bold flex items-center justify-center gap-2 hover:bg-cream transition-colors disabled:opacity-50"
+                className="w-full min-h-11 bg-transparent border border-border rounded-lg py-3 font-bold flex items-center justify-center gap-2 hover:bg-muted transition-colors disabled:opacity-50"
               >
                 <GoogleIcon /> Continue with Google
               </button>
@@ -130,15 +136,15 @@ function Auth() {
           <form onSubmit={handleEmail} className="space-y-3">
             {mode === "signup" && (
               <input value={name} onChange={(e) => setName(e.target.value)} required
-                placeholder="Your name" className="w-full bg-cream border border-border rounded-2xl px-4 py-3 outline-none focus:border-primary" />
+                placeholder="Your name" className="w-full bg-card border border-border rounded-lg px-4 py-3 outline-none focus:border-primary" />
             )}
             <input value={email} onChange={(e) => setEmail(e.target.value)} required type="email"
-              placeholder="you@example.com" className="w-full bg-cream border border-border rounded-2xl px-4 py-3 outline-none focus:border-primary" />
+              placeholder="you@example.com" className="w-full bg-card border border-border rounded-lg px-4 py-3 outline-none focus:border-primary" />
             {mode !== "reset" && (
               <input value={password} onChange={(e) => setPassword(e.target.value)} required type="password" minLength={6}
-                placeholder="Password (6+ characters)" className="w-full bg-cream border border-border rounded-2xl px-4 py-3 outline-none focus:border-primary" />
+                placeholder="Password (6+ characters)" className="w-full bg-card border border-border rounded-lg px-4 py-3 outline-none focus:border-primary" />
             )}
-            <button disabled={loading} className="w-full bg-primary font-bold rounded-full py-3 shadow-soft hover:-translate-y-0.5 transition-transform disabled:opacity-60">
+            <button disabled={loading} className="w-full min-h-11 bg-primary text-primary-foreground font-bold rounded-lg py-3 shadow-soft hover:bg-[var(--primary-hover)] active:scale-[0.98] transition-all disabled:opacity-60">
               {loading ? "…" : mode === "signup" ? "Create account" : mode === "reset" ? "Send reset link" : "Log in"}
             </button>
           </form>
